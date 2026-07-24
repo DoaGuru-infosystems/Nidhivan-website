@@ -8,7 +8,7 @@ import Achievements1 from './../Elements/Achievements1';
 import Team2 from './../Elements/Team2';
 import Testimonials2 from './../Elements/Testimonials2';
 
-var bnrimg = require('./../../images/banner/5.jpg');
+var bnrimg = new URL('./../../images/banner/5.jpg', import.meta.url).href;
 
 class About1 extends React.Component {
     componentDidMount() {
@@ -28,7 +28,7 @@ class About1 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {

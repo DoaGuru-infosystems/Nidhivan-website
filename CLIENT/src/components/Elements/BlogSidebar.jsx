@@ -27,11 +27,11 @@ class BlogSidebar extends React.Component {
                             <div className="widget-post-bx">
                                 <div className="widget-post clearfix">
                                     <div className="sx-post-media">
-                                        <img src={require('./../../images/blog/recent-blog/pic1.jpg')} alt=""/>
+                                        <img src={new URL('./../../images/blog/recent-blog/pic1.jpg', import.meta.url).href} alt=""/>
                                     </div>
                                     <div className="sx-post-info">
                                         <div className="sx-post-header">
-                                            <h6 className="post-title">Don’t get framed by the competition.</h6>
+                                            <h6 className="post-title">Donâ€™t get framed by the competition.</h6>
                                         </div>
                                         <div className="sx-post-meta">
                                             <ul>
@@ -42,11 +42,11 @@ class BlogSidebar extends React.Component {
                                 </div>
                                 <div className="widget-post clearfix">
                                     <div className="sx-post-media">
-                                        <img src={require('./../../images/blog/recent-blog/pic2.jpg')} alt=""/>
+                                        <img src={new URL('./../../images/blog/recent-blog/pic2.jpg', import.meta.url).href} alt=""/>
                                     </div>
                                     <div className="sx-post-info">
                                         <div className="sx-post-header">
-                                            <h6 className="post-title">building your dream house shouldn’t</h6>
+                                            <h6 className="post-title">building your dream house shouldnâ€™t</h6>
                                         </div>
                                         <div className="sx-post-meta">
                                             <ul>
@@ -57,7 +57,7 @@ class BlogSidebar extends React.Component {
                                 </div>
                                 <div className="widget-post clearfix">
                                     <div className="sx-post-media">
-                                        <img src={require('./../../images/blog/recent-blog/pic3.jpg')} alt="" />
+                                        <img src={new URL('./../../images/blog/recent-blog/pic3.jpg', import.meta.url).href} alt="" />
                                     </div>
                                     <div className="sx-post-info">
                                         <div className="sx-post-header">
@@ -110,42 +110,42 @@ class BlogSidebar extends React.Component {
                         <ul className="p-a10 bg-white clearfix">
                             <li>
                                 <div className="sx-post-thum">
-                                    <a href={require('./../../images/gallery/pic1.jpg')} className="mfp-link"><img src={require('./../../images/gallery/thumb/pic1.jpg')} alt=""/></a>
+                                    <a href={new URL('./../../images/gallery/pic1.jpg', import.meta.url).href} className="mfp-link"><img src={new URL('./../../images/gallery/thumb/pic1.jpg', import.meta.url).href} alt=""/></a>
                                 </div>
                             </li>
                             <li>
                                 <div className="sx-post-thum ">
-                                    <a href={require('./../../images/gallery/pic2.jpg')} className="mfp-link"><img src={require('./../../images/gallery/thumb/pic2.jpg')} alt=""/></a>
+                                    <a href={new URL('./../../images/gallery/pic2.jpg', import.meta.url).href} className="mfp-link"><img src={new URL('./../../images/gallery/thumb/pic2.jpg', import.meta.url).href} alt=""/></a>
                                 </div>
                             </li>
                             <li>
                                 <div className="sx-post-thum  ">
-                                    <a href={require('./../../images/gallery/pic3.jpg')} className="mfp-link"><img src={require('./../../images/gallery/thumb/pic3.jpg')} alt="" /></a>
+                                    <a href={new URL('./../../images/gallery/pic3.jpg', import.meta.url).href} className="mfp-link"><img src={new URL('./../../images/gallery/thumb/pic3.jpg', import.meta.url).href} alt="" /></a>
                                 </div>
                             </li>
                             <li>
                                 <div className="sx-post-thum ">
-                                    <a href={require('./../../images/gallery/pic4.jpg')}  className="mfp-link"><img src={require('./../../images/gallery/thumb/pic4.jpg')} alt="" /></a>
+                                    <a href={new URL('./../../images/gallery/pic4.jpg', import.meta.url).href}  className="mfp-link"><img src={new URL('./../../images/gallery/thumb/pic4.jpg', import.meta.url).href} alt="" /></a>
                                 </div>
                             </li>
                             <li>
                                 <div className="sx-post-thum ">
-                                    <a href={require('./../../images/gallery/pic5.jpg')} className="mfp-link"><img src={require('./../../images/gallery/thumb/pic5.jpg')} alt=""/></a>
+                                    <a href={new URL('./../../images/gallery/pic5.jpg', import.meta.url).href} className="mfp-link"><img src={new URL('./../../images/gallery/thumb/pic5.jpg', import.meta.url).href} alt=""/></a>
                                 </div>
                             </li>
                             <li>
                                 <div className="sx-post-thum ">
-                                    <a href={require('./../../images/gallery/pic6.jpg')} className="mfp-link"><img src={require('./../../images/gallery/thumb/pic6.jpg')} alt="" /></a>
+                                    <a href={new URL('./../../images/gallery/pic6.jpg', import.meta.url).href} className="mfp-link"><img src={new URL('./../../images/gallery/thumb/pic6.jpg', import.meta.url).href} alt="" /></a>
                                 </div>
                             </li>
                             <li>
                                 <div className="sx-post-thum">
-                                    <a href={require('./../../images/gallery/pic7.jpg')} className="mfp-link"><img src={require('./../../images/gallery/thumb/pic7.jpg')} alt="" /></a>
+                                    <a href={new URL('./../../images/gallery/pic7.jpg', import.meta.url).href} className="mfp-link"><img src={new URL('./../../images/gallery/thumb/pic7.jpg', import.meta.url).href} alt="" /></a>
                                 </div>
                             </li>
                             <li>
                                 <div className="sx-post-thum ">
-                                    <a href={require('./../../images/gallery/pic8.jpg')} className="mfp-link"><img src={require('./../../images/gallery/thumb/pic8.jpg')} alt=""/></a>
+                                    <a href={new URL('./../../images/gallery/pic8.jpg', import.meta.url).href} className="mfp-link"><img src={new URL('./../../images/gallery/thumb/pic8.jpg', import.meta.url).href} alt=""/></a>
                                 </div>
                             </li>
                         </ul>

@@ -10,7 +10,7 @@ const services = [
     {
         count: '02',
         title: 'Planning',
-        description: 'Landscape plans for drainage problems may also entail planting beds away from the home’s foundation.',
+        description: 'Landscape plans for drainage problems may also entail planting beds away from the homeâ€™s foundation.',
     },
     {
         count: '03',
@@ -34,8 +34,8 @@ const services = [
     },
 ]
 
-var bgimg1 = require('./../../images/background/bg-5.png');
-var bgimg2 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/bg-5.png', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class WhatWeDo2 extends React.Component {
     render() {

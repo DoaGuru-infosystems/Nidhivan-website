@@ -6,48 +6,48 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const projects = [
     {
-        image: require('./../../images/projects/square/pic4.jpg'),
+        image: new URL('./../../images/projects/square/pic4.jpg', import.meta.url).href,
         title: 'Life style building',
         description: 'Engineering your dreams with us the architect has always.'
     },
     {
-        image: require('./../../images/projects/square/pic9.jpg'),
+        image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href,
         title: 'Modern Bathroom',
         description: 'Engineering your dreams with us the architect has always.'
     },
     {
-        image: require('./../../images/projects/square/pic10.jpg'),
+        image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href,
         title: 'Dream House',
         description: 'Engineering your dreams with us the architect has always.'
     },
     {
-        image: require('./../../images/projects/square/pic6.jpg'),
+        image: new URL('./../../images/projects/square/pic6.jpg', import.meta.url).href,
         title: 'Bellevue Projects',
         description: 'Engineering your dreams with us the architect has always.'
     },
     {
-        image: require('./../../images/projects/square/pic7.jpg'),
+        image: new URL('./../../images/projects/square/pic7.jpg', import.meta.url).href,
         title: 'Modish Interior',
         description: 'Engineering your dreams with us the architect has always.'
     },
     {
-        image: require('./../../images/projects/square/pic8.jpg'),
+        image: new URL('./../../images/projects/square/pic8.jpg', import.meta.url).href,
         title: 'Vilters',
         description: 'Engineering your dreams with us the architect has always.'
     },
     {
-        image: require('./../../images/projects/square/pic9.jpg'),
+        image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href,
         title: 'Dream Home',
         description: 'Engineering your dreams with us the architect has always.'
     },
     {
-        image: require('./../../images/projects/square/pic2.jpg'),
+        image: new URL('./../../images/projects/square/pic2.jpg', import.meta.url).href,
         title: 'Living Room',
         description: 'Engineering your dreams with us the architect has always.'
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class Projects6 extends React.Component {
     render() {

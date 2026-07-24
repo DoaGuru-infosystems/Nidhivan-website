@@ -6,7 +6,7 @@ import Banner from './../Elements/Banner';
 import Projects6 from './../Elements/Projects6';
 import ReactPlayer from 'react-player';
 
-var bnrimg = require('./../../images/banner/2.jpg');
+var bnrimg = new URL('./../../images/banner/2.jpg', import.meta.url).href;
 
 class ProjectDetail1 extends React.Component {
     
@@ -27,7 +27,7 @@ class ProjectDetail1 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {
@@ -88,17 +88,17 @@ class ProjectDetail1 extends React.Component {
                                     <div className="project-detail-outer">
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                <img src={require('./../../images/projects/portrait/pic7.jpg')} alt="" />
+                                                <img src={new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href} alt="" />
                                             </div>
                                         </div>
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                <img src={require('./../../images/projects/portrait/pic4.jpg')} alt="" />
+                                                <img src={new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href} alt="" />
                                             </div>
                                         </div>
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                <img src={require('./../../images/projects/portrait/pic5.jpg')} alt="" />
+                                                <img src={new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href} alt="" />
                                             </div>
                                         </div>
                                         <div className="sx-box">

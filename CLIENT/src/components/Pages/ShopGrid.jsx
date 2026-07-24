@@ -7,69 +7,69 @@ import ShopSidebar from '../Elements/ShopSidebar';
 
 const products = [
     {
-        image: require('./../../images/products/pic-1.jpg'),
+        image: new URL('./../../images/products/pic-1.jpg', import.meta.url).href,
         title: 'Happy Ninja',
         sale: 'no',
         cutprice: '',
         price: '36.00'
     },
     {
-        image: require('./../../images/products/pic-2.jpg'),
+        image: new URL('./../../images/products/pic-2.jpg', import.meta.url).href,
         title: 'Flying Ninja',
         sale: 'yes',
         cutprice: '45.00',
         price: '36.00'
     },
     {
-        image: require('./../../images/products/pic-3.jpg'),
+        image: new URL('./../../images/products/pic-3.jpg', import.meta.url).href,
         title: 'Half White',
         sale: 'no',
         cutprice: '',
         price: '29.00'
     },
     {
-        image: require('./../../images/products/pic-4.jpg'),
+        image: new URL('./../../images/products/pic-4.jpg', import.meta.url).href,
         title: 'Woo Ninja',
         sale: 'no',
         cutprice: '',
         price: '59.00'
     },
     {
-        image: require('./../../images/products/pic-5.jpg'),
+        image: new URL('./../../images/products/pic-5.jpg', import.meta.url).href,
         title: 'Woo logo',
         sale: 'yes',
         cutprice: '45.00',
         price: '36.00'
     },
     {
-        image: require('./../../images/products/pic-6.jpg'),
+        image: new URL('./../../images/products/pic-6.jpg', import.meta.url).href,
         title: 'Happy Ninja',
         sale: 'no',
         cutprice: '',
         price: '99.00'
     },
     {
-        image: require('./../../images/products/pic-7.jpg'),
+        image: new URL('./../../images/products/pic-7.jpg', import.meta.url).href,
         title: 'Woo Ninja',
         sale: 'no',
         cutprice: '',
         price: '45.00'
     },
     {
-        image: require('./../../images/products/pic-8.jpg'),
+        image: new URL('./../../images/products/pic-8.jpg', import.meta.url).href,
         title: 'Danger black',
         cutprice: '',
         price: '29.00'
     },
     {
-        image: require('./../../images/products/pic-1.jpg'),
+        image: new URL('./../../images/products/pic-1.jpg', import.meta.url).href,
         title: 'Happy Ninja',
         sale: 'no',
         cutprice: '',
         price: '59.00'
     },
     {
-        image: require('./../../images/products/pic-2.jpg'),
+        image: new URL('./../../images/products/pic-2.jpg', import.meta.url).href,
         title: 'Flying Ninja',
         sale: 'no',
         cutprice: '',
@@ -77,7 +77,7 @@ const products = [
     }
 ]
 
-var bnrimg = require('./../../images/banner/4.jpg');
+var bnrimg = new URL('./../../images/banner/4.jpg', import.meta.url).href;
 
 class ShopGrid extends React.Component {
     componentDidMount() {
@@ -97,7 +97,7 @@ class ShopGrid extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {
@@ -114,7 +114,7 @@ class ShopGrid extends React.Component {
                                 <NavLink to={"/shop-grid"} className="active"><i className="fa fa-th" /></NavLink>
                                 <NavLink to={"/shop-list"}><i className="fa fa-th-list" /></NavLink>
                                 </div>
-                                <span className="woocommerce-result-count">Showing 1–10 of 13 results</span>
+                                <span className="woocommerce-result-count">Showing 1Ã¢â‚¬â€œ10 of 13 results</span>
                                 <form className="woocommerce-ordering select-box-border-style1-wrapper" method="get">
                                     <select name="orderby" className="orderby select-box-border-style1" aria-label="Shop order">
                                         <option value="menu_order" selected="selected">Default sorting</option>

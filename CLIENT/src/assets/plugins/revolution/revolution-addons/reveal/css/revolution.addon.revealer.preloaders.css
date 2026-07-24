@@ -93,7 +93,7 @@
 	to {transform: rotate(360deg)}
    
 }
-@-webkit-keyframesrsaddon-revealer-2 {
+@-webkit-keyframes rsaddon-revealer-2 {
 	
 	from {-webkit-transform: rotate(0deg)}
 	to {-webkit-transform: rotate(360deg)}
@@ -631,7 +631,6 @@
     80% {transform: rotate3d(0, 0, 1, 360deg) translate3d(-80%, 80%, 0)}
     100% {transform: rotate3d(0, 0, 1, 360deg) translate3d(0, 0, 0)}
 }
-
 
 
 

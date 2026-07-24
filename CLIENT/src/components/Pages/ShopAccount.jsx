@@ -4,7 +4,7 @@ import Header4 from '../Common/Header4';
 import Footer from '../Common/Footer';
 import Banner from './../Elements/Banner';
 
-var bnrimg = require('./../../images/banner/5.jpg');
+var bnrimg = new URL('./../../images/banner/5.jpg', import.meta.url).href;
 
 class ShopAccount extends React.Component {
     render() {

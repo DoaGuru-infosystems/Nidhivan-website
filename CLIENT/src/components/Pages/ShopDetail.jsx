@@ -8,28 +8,28 @@ import '../../../node_modules/react-image-gallery/styles/css/image-gallery.css';
 
 const images = [
     {
-        original: require('./../../images/products/pic-1.jpg'),
-        thumbnail: require('./../../images/products/thumb/pic-1.jpg'),
+        original: new URL('./../../images/products/pic-1.jpg', import.meta.url).href,
+        thumbnail: new URL('./../../images/products/thumb/pic-1.jpg', import.meta.url).href,
     },
     {
-        original: require('./../../images/products/pic-2.jpg'),
-        thumbnail: require('./../../images/products/thumb/pic-2.jpg'),
+        original: new URL('./../../images/products/pic-2.jpg', import.meta.url).href,
+        thumbnail: new URL('./../../images/products/thumb/pic-2.jpg', import.meta.url).href,
     },
     {
-        original: require('./../../images/products/pic-3.jpg'),
-        thumbnail: require('./../../images/products/thumb/pic-3.jpg'),
+        original: new URL('./../../images/products/pic-3.jpg', import.meta.url).href,
+        thumbnail: new URL('./../../images/products/thumb/pic-3.jpg', import.meta.url).href,
     },
     {
-        original: require('./../../images/products/pic-4.jpg'),
-        thumbnail: require('./../../images/products/thumb/pic-4.jpg'),
+        original: new URL('./../../images/products/pic-4.jpg', import.meta.url).href,
+        thumbnail: new URL('./../../images/products/thumb/pic-4.jpg', import.meta.url).href,
     },
     {
-        original: require('./../../images/products/pic-5.jpg'),
-        thumbnail: require('./../../images/products/thumb/pic-5.jpg'),
+        original: new URL('./../../images/products/pic-5.jpg', import.meta.url).href,
+        thumbnail: new URL('./../../images/products/thumb/pic-5.jpg', import.meta.url).href,
     }
 ];
 
-var bnrimg = require('./../../images/banner/5.jpg');
+var bnrimg = new URL('./../../images/banner/5.jpg', import.meta.url).href;
 
 class ShopDetail extends React.Component {
     componentDidMount() {
@@ -49,7 +49,7 @@ class ShopDetail extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {
@@ -160,7 +160,7 @@ class ShopDetail extends React.Component {
                                                                                 <NavLink to={"#"}>06 August 2022</NavLink>
                                                                             </div>
                                                                             <div className="comment-author vcard">
-                                                                                <img className="avatar photo" src={require('./../../images/testimonials/pic4.jpg')} alt=""/>
+                                                                                <img className="avatar photo" src={new URL('./../../images/testimonials/pic4.jpg', import.meta.url).href} alt=""/>
                                                                                 <cite className="fn"> Schiocchet </cite>
                                                                                 <span className="says">says:</span>
                                                                             </div>
@@ -177,7 +177,7 @@ class ShopDetail extends React.Component {
                                                                                         <NavLink to={"#"}>05 August 2022</NavLink>
                                                                                     </div>
                                                                                     <div className="comment-author vcard">
-                                                                                        <img className="avatar photo" src={require('./../../images/testimonials/pic3.jpg')} alt=""/>
+                                                                                        <img className="avatar photo" src={new URL('./../../images/testimonials/pic3.jpg', import.meta.url).href} alt=""/>
                                                                                         <cite className="fn">Brayden</cite>
                                                                                         <span className="says">says:</span>
                                                                                     </div>
@@ -193,7 +193,7 @@ class ShopDetail extends React.Component {
                                                                                                 <NavLink to={"#"}>02 August 2022</NavLink>
                                                                                             </div>
                                                                                             <div className="comment-author vcard">
-                                                                                                <img className="avatar photo" src={require('./../../images/testimonials/pic2.jpg')} alt=""/>
+                                                                                                <img className="avatar photo" src={new URL('./../../images/testimonials/pic2.jpg', import.meta.url).href} alt=""/>
                                                                                                 <cite className="fn">Diego</cite>
                                                                                                 <span className="says">says:</span>
                                                                                             </div>
@@ -262,7 +262,7 @@ class ShopDetail extends React.Component {
                                 <div className="col-md-3 col-sm-6 col-xs-6 col-xs-100pc m-b30">
                                     <div className="sx-box sx-product-box   overflow-hide">
                                         <div className="sx-thum-bx sx-img-overlay1">
-                                            <img src={require('./../../images/products/pic-1.jpg')} alt=""/>
+                                            <img src={new URL('./../../images/products/pic-1.jpg', import.meta.url).href} alt=""/>
                                             <div className="item-cart-view">
                                                 <div className="item-cart-btn">
                                                     <NavLink to={"#"}>
@@ -293,7 +293,7 @@ class ShopDetail extends React.Component {
                                     <div className="sx-box sx-product-box   overflow-hide">
                                         <div className="shop-pro-sale-bnr">Sale!</div>
                                         <div className="sx-thum-bx sx-img-overlay1">
-                                            <img src={require('./../../images/products/pic-2.jpg')} alt=""/>
+                                            <img src={new URL('./../../images/products/pic-2.jpg', import.meta.url).href} alt=""/>
                                             <div className="item-cart-view">
                                                 <div className="item-cart-btn">
                                                     <NavLink to={"#"}>
@@ -324,7 +324,7 @@ class ShopDetail extends React.Component {
                                 <div className="col-md-3 col-sm-6 col-xs-6 col-xs-100pc m-b30">
                                     <div className="sx-box sx-product-box   overflow-hide">
                                         <div className="sx-thum-bx sx-img-overlay1">
-                                            <img src={require('./../../images/products/pic-3.jpg')} alt=""/>
+                                            <img src={new URL('./../../images/products/pic-3.jpg', import.meta.url).href} alt=""/>
                                             <div className="item-cart-view">
                                                 <div className="item-cart-btn">
                                                     <NavLink to={"#"}>
@@ -354,7 +354,7 @@ class ShopDetail extends React.Component {
                                 <div className="col-md-3 col-sm-6 col-xs-6 col-xs-100pc m-b30">
                                     <div className="sx-box sx-product-box   overflow-hide">
                                         <div className="sx-thum-bx sx-img-overlay1">
-                                            <img src={require('./../../images/products/pic-4.jpg')} alt="" />
+                                            <img src={new URL('./../../images/products/pic-4.jpg', import.meta.url).href} alt="" />
                                             <div className="item-cart-view">
                                                 <div className="item-cart-btn">
                                                     <NavLink to={"#"}>

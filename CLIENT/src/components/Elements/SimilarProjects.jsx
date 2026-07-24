@@ -6,23 +6,23 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const services = [
     {
-        image: require('./../../images/gallery/pic1.jpg'),
+        image: new URL('./../../images/gallery/pic1.jpg', import.meta.url).href,
         title: 'Interior Work Avroko',
         description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
     },
     {
-        image: require('./../../images/gallery/pic2.jpg'),
+        image: new URL('./../../images/gallery/pic2.jpg', import.meta.url).href,
         title: 'Interior Work Avroko',
         description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
     },
     {
-        image: require('./../../images/gallery/pic3.jpg'),
+        image: new URL('./../../images/gallery/pic3.jpg', import.meta.url).href,
         title: 'Interior Work Avroko',
         description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class SimilarProjects extends React.Component {
     render() {

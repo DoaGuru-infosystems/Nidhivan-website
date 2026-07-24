@@ -14,100 +14,100 @@ const filters = [
 
 const projects = [
     {
-        image: require('./../../images/projects/portrait/pic4.jpg'),
+        image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
         title: 'Life style building',
         description: 'We combine Interior and Exterior Design services and often provide...',
         filter: 'cat-1'
     },
     {
-        image: require('./../../images/projects/square/pic9.jpg'),
+        image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href,
         title: 'Modern Bathroom',
         description: 'Landscape plans for drainage problems may also entail planting.',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/square/pic10.jpg'),
+        image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href,
         title: 'Dream House',
         description: 'We provide a range of architectural 3D modeling services to our customers...',
         filter: 'cat-3'
     },
     {
-        image: require('./../../images/projects/portrait/pic6.jpg'),
+        image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href,
         title: 'Vilters',
         description: 'Landscape plans for drainage problems may also entail planting beds away ...',
         filter: 'cat-4'
     },
     {
-        image: require('./../../images/projects/square/pic7.jpg'),
+        image: new URL('./../../images/projects/square/pic7.jpg', import.meta.url).href,
         title: 'Bellevue Projects',
         description: 'Project management is the process by which our team plans and executes...',
         filter: 'cat-5'
     },
     {
-        image: require('./../../images/projects/square/pic8.jpg'),
+        image: new URL('./../../images/projects/square/pic8.jpg', import.meta.url).href,
         title: 'Modish Interior',
         description: 'Our team also provides consultations on all architectural issues, even if you need...',
         filter: 'cat-4'
     },
     {
-        image: require('./../../images/projects/portrait/pic9.jpg'),
+        image: new URL('./../../images/projects/portrait/pic9.jpg', import.meta.url).href,
         title: 'Living Room',
         description: 'Landscape plans for drainage problems may also entail planting beds...',
         filter: 'cat-3'
     },
     {
-        image: require('./../../images/projects/square/pic2.jpg'),
+        image: new URL('./../../images/projects/square/pic2.jpg', import.meta.url).href,
         title: 'Wall Interior',
         description: 'We combine Interior and Exterior Design services and often provide...',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/portrait/pic2.jpg'),
+        image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href,
         title: 'Dream Home',
         description: 'We combine Interior and Exterior Design services and often provide...',
         filter: 'cat-3'
     },
 
     {
-        image: require('./../../images/projects/portrait/pic3.jpg'),
+        image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href,
         title: 'Queens Museum',
         description: 'We combine Interior and Exterior Design services and often provide...',
         filter: 'cat-3'
     },
     {
-        image: require('./../../images/projects/square/pic1.jpg'),
+        image: new URL('./../../images/projects/square/pic1.jpg', import.meta.url).href,
         title: 'Life style building',
         description: 'Project management is the process by which our team plans and executes...',
         filter: 'cat-1'
     },
     {
-        image: require('./../../images/projects/square/pic3.jpg'),
+        image: new URL('./../../images/projects/square/pic3.jpg', import.meta.url).href,
         title: 'Hotel Shears',
         description: 'Landscape plans for drainage problems may also entail planting beds...',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/portrait/pic4.jpg'),
+        image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
         title: 'Modern Bathroom',
         description: 'We combine Interior and Exterior Design services and often provide...',
         filter: 'cat-1'
     },
     {
-        image: require('./../../images/projects/square/pic9.jpg'),
+        image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href,
         title: 'Dream House',
         description: 'Landscape plans for drainage problems may also entail planting beds...',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/square/pic10.jpg'),
+        image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href,
         title: 'Life style building',
         description: 'Project management is the process by which our team plans and executes...',
         filter: 'cat-3'
     }
 ]
 
-var bnrimg = require('./../../images/banner/8.jpg');
-var bgimg1 = require('./../../images/background/cross-line.png');
+var bnrimg = new URL('./../../images/banner/8.jpg', import.meta.url).href;
+var bgimg1 = new URL('./../../images/background/cross-line.png', import.meta.url).href;
 
 class ProjectMasonaryNoGap5 extends React.Component {
     componentDidMount() {
@@ -127,7 +127,7 @@ class ProjectMasonaryNoGap5 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {

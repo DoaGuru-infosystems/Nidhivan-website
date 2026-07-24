@@ -9,41 +9,41 @@ const services = [
         count: '01',
         title: 'Plans and Projects',
         flaticon: 'flaticon-sketch',
-        image: require('./../../images/services/service-projects/1.jpg'),
+        image: new URL('./../../images/services/service-projects/1.jpg', import.meta.url).href,
     },
     {
         count: '02',
         title: 'Interior',
         flaticon: 'flaticon-stairs',
-        image: require('./../../images/services/service-projects/2.jpg'),
+        image: new URL('./../../images/services/service-projects/2.jpg', import.meta.url).href,
     },
     {
         count: '03',
         title: 'Exterior',
         flaticon: 'flaticon-window',
-        image: require('./../../images/services/service-projects/3.jpg'),
+        image: new URL('./../../images/services/service-projects/3.jpg', import.meta.url).href,
     },
     {
         count: '04',
         title: 'Architecture',
         flaticon: 'flaticon-skyline',
-        image: require('./../../images/services/service-projects/4.jpg'),
+        image: new URL('./../../images/services/service-projects/4.jpg', import.meta.url).href,
     },
     {
         count: '05',
         title: 'Furniture',
         flaticon: 'flaticon-bed',
-        image: require('./../../images/services/service-projects/5.jpg'),
+        image: new URL('./../../images/services/service-projects/5.jpg', import.meta.url).href,
     },
     {
         count: '06',
         title: 'Decoration',
         flaticon: 'flaticon-door',
-        image: require('./../../images/services/service-projects/7.jpg'),
+        image: new URL('./../../images/services/service-projects/7.jpg', import.meta.url).href,
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class Services2 extends React.Component {
     render() {

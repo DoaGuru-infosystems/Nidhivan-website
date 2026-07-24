@@ -5,33 +5,33 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const testimonials = [
     {
-        image: require('./../../images/testimonials/pic1.jpg'),
+        image: new URL('./../../images/testimonials/pic1.jpg', import.meta.url).href,
         reviewername: 'Rosalina D. William',
         position: 'Architect',
         review: 'Great theme, just what we were looking for. Easy to install, easy to navigate. Well documented. Really enjoyed the support.'
     },
     {
-        image: require('./../../images/testimonials/pic2.jpg'),
+        image: new URL('./../../images/testimonials/pic2.jpg', import.meta.url).href,
         reviewername: 'Mitchal Jhon',
         position: 'Architect',
         review: 'Amazing fast and reliable customer support! The team of willing to go mile for customer service! Thanks!'
     },
     {
-        image: require('./../../images/testimonials/pic3.jpg'),
+        image: new URL('./../../images/testimonials/pic3.jpg', import.meta.url).href,
         reviewername: 'Barney Smith',
         position: 'Interior designer',
         review: 'Great theme, just what we were looking for. Easy to install, easy to navigate. Well documented. Really enjoyed the support.'
     },
     {
-        image: require('./../../images/testimonials/pic4.jpg'),
+        image: new URL('./../../images/testimonials/pic4.jpg', import.meta.url).href,
         reviewername: 'Rosalina D. William',
         position: 'Architect',
         review: 'Amazing fast and reliable customer support! The team of willing to go mile for customer service! Thanks!'
     }
 ]
 
-var bgimg1 = require('./../../images/background/bg6.jpg');
-var bgimg2 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/bg6.jpg', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class Testimonials2 extends React.Component {
     render() {

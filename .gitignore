@@ -3,3 +3,4 @@ CLIENT/node_modules/
 
 # Generated output
 graphify-out/
+CLIENT/build/

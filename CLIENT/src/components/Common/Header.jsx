@@ -2,13 +2,13 @@ import React from 'react';
 import Navigation from '../Common/Navigation';
 import { NavLink } from 'react-router-dom';
 
-var bnr = require('./../../images/background/bg-map.png');
+var bnr = new URL('./../../images/background/bg-map.png', import.meta.url).href;
 
 class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { logo: require('./../../images/logo-1.png') };
+        this.state = { logo: new URL('./../../images/logo-1.png', import.meta.url).href };
     }
 
     state = { isSearchActive: false, isQuoteActive: false };
@@ -102,7 +102,7 @@ class Header extends React.Component {
                                 {/* CONTACT */}
                                 <div className="contact-slide-hide" style={{ backgroundImage: 'url(' + bnr + ')', right: isQuoteActive ? '0px' : '100%' }}>
                                     <div className="contact-nav">
-                                        <NavLink to={"#"} className="contact_close" onClick={this.handleQuoteToggle}>×</NavLink>
+                                        <NavLink to={"#"} className="contact_close" onClick={this.handleQuoteToggle}>Ã—</NavLink>
                                         <div className="contact-nav-form">
                                             <div className="row">
                                                 <div className="col-xl-6 col-lg-6 col-md-12">

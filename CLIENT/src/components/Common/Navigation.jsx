@@ -20,7 +20,7 @@ class Navigation extends React.Component {
             })
         };
 
-        loadScript('./assets/js/mobilenav.js');
+        loadScript('/assets/js/mobilenav.js');
 
     };
 

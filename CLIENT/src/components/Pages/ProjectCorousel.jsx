@@ -6,7 +6,7 @@ import Projects3 from './../Elements/Projects3';
 import Projects4 from '../Elements/Projects4';
 import SimilarProjects from './../Elements/SimilarProjects';
 
-var bnrimg = require('./../../images/banner/3.jpg');
+var bnrimg = new URL('./../../images/banner/3.jpg', import.meta.url).href;
 
 class ProjectCorousel extends React.Component {
     render() {

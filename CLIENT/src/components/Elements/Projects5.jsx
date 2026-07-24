@@ -11,85 +11,85 @@ const filters = [
 
 const projects = [
     {
-        image: require('./../../images/projects/portrait/pic4.jpg'),
+        image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
         title: 'Life style building',
         filter: 'cat-1'
     },
     {
-        image: require('./../../images/projects/square/pic9.jpg'),
+        image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href,
         title: 'Modern Bathroom',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/square/pic10.jpg'),
+        image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href,
         title: 'Dream House',
         filter: 'cat-3'
     },
     {
-        image: require('./../../images/projects/portrait/pic6.jpg'),
+        image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href,
         title: 'Bellevue Projects',
         filter: 'cat-4'
     },
     {
-        image: require('./../../images/projects/square/pic7.jpg'),
+        image: new URL('./../../images/projects/square/pic7.jpg', import.meta.url).href,
         title: 'Modish Interior',
         filter: 'cat-5'
     },
     {
-        image: require('./../../images/projects/square/pic8.jpg'),
+        image: new URL('./../../images/projects/square/pic8.jpg', import.meta.url).href,
         title: 'Wall Interior',
         filter: 'cat-4'
     },
     {
-        image: require('./../../images/projects/portrait/pic9.jpg'),
+        image: new URL('./../../images/projects/portrait/pic9.jpg', import.meta.url).href,
         title: 'Dream Home',
         filter: 'cat-3'
     },
     {
-        image: require('./../../images/projects/square/pic2.jpg'),
+        image: new URL('./../../images/projects/square/pic2.jpg', import.meta.url).href,
         title: 'Vilters',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/portrait/pic2.jpg'),
+        image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href,
         title: 'Queens Museum',
         filter: 'cat-3'
     },
 
     {
-        image: require('./../../images/projects/portrait/pic3.jpg'),
+        image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href,
         title: 'Living Room',
         filter: 'cat-3'
     },
     {
-        image: require('./../../images/projects/square/pic1.jpg'),
+        image: new URL('./../../images/projects/square/pic1.jpg', import.meta.url).href,
         title: 'Modern Bathroom',
         filter: 'cat-1'
     },
     {
-        image: require('./../../images/projects/square/pic3.jpg'),
+        image: new URL('./../../images/projects/square/pic3.jpg', import.meta.url).href,
         title: 'Life style building',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/portrait/pic4.jpg'),
+        image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
         title: 'Hotel Shears',
         filter: 'cat-1'
     },
     {
-        image: require('./../../images/projects/square/pic9.jpg'),
+        image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href,
         title: 'Dream House',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/square/pic10.jpg'),
+        image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href,
         title: 'Life style building',
         filter: 'cat-3'
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
-var bgimg2 = require('./../../images/background/cross-line.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/cross-line.png', import.meta.url).href;
 
 class Projects5 extends React.Component {
     componentDidMount() {
@@ -109,7 +109,7 @@ class Projects5 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {

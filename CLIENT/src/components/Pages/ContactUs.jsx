@@ -4,7 +4,7 @@ import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 import GoogleMapReact from 'google-map-react';
 
-var bnrimg = require('./../../images/banner/9.jpg');
+var bnrimg = new URL('./../../images/banner/9.jpg', import.meta.url).href;
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 

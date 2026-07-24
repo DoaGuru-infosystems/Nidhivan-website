@@ -7,7 +7,7 @@ import Services6 from './../Elements/Services6';
 import Services7 from './../Elements/Services7';
 import ClientsLogo2 from './../Elements/ClientsLogo2';
 
-var bnrimg = require('./../../images/banner/6.jpg');
+var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href;
 
 class Service1 extends React.Component {
     render() {

@@ -3,56 +3,56 @@ import { NavLink } from 'react-router-dom';
 
 const locations = [
     {
-        image: require('./../../images/our-history/4.jpg'),
+        image: new URL('./../../images/our-history/4.jpg', import.meta.url).href,
         title: 'French Embassy',
         location: 'Perth, Australia',
-        description: 'I just wanted to say thank you and the team very much for the brilliant service around renovating the floors at our house. You were absolutely brilliant and we can see you’ve gone the extra mile matching the floors between rooms etc. You’ve kept the place really tidy too, cannot ask for more.',
+        description: 'I just wanted to say thank you and the team very much for the brilliant service around renovating the floors at our house. You were absolutely brilliant and we can see youâ€™ve gone the extra mile matching the floors between rooms etc. Youâ€™ve kept the place really tidy too, cannot ask for more.',
     },
     {
-        image: require('./../../images/our-history/1.jpg'),
+        image: new URL('./../../images/our-history/1.jpg', import.meta.url).href,
         title: 'Art Museum',
         location: 'Muscat, Sultanate of Oman.',
         description: 'Fantastic service from start to finish. After our ceiling collapsed we never thought our damaged floor would look so good again. These guys worked in a tight time frame and were very accommodating to the other trades working in the same area to produce brilliant results and restore our badly damaged floor to look like new!',
     },
     {
-        image: require('./../../images/our-history/2.jpg'),
+        image: new URL('./../../images/our-history/2.jpg', import.meta.url).href,
         title: 'Drana Villa, CA',
         location: 'Amman, Jordan',
         description: 'The floor looks magnificent and the parquet in the hall sets it off beautifully. Your men were excellent, you were delightful and nothing was too much trouble for you. You have very tidy workers, covering everything, and the house was left in a good shape as the condition allowed.',
     },
     {
-        image: require('./../../images/our-history/3.jpg'),
+        image: new URL('./../../images/our-history/3.jpg', import.meta.url).href,
         title: 'House Office, CA',
         location: 'Casablanca, Morocco',
-        description: 'I just wanted to say thank you and the team very much for the brilliant service around renovating the floors at our house. You were absolutely brilliant and we can see you’ve gone the extra mile matching the floors between rooms etc. You’ve kept the place really tidy too, cannot ask for more.',
+        description: 'I just wanted to say thank you and the team very much for the brilliant service around renovating the floors at our house. You were absolutely brilliant and we can see youâ€™ve gone the extra mile matching the floors between rooms etc. Youâ€™ve kept the place really tidy too, cannot ask for more.',
     },
     {
-        image: require('./../../images/our-history/5.jpg'),
+        image: new URL('./../../images/our-history/5.jpg', import.meta.url).href,
         title: 'French Embassy',
         location: 'Perth, Australia',
-        description: 'I just wanted to say thank you and the team very much for the brilliant service around renovating the floors at our house. You were absolutely brilliant and we can see you’ve gone the extra mile matching the floors between rooms etc. You’ve kept the place really tidy too, cannot ask for more.',
+        description: 'I just wanted to say thank you and the team very much for the brilliant service around renovating the floors at our house. You were absolutely brilliant and we can see youâ€™ve gone the extra mile matching the floors between rooms etc. Youâ€™ve kept the place really tidy too, cannot ask for more.',
     },
     {
-        image: require('./../../images/our-history/6.jpg'),
+        image: new URL('./../../images/our-history/6.jpg', import.meta.url).href,
         title: 'Art Museum',
         location: 'Muscat, Sultanate of Oman.',
         description: 'Fantastic service from start to finish. After our ceiling collapsed we never thought our damaged floor would look so good again. These guys worked in a tight time frame and were very accommodating to the other trades working in the same area to produce brilliant results and restore our badly damaged floor to look like new!',
     },
     {
-        image: require('./../../images/our-history/7.jpg'),
+        image: new URL('./../../images/our-history/7.jpg', import.meta.url).href,
         title: 'Drana Villa, CA',
         location: 'Amman, Jordan',
         description: 'The floor looks magnificent and the parquet in the hall sets it off beautifully. Your men were excellent, you were delightful and nothing was too much trouble for you. You have very tidy workers, covering everything, and the house was left in a good shape as the condition allowed.',
     },
     {
-        image: require('./../../images/our-history/8.jpg'),
+        image: new URL('./../../images/our-history/8.jpg', import.meta.url).href,
         title: 'House Office, CA',
         locatio: 'Casablanca, Morocco',
-        description: 'I just wanted to say thank you and the team very much for the brilliant service around renovating the floors at our house. You were absolutely brilliant and we can see you’ve gone the extra mile matching the floors between rooms etc. You’ve kept the place really tidy too, cannot ask for more.',
+        description: 'I just wanted to say thank you and the team very much for the brilliant service around renovating the floors at our house. You were absolutely brilliant and we can see youâ€™ve gone the extra mile matching the floors between rooms etc. Youâ€™ve kept the place really tidy too, cannot ask for more.',
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line.png');
+var bgimg1 = new URL('./../../images/background/cross-line.png', import.meta.url).href;
 
 class About4 extends React.Component {
     render() {

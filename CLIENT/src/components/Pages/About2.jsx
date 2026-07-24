@@ -8,7 +8,7 @@ import Statistics1 from './../Elements/Statistics1';
 import Team1 from './../Elements/Team1';
 import ClientsLogo1 from './../Elements/ClientsLogo1';
 
-var bnrimg = require('./../../images/banner/6.jpg');
+var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href;
 
 class Home4 extends React.Component {
     componentDidMount() {
@@ -28,7 +28,7 @@ class Home4 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {

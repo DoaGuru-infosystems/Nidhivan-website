@@ -3,15 +3,15 @@ import { NavLink } from 'react-router-dom';
 
 const blogs = [
     {
-        image: require('./../../images/blog/blog-grid/pic4.jpg'),
-        title: 'We’ll nail your next project, because nobody wants...',
+        image: new URL('./../../images/blog/blog-grid/pic4.jpg', import.meta.url).href,
+        title: 'Weâ€™ll nail your next project, because nobody wants...',
         author: 'John',
         date: '5',
         month: 'SEP',
         comments: '5 Comment'
     },
     {
-        image: require('./../../images/blog/blog-grid/pic2.jpg'),
+        image: new URL('./../../images/blog/blog-grid/pic2.jpg', import.meta.url).href,
         title: 'Flooring Pro\'s Secrets That Can Raise Your Home Value...',
         author: 'John',
         date: '25',
@@ -19,7 +19,7 @@ const blogs = [
         comments: '5 Comment'
     },
     {
-        image: require('./../../images/blog/blog-grid/pic3.jpg'),
+        image: new URL('./../../images/blog/blog-grid/pic3.jpg', import.meta.url).href,
         title: 'Best Laminate & Hardwood Flooring Trends For 2019...',
         author: 'John',
         date: '5',
@@ -28,7 +28,7 @@ const blogs = [
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class Blog1 extends React.Component {
     render() {

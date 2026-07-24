@@ -13,50 +13,50 @@ const filters = [
 
 const projects = [
     {
-        image: require('./../../images/projects/portrait/pic1.jpg'),
+        image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href,
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-one'
     },
     {
-        image: require('./../../images/projects/portrait/pic2.jpg'),
+        image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href,
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-two'
     },
     {
-        image: require('./../../images/projects/portrait/pic3.jpg'),
+        image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href,
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-three'
     },
     {
-        image: require('./../../images/projects/portrait/pic4.jpg'),
+        image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-four'
     },
     {
-        image: require('./../../images/projects/portrait/pic5.jpg'),
+        image: new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href,
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-three'
     },
     {
-        image: require('./../../images/projects/portrait/pic6.jpg'),
+        image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href,
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-two'
     },
     {
-        image: require('./../../images/projects/portrait/pic7.jpg'),
+        image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href,
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-one'
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class Projects1 extends React.Component {
     componentDidMount() {
@@ -76,7 +76,7 @@ class Projects1 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {

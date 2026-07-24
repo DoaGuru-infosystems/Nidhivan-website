@@ -14,69 +14,69 @@ const filters = [
 
 const projects = [
     {
-        image: require('./../../images/projects/portrait/pic1.jpg'),
+        image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href,
         title: 'Interior Work Avroko',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-1'
     },
     {
-        image: require('./../../images/projects/portrait/pic2.jpg'),
+        image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href,
         title: 'Vilters',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/portrait/pic3.jpg'),
+        image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href,
         title: 'Industrial Design',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-3'
     },
     {
-        image: require('./../../images/projects/portrait/pic4.jpg'),
+        image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
         title: 'House Bluprint',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-4'
     },
     {
-        image: require('./../../images/projects/portrait/pic5.jpg'),
+        image: new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href,
         title: 'Modern Bathroom',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-5'
     },
     {
-        image: require('./../../images/projects/portrait/pic6.jpg'),
+        image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href,
         title: 'Bellevue Project',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-4'
     },
     {
-        image: require('./../../images/projects/portrait/pic7.jpg'),
+        image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href,
         title: 'Qatar Pavilion',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-3'
     },
     {
-        image: require('./../../images/projects/portrait/pic8.jpg'),
+        image: new URL('./../../images/projects/portrait/pic8.jpg', import.meta.url).href,
         title: 'Museum',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-2'
     },
     {
-        image: require('./../../images/projects/portrait/pic9.jpg'),
+        image: new URL('./../../images/projects/portrait/pic9.jpg', import.meta.url).href,
         title: 'Modern house',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-1'
     },
     {
-        image: require('./../../images/projects/portrait/pic7.jpg'),
+        image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href,
         title: 'Qatar Pavilion',
         address: 'Muscat, Sultanate of Oman',
         filter: 'cat-3'
     }
 ]
 
-var bnrimg = require('./../../images/banner/6.jpg');
-var bgimg1 = require('./../../images/background/cross-line.png');
+var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href;
+var bgimg1 = new URL('./../../images/background/cross-line.png', import.meta.url).href;
 
 class ProjectGridNoGap5 extends React.Component {
     componentDidMount() {
@@ -96,7 +96,7 @@ class ProjectGridNoGap5 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {

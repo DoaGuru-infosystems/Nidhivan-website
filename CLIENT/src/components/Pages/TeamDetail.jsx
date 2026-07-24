@@ -3,7 +3,7 @@ import Header4 from './../Common/Header4';
 import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 
-var bnrimg = require('./../../images/banner/1.jpg');
+var bnrimg = new URL('./../../images/banner/1.jpg', import.meta.url).href;
 
 class TeamDetail extends React.Component {
     render() {
@@ -21,7 +21,7 @@ class TeamDetail extends React.Component {
                                         <div className="col-lg-4 col-md-5 col-sm-12">
                                             <div className="about-single-team-info-left p-a30 sx-bg-secondry">
                                                 <div className="profile-image">
-                                                    <img src={require('./../../images/our-team5/1.jpg')} alt="" />
+                                                    <img src={new URL('./../../images/our-team5/1.jpg', import.meta.url).href} alt="" />
                                                 </div>
                                                 <div className="text-black bg-white p-a30">
                                                     <h4 className="m-t0">Johnny Smith</h4>

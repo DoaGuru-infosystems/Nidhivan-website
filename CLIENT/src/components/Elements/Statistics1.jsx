@@ -1,8 +1,8 @@
 import React from 'react';
 import CountUp from 'react-countup';
 
-var bgimg1 = require('./../../images/background/bg-1.jpg');
-var bgimg2 = require('./../../images/background/bg-5.png');
+var bgimg1 = new URL('./../../images/background/bg-1.jpg', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/bg-5.png', import.meta.url).href;
 
 class Statistics1 extends React.Component {
     

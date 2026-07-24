@@ -8,7 +8,7 @@ class Switcher extends React.Component {
     constructor(props) {
         super(props);
         this.handleSwitchSkin.bind(this);
-        this.state = { stylePath: './assets/css/skin/skin-1.css' };
+        this.state = { stylePath: '/assets/css/skin/skin-1.css' };
     }
 
     componentDidMount = () => {
@@ -19,7 +19,7 @@ class Switcher extends React.Component {
         } else {
             document.body.classList.remove('footer-fixed');
         } 
-        this.setState({ stylePath: './assets/css/skin/skin-1.css' });
+        this.setState({ stylePath: '/assets/css/skin/skin-1.css' });
 
     }
 
@@ -34,25 +34,25 @@ class Switcher extends React.Component {
         const skin = skinitem.item;
 
         if (skin === 1) {
-            this.setState({ stylePath: './assets/css/skin/skin-1.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-1.css' });
         } else if (skin === 2) {
-            this.setState({ stylePath: './assets/css/skin/skin-2.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-2.css' });
         } else if (skin === 3) {
-            this.setState({ stylePath: './assets/css/skin/skin-3.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-3.css' });
         } else if (skin === 4) {
-            this.setState({ stylePath: './assets/css/skin/skin-4.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-4.css' });
         } else if (skin === 5) {
-            this.setState({ stylePath: './assets/css/skin/skin-5.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-5.css' });
         } else if (skin === 6) {
-            this.setState({ stylePath: './assets/css/skin/skin-6.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-6.css' });
         } else if (skin === 7) {
-            this.setState({ stylePath: './assets/css/skin/skin-7.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-7.css' });
         } else if (skin === 8) {
-            this.setState({ stylePath: './assets/css/skin/skin-8.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-8.css' });
         } else if (skin === 9) {
-            this.setState({ stylePath: './assets/css/skin/skin-9.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-9.css' });
         } else if (skin === 10) {
-            this.setState({ stylePath: './assets/css/skin/skin-10.css' });
+            this.setState({ stylePath: '/assets/css/skin/skin-10.css' });
         }
 
     };

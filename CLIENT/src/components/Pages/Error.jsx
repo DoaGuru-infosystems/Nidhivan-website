@@ -4,7 +4,7 @@ import Header4 from './../Common/Header4';
 import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 
-var bnrimg = require('./../../images/banner/8.jpg');
+var bnrimg = new URL('./../../images/banner/8.jpg', import.meta.url).href;
 
 class Error extends React.Component {
     render() {
@@ -19,7 +19,7 @@ class Error extends React.Component {
                             <div className="section-content">
                                 <div className="page-notfound row">
                                     <div className="col-md-7">
-                                        <img src={require('./../../images/error-404.png')} alt="" />
+                                        <img src={new URL('./../../images/error-404.png', import.meta.url).href} alt="" />
                                     </div>
                                     <div className="col-md-5">
                                         <strong>Page Not Found</strong>

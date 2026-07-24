@@ -9,7 +9,7 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
-var bnrimg = require('./../../images/banner/8.jpg');
+var bnrimg = new URL('./../../images/banner/8.jpg', import.meta.url).href;
 
 class BlogListing extends React.Component {
     render() {
@@ -76,7 +76,7 @@ class BlogListing extends React.Component {
                                         {/* COLUMNS 2 */}
                                         <div className="blog-post blog-lg date-style-3 block-shadow">
                                             <div className="sx-post-media sx-img-effect zoom-slow">
-                                                <NavLink to={"/blog-single"}><img src={require('./../../images/blog/default/thum1.jpg')} alt="" /></NavLink>
+                                                <NavLink to={"/blog-single"}><img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt="" /></NavLink>
                                             </div>
                                             <div className="sx-post-info  bg-white">
                                                 <div className="sx-post-meta ">
@@ -115,17 +115,17 @@ class BlogListing extends React.Component {
                                                 <OwlCarousel className="owl-carousel owl-fade-slider-one owl-btn-vertical-center owl-dots-bottom-right" {...options}>
                                                     <div className="item">
                                                         <div className="aon-thum-bx">
-                                                            <img src={require('./../../images/blog/default/thum1.jpg')} alt="" />
+                                                            <img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt="" />
                                                         </div>
                                                     </div>
                                                     <div className="item">
                                                         <div className="aon-thum-bx">
-                                                            <img src={require('./../../images/blog/default/thum2.jpg')} alt="" />
+                                                            <img src={new URL('./../../images/blog/default/thum2.jpg', import.meta.url).href} alt="" />
                                                         </div>
                                                     </div>
                                                     <div className="item">
                                                         <div className="aon-thum-bx">
-                                                            <img src={require('./../../images/blog/default/thum3.jpg')} alt="" />
+                                                            <img src={new URL('./../../images/blog/default/thum3.jpg', import.meta.url).href} alt="" />
                                                         </div>
                                                     </div>
                                                 </OwlCarousel>
@@ -141,7 +141,7 @@ class BlogListing extends React.Component {
                                                     </ul>
                                                 </div>
                                                 <div className="sx-post-title ">
-                                                    <h4 className="post-title"><NavLink to={"/blog-single"}>When it comes to your house, don’t mess with the trust the best</NavLink></h4>
+                                                    <h4 className="post-title"><NavLink to={"/blog-single"}>When it comes to your house, donâ€™t mess with the trust the best</NavLink></h4>
                                                 </div>
                                                 <div className="sx-post-text">
                                                     <p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibus dam veritatis quisquam laboriosam esse beatae hic perferendis velit deserunt soluta iste repellendus officia in neque veniam debitis</p>
@@ -253,7 +253,7 @@ class BlogListing extends React.Component {
                                                     </ul>
                                                 </div>
                                                 <div className="sx-post-title ">
-                                                    <h4 className="post-title"><NavLink to={"/blog-single"}>You Tube Video don’t get framed by the competition, trust our solid reputation.</NavLink></h4>
+                                                    <h4 className="post-title"><NavLink to={"/blog-single"}>You Tube Video donâ€™t get framed by the competition, trust our solid reputation.</NavLink></h4>
                                                 </div>
                                                 <div className="sx-post-text">
                                                     <p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibus dam veritatis quisquam laboriosam esse beatae hic perferendis velit deserunt soluta iste repellendus officia in neque veniam debitis</p>
@@ -295,7 +295,7 @@ class BlogListing extends React.Component {
                                                     </ul>
                                                 </div>
                                                 <div className="sx-post-title ">
-                                                    <h4 className="post-title"><NavLink to={"/blog-single"}>Vimeo Video don’t get framed by the competition, trust our solid reputation.</NavLink></h4>
+                                                    <h4 className="post-title"><NavLink to={"/blog-single"}>Vimeo Video donâ€™t get framed by the competition, trust our solid reputation.</NavLink></h4>
                                                 </div>
                                                 <div className="sx-post-text">
                                                     <p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibus dam veritatis quisquam laboriosam esse beatae hic perferendis velit deserunt soluta iste repellendus officia in neque veniam debitis</p>
@@ -318,13 +318,13 @@ class BlogListing extends React.Component {
                                         </div>
                                     </div>
                                     <ul className="pagination m-b30">
-                                        <li><NavLink to={"#"}>«</NavLink></li>
+                                        <li><NavLink to={"#"}>Â«</NavLink></li>
                                         <li className="active"><NavLink to={"#"}>1</NavLink></li>
                                         <li><NavLink to={"#"}>2</NavLink></li>
                                         <li><NavLink to={"#"}>3</NavLink></li>
                                         <li><NavLink to={"#"}>4</NavLink></li>
                                         <li><NavLink to={"#"}>5</NavLink></li>
-                                        <li><NavLink to={"#"}>»</NavLink></li>
+                                        <li><NavLink to={"#"}>Â»</NavLink></li>
                                     </ul>
                                 </div>
                                 {/* SIDE BAR START */}

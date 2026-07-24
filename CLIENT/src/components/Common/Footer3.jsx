@@ -18,7 +18,7 @@ class Footer3 extends React.Component {
                                         {/*<h4 class="widget-title">About Company</h4>*/}
                                         <div className="logo-footer clearfix p-b15">
                                             <NavLink to={"./"}>
-                                                <img src={require('./../../images/logo-1.png')} alt="Inteshape" />
+                                                <img src={new URL('./../../images/logo-1.png', import.meta.url).href} alt="Inteshape" />
                                             </NavLink>
                                         </div>
                                         <p>7X Theme is a minimal html template for interior and architecture purpose. Today we can tell you, thanks to your passion, hard work creativity.</p>
@@ -43,7 +43,7 @@ class Footer3 extends React.Component {
                                                 </div>
                                                 <div className="sx-post-info">
                                                     <div className="sx-post-header">
-                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>On these beams, we’re.</NavLink></h6>
+                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>On these beams, weâ€™re.</NavLink></h6>
                                                     </div>
                                                     <div className="sx-post-meta">
                                                         <ul>
@@ -61,7 +61,7 @@ class Footer3 extends React.Component {
                                                 </div>
                                                 <div className="sx-post-info">
                                                     <div className="sx-post-header">
-                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>We’ll be a sensation for you</NavLink></h6>
+                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>Weâ€™ll be a sensation for you</NavLink></h6>
                                                     </div>
                                                     <div className="sx-post-meta">
                                                         <ul>
@@ -79,7 +79,7 @@ class Footer3 extends React.Component {
                                                 </div>
                                                 <div className="sx-post-info">
                                                     <div className="sx-post-header">
-                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>We’ll be a sensation for you</NavLink></h6>
+                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>Weâ€™ll be a sensation for you</NavLink></h6>
                                                     </div>
                                                     <div className="sx-post-meta">
                                                         <ul>
@@ -154,7 +154,7 @@ class Footer3 extends React.Component {
                         <div className="container">
                             <div className="clearfix">
                                 <div className="sx-footer-bot-center">
-                                    <span className="copyrights-text">© 2019 Your Company. Designed By 7xtheme.</span>
+                                    <span className="copyrights-text">Â© 2019 Your Company. Designed By 7xtheme.</span>
                                 </div>
                             </div>
                         </div>

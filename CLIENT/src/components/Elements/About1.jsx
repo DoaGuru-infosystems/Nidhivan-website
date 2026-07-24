@@ -5,15 +5,15 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const images = [
-    require('./../../images/about-slider/1.jpg'),
-    require('./../../images/about-slider/2.jpg'),
-    require('./../../images/about-slider/3.jpg'),
-    require('./../../images/about-slider/4.jpg'),
-    require('./../../images/about-slider/5.jpg')
+    new URL('./../../images/about-slider/1.jpg', import.meta.url).href,
+    new URL('./../../images/about-slider/2.jpg', import.meta.url).href,
+    new URL('./../../images/about-slider/3.jpg', import.meta.url).href,
+    new URL('./../../images/about-slider/4.jpg', import.meta.url).href,
+    new URL('./../../images/about-slider/5.jpg', import.meta.url).href
 ]
 
-var bgimg1 = require('./../../images/background/bg-4.png');
-var bgimg2 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/bg-4.png', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class About1 extends React.Component {
 
@@ -72,7 +72,7 @@ class About1 extends React.Component {
 
                                         </OwlCarousel>
                                         <div className="about-home-before">
-                                            <img src={require('./../../images/about-slider/1-ab.jpg')} alt="" />
+                                            <img src={new URL('./../../images/about-slider/1-ab.jpg', import.meta.url).href} alt="" />
                                         </div>
                                     </div>
                                 </div>

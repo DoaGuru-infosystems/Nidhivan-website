@@ -6,7 +6,7 @@ import Banner from './../Elements/Banner';
 import Projects7 from './../Elements/Projects7';
 import ReactPlayer from 'react-player';
 
-var bnrimg = require('./../../images/banner/1.jpg');
+var bnrimg = new URL('./../../images/banner/1.jpg', import.meta.url).href;
 
 class ProjectDetail2 extends React.Component {
     componentDidMount() {
@@ -26,7 +26,7 @@ class ProjectDetail2 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {
@@ -45,42 +45,42 @@ class ProjectDetail2 extends React.Component {
                                         <div className="col-md-6">
                                             <div className="project-detail-pic m-b30">
                                                 <div className="sx-media">
-                                                    <img src={require('./../../images/projects/square/pic8.jpg')} alt="" />
+                                                    <img src={new URL('./../../images/projects/square/pic8.jpg', import.meta.url).href} alt="" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="project-detail-pic m-b30">
                                                 <div className="sx-media">
-                                                    <img src={require('./../../images/projects/square/pic9.jpg')} alt="" />
+                                                    <img src={new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href} alt="" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="project-detail-pic m-b30">
                                                 <div className="sx-media">
-                                                    <img src={require('./../../images/projects/square/pic10.jpg')} alt="" />
+                                                    <img src={new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href} alt="" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="project-detail-pic m-b30">
                                                 <div className="sx-media">
-                                                    <img src={require('./../../images/projects/square/pic7.jpg')} alt="" />
+                                                    <img src={new URL('./../../images/projects/square/pic7.jpg', import.meta.url).href} alt="" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="project-detail-pic m-b30">
                                                 <div className="sx-media">
-                                                    <img src={require('./../../images/projects/square/pic2.jpg')} alt="" />
+                                                    <img src={new URL('./../../images/projects/square/pic2.jpg', import.meta.url).href} alt="" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="project-detail-pic m-b30">
                                                 <div className="sx-media">
-                                                    <img src={require('./../../images/projects/square/pic3.jpg')} alt="" />
+                                                    <img src={new URL('./../../images/projects/square/pic3.jpg', import.meta.url).href} alt="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +124,7 @@ class ProjectDetail2 extends React.Component {
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <h4>Landscape plans for drainage problems may also entail planting beds away from the home’s foundation.</h4>
+                                            <h4>Landscape plans for drainage problems may also entail planting beds away from the homeÃ¢â‚¬â„¢s foundation.</h4>
                                             <p> Designers think everything done by someone else is awful, and that they could do it better themselves, which explains why I designed my own living room carpet, I suppose. the architect represents neither a Dionysian nor an Apollinian condition: here it is the mighty act of will, the will which moves mountains, the intoxication of the strong will, which demands artistic expression.</p> <p>The most powerful men have always inspired the architects; the architect has always been influenced by power.</p>
                                             <div className="m-b0">
                                                 <div className="sx-divider divider-1px  bg-black"><i className="icon-dot c-square" /></div>

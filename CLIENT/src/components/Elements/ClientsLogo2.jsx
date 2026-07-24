@@ -5,12 +5,12 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const logos = [
-    { image: require('./../../images/client-logo/1.png') },
-    { image: require('./../../images/client-logo/2.png') },
-    { image: require('./../../images/client-logo/3.png') },
-    { image: require('./../../images/client-logo/4.png') },
-    { image: require('./../../images/client-logo/5.png') },
-    { image: require('./../../images/client-logo/6.png') }
+    { image: new URL('./../../images/client-logo/1.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/2.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/3.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/4.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/5.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/6.png', import.meta.url).href }
 ]
 
 class ClientsLogo2 extends React.Component {

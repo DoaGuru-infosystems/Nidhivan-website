@@ -1,8 +1,8 @@
 import React from 'react';
 
-var bgimg1 = require('./../../images/background/bg-5.png');
-var bgimg2 = require('./../../images/background/bg-2.jpg');
-var bgimg3 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/bg-5.png', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/bg-2.jpg', import.meta.url).href;
+var bgimg3 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class WhatWeDo6 extends React.Component {
     render() {
@@ -24,7 +24,7 @@ class WhatWeDo6 extends React.Component {
                             <div className="row number-block-one-outer justify-content-center">
                                 <div className="col-lg-4 col-md-6 col-sm-6 m-b30">
                                     <div className="number-block-one animate-in-to-top">
-                                        <img src={require('./../../images/pic1.jpg')} alt="" />
+                                        <img src={new URL('./../../images/pic1.jpg', import.meta.url).href} alt="" />
                                         <div className="figcaption bg-white text-center p-a20">
                                             <h4 className="m-a0">Interior Design</h4>
                                         </div>
@@ -35,7 +35,7 @@ class WhatWeDo6 extends React.Component {
                                 </div>
                                 <div className="col-lg-4 col-md-6 col-sm-6 m-b30">
                                     <div className="number-block-one animate-in-to-top">
-                                        <img src={require('./../../images/pic2.jpg')} alt="" />
+                                        <img src={new URL('./../../images/pic2.jpg', import.meta.url).href} alt="" />
                                         <div className="figcaption bg-white text-center p-a20">
                                             <h4 className="m-a0">Architectur</h4>
                                         </div>
@@ -46,7 +46,7 @@ class WhatWeDo6 extends React.Component {
                                 </div>
                                 <div className="col-lg-4 col-md-6 col-sm-6 m-b30">
                                     <div className="number-block-one animate-in-to-top">
-                                        <img src={require('./../../images/pic3.jpg')} alt="" />
+                                        <img src={new URL('./../../images/pic3.jpg', import.meta.url).href} alt="" />
                                         <div className="figcaption bg-white text-center p-a20">
                                             <h4 className="m-a0">Floor Plan</h4>
                                         </div>

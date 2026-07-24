@@ -6,21 +6,21 @@ const services = [
         count: '01',
         title: 'Smartly Execute',
         flaticon: 'flaticon-sketch',
-        image: require('./../../images/services/service-projects/1.jpg'),
+        image: new URL('./../../images/services/service-projects/1.jpg', import.meta.url).href,
         description: 'Our team also provides consultations on all architectural issues, even if you need.'
     },
     {
         count: '02',
         title: 'Perfect Design',
         flaticon: 'flaticon-stairs',
-        image: require('./../../images/services/service-projects/2.jpg'),
+        image: new URL('./../../images/services/service-projects/2.jpg', import.meta.url).href,
         description: 'We combine Interior and Exterior Design services and often provide them as a single solution.'
     },
     {
         count: '03',
         title: 'Carefully planned',
         flaticon: 'flaticon-window',
-        image: require('./../../images/services/service-projects/3.jpg'),
+        image: new URL('./../../images/services/service-projects/3.jpg', import.meta.url).href,
         description: 'Landscape plans for drainage problems may also entail planting beds away'
     }
 ]

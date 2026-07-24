@@ -6,38 +6,38 @@ import Banner from './../Elements/Banner';
 
 const teamMembers = [
     {
-        image: require('./../../images/our-team5/1.jpg'),
+        image: new URL('./../../images/our-team5/1.jpg', import.meta.url).href,
         membername: 'Johnny Jackman',
         position: 'Architect'
     },
     {
-        image: require('./../../images/our-team5/2.jpg'),
+        image: new URL('./../../images/our-team5/2.jpg', import.meta.url).href,
         membername: 'Daniel Rickman',
         position: 'Architect'
     },
     {
-        image: require('./../../images/our-team5/3.jpg'),
+        image: new URL('./../../images/our-team5/3.jpg', import.meta.url).href,
         membername: 'Mark Norwich',
         position: 'Finances'
     },
     {
-        image: require('./../../images/our-team5/5.jpg'),
+        image: new URL('./../../images/our-team5/5.jpg', import.meta.url).href,
         membername: 'Johnny Jackman',
         position: 'Architect'
     },
     {
-        image: require('./../../images/our-team5/6.jpg'),
+        image: new URL('./../../images/our-team5/6.jpg', import.meta.url).href,
         membername: 'Daniel Rickman',
         position: 'Architect'
     },
     {
-        image: require('./../../images/our-team5/7.jpg'),
+        image: new URL('./../../images/our-team5/7.jpg', import.meta.url).href,
         membername: 'Mark Norwich',
         position: 'Finances'
     },
 ]
 
-var bnrimg = require('./../../images/banner/2.jpg');
+var bnrimg = new URL('./../../images/banner/2.jpg', import.meta.url).href;
 
 class Team2 extends React.Component {
     render() {

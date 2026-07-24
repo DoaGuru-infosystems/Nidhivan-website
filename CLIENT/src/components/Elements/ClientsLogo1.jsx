@@ -2,18 +2,18 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const logos = [
-    { image: require('./../../images/client-logo/logo1.png') },
-    { image: require('./../../images/client-logo/logo2.png') },
-    { image: require('./../../images/client-logo/logo3.png') },
-    { image: require('./../../images/client-logo/logo4.png') },
-    { image: require('./../../images/client-logo/logo5.png') },
-    { image: require('./../../images/client-logo/logo6.png') },
-    { image: require('./../../images/client-logo/logo7.png') },
-    { image: require('./../../images/client-logo/logo8.png') }
+    { image: new URL('./../../images/client-logo/logo1.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/logo2.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/logo3.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/logo4.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/logo5.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/logo6.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/logo7.png', import.meta.url).href },
+    { image: new URL('./../../images/client-logo/logo8.png', import.meta.url).href }
 ]
 
-var bgimg1 = require('./../../images/background/bg-12.jpg');
-var bgimg2 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/bg-12.jpg', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class ClientsLogo1 extends React.Component {
     render() {

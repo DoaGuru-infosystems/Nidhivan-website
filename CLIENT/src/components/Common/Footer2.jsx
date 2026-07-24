@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Switcher from '../Elements/Switcher';
 
-var bnr = require('./../../images/background/f-bg.jpg');
+var bnr = new URL('./../../images/background/f-bg.jpg', import.meta.url).href;
 
 class Footer2 extends React.Component {
     render() {
@@ -21,7 +21,7 @@ class Footer2 extends React.Component {
                                         {/*<h4 class="widget-title">About Company</h4>*/}
                                         <div className="logo-footer clearfix p-b15">
                                             <NavLink to={"./"}>
-                                                <img src={require('./../../images/logo-light.png')} alt="Inteshape" />
+                                                <img src={new URL('./../../images/logo-light.png', import.meta.url).href} alt="Inteshape" />
                                             </NavLink>
                                         </div>
                                         <p>7X Theme is a html template for interior and architecture purpose. Today we can tell you, thanks to your passion.</p>
@@ -46,7 +46,7 @@ class Footer2 extends React.Component {
                                                 </div>
                                                 <div className="sx-post-info">
                                                     <div className="sx-post-header">
-                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>On these beams, we’re.</NavLink></h6>
+                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>On these beams, weâ€™re.</NavLink></h6>
                                                     </div>
                                                     <div className="sx-post-meta">
                                                         <ul>
@@ -64,7 +64,7 @@ class Footer2 extends React.Component {
                                                 </div>
                                                 <div className="sx-post-info">
                                                     <div className="sx-post-header">
-                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>We’ll be a sensation for</NavLink></h6>
+                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>Weâ€™ll be a sensation for</NavLink></h6>
                                                     </div>
                                                     <div className="sx-post-meta">
                                                         <ul>
@@ -82,7 +82,7 @@ class Footer2 extends React.Component {
                                                 </div>
                                                 <div className="sx-post-info">
                                                     <div className="sx-post-header">
-                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>We’ll be a sensation for</NavLink></h6>
+                                                        <h6 className="post-title"><NavLink to={"/blog-single"}>Weâ€™ll be a sensation for</NavLink></h6>
                                                     </div>
                                                     <div className="sx-post-meta">
                                                         <ul>
@@ -157,7 +157,7 @@ class Footer2 extends React.Component {
                         <div className="container">
                             <div className="row">
                                 <div className="sx-footer-bot-left">
-                                    <span className="copyrights-text">© 2019 Your Company. Designed By 7xtheme.</span>
+                                    <span className="copyrights-text">Â© 2019 Your Company. Designed By 7xtheme.</span>
                                 </div>
                             </div>
                         </div>

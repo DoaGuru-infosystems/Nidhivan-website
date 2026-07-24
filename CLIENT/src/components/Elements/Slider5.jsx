@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-var slideimg1 = require('./../../images/main-slider/slider5/slide1.jpg');
-var slideimg2 = require('./../../images/main-slider/slider5/slide2.jpg');
+var slideimg1 = new URL('./../../images/main-slider/slider5/slide1.jpg', import.meta.url).href;
+var slideimg2 = new URL('./../../images/main-slider/slider5/slide2.jpg', import.meta.url).href;
 
 class Slider5 extends React.Component {
     componentDidMount() {
@@ -22,8 +22,8 @@ class Slider5 extends React.Component {
             })
         };
 
-        loadScript('./assets/js/rev-script-5.js');
-        loadScript('./assets/plugins/revolution-addons/beforeafter/js/revolution.addon.beforeafter.min.js');
+        loadScript('/assets/js/rev-script-5.js');
+        loadScript('/assets/plugins/revolution-addons/beforeafter/js/revolution.addon.beforeafter.min.js');
     };
     render() {
         return (
@@ -36,7 +36,7 @@ class Slider5 extends React.Component {
                         <li data-index="rs-964" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="" data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="{&quot;revslider-weather-addon&quot; : { &quot;type&quot; : &quot;&quot; ,&quot;name&quot; : &quot;&quot; ,&quot;woeid&quot; : &quot;&quot; ,&quot;unit&quot; : &quot;&quot; }}" data-description="" data-beforeafter={`{"moveto":"50%|50%|50%|50%","bgColor":"#e7e7e7","bgType":"image","bgImage":"${slideimg1}",
                   "bgFit":"cover","bgPos":"center center","bgRepeat":"no-repeat","direction":"horizontal","easing":"Power2.easeInOut","delay":"500","time":"750","out":"fade","carousel":false}`}>
                    
-                    <img src={require('./../../images/main-slider/slider5/slide1-sk.jpg')} alt="" data-beforeafter="after"  data-bgcolor="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" className="rev-slidebg" data-no-retina />
+                    <img src={new URL('./../../images/main-slider/slider5/slide1-sk.jpg', import.meta.url).href} alt="" data-beforeafter="after"  data-bgcolor="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" className="rev-slidebg" data-no-retina />
                     
                     
                     
@@ -199,7 +199,7 @@ class Slider5 extends React.Component {
                         <li data-index="rs-965" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb="" data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="{&quot;revslider-weather-addon&quot; : { &quot;type&quot; : &quot;&quot; ,&quot;name&quot; : &quot;&quot; ,&quot;woeid&quot; : &quot;&quot; ,&quot;unit&quot; : &quot;&quot; }}" data-description="" data-beforeafter={`{"moveto":"50%|50%|50%|50%","bgColor":"#e7e7e7","bgType":"image","bgImage":"${slideimg2}",
                   "bgFit":"cover","bgPos":"center center","bgRepeat":"no-repeat","direction":"horizontal","easing":"Power2.easeInOut","delay":"500","time":"750","out":"fade","carousel":false}`}>
                    
-                    <img src={require('./../../images/main-slider/slider5/slide2-sk.jpg')} alt="" data-beforeafter="after"  data-bgcolor=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" className="rev-slidebg" data-no-retina />
+                    <img src={new URL('./../../images/main-slider/slider5/slide2-sk.jpg', import.meta.url).href} alt="" data-beforeafter="after"  data-bgcolor=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" className="rev-slidebg" data-no-retina />
                    
                     
                    

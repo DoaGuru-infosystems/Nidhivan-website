@@ -5,7 +5,7 @@ import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 import ReactPlayer from 'react-player';
 
-var bnrimg = require('./../../images/banner/4.jpg');
+var bnrimg = new URL('./../../images/banner/4.jpg', import.meta.url).href;
 
 class ServiceDetail extends React.Component {
     render() {
@@ -61,7 +61,7 @@ class ServiceDetail extends React.Component {
                                     <div className="section-content">
                                         <div className="service-single-block m-b30">
                                             <div className="sx-media">
-                                                <img src={require('./../../images/gallery/pic5.jpg')} alt="" />
+                                                <img src={new URL('./../../images/gallery/pic5.jpg', import.meta.url).href} alt="" />
                                             </div>
                                             <h3 className="m-t30 sx-tilte">Interior design, a fine line with more shine a design gives you.</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>

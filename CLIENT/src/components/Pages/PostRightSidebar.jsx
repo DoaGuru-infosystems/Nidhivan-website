@@ -5,8 +5,8 @@ import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 import BlogSidebar from './../Elements/BlogSidebar';
 
-var bnrimg = require('./../../images/banner/4.jpg');
-var bgimg1 = require('./../../images/background/cross-line2.png');
+var bnrimg = new URL('./../../images/banner/4.jpg', import.meta.url).href;
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class PostRightSidebar extends React.Component {
     componentDidMount() {
@@ -26,7 +26,7 @@ class PostRightSidebar extends React.Component {
             })
         };
 
-        loadScript('./assets/js/custom.js');
+        loadScript('/assets/js/custom.js');
 
     };
     render() {
@@ -45,7 +45,7 @@ class PostRightSidebar extends React.Component {
                                         <div className="blog-post blog-detail text-black">
                                             <div className="sx-post-media">
                                                 <div className="portfolio-item">
-                                                    <img className="img-responsive" src={require('./../../images/blog/default/thum1.jpg')} alt="" />
+                                                    <img className="img-responsive" src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt="" />
                                                 </div>
                                             </div>
                                             <div className="sx-post-meta  m-t20">
@@ -71,14 +71,14 @@ class PostRightSidebar extends React.Component {
                                                     <div className="col-md-6">
                                                         <div className="sx-box m-b30">
                                                             <div className="sx-media">
-                                                                <img src={require('./../../images/blog/default/thum1.jpg')} alt="" />
+                                                                <img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt="" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
                                                         <div className="sx-box m-b30">
                                                             <div className="sx-media">
-                                                                <img src={require('./../../images/blog/default/thum2.jpg')} alt="" />
+                                                                <img src={new URL('./../../images/blog/default/thum2.jpg', import.meta.url).href} alt="" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -144,7 +144,7 @@ class PostRightSidebar extends React.Component {
                                                 <div className="col-md-6 col-sm-6">
                                                     <div className="blog-post blog-grid date-style-2">
                                                         <div className="sx-post-media sx-img-effect img-reflection">
-                                                            <NavLink to={"/blog-masonry"}><img src={require('./../../images/blog/blog-grid/pic1.jpg')} alt="" /></NavLink>
+                                                            <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic1.jpg', import.meta.url).href} alt="" /></NavLink>
                                                         </div>
                                                         <div className="sx-post-info p-t30">
                                                             <div className="sx-post-meta ">
@@ -155,7 +155,7 @@ class PostRightSidebar extends React.Component {
                                                                 </ul>
                                                             </div>
                                                             <div className="sx-post-title ">
-                                                                <h4 className="post-title"><NavLink to={"/blog-masonry"}>We’ll nail your next project, because...</NavLink></h4>
+                                                                <h4 className="post-title"><NavLink to={"/blog-masonry"}>WeÃ¢â‚¬â„¢ll nail your next project, because...</NavLink></h4>
                                                             </div>
                                                             <div className="sx-post-readmore">
                                                                 <NavLink to={"/blog-masonry"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
@@ -166,7 +166,7 @@ class PostRightSidebar extends React.Component {
                                                 <div className="col-md-6 col-sm-6">
                                                     <div className="blog-post blog-grid date-style-2">
                                                         <div className="sx-post-media sx-img-effect img-reflection">
-                                                            <NavLink to={"/blog-masonry"}><img src={require('./../../images/blog/blog-grid/pic2.jpg')} alt="" /></NavLink>
+                                                            <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic2.jpg', import.meta.url).href} alt="" /></NavLink>
                                                         </div>
                                                         <div className="sx-post-info p-t30">
                                                             <div className="sx-post-meta ">
@@ -201,7 +201,7 @@ class PostRightSidebar extends React.Component {
                                                                     <NavLink to={"#"}>20 Sep 2022</NavLink>
                                                                 </div>
                                                                 <div className="comment-author vcard">
-                                                                    <img className="avatar photo" src={require('./../../images/testimonials/pic4.jpg')} alt="" />
+                                                                    <img className="avatar photo" src={new URL('./../../images/testimonials/pic4.jpg', import.meta.url).href} alt="" />
                                                                     <cite className="fn"> Schiocchet </cite>
                                                                     <span className="says">says:</span>
                                                                 </div>
@@ -218,7 +218,7 @@ class PostRightSidebar extends React.Component {
                                                                             <NavLink to={"#"}>22 Sep 2022</NavLink>
                                                                         </div>
                                                                         <div className="comment-author vcard">
-                                                                            <img className="avatar photo" src={require('./../../images/testimonials/pic3.jpg')} alt="" />
+                                                                            <img className="avatar photo" src={new URL('./../../images/testimonials/pic3.jpg', import.meta.url).href} alt="" />
                                                                             <cite className="fn">Brayden</cite>
                                                                             <span className="says">says:</span>
                                                                         </div>
@@ -234,7 +234,7 @@ class PostRightSidebar extends React.Component {
                                                                                     <NavLink to={"#"}>24 Sep 2022</NavLink>
                                                                                 </div>
                                                                                 <div className="comment-author vcard">
-                                                                                    <img className="avatar photo" src={require('./../../images/testimonials/pic2.jpg')} alt="" />
+                                                                                    <img className="avatar photo" src={new URL('./../../images/testimonials/pic2.jpg', import.meta.url).href} alt="" />
                                                                                     <cite className="fn">Diego</cite>
                                                                                     <span className="says">says:</span>
                                                                                 </div>

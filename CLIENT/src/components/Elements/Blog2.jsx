@@ -5,7 +5,7 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import ReactPlayer from 'react-player';
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class Blog2 extends React.Component {
     render() {
@@ -57,7 +57,7 @@ class Blog2 extends React.Component {
                                                 </ul>
                                             </div>
                                             <div className="sx-post-title ">
-                                                <h4 className="post-title"><NavLink to={"/blog-single"}>You don’t get framed by the Decor.</NavLink></h4>
+                                                <h4 className="post-title"><NavLink to={"/blog-single"}>You donâ€™t get framed by the Decor.</NavLink></h4>
                                             </div>
                                             <div className="sx-post-text">
                                                 <p>Asperiores, tenetur, blanditiis, quaerat pariatur quibus dam veritatis quisquam laboriosam esse beatae hic perferendis</p>
@@ -87,17 +87,17 @@ class Blog2 extends React.Component {
                                             <OwlCarousel className="owl-carousel owl-fade-slider-one owl-btn-vertical-center owl-dots-bottom-right" {...options}>
                                                 <div className="item">
                                                     <div className="aon-thum-bx">
-                                                        <img src={require('./../../images/blog/default/thum1.jpg')} alt="" />
+                                                        <img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt="" />
                                                     </div>
                                                 </div>
                                                 <div className="item">
                                                     <div className="aon-thum-bx">
-                                                        <img src={require('./../../images/blog/default/thum2.jpg')} alt="" />
+                                                        <img src={new URL('./../../images/blog/default/thum2.jpg', import.meta.url).href} alt="" />
                                                     </div>
                                                 </div>
                                                 <div className="item">
                                                     <div className="aon-thum-bx">
-                                                        <img src={require('./../../images/blog/default/thum3.jpg')} alt="" />
+                                                        <img src={new URL('./../../images/blog/default/thum3.jpg', import.meta.url).href} alt="" />
                                                     </div>
                                                 </div>
 

@@ -17,7 +17,7 @@ const achievements1 = [
     },
     {
         title: 'International Fine Art',
-        description: 'Don’t know how to go with plan, give everything to interior design with calm.',
+        description: 'Donâ€™t know how to go with plan, give everything to interior design with calm.',
         date: '28',
         month: 'Aug',
         year: '2014',
@@ -62,8 +62,8 @@ const achievements2 = [
     }
 ]
 
-var bgimg1 = require('./../../images/background/bg-map.png');
-var bgimg2 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/bg-map.png', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class Achievements1 extends React.Component {
     render() {

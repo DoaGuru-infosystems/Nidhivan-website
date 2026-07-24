@@ -6,48 +6,48 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const projects = [
     {
-        image: require('./../../images/projects/square/pic4.jpg'),
+        image: new URL('./../../images/projects/square/pic4.jpg', import.meta.url).href,
         title: 'Life style building',
         description: 'We provide a range of architectural 3D modeling services to our customers to aid the design'
     },
     {
-        image: require('./../../images/projects/square/pic9.jpg'),
+        image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href,
         title: 'Modern Bathroom',
         description: 'Analysis and planning services that help both the client and architects to work out the forthcoming project...'
     },
     {
-        image: require('./../../images/projects/square/pic10.jpg'),
+        image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href,
         title: 'Dream House',
         description: 'We offer comprehensive Architectural Engineering Services including Interior design, Master planning.'
     },
     {
-        image: require('./../../images/projects/square/pic6.jpg'),
+        image: new URL('./../../images/projects/square/pic6.jpg', import.meta.url).href,
         title: 'Bellevue Projects',
         description: 'Project management is the process by which our team plans and executes your project. We will develop it...'
     },
     {
-        image: require('./../../images/projects/square/pic7.jpg'),
+        image: new URL('./../../images/projects/square/pic7.jpg', import.meta.url).href,
         title: 'Modish Interior',
         description: 'Our team also provides consultations on all architectural issues, even if you need specific...'
     },
     {
-        image: require('./../../images/projects/square/pic8.jpg'),
+        image: new URL('./../../images/projects/square/pic8.jpg', import.meta.url).href,
         title: 'Vilters',
         description: 'We combine Interior and Exterior Design services and often provide them as a single solution. It helps us...'
     },
     {
-        image: require('./../../images/projects/square/pic9.jpg'),
+        image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href,
         title: 'Dream Home',
         description: 'Project management is the process by which our team plans and executes your project. We will develop it...'
     },
     {
-        image: require('./../../images/projects/square/pic2.jpg'),
+        image: new URL('./../../images/projects/square/pic2.jpg', import.meta.url).href,
         title: 'Living Room',
         description: 'We combine Interior and Exterior Design services and often provide them as a single solution. It helps us...'
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class Projects3 extends React.Component {
     render() {

@@ -7,7 +7,7 @@ import ShopSidebar from '../Elements/ShopSidebar';
 
 const products = [
     {
-        image: require('./../../images/products/pic-1.jpg'),
+        image: new URL('./../../images/products/pic-1.jpg', import.meta.url).href,
         title: 'Happy Ninja',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'no',
@@ -15,7 +15,7 @@ const products = [
         price: '36.00'
     },
     {
-        image: require('./../../images/products/pic-2.jpg'),
+        image: new URL('./../../images/products/pic-2.jpg', import.meta.url).href,
         title: 'Flying Ninja',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'yes',
@@ -23,7 +23,7 @@ const products = [
         price: '36.00'
     },
     {
-        image: require('./../../images/products/pic-3.jpg'),
+        image: new URL('./../../images/products/pic-3.jpg', import.meta.url).href,
         title: 'Half White',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'no',
@@ -31,7 +31,7 @@ const products = [
         price: '29.00'
     },
     {
-        image: require('./../../images/products/pic-4.jpg'),
+        image: new URL('./../../images/products/pic-4.jpg', import.meta.url).href,
         title: 'Woo Ninja',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'no',
@@ -39,7 +39,7 @@ const products = [
         price: '59.00'
     },
     {
-        image: require('./../../images/products/pic-5.jpg'),
+        image: new URL('./../../images/products/pic-5.jpg', import.meta.url).href,
         title: 'Woo logo',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'yes',
@@ -47,7 +47,7 @@ const products = [
         price: '36.00'
     },
     {
-        image: require('./../../images/products/pic-6.jpg'),
+        image: new URL('./../../images/products/pic-6.jpg', import.meta.url).href,
         title: 'Happy Ninja',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'no',
@@ -55,7 +55,7 @@ const products = [
         price: '99.00'
     },
     {
-        image: require('./../../images/products/pic-7.jpg'),
+        image: new URL('./../../images/products/pic-7.jpg', import.meta.url).href,
         title: 'Woo Ninja',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'no',
@@ -63,14 +63,14 @@ const products = [
         price: '45.00'
     },
     {
-        image: require('./../../images/products/pic-8.jpg'),
+        image: new URL('./../../images/products/pic-8.jpg', import.meta.url).href,
         title: 'Danger black',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         cutprice: '',
         price: '29.00'
     },
     {
-        image: require('./../../images/products/pic-1.jpg'),
+        image: new URL('./../../images/products/pic-1.jpg', import.meta.url).href,
         title: 'Happy Ninja',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'no',
@@ -78,7 +78,7 @@ const products = [
         price: '59.00'
     },
     {
-        image: require('./../../images/products/pic-2.jpg'),
+        image: new URL('./../../images/products/pic-2.jpg', import.meta.url).href,
         title: 'Flying Ninja',
         description: 'Asperiores, tenetur, blanditiis, quaerat odit exercitationem pariatur quibus dam veritatis quisquam laboriosam.',
         sale: 'no',
@@ -87,7 +87,7 @@ const products = [
     }
 ]
 
-var bnrimg = require('./../../images/banner/5.jpg');
+var bnrimg = new URL('./../../images/banner/5.jpg', import.meta.url).href;
 
 class ShopList extends React.Component {
     render() {
@@ -104,7 +104,7 @@ class ShopList extends React.Component {
                                 <NavLink to={"/shop-grid"}><i className="fa fa-th" /></NavLink>
                                 <NavLink to={"/shop-list"} className="active"><i className="fa fa-th-list" /></NavLink>
                                 </div>
-                                <span className="woocommerce-result-count">Showing 1–10 of 13 results</span>
+                                <span className="woocommerce-result-count">Showing 1â€“10 of 13 results</span>
                                 <form className="woocommerce-ordering select-box-border-style1-wrapper" method="get">
                                     <select name="orderby" className="orderby select-box-border-style1" aria-label="Shop order">
                                         <option value="menu_order" selected="selected">Default sorting</option>

@@ -7,7 +7,7 @@ import About3 from './../Elements/About3';
 import Statistics1 from './../Elements/Statistics1';
 import Testimonials2 from './../Elements/Testimonials2';
 
-var bnrimg = require('./../../images/banner/5.jpg');
+var bnrimg = new URL('./../../images/banner/5.jpg', import.meta.url).href;
 
 class Service2 extends React.Component {
     render() {

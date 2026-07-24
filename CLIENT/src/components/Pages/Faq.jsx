@@ -3,7 +3,7 @@ import Header4 from './../Common/Header4';
 import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 
-var bnrimg = require('./../../images/banner/7.jpg');
+var bnrimg = new URL('./../../images/banner/7.jpg', import.meta.url).href;
 
 class Faq extends React.Component {
     render() {

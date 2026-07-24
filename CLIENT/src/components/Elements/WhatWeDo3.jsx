@@ -5,47 +5,47 @@ const services = [
     {
         count: '01',
         title: 'Architecture',
-        image: require('./../../images/services/service-projects/1.jpg'),
+        image: new URL('./../../images/services/service-projects/1.jpg', import.meta.url).href,
     },
     {
         count: '02',
         title: 'Planning',
-        image: require('./../../images/services/service-projects/2.jpg'),
+        image: new URL('./../../images/services/service-projects/2.jpg', import.meta.url).href,
     },
     {
         count: '03',
         title: 'Exterior',
-        image: require('./../../images/services/service-projects/3.jpg'),
+        image: new URL('./../../images/services/service-projects/3.jpg', import.meta.url).href,
     },
     {
         count: '04',
         title: 'Decoration',
-        image: require('./../../images/services/service-projects/4.jpg'),
+        image: new URL('./../../images/services/service-projects/4.jpg', import.meta.url).href,
     },
     {
         count: '05',
         title: 'Interior Planing',
-        image: require('./../../images/services/service-projects/5.jpg'),
+        image: new URL('./../../images/services/service-projects/5.jpg', import.meta.url).href,
     },
     {
         count: '06',
         title: 'Style Selection',
-        image: require('./../../images/services/service-projects/6.jpg'),
+        image: new URL('./../../images/services/service-projects/6.jpg', import.meta.url).href,
     },
     {
         count: '07',
         title: 'Architecture',
-        image: require('./../../images/services/service-projects/7.jpg'),
+        image: new URL('./../../images/services/service-projects/7.jpg', import.meta.url).href,
     },
     {
         count: '08',
         title: 'Planning',
-        image: require('./../../images/services/service-projects/8.jpg'),
+        image: new URL('./../../images/services/service-projects/8.jpg', import.meta.url).href,
     }
 ]
 
-var bgimg1 = require('./../../images/background/cross-line2.png');
-var bgimg2 = require('./../../images/background/cross-line2.png');
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
+var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class WhatWeDo3 extends React.Component {
     render() {

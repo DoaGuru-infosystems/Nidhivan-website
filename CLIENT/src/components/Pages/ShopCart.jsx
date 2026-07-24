@@ -4,7 +4,7 @@ import Header4 from './../Common/Header4';
 import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 
-var bnrimg = require('./../../images/banner/5.jpg');
+var bnrimg = new URL('./../../images/banner/5.jpg', import.meta.url).href;
 
 class ShopCart extends React.Component {
     render() {
@@ -31,7 +31,7 @@ class ShopCart extends React.Component {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td data-title="Code"><img src={require('./../../images/cart/pic-1.jpg')} alt=""/></td>
+                                                <td data-title="Code"><img src={new URL('./../../images/cart/pic-1.jpg', import.meta.url).href} alt=""/></td>
                                                 <td data-title="Company">DJI Inspire 2</td>
                                                 <td data-title="Price" className="numeric">$35.00</td>
                                                 <td data-title="Change" className="numeric">In Stock</td>
@@ -39,7 +39,7 @@ class ShopCart extends React.Component {
                                                 <td data-title="Open" className="numeric"><NavLink to={"#"}><i className="fa fa-times" /></NavLink></td>
                                             </tr>
                                             <tr>
-                                                <td data-title="Code"><img src={require('./../../images/cart/pic-2.jpg')} alt=""/></td>
+                                                <td data-title="Code"><img src={new URL('./../../images/cart/pic-2.jpg', import.meta.url).href} alt=""/></td>
                                                 <td data-title="Company">Mavic Pro Platinum</td>
                                                 <td data-title="Price" className="numeric">$15.00</td>
                                                 <td data-title="Change" className="numeric">In Stock</td>
