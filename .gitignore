@@ -1,0 +1,5 @@
+# Dependencies
+CLIENT/node_modules/
+
+# Generated output
+graphify-out/
