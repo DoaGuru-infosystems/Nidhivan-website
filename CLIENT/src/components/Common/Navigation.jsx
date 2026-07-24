@@ -42,8 +42,6 @@ class Navigation extends React.Component {
                     <li><NavLink to={ "/blog-grid" }>Blogs</NavLink></li>
                     <li><NavLink to={ "/gallery" }>Gallery</NavLink></li>
                     <li><NavLink to={ "/contact-us" }>Contact Us</NavLink></li>
-                    <li><NavLink to={ "/terms" }>Terms & Conditions</NavLink></li>
-                    <li><NavLink to={ "/privacy" }>Privacy Policy</NavLink></li>
                 </ul>
             </>
         );

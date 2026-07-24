@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from '../Common/Navigation';
 import { NavLink } from 'react-router-dom';
+import { siteData } from '../../data/siteContent';
 
 var bnr = new URL('./../../images/background/bg-map.png', import.meta.url).href;
 
@@ -57,8 +58,8 @@ class Header extends React.Component {
                         <div className="container">
                             <div className="d-flex justify-content-end">
                                 <ul className="list-unstyled e-p-bx">
-                                    <li><span>Mail us:</span> 7xthemehelp@gmail.com</li>
-                                    <li><span>Call us:</span>(075) 123-7654</li>
+                                    <li><span>Mail us:</span> {siteData.contactInfo.email}</li>
+                                    <li><span>Call us:</span>{siteData.contactInfo.phone}</li>
                                 </ul>
                             </div>
                         </div>
@@ -111,21 +112,21 @@ class Header extends React.Component {
                                                             <div className="icon-xs inline-icon m-b20 scale-in-center"><i className="fa fa-phone" /></div>
                                                             <div className="icon-content">
                                                                 <h6 className="m-t0">Phone number</h6>
-                                                                <p>(075) 123-7654</p>
+                                                                <p>{siteData.contactInfo.phone}</p>
                                                             </div>
                                                         </div>
                                                         <div className="sx-icon-box-wraper left p-b30">
                                                             <div className="icon-xs inline-icon m-b20 scale-in-center"><i className="fa fa-envelope" /></div>
                                                             <div className="icon-content">
                                                                 <h6 className="m-t0">Email address</h6>
-                                                                <p>7xthemehelp@gmail.com</p>
+                                                                <p>{siteData.contactInfo.email}</p>
                                                             </div>
                                                         </div>
                                                         <div className="sx-icon-box-wraper left p-b30">
                                                             <div className="icon-xs inline-icon m-b20 scale-in-center"><i className="fa fa-map-marker" /></div>
                                                             <div className="icon-content">
                                                                 <h6 className="m-t0">Address info</h6>
-                                                                <p>201 Liverpool Street, Suite 721, London</p>
+                                                                <p>{siteData.contactInfo.address}</p>
                                                             </div>
                                                         </div>
                                                         <div className="full-social-bg">

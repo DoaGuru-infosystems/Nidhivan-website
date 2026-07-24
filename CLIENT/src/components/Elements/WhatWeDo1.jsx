@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { siteData } from '../../data/siteContent';
 
 var bgimg1 = new URL('./../../images/background/bg-5.png', import.meta.url).href;
 var bgimg2 = new URL('./../../images/background/bg-2.jpg', import.meta.url).href;
@@ -27,7 +28,7 @@ class WhatWeDo1 extends React.Component {
                                     <div className="number-block-one animate-in-to-top">
                                         <img src={new URL('./../../images/pic1.jpg', import.meta.url).href} alt="" />
                                         <div className="figcaption bg-white text-center p-a20">
-                                            <h4 className="m-a0">Interior Design</h4>
+                                            <h4 className="m-a0">{siteData.services[0].title}</h4>
                                         </div>
                                         <div className="figcaption-number text-center sx-text-primary animate-in-to-top-content">
                                             <span>01</span>
@@ -38,7 +39,7 @@ class WhatWeDo1 extends React.Component {
                                     <div className="number-block-one animate-in-to-top">
                                         <img src={new URL('./../../images/pic2.jpg', import.meta.url).href} alt="" />
                                         <div className="figcaption bg-white text-center p-a20">
-                                            <h4 className="m-a0">Architectur</h4>
+                                            <h4 className="m-a0">{siteData.services[1].title}</h4>
                                         </div>
                                         <div className="figcaption-number text-center sx-text-primary animate-in-to-top-content">
                                             <span>02</span>
@@ -49,7 +50,7 @@ class WhatWeDo1 extends React.Component {
                                     <div className="number-block-one animate-in-to-top">
                                         <img src={new URL('./../../images/pic3.jpg', import.meta.url).href} alt="" />
                                         <div className="figcaption bg-white text-center p-a20">
-                                            <h4 className="m-a0">Floor Plan</h4>
+                                            <h4 className="m-a0">{siteData.services[2].title}</h4>
                                         </div>
                                         <div className="figcaption-number text-center sx-text-primary animate-in-to-top-content">
                                             <span>03</span>
@@ -61,14 +62,14 @@ class WhatWeDo1 extends React.Component {
                                 <div className="row">
                                     <div className="col-lg-6 col-md-12 col-sm-12">
                                         <div className="large-title">
-                                            <h3 className="m-tb0">We present the idea with impressive details.</h3>
+                                            <h3 className="m-tb0">We deliver excellence in real estate and property investments.</h3>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 col-md-12	col-sm-12">
                                         <div className="large-title-info">
-                                            <p>Vivid colors and abstract patterns, combined with unique uses of light, textures, and space, create an outdoor space that magnifies...</p>
+                                            <p>Discover strategic properties, secure your investments, and build a foundation for your dreams with our expert guidance.</p>
                                             <div className="text-left">
-                                                <NavLink to={"/about-1"} className="site-button-link">Read More</NavLink>
+                                                <NavLink to={"/about"} className="site-button-link">Read More</NavLink>
                                             </div>
                                         </div>
                                     </div>

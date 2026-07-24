@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from './../Elements/Banner';
 import GoogleMapReact from 'google-map-react';
+import { siteData } from '../../data/siteContent';
 
 var bnrimg = new URL('./../../images/banner/9.jpg', import.meta.url).href;
 
@@ -18,7 +19,7 @@ class ContactUs extends React.Component {
         return (
             <>
                 <div className="page-content">
-                    <Banner title="Contact Us Form" pagename="Contact us" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
+                    <Banner title="Contact Us" pagename="Contact Us" description={siteData.aboutUs.shortDescription} bgimage={bnrimg}/>
                     {/* SECTION CONTENTG START */}
                     <div className="section-full p-tb80 inner-page-padding">
                         {/* LOCATION BLOCK*/}
@@ -71,21 +72,21 @@ class ContactUs extends React.Component {
                                                     <div className="icon-xs"><i className="fa fa-phone" /></div>
                                                     <div className="icon-content">
                                                         <h5 className="m-t0">Phone number</h5>
-                                                        <p>(123) 456-78910</p>
+                                                        <p>{siteData.contactInfo.phone}</p>
                                                     </div>
                                                 </div>
                                                 <div className="sx-icon-box-wraper left p-b30">
                                                     <div className="icon-xs"><i className="fa fa-envelope" /></div>
                                                     <div className="icon-content">
                                                         <h5 className="m-t0">Email address</h5>
-                                                        <p>7xthemehelp@gmail.com</p>
+                                                        <p>{siteData.contactInfo.email}</p>
                                                     </div>
                                                 </div>
                                                 <div className="sx-icon-box-wraper left">
                                                     <div className="icon-xs"><i className="fa fa-map-marker" /></div>
                                                     <div className="icon-content">
                                                         <h5 className="m-t0">Address info</h5>
-                                                        <p>09, Martin Street B190 Polo Alto, San Francisco</p>
+                                                        <p>{siteData.contactInfo.address}</p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import { siteData } from '../../data/siteContent';
 
 var bgimg1 = new URL('./../../images/video-bg.jpg', import.meta.url).href;
 
@@ -14,16 +15,16 @@ class About3 extends React.Component {
                             <div className="row">
                                 <div className="col-xl-6 col-lg-6 col-md-12">
                                     <div className="about-home-3 m-b30 bg-white">
-                                        <h3 className="m-t0 m-b20 sx-tilte">A small efficient interior design team.</h3>
-                                        <p>Inteshape is a team of highly talented, experienced, and award-winning architects and designers. Our company has been the leading provider of architecture services to clients throughout the USA since 1999. We pay attention to every demand...</p>
+                                        <h3 className="m-t0 m-b20 sx-tilte">{siteData.aboutUs.title}</h3>
+                                        <p>{siteData.aboutUs.longDescription}</p>
                                         <ul className="list-angle-right anchor-line">
-                                            <li><NavLink to="/about-1">We provide a architectural 3D modeling services.</NavLink></li>
-                                            <li><NavLink to="/about-1">Our specialists are ready to consult you on any topic.</NavLink></li>
-                                            <li><NavLink to="/about-1">We develop and implement better interior design.</NavLink></li>
-                                            <li><NavLink to="/about-1">We provide high-quality interior services for clients.</NavLink></li>
+                                            <li><NavLink to="/about">We provide legally verified, Vastu-compliant homes.</NavLink></li>
+                                            <li><NavLink to="/about">Our specialists guide you through home loans and legalities.</NavLink></li>
+                                            <li><NavLink to="/about">We develop premium commercial hubs for high returns.</NavLink></li>
+                                            <li><NavLink to="/about">Dedicated to bringing your dream property to reality.</NavLink></li>
                                         </ul>
                                         <div className="text-left">
-                                            <NavLink to="/about-1" className="site-button btn-half"><span>Read More</span></NavLink>
+                                            <NavLink to="/about" className="site-button btn-half"><span>Read More</span></NavLink>
                                         </div>
                                     </div>
                                 </div>
@@ -39,7 +40,7 @@ class About3 extends React.Component {
                                                     </NavLink>
 
                                                     <div className="video-section-bottom">
-                                                        <h3 className="sx-title text-white">25 Years<br />Experience</h3>
+                                                        <h3 className="sx-title text-white">{siteData.statistics[2].value}+ Years<br />Experience</h3>
                                                     </div>
                                                 </div>
                                             </div>

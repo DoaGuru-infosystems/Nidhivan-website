@@ -1,9 +1,9 @@
 import React from 'react';
 import Banner from './../Elements/Banner';
 import About3 from './../Elements/About3';
+import { siteData } from '../../data/siteContent';
 import WhatWeDo3 from './../Elements/WhatWeDo3';
 import Statistics1 from './../Elements/Statistics1';
-import Team1 from './../Elements/Team1';
 import ClientsLogo1 from './../Elements/ClientsLogo1';
 
 var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href;
@@ -33,11 +33,10 @@ class About extends React.Component {
         return (
             <>
                 <div className="page-content">
-                    <Banner title="About Company" pagename="About 2" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
+                    <Banner title="About Us" pagename="About Us" description={siteData.aboutUs.shortDescription} bgimage={bnrimg}/>
                     <About3 bgcolor="bg-gray" />
                     <WhatWeDo3 />
                     <Statistics1 />
-                    <Team1 />
                     <ClientsLogo1 />
                 </div>
 

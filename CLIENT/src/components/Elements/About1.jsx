@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
+import { siteData } from '../../data/siteContent';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
@@ -51,10 +52,10 @@ class About1 extends React.Component {
                             <div className="row">
                                 <div className="col-lg-5 col-md-12 col-sm-12">
                                     <div className="about-home-left">
-                                        <h3 className="m-t0 sx-tilte">We are competitive in architecture solutions</h3>
-                                        <p>Landscape design is a process of developing practical and pleasing outdoor living space. there are six principles of design that have been used by artists for centuries throughout all art forms, painting and floral design.</p>
+                                        <h3 className="m-t0 sx-tilte">{siteData.aboutUs.title}</h3>
+                                        <p>{siteData.aboutUs.longDescription}</p>
                                         <div className="text-left">
-                                            <NavLink to="/about-1" className="site-button-secondry btn-half"><span>Read More</span></NavLink>
+                                            <NavLink to="/about" className="site-button-secondry btn-half"><span>Read More</span></NavLink>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +65,7 @@ class About1 extends React.Component {
                                             {images.map((item, index) => (
                                                 <div className="item" key={index}>
                                                     <div className="sx-img-effect zoom-slow">
-                                                    <NavLink to={"/about-1"}><img src={item} alt="" /></NavLink>
+                                                    <NavLink to={"/about"}><img src={item} alt="" /></NavLink>
                                                     </div>
                                                 </div>
 

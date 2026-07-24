@@ -1,60 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import OwlCarousel from 'react-owl-carousel';
+import { siteData } from '../../data/siteContent';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 const filters = [
-    { label: "Bathroom", filter: ".col-one" },
-    { label: "Decoration", filter: ".col-two" },
-    { label: "Kitchen", filter: ".col-three" },
-    { label: "Living room", filter: ".col-four" }
+    { label: "Residential", filter: ".cat-1" },
+    { label: "Commercial", filter: ".cat-2" },
+    { label: "Plots", filter: ".cat-3" }
 ];
 
-const projects = [
-    {
-        image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href,
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-one'
-    },
-    {
-        image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href,
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-two'
-    },
-    {
-        image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href,
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-three'
-    },
-    {
-        image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-four'
-    },
-    {
-        image: new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href,
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-three'
-    },
-    {
-        image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href,
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-two'
-    },
-    {
-        image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href,
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-one'
-    }
-]
 
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
@@ -140,22 +96,24 @@ class Projects1 extends React.Component {
                                 {/* IMAGE CAROUSEL START */}
                                 <div className="section-content ">
                                     <OwlCarousel className="owl-carousel owl-carousel-filter  owl-btn-bottom-center mfp-gallery navigation-with-name" {...options}>
-                                        {projects.map((item, index) => (
+                                        {siteData.projects.map((item, index) => {
+                                            const imgUrl = new URL(`./../../images/projects/portrait/pic${(index % 7) + 1}.jpg`, import.meta.url).href;
+                                            return (
                                             <div key={index} className={`${item.filter} item fadingcol overflow-hide`}>
                                                 <div className="sx-box   image-hover-block">
                                                     <div className="sx-thum-bx">
-                                                        <img src={item.image} alt="" />
+                                                        <img src={imgUrl} alt="" />
                                                     </div>
                                                     <div className="sx-info  p-t20 text-white">
-                                                        <h4 className="sx-tilte"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
-                                                        <p className="m-b0">{item.address}</p>
+                                                        <h4 className="sx-tilte"><NavLink to={"/about"}>{item.title}</NavLink></h4>
+                                                        <p className="m-b0">{item.location}</p>
                                                     </div>
-                                                    <a className="mfp-link" href={item.image}>
+                                                    <a className="mfp-link" href={imgUrl}>
                                                         <i className="fa fa-arrows-alt" />
                                                     </a>
                                                 </div>
                                             </div>
-                                        ))}
+                                        )})}
                                     </OwlCarousel>
                                 </div>
                             </div>

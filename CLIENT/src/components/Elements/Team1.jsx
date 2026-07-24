@@ -1,28 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const teamMembers = [
-    {
-        image: new URL('./../../images/our-team5/1.jpg', import.meta.url).href,
-        membername: 'Johnny Jackman',
-        position: 'Architect'
-    },
-    {
-        image: new URL('./../../images/our-team5/2.jpg', import.meta.url).href,
-        membername: 'Daniel Rickman',
-        position: 'Architect'
-    },
-    {
-        image: new URL('./../../images/our-team5/3.jpg', import.meta.url).href,
-        membername: 'Mark Norwich',
-        position: 'Finances'
-    },
-    {
-        image: new URL('./../../images/our-team5/4.jpg', import.meta.url).href,
-        membername: 'Nich Jonas',
-        position: 'Finances'
-    }
-]
+import { siteData } from '../../data/siteContent';
 
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
@@ -44,25 +23,27 @@ class Team1 extends React.Component {
                         {/* IMAGE CAROUSEL START */}
                         <div className="section-content">
                             <div className="row team-item-four">
-                                {teamMembers.map((item, index) => (
+                                {siteData.team.map((item, index) => {
+                                    const imgUrl = new URL(`./../../images/our-team5/${(index % 4) + 1}.jpg`, import.meta.url).href;
+                                    return (
                                     <div className="col-lg-3 col-md-6 col-sm-6 m-b30" key={index}>
                                         <div className="our-team-2 ">
                                             <div className="profile-image">
-                                                <img src={item.image} alt="" />
+                                                <img src={imgUrl} alt="" />
                                                 <div className="icons">
-                                                    <a href="https://www.facebook.com" target="_blank"><i className="fa fa-facebook" /></a>
-                                                    <a href="https://www.twitter.com" target="_blank"> <i className="fa fa-twitter" /></a>
-                                                    <a href="https://www.instagram.com" target="_blank"> <i className="fa fa-instagram" /></a>
-                                                    <a href="https://in.linkedin.com" target="_blank"> <i className="fa fa-linkedin" /></a>
+                                                    <a href="https://www.facebook.com" target="_blank" rel="noreferrer"><i className="fa fa-facebook" /></a>
+                                                    <a href="https://www.twitter.com" target="_blank" rel="noreferrer"> <i className="fa fa-twitter" /></a>
+                                                    <a href="https://www.instagram.com" target="_blank" rel="noreferrer"> <i className="fa fa-instagram" /></a>
+                                                    <a href="https://in.linkedin.com" target="_blank" rel="noreferrer"> <i className="fa fa-linkedin" /></a>
                                                 </div>
                                             </div>
                                             <div className="figcaption text-black">
-                                                <h4 className="m-t0"><NavLink to={"/team-single"}>{item.membername}</NavLink></h4>
-                                                <span className="m-b0">{item.position}</span>
+                                                <h4 className="m-t0"><NavLink to={"/about"}>{item.name}</NavLink></h4>
+                                                <span className="m-b0">{item.role}</span>
                                             </div>
                                         </div>
                                     </div>
-                                ))}
+                                )})}
                             </div>
                         </div>
                     </div>

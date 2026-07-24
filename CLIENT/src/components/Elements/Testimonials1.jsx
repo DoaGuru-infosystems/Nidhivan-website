@@ -1,41 +1,9 @@
 import React from 'react';
 import CountUp from 'react-countup';
 import OwlCarousel from 'react-owl-carousel';
+import { siteData } from '../../data/siteContent';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-
-const testimonials = [
-    {
-        image: new URL('./../../images/testimonials/pic1.jpg', import.meta.url).href,
-        reviewername: 'Rosalina D. William',
-        position: 'Architect',
-        review: 'â€œAmazing fast and reliable customer support! The team of developers are willing to go mile for customer service! Thanks! which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of me.â€'
-    },
-    {
-        image: new URL('./../../images/testimonials/pic2.jpg', import.meta.url).href,
-        reviewername: 'Mitchal Jhon',
-        position: 'Architect',
-        review: 'â€œAmazing fast and reliable customer support! The team of developers are willing to go mile for customer service! Thanks! which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of me.â€'
-    },
-    {
-        image: new URL('./../../images/testimonials/pic3.jpg', import.meta.url).href,
-        reviewername: 'Barney Smith',
-        position: 'Interior designer',
-        review: 'â€œGreat theme, just what we were looking for. Easy to install, easy to navigate. Well documented. Really enjoyed the support. which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of me.â€'
-    },
-    {
-        image: new URL('./../../images/testimonials/pic4.jpg', import.meta.url).href,
-        reviewername: 'Rosalina D. William',
-        position: 'Architect',
-        review: 'â€œGreat theme, just what we were looking for. Easy to install, easy to navigate. Well documented. Really enjoyed the support. which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of me.â€'
-    },
-    {
-        image: new URL('./../../images/testimonials/pic3.jpg', import.meta.url).href,
-        reviewername: 'Rosalina D. William',
-        position: 'CEO, Intearch',
-        review: 'â€œGreat theme, just what we were looking for. Easy to install, easy to navigate. Well documented. Really enjoyed the support. which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of me.â€'
-    },
-]
 
 var bgimg1 = new URL('./../../images/background/bg-8.jpg', import.meta.url).href;
 var bgimg2 = new URL('./../../images/background/bg-5.png', import.meta.url).href;
@@ -79,30 +47,14 @@ class Testimonials1 extends React.Component {
                                     {/* TITLE END */}
                                     <div className="counter-blocks">
                                         <div className="row">
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-b30">
-                                                <div className="sx-count  text-black sx-icon-box-wraper bg-repeat  bg-white p-a30" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
-                                                    <h2 className="st-count-number sx-text-primary text-left"><span className="counter"><CountUp end={24} duration={5} /></span></h2>
-                                                    <h4 className="m-tb0">Years of Experience</h4>
+                                            {siteData.statistics.map((stat, index) => (
+                                                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-b30" key={index}>
+                                                    <div className="sx-count text-black sx-icon-box-wraper bg-repeat bg-white p-a30" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
+                                                        <h2 className="st-count-number sx-text-primary text-left"><span className="counter"><CountUp end={parseInt(stat.value)} duration={5} /></span><span>{stat.suffix}</span></h2>
+                                                        <h4 className="m-tb0">{stat.label}</h4>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-b30">
-                                                <div className="sx-count text-black sx-icon-box-wraper bg-repeat  bg-white p-a30" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
-                                                    <h2 className="st-count-number sx-text-primary text-left"><span className="counter"><CountUp end={340} duration={5} /></span></h2>
-                                                    <h4 className="m-tb0">Project Taken</h4>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-b30">
-                                                <div className="sx-count text-black sx-icon-box-wraper bg-repeat  bg-white p-a30" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
-                                                    <h2 className="st-count-number sx-text-primary text-left"><span className="counter"><CountUp end={86} duration={5} /></span></h2>
-                                                    <h4 className="m-tb0">Awards Won</h4>
-                                                </div>
-                                            </div>
-                                            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-b30">
-                                                <div className="sx-count text-black sx-icon-box-wraper bg-repeat  bg-white p-a30" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
-                                                    <h2 className="st-count-number sx-text-primary text-left"><span className="counter"><CountUp end={36} duration={5} /></span><span>K</span></h2>
-                                                    <h4 className="m-tb0">Twitter Followers</h4>
-                                                </div>
-                                            </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
@@ -120,22 +72,23 @@ class Testimonials1 extends React.Component {
                                     {/* TITLE END */}
                                     {/* TESTIMONIAL START */}
                                     <OwlCarousel className="owl-carousel testimonial-home number-slider" {...options}>
-                                        {testimonials.map((item, index) => (
+                                        {siteData.testimonials.map((item, index) => {
+                                            const imgUrl = new URL(`./../../images/testimonials/pic${(index % 4) + 1}.jpg`, import.meta.url).href;
+                                            return (
                                             <div className="item" key={index}>
                                                 <div className="testimonial-2  hover-animation-1">
                                                     <div className="testimonial-detail clearfix">
-                                                        <div className="testimonial-pic shadow scale-in-center"><img src={item.image} alt="" width={100} height={100} /></div>
-                                                        <h4 className="testimonial-name">{item.reviewername}</h4>
-                                                        <span className="testimonial-position">{item.position}</span>
+                                                        <div className="testimonial-pic shadow scale-in-center"><img src={imgUrl} alt="" width={100} height={100} /></div>
+                                                        <h4 className="testimonial-name">{item.name}</h4>
+                                                        <span className="testimonial-position">{item.role}</span>
                                                         <span className="fa fa-quote-right" />
                                                     </div>
                                                     <div className="testimonial-text bg-white  shadow-sm">
-                                                        <p>{item.review}</p>
+                                                        <p>{item.text}</p>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        ))}
+                                        )})}
 
                                     </OwlCarousel>
                                 </div>

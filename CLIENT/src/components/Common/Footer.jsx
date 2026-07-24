@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Switcher from '../Elements/Switcher';
+import { siteData } from '../../data/siteContent';
 
 class Footer extends React.Component {
     render() {
@@ -22,7 +23,7 @@ class Footer extends React.Component {
                                                 <img src={new URL('./../../images/logo-light.png', import.meta.url).href} alt="Inteshape" />
                                             </NavLink>
                                         </div>
-                                        <p>7X Theme is a html template for interior and architecture purpose. Today we can tell you, thanks to your passion.</p>
+                                        <p>{siteData.aboutUs.shortDescription}</p>
                                         <ul className="social-icons  sx-social-links">
                                             <li><a href="https://www.behance.net/" className="fa fa-behance" target="_blank"></a></li>
                                             <li><a href="https://www.facebook.com" className="fa fa-facebook" target="_blank"></a></li>
@@ -98,11 +99,11 @@ class Footer extends React.Component {
                                     <div className="widget widget_services inline-links">
                                         <h5 className="widget-title">Useful links</h5>
                                         <ul>
-                                            <li><NavLink to={"/about-1"}>About</NavLink></li>
-                                            <li><NavLink to={"/services-1"}>Services</NavLink></li>
-                                            <li><NavLink to={"/project-grid-3-columns"}>Projects</NavLink></li>
-                                            <li><NavLink to={"/blog-grid"}>Blog</NavLink></li>
+                                            <li><NavLink to={"/about"}>About</NavLink></li>
+                                            <li><NavLink to={"/gallery"}>Gallery</NavLink></li>
                                             <li><NavLink to={"/contact-us"}>Contact Us</NavLink></li>
+                                            <li><NavLink to={"/terms"}>Terms & Conditions</NavLink></li>
+                                            <li><NavLink to={"/privacy"}>Privacy Policy</NavLink></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -111,10 +112,10 @@ class Footer extends React.Component {
                                     <div className="widget widget_address_outer">
                                         <h5 className="widget-title">Contact Us</h5>
                                         <ul className="widget_address">
-                                            <li>756 Livingston Street, Brooklyn, NY 11201, United State</li>
-                                            <li>7xthemedemo@gmail.com</li>
-                                            <li>(+298) 012-3456-789</li>
-                                            <li>(+298) 146-6543-480</li>
+                                            <li>{siteData.contactInfo.address}</li>
+                                            <li>{siteData.contactInfo.email}</li>
+                                            <li>{siteData.contactInfo.phone}</li>
+                                            <li>{siteData.contactInfo.workingHours}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -126,7 +127,7 @@ class Footer extends React.Component {
                                     <div className="col-lg-7 col-md-6">
                                         <div className="call-to-action-left">
                                             <h5 className="text-uppercase m-b10 m-t0">Subscribe to our newsletter!</h5>
-                                            <span>Never Miss Anything From 7xtheme By Signing Up To Our Newsletter.</span>
+                                            <span>Never miss anything from {siteData.companyName} by signing up to our newsletter.</span>
                                         </div>
                                     </div>
                                     <div className="col-lg-5 col-md-6">
@@ -155,7 +156,7 @@ class Footer extends React.Component {
                         <div className="container">
                             <div className="row">
                                 <div className="sx-footer-bot-left">
-                                    <span className="copyrights-text">Â© 2022 Your Company. Designed By 7xtheme.</span>
+                                    <span className="copyrights-text">© 2026 {siteData.companyName}. All Rights Reserved.</span>
                                 </div>
                             </div>
                         </div>

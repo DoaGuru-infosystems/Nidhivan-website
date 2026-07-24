@@ -1,48 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const services = [
-    {
-        count: '01',
-        title: 'Architecture',
-        image: new URL('./../../images/services/service-projects/1.jpg', import.meta.url).href,
-    },
-    {
-        count: '02',
-        title: 'Planning',
-        image: new URL('./../../images/services/service-projects/2.jpg', import.meta.url).href,
-    },
-    {
-        count: '03',
-        title: 'Exterior',
-        image: new URL('./../../images/services/service-projects/3.jpg', import.meta.url).href,
-    },
-    {
-        count: '04',
-        title: 'Decoration',
-        image: new URL('./../../images/services/service-projects/4.jpg', import.meta.url).href,
-    },
-    {
-        count: '05',
-        title: 'Interior Planing',
-        image: new URL('./../../images/services/service-projects/5.jpg', import.meta.url).href,
-    },
-    {
-        count: '06',
-        title: 'Style Selection',
-        image: new URL('./../../images/services/service-projects/6.jpg', import.meta.url).href,
-    },
-    {
-        count: '07',
-        title: 'Architecture',
-        image: new URL('./../../images/services/service-projects/7.jpg', import.meta.url).href,
-    },
-    {
-        count: '08',
-        title: 'Planning',
-        image: new URL('./../../images/services/service-projects/8.jpg', import.meta.url).href,
-    }
-]
+import { siteData } from '../../data/siteContent';
 
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
@@ -64,21 +23,23 @@ class WhatWeDo3 extends React.Component {
                         {/* TITLE END */}
                         <div className="section-content">
                             <div className="row number-block-three-outer justify-content-center">
-                                {services.map((item, index) => (
+                                {siteData.services.map((item, index) => {
+                                    const imgUrl = new URL(`./../../images/services/service-projects/${index + 1}.jpg`, import.meta.url).href;
+                                    return (
                                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 m-b30" key={index}>
                                         <div className="number-block-three slide-ani-top">
                                             <div className="sx-media">
-                                                <img src={item.image} alt="" />
+                                                <img src={imgUrl} alt="" />
                                             </div>
                                             <div className="figcaption bg-gray  p-a30">
-                                                <h4 className="m-tb0"><NavLink to={"/services-detail"}>{item.title}</NavLink></h4>
+                                                <h4 className="m-tb0"><NavLink to={"/about"}>{item.title}</NavLink></h4>
                                                 <div className="figcaption-number animate-top-content">
-                                                    <span>{item.count}</span>
+                                                    <span>0{index + 1}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                ))}
+                                )})}
                             </div>
                         </div>
                     </div>
