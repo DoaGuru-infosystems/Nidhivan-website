@@ -1,6 +1,4 @@
 import React from 'react';
-import Header4 from './../Common/Header4';
-import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 
 var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href;
@@ -9,7 +7,6 @@ class FontIcons extends React.Component {
     render() {
         return (
             <>
-                <Header4 />
                 <div className="page-content">
                     <Banner title="Icon Font Style" pagename="Icon Fonts" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                     
@@ -248,8 +245,7 @@ class FontIcons extends React.Component {
                     {/* SECTION CONTENT END */}
                 </div>
 
-                <Footer />
-            </>
+                </>
         );
     };
 };

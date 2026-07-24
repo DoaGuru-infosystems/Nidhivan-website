@@ -1,6 +1,4 @@
 import React from 'react';
-import Header4 from './../Common/Header4';
-import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 import About3 from './../Elements/About3';
 import WhatWeDo3 from './../Elements/WhatWeDo3';
@@ -10,7 +8,7 @@ import ClientsLogo1 from './../Elements/ClientsLogo1';
 
 var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href;
 
-class Home4 extends React.Component {
+class About extends React.Component {
     componentDidMount() {
         function loadScript(src) {
 
@@ -34,7 +32,6 @@ class Home4 extends React.Component {
     render() {
         return (
             <>
-                <Header4 />
                 <div className="page-content">
                     <Banner title="About Company" pagename="About 2" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                     <About3 bgcolor="bg-gray" />
@@ -44,10 +41,9 @@ class Home4 extends React.Component {
                     <ClientsLogo1 />
                 </div>
 
-                <Footer />
-            </>
+                </>
         );
     };
 };
 
-export default Home4;
+export default About;

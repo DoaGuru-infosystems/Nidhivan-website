@@ -1,7 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Header4 from './../Common/Header4';
-import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 import Projects7 from './../Elements/Projects7';
 import ReactPlayer from 'react-player';
@@ -32,7 +30,6 @@ class ProjectDetail2 extends React.Component {
     render() {
         return (
             <>
-                <Header4 />
                 <div className="page-content">
                     <Banner title="Project Details" pagename="Project Detail" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg} />
 
@@ -154,8 +151,7 @@ class ProjectDetail2 extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
-            </>
+                </>
         );
     };
 };

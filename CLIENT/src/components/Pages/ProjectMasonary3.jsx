@@ -1,7 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Header4 from './../Common/Header4';
-import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 
 const filters = [
@@ -134,7 +132,6 @@ class ProjectMasonary3 extends React.Component {
     render() {
         return (
             <>
-                <Header4 />
                 <div className="page-content">
                     <Banner title="Masonry With 3 Columns" pagename="Project with Masonry With 3 Columns" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                     
@@ -184,8 +181,7 @@ class ProjectMasonary3 extends React.Component {
                     {/* SECTION CONTENT END  */}
                 </div>
 
-                <Footer />
-            </>
+                </>
         );
     };
 };

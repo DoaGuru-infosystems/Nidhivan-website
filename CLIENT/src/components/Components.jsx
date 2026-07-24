@@ -1,24 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home1 from './Pages/Home1';
-import Home2 from './Pages/Home2';
-import Home3 from './Pages/Home3';
-import Home4 from './Pages/Home4';
-import Home5 from './Pages/Home5';
-import Home6 from './Pages/Home6';
+import Home from './Pages/Home';
+import Header from './Common/Header';
+import Footer from './Common/Footer';
+import About from './Pages/About';
 
-import About1 from './Pages/About1';
-import About2 from './Pages/About2';
-
-import Services1 from './Pages/Services1';
-import Services2 from './Pages/Services2';
-import ServiceDetail from './Pages/ServiceDetail';
-
-import Team1 from './Pages/Team1';
-import Team2 from './Pages/Team2';
-import TeamDetail from './Pages/TeamDetail';
-
-import OurHistory from './Pages/OurHistory';
 import FontIcons from './Pages/FontIcons';
 import Error from './Pages/Error';
 
@@ -46,14 +32,11 @@ import BlogMasonary from './Pages/BlogMasonary';
 import BlogSingle from './Pages/BlogSingle';
 import PostRightSidebar from './Pages/PostRightSidebar';
 
-import ShopGrid from './Pages/ShopGrid';
-import ShopList from './Pages/ShopList';
-import ShopDetail from './Pages/ShopDetail';
-import ShopAccount from './Pages/ShopAccount';
-import ShopCart from './Pages/ShopCart';
-import ShopCheckout from './Pages/ShopCheckout';
+import Terms from './Pages/Terms';
+import PrivacyPolicy from './Pages/PrivacyPolicy';
+import Gallery from './Pages/Gallery';
 
-import Faq from './Pages/Faq';
+
 import ContactUs from './Pages/ContactUs';
 import ScrollToTop from './Common/ScrollToTop';
 
@@ -63,26 +46,12 @@ class Components extends React.Component {
             <BrowserRouter basename="/">
                 <ScrollToTop />
                 <div className="page-wraper">
+                        <Header />
                         <Routes>
-                            <Route path='/' element={<Home1/>} />
-                            <Route path='/home-2' element={<Home2/>} />
-                            <Route path='/home-3' element={<Home3/>} />
-                            <Route path='/home-4' element={<Home4/>} />
-                            <Route path='/home-5' element={<Home5/>} />
-                            <Route path='/home-6' element={<Home6/>} />
+                            <Route path='/' element={<Home/>} />
 
-                            <Route path='/about-1' element={<About1/>} />
-                            <Route path='/about-2' element={<About2/>} />
+                            <Route path='/about' element={<About/>} />
 
-                            <Route path='/services-1' element={<Services1/>} />
-                            <Route path='/services-2' element={<Services2/>} />
-                            <Route path='/services-detail' element={<ServiceDetail/>} />
-
-                            <Route path='/team-1' element={<Team1/>} />
-                            <Route path='/team-2' element={<Team2/>} />
-                            <Route path='/team-single' element={<TeamDetail/>} />
-
-                            <Route path='/our-history' element={<OurHistory/>} />
                             <Route path='/icon-font' element={<FontIcons/>} />
                             <Route path='/error-404' element={<Error/>} />
 
@@ -110,18 +79,15 @@ class Components extends React.Component {
                             <Route path='/blog-single' element={<BlogSingle/>} />
                             <Route path='/post-right-sidebar' element={<PostRightSidebar/>} />
 
-                            <Route path='/shop-grid' element={<ShopGrid/>} />
-                            <Route path='/shop-list' element={<ShopList/>} />
-                            <Route path='/shop-detail' element={<ShopDetail/>} />
-                            <Route path='/shop-account' element={<ShopAccount/>} />
-                            <Route path='/shop-cart' element={<ShopCart/>} />
-                            <Route path='/shop-checkout' element={<ShopCheckout/>} />
 
-                            <Route path='/faq' element={<Faq/>} />
                             <Route path='/contact-us' element={<ContactUs/>} />
+                            <Route path='/terms' element={<Terms/>} />
+                            <Route path='/privacy' element={<PrivacyPolicy/>} />
+                            <Route path='/gallery' element={<Gallery/>} />
                             
                             <Route element={<Error/>} />
                         </Routes>
+                        <Footer />
                 </div>
             </BrowserRouter>
         );

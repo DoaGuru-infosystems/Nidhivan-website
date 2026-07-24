@@ -1,7 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Header4 from './../Common/Header4';
-import Footer from './../Common/Footer';
 import Banner from './../Elements/Banner';
 
 const blogs = [
@@ -81,7 +79,6 @@ class BlogMasonary extends React.Component {
     render() {
         return (
             <>
-                <Header4 />
                 <div className="page-content">
                     <Banner title="Blog Masonary Style" pagename="Blog Masonry" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                     {/* SECTION CONTENT START */}
@@ -127,8 +124,7 @@ class BlogMasonary extends React.Component {
                     {/* SECTION CONTENT END  */}
                 </div>
 
-                <Footer />
-            </>
+                </>
         );
     };
 };

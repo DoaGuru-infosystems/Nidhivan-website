@@ -4,7 +4,7 @@ import Banner from './../Elements/Banner';
 
 const filters = [
     { label: "Architecture", filter: ".cat-1" },
-    { label: "Decore", filter: ".cat-2" },
+    { label: "Decor", filter: ".cat-2" },
     { label: "Outdoor", filter: ".cat-3" },
     { label: "Interiors", filter: ".cat-4" },
     { label: "Residential", filter: ".cat-5" }
@@ -13,67 +13,66 @@ const filters = [
 const projects = [
     {
         image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href,
-        title: 'Interior Work Avroko',
-        address: 'Muscat, Sultanate of Oman',
+        title: 'Modern Villa',
+        address: 'Mumbai, Maharashtra',
         filter: 'cat-1'
     },
     {
         image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href,
-        title: 'Vilters',
-        address: 'Muscat, Sultanate of Oman',
+        title: 'Luxury Apartment',
+        address: 'Pune, Maharashtra',
         filter: 'cat-2'
     },
     {
         image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href,
         title: 'Industrial Design',
-        address: 'Muscat, Sultanate of Oman',
+        address: 'Delhi, NCR',
         filter: 'cat-3'
     },
     {
         image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
-        title: 'House Bluprint',
-        address: 'Muscat, Sultanate of Oman',
+        title: 'House Blueprint',
+        address: 'Bangalore, Karnataka',
         filter: 'cat-4'
     },
     {
         image: new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href,
         title: 'Modern Bathroom',
-        address: 'Muscat, Sultanate of Oman',
+        address: 'Hyderabad, Telangana',
         filter: 'cat-5'
     },
     {
         image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href,
         title: 'Bellevue Project',
-        address: 'Muscat, Sultanate of Oman',
+        address: 'Chennai, Tamil Nadu',
         filter: 'cat-4'
     },
     {
         image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href,
-        title: 'Qatar Pavilion',
-        address: 'Muscat, Sultanate of Oman',
+        title: 'Outdoor Pavilion',
+        address: 'Kochi, Kerala',
         filter: 'cat-3'
     },
     {
         image: new URL('./../../images/projects/portrait/pic8.jpg', import.meta.url).href,
-        title: 'Museum',
-        address: 'Muscat, Sultanate of Oman',
+        title: 'Museum Interiors',
+        address: 'Kolkata, West Bengal',
         filter: 'cat-2'
     },
     {
         image: new URL('./../../images/projects/portrait/pic9.jpg', import.meta.url).href,
-        title: 'Modern house',
-        address: 'Muscat, Sultanate of Oman',
+        title: 'Minimalist House',
+        address: 'Ahmedabad, Gujarat',
         filter: 'cat-1'
     }
 ]
 
-var bnrimg = new URL('./../../images/banner/2.jpg', import.meta.url).href;
+var bnrimg = new URL('./../../images/banner/3.jpg', import.meta.url).href;
 var bgimg1 = new URL('./../../images/background/cross-line.png', import.meta.url).href;
 
-class ProjectGridNoGap3 extends React.Component {
+class Gallery extends React.Component {
     componentDidMount() {
         function loadScript(src) {
-
             return new Promise(function (resolve, reject) {
                 var script = document.createElement('script');
                 script.src = src;
@@ -87,20 +86,17 @@ class ProjectGridNoGap3 extends React.Component {
                 document.body.removeChild(script);
             })
         };
-
         loadScript('/assets/js/custom.js');
-
     };
+    
     render() {
         return (
             <>
                 <div className="page-content">
-                    <Banner title="Grid 3 Columns No Gap" pagename="Project with Grid 3 Columns No Gap" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
+                    <Banner title="Our Gallery" pagename="Gallery" description="Explore our portfolio of breathtaking real estate projects, interior designs, and architectural marvels." bgimage={bnrimg}/>
                     
-                    {/* SECTION CONTENT START */}
                     <div className="section-full p-tb80 inner-page-padding">
                         <div className="container">
-                            {/* Filter Nav START */}
                             <div className="filter-wrap p-b30 text-center">
                                 <ul className="filter-navigation masonry-filter clearfix">
                                     <li className="active"><NavLink to={"#"} className="btn from-top" data-filter="*" data-hover="All">All</NavLink></li>
@@ -109,17 +105,16 @@ class ProjectGridNoGap3 extends React.Component {
                                     ))}
                                 </ul>
                             </div>
-                            {/* Filter Nav END */}
-                            {/* GALLERY CONTENT START */}
-                            <ul className="masonry-outer mfp-gallery work-grid clearfix list-unstyled no-col-gap ">
+                            
+                            <ul className="masonry-outer mfp-gallery work-grid row clearfix list-unstyled">
                                 {projects.map((item, index) => (
-                                    <div key={index} className={`${item.filter} masonry-item col-lg-4 col-md-6 col-sm-12`}>
+                                    <div key={index} className={`${item.filter} masonry-item  col-lg-4 col-md-6 col-sm-12 m-b30`}>
                                         <div className="sx-box image-hover-block">
                                             <div className="sx-thum-bx">
                                                 <img src={item.image} alt="" />
                                             </div>
                                             <div className="sx-info  p-t20 text-white">
-                                                <h4 className="sx-tilte"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
+                                                <h4 className="sx-tilte"><NavLink to={"#"} style={{ pointerEvents: 'none' }}>{item.title}</NavLink></h4>
                                                 <p className="m-b0">{item.address}</p>
                                             </div>
                                             <a className="mfp-link" href={item.image}>
@@ -129,18 +124,16 @@ class ProjectGridNoGap3 extends React.Component {
                                     </div>
                                 ))}
                             </ul>
-                            {/* GALLERY CONTENT END */}
+                            
                             <div className="text-center load-more-btn-outer" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                                 <button className="site-button-secondry btn-half"><span>Load More</span></button>
                             </div>
                         </div>
                     </div>
-                    {/* SECTION CONTENT END  */}
                 </div>
-
-                </>
+            </>
         );
     };
 };
 
-export default ProjectGridNoGap3;
+export default Gallery;
