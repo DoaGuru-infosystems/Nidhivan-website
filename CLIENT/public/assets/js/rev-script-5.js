@@ -9,7 +9,7 @@ tpj(document).ready(function() {
 	}else{
 		revapi346 = tpj("#rev_slider_346_1").show().revolution({
 			sliderType:"standard",
-			jsFileLocation:"//server.local/revslider/wp-content/plugins/revslider/public/assets/js/",
+			jsFileLocation:"/assets/plugins/revolution/revolution/js/",
 			sliderLayout:"fullscreen",
 			dottedOverlay:"none",
 			delay:9000,

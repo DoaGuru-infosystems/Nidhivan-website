@@ -10,7 +10,7 @@ var revapi96,
 	}else{
 		revapi96 = tpj("#slider-video").show().revolution({
 			sliderType:"standard",
-			jsFileLocation:"revolution/js/",
+			jsFileLocation:"/assets/plugins/revolution/revolution/js/",
 			sliderLayout:"fullScreen",
 			dottedOverlay:"none",
 			delay:9000,
