@@ -1,6 +1,6 @@
-@import "tailwindcss/theme.css" prefix(tw);
-@import "tailwindcss/utilities.css" prefix(tw);
-/* @import "tailwindcss/preflight.css";  <- Phase 8 tak commented rakhna, jab bootstrap hatega tab enable karenge */
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+@import "tailwindcss/preflight.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
@@ -150,12 +150,29 @@ img {
 
 @layer base {
   * {
-    @apply tw:border-border tw:outline-ring/50;
+    @apply border-border outline-ring/50;
   }
   body {
-    @apply tw:bg-background tw:text-foreground;
+    @apply bg-background text-foreground;
   }
   html {
-    @apply tw:font-sans;
+    @apply font-sans;
   }
+}
+
+/* Phase 6 Animations Replacement */
+@keyframes bg-scroll-horizontal {
+  from { background-position: 0 0; }
+  to { background-position: -2000px 0; }
+}
+
+.bg-moving {
+  animation: bg-scroll-horizontal 40s linear infinite;
+  background-size: auto 100%;
+}
+
+.sticky_column {
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
 }

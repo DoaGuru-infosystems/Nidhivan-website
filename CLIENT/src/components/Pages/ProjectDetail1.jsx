@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Banner from './../Elements/Banner';
 import Projects6 from './../Elements/Projects6';
 import ReactPlayer from 'react-player';
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
 var bnrimg = new URL('./../../images/banner/2.jpg', import.meta.url).href;
 
@@ -37,8 +38,8 @@ class ProjectDetail1 extends React.Component {
                     {/* SECTION CONTENT START */}
                     <div className="section-full p-tb80 inner-page-padding stick_in_parent">
                         <div className="container">
-                            <div className="row">
-                                <div className="col-lg-7 col-md-7  sticky_column">
+                            <div className="grid grid-cols-12 gap-8">
+                                <div className="col-span-12 md:col-span-7 lg:col-span-7 sticky_column">
                                     <div className="project-detail-containt">
                                         <div className="bg-white text-black">
                                             <h3>A multitask profession which creates any land in beautiful creation </h3>
@@ -81,7 +82,7 @@ class ProjectDetail1 extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-5 col-md-5 ">
+                                <div className="col-span-12 md:col-span-5 lg:col-span-5">
                                     <div className="project-detail-outer">
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
@@ -101,10 +102,17 @@ class ProjectDetail1 extends React.Component {
                                         <div className="sx-box">
                                             <div className="sx-thum-bx sx-img-overlay1 sx-img-effect yt-thum-box">
                                                 <img src="https://img.youtube.com/vi/Oy2QIiSQT2U/0.jpg" alt="" />
-                                                <NavLink to={"#"} className="play-now" data-toggle="modal" data-target="#myModal5">
-                                                    <i className="icon fa fa-play" />
-                                                    <span className="ripple" />
-                                                </NavLink>
+                                                <Dialog>
+                                                    <DialogTrigger asChild>
+                                                        <button className="play-now">
+                                                            <i className="icon fa fa-play" />
+                                                            <span className="ripple" />
+                                                        </button>
+                                                    </DialogTrigger>
+                                                    <DialogContent className="sm:max-w-[800px] p-0 bg-transparent border-none shadow-none">
+                                                        <ReactPlayer url='https://www.youtube.com/watch?v=Oy2QIiSQT2U' width="100%" height="450px" />
+                                                    </DialogContent>
+                                                </Dialog>
                                             </div>
                                         </div>
                                     </div>
@@ -118,14 +126,6 @@ class ProjectDetail1 extends React.Component {
                     </div>
                     {/* SECTION CONTENT END  */}
                     <Projects6 />
-                </div>
-
-                <div className="modal fade" id="myModal5" role="dialog">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <ReactPlayer url='https://www.youtube.com/watch?v=Oy2QIiSQT2U' />
-                        </div>
-                    </div>
                 </div>
                 </>
         );

@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { siteData } from '../../data/siteContent';
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
 var bgimg1 = new URL('./../../images/video-bg.jpg', import.meta.url).href;
 
@@ -12,8 +13,8 @@ class About3 extends React.Component {
                 <div className={`${this.props.bgcolor} section-full mobile-page-padding p-t80 p-b50`}>
                     <div className="container">
                         <div className="section-content">
-                            <div className="row">
-                                <div className="col-xl-6 col-lg-6 col-md-12">
+                            <div className="grid grid-cols-12 gap-8">
+                                <div className="col-span-12 lg:col-span-6">
                                     <div className="about-home-3 m-b30 bg-white">
                                         <h3 className="m-t0 m-b20 sx-tilte">{siteData.aboutUs.title}</h3>
                                         <p>{siteData.aboutUs.longDescription}</p>
@@ -28,16 +29,23 @@ class About3 extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xl-6 col-lg-6 col-md-12">
+                                <div className="col-span-12 lg:col-span-6">
                                     <div className="video-section-full-v2">
                                         <div className="video-section-full bg-no-repeat bg-cover bg-center overlay-wraper m-b30" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                                             <div className="overlay-main bg-black opacity-04" />
                                             <div className="video-section-inner">
                                                 <div className="video-section-content">
-                                                    <NavLink to={"#"} className="play-now" data-toggle="modal" data-target="#myModal">
-                                                        <i className="icon fa fa-play" />
-                                                        <span className="ripple" />
-                                                    </NavLink>
+                                                    <Dialog>
+                                                        <DialogTrigger asChild>
+                                                            <button className="play-now">
+                                                                <i className="icon fa fa-play" />
+                                                                <span className="ripple" />
+                                                            </button>
+                                                        </DialogTrigger>
+                                                        <DialogContent className="sm:max-w-[800px] p-0 bg-transparent border-none shadow-none">
+                                                            <ReactPlayer url='https://vimeo.com/34741214' width="100%" height="450px" />
+                                                        </DialogContent>
+                                                    </Dialog>
 
                                                     <div className="video-section-bottom">
                                                         <h3 className="sx-title text-white">{siteData.statistics[2].value}+ Years<br />Experience</h3>
@@ -51,13 +59,7 @@ class About3 extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="modal fade" id="myModal" role="dialog">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <ReactPlayer url='https://vimeo.com/34741214' />
-                        </div>
-                    </div>
-                </div>
+                {/* Modal removed and replaced with shadcn Dialog above */}
             </>
         );
     }

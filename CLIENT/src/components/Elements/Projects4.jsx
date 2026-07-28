@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const projects = [
     {
@@ -51,98 +52,72 @@ const projects = [
 
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
-class Projects4 extends React.Component {
-    componentDidMount() {
-        function loadScript(src) {
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
-            return new Promise(function (resolve, reject) {
-                var script = document.createElement('script');
-                script.src = src;
-                script.addEventListener('load', function () {
-                    resolve();
-                });
-                script.addEventListener('error', function (e) {
-                    reject(e);
-                });
-                document.body.appendChild(script);
-                document.body.removeChild(script);
-            })
-        };
+const Projects4 = () => {
+    const [open, setOpen] = React.useState(false);
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+    const slides = projects.map(item => ({ src: item.image }));
 
-        loadScript('/assets/js/custom.js');
-
+    const swiperOptions = {
+        modules: [Navigation, Autoplay],
+        loop: true,
+        spaceBetween: 40,
+        slidesPerView: 3,
+        navigation: true,
+        breakpoints: {
+            0: { slidesPerView: 1, spaceBetween: 15 },
+            640: { slidesPerView: 2, spaceBetween: 15 },
+            800: { slidesPerView: 3, spaceBetween: 20 },
+            1200: { slidesPerView: 4, spaceBetween: 40 }
+        }
     };
-    render() {
-        const options = {
-            loop:true,
-            autoplay:false,
-            center: false,
-            items:3,
-            margin:40,
-            nav:true,
-            dots: false,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-            responsive:{
-                0:{
-                    items:1,
-                    margin:15
-                },
-                640:{
-                    items:2,
-                    margin:15
-                },			
-                800:{
-                    items:3,
-                    margin:20,
-                },
-                1200:{
-                    items:4
-                }			
-                
-            }
-        };
-        return (
-            <>
-                <div className="section-full p-tb80 bg-white inner-page-padding">
-                    <div className="container-fluid">
-                        <div className="section-content">
-                            {/* TITLE START */}
-                            <div className="section-head">
-                                <div className="sx-separator-outer separator-left">
-                                    <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                                        <h3 className="sep-line-one">Carousel style 2</h3>
-                                    </div>
+    return (
+        <>
+            <div className="section-full p-tb80 bg-white inner-page-padding">
+                <div className="container-fluid">
+                    <div className="section-content">
+                        {/* TITLE START */}
+                        <div className="section-head">
+                            <div className="sx-separator-outer separator-left">
+                                <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
+                                    <h3 className="sep-line-one">Carousel style 2</h3>
                                 </div>
                             </div>
-                            {/* TITLE END */}
-                            <div className="work-carousel-outer">
-                                <OwlCarousel className="owl-carousel mfp-gallery project-carousel project-carousel4 owl-btn-vertical-center" {...options}>
-                                    {projects.map((item, index) => (
-                                        <div key={index} className={`${item.filter} item fadingcol overflow-hide`}>
-                                            <div className="sx-box   image-hover-block">
-                                                <div className="sx-thum-bx">
-                                                    <img src={item.image} alt="" />
-                                                </div>
-                                                <div className="sx-info  p-t20 text-white">
-                                                    <h4 className="sx-tilte"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
-                                                    <p className="m-b0">{item.address}</p>
-                                                </div>
-                                                <a className="mfp-link" href={item.image}>
-                                                    <i className="fa fa-arrows-alt" />
-                                                </a>
+                        </div>
+                        {/* TITLE END */}
+                        <div className="work-carousel-outer">
+                            <Swiper className="project-carousel project-carousel4 owl-btn-vertical-center" {...swiperOptions}>
+                                {projects.map((item, index) => (
+                                    <SwiperSlide key={index} className={`${item.filter} fadingcol overflow-hide`}>
+                                        <div className="sx-box   image-hover-block">
+                                            <div className="sx-thum-bx">
+                                                <img src={item.image} alt="" className="cursor-pointer" onClick={() => { setCurrentIndex(index); setOpen(true); }} />
                                             </div>
+                                            <div className="sx-info  p-t20 text-white">
+                                                <h4 className="sx-tilte"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
+                                                <p className="m-b0">{item.address}</p>
+                                            </div>
+                                            <button className="cursor-pointer bg-transparent border-none text-white absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 hover:bg-black/80 transition-colors" onClick={(e) => { e.preventDefault(); setCurrentIndex(index); setOpen(true); }}>
+                                                <i className="fa fa-arrows-alt" />
+                                            </button>
                                         </div>
-                                    ))}
-                                </OwlCarousel>
-
-                            </div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                         </div>
                     </div>
                 </div>
-
-            </>
-        );
-    }
+            </div>
+            <Lightbox
+                open={open}
+                close={() => setOpen(false)}
+                index={currentIndex}
+                slides={slides}
+            />
+        </>
+    );
 };
 
 export default Projects4;

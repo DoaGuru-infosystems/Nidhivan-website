@@ -1,128 +1,309 @@
-import React from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { siteData } from '../../data/siteContent';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectFade, Autoplay, Navigation } from 'swiper/modules';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-class Slider1 extends React.Component {
-    shouldComponentUpdate() {
-        return false;
-    }
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
 
-    componentDidMount() {
-        function loadScript(src) {
+// Import slider images
+import slide1 from '../../images/main-slider/slider1/slide1.jpg';
+import slide2 from '../../images/main-slider/slider1/slide2.jpg';
+import slide3 from '../../images/main-slider/slider1/slide3.jpg';
 
-            return new Promise(function (resolve, reject) {
-                var script = document.createElement('script');
-                script.src = src;
-                script.addEventListener('load', function () {
-                    resolve();
-                });
-                script.addEventListener('error', function (e) {
-                    reject(e);
-                });
-                document.body.appendChild(script);
-            })
-        };
+gsap.registerPlugin(useGSAP);
 
-        loadScript('/assets/js/rev-script-1.js');
+const slides = [
+  {
+    image: slide3,
+    tagline: siteData.companyName,
+    title: siteData.taglines[0],
+    description: 'Invest with confidence. We offer legally verified properties with guaranteed high returns.',
+  },
+  {
+    image: slide1,
+    tagline: siteData.companyName,
+    title: siteData.taglines[1],
+    description: 'Invest with confidence. We offer legally verified properties with guaranteed high returns.',
+  },
+  {
+    image: slide2,
+    tagline: siteData.companyName,
+    title: siteData.taglines[2],
+    description: 'Invest with confidence. We offer legally verified properties with guaranteed high returns.',
+  },
+];
 
-    };
-    render() {
-        return (
-            <>
-                <div id="rev_slider_26_1_wrapper" className="rev_slider_wrapper fullscreen-container home-rev-slider" data-alias="mask-showcase" data-source="gallery">
-                    {/* START REVOLUTION SLIDER 5.4.1 fullscreen mode */}
-                    <div id="rev_slider_26_1" className="rev_slider fullscreenbanner" style={{ display: 'none' }} data-version="5.4.1">
-                        <ul>
-                            {/* SLIDE 1 */}
-                            <li data-index="rs-72" data-transition="fade" data-slotamount="default" data-hideafterloop={0} data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed={300} data-thumb={new URL('./../../images/main-slider/slider1/slide3.jpg', import.meta.url).href} data-rotate={0} data-saveperformance="off" data-title data-param1={1} data-param2 data-param3 data-param4 data-param5 data-param6 data-param7 data-param8 data-param9 data-param10 data-description>
-                                {/* MAIN IMAGE */}
-                                <img src={new URL('./../../images/main-slider/slider1/slide3.jpg', import.meta.url).href} alt="" data-bgcolor="#f8f8f8" style={{}} data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" className="rev-slidebg" data-no-retina />
-                                {/* LAYER 1  right image overlay dark*/}
-                                <div className="tp-caption tp-shape tp-shapewrapper  rs-parallaxlevel-tobggroup" id="slide-75-layer-1" data-x="['right','right','right','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-fontweight="['100','100','400','400']" data-width="['full','full','full','full']" data-height="['full','full','full','full']" data-whitespace="nowrap" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;from&quot;:&quot;opacity:0;&quot;,&quot;speed&quot;:1500,&quot;to&quot;:&quot;o:1;&quot;,&quot;delay&quot;:150,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]" data-textalign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 6, backgroundColor: 'rgba(0,0,0,0.7)' }}>
-                                </div>
-                                {/* LAYER 3  Thin text title*/}
-                                <div className="tp-caption   tp-resizeme slider-tag-line" id="slide-72-layer-3" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-130','-130','-130','-100']" data-fontsize="['22','22','20','16']" data-lineheight="['26','26','26','22']" data-width="['700','600','600','380']" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:300,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, fontWeight: 500, letterSpacing: 10, color: '#fff', fontFamily: '"Poppins", sans-serif', textTransform: 'uppercase' }}>{siteData.companyName}</div>
-                                {/* LAYER 4  Bold Title*/}
-                                <div className="tp-caption   tp-resizeme" id="slide-72-layer-4" data-x="['left','left','center','center']" data-hoffset="['46','46','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-30','-30','-30','-20']" data-fontsize="['64','54','44','34']" data-lineheight="['74','64','54','44']" data-width="['850','700','600','420']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:200,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, whiteSpace: 'normal', fontWeight: 800, color: '#fff', fontFamily: '"Poppins", sans-serif' }}>{siteData.taglines[0]}</div>
-                                {/* LAYER 5  Paragraph*/}
-                                <div className="tp-caption   tp-resizeme" id="slide-72-layer-5" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['80','90','80','90']" data-fontsize="['18','18','18','16']" data-lineheight="['30','30','30','30']" data-width="['800','700','600','420']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:200,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, whiteSpace: 'normal', color: '#fff', fontFamily: '"Poppins", sans-serif' }}>Invest with confidence. We offer legally verified properties with guaranteed high returns.</div>
-                                {/* LAYER 6  Read More*/}
-                                <div className="tp-caption rev-btn  tp-resizeme" id="slide-72-layer-6" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['170','180','170','170']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="button" data-responsive_offset="on" data-frames="[{&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,
-                      &quot;speed&quot;:1500,&quot;to&quot;:&quot;o:1;&quot;,&quot;delay&quot;:1000,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;to&quot;:&quot;y:[-100%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power1.easeIn&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 9, lineHeight: 30 }}><NavLink to={"#"} className="site-button btn-half"><span> Read More</span></NavLink></div>
-                                {/* Border left Part */}
-                                <div className="tp-caption tp-shape tp-shapewrapper " id="slide-72-layer-8" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full" data-whitespace="nowrap" data-visibility="['on','off','off','off']" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;delay&quot;:50,&quot;speed&quot;:100,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1000,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeIn&quot;}]" data-textalign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 8, backgroundColor: 'rgba(0, 0, 0, 0)', borderLeft: '40px solid #eef1f2' }}> </div>
-                                {/* Border bottom Part */}
-                                <div className="tp-caption tp-shape tp-shapewrapper " id="slide-72-layer-7" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full" data-whitespace="nowrap" data-visibility="['on','on','off','off']" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;delay&quot;:50,&quot;speed&quot;:100,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1000,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeIn&quot;}]" data-textalign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 8, backgroundColor: 'rgba(0, 0, 0, 0)', borderBottom: '80px solid #eef1f2' }}> </div>
-                            </li>
-                            {/* SLIDE 2 */}
-                            <li data-index="rs-73" data-transition="fade" data-slotamount="default" data-hideafterloop={0} data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed={300} data-thumb={new URL('./../../images/main-slider/slider1/slide1.jpg', import.meta.url).href} data-rotate={0} data-saveperformance="off" data-title data-param1={1} data-param2 data-param3 data-param4 data-param5 data-param6 data-param7 data-param8 data-param9 data-param10 data-description>
-                                {/* MAIN IMAGE */}
-                                <img src={new URL('./../../images/main-slider/slider1/slide1.jpg', import.meta.url).href} alt="" data-bgcolor="#f8f8f8" style={{}} data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" className="rev-slidebg" data-no-retina />
-                                {/* LAYER 1  right image overlay dark*/}
-                                <div className="tp-caption tp-shape tp-shapewrapper  rs-parallaxlevel-tobggroup" id="slide-73-layer-1" data-x="['right','right','right','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-fontweight="['100','100','400','400']" data-width="['full','full','full','full']" data-height="['full','full','full','full']" data-whitespace="nowrap" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;from&quot;:&quot;opacity:0;&quot;,&quot;speed&quot;:1500,&quot;to&quot;:&quot;o:1;&quot;,&quot;delay&quot;:150,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]" data-textalign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 6, backgroundColor: 'rgba(0,0,0,0.7)' }}>
-                                </div>
-                                {/* LAYER 3  Thin text title*/}
-                                <div className="tp-caption   tp-resizeme slider-tag-line" id="slide-73-layer-3" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-130','-130','-130','-100']" data-fontsize="['22','22','20','16']" data-lineheight="['26','26','26','22']" data-width="['700','600','600','380']" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:300,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, fontWeight: 500, letterSpacing: 10, color: '#fff', fontFamily: '"Poppins", sans-serif', textTransform: 'uppercase' }}>{siteData.companyName}</div>
-                                {/* LAYER 4  Bold Title*/}
-                                <div className="tp-caption   tp-resizeme" id="slide-73-layer-4" data-x="['left','left','center','center']" data-hoffset="['46','46','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-30','-30','-30','-20']" data-fontsize="['64','54','44','34']" data-lineheight="['74','64','54','44']" data-width="['850','700','600','420']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:200,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, whiteSpace: 'normal', fontWeight: 800, color: '#fff', fontFamily: '"Poppins", sans-serif' }}>{siteData.taglines[1]}</div>
-                                {/* LAYER 5  Paragraph*/}
-                                <div className="tp-caption   tp-resizeme" id="slide-73-layer-5" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['80','90','80','90']" data-fontsize="['18','18','18','16']" data-lineheight="['30','30','30','30']" data-width="['800','700','600','420']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:200,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, whiteSpace: 'normal', color: '#fff', fontFamily: '"Poppins", sans-serif' }}>Invest with confidence. We offer legally verified properties with guaranteed high returns.</div>
-                                {/* LAYER 6  Read More*/}
-                                <div className="tp-caption rev-btn  tp-resizeme" id="slide-73-layer-6" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['170','180','170','170']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="button" data-responsive_offset="on" data-frames="[{&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,
-                      &quot;speed&quot;:1500,&quot;to&quot;:&quot;o:1;&quot;,&quot;delay&quot;:1000,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;to&quot;:&quot;y:[-100%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power1.easeIn&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 9, lineHeight: 30 }}><NavLink to={"#"} className="site-button btn-half"><span> Read More</span></NavLink></div>
-                                {/* Border left Part */}
-                                <div className="tp-caption tp-shape tp-shapewrapper " id="slide-73-layer-8" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full" data-whitespace="nowrap" data-visibility="['on','off','off','off']" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;delay&quot;:50,&quot;speed&quot;:100,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1000,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeIn&quot;}]" data-textalign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 8, backgroundColor: 'rgba(0, 0, 0, 0)', borderLeft: '40px solid #eef1f2' }}> </div>
-                                {/* Border bottom Part */}
-                                <div className="tp-caption tp-shape tp-shapewrapper " id="slide-73-layer-7" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full" data-whitespace="nowrap" data-visibility="['on','on','off','off']" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;delay&quot;:50,&quot;speed&quot;:100,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1000,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeIn&quot;}]" data-textalign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 8, backgroundColor: 'rgba(0, 0, 0, 0)', borderBottom: '80px solid #eef1f2' }}> </div>
-                            </li>
-                            {/* SLIDE 3 */}
-                            <li data-index="rs-74" data-transition="fade" data-slotamount="default" data-hideafterloop={0} data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed={300} data-thumb={new URL('./../../images/main-slider/slider1/slide2.jpg', import.meta.url).href} data-rotate={0} data-saveperformance="off" data-title data-param1={1} data-param2 data-param3 data-param4 data-param5 data-param6 data-param7 data-param8 data-param9 data-param10 data-description>
-                                {/* MAIN IMAGE */}
-                                <img src={new URL('./../../images/main-slider/slider1/slide2.jpg', import.meta.url).href} alt="" data-bgcolor="#f8f8f8" style={{}} data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" className="rev-slidebg" data-no-retina />
-                                {/* LAYER 1  right image overlay dark*/}
-                                <div className="tp-caption tp-shape tp-shapewrapper  rs-parallaxlevel-tobggroup" id="slide-74-layer-1" data-x="['right','right','right','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-fontweight="['100','100','400','400']" data-width="['full','full','full','full']" data-height="['full','full','full','full']" data-whitespace="nowrap" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;from&quot;:&quot;opacity:0;&quot;,&quot;speed&quot;:1500,&quot;to&quot;:&quot;o:1;&quot;,&quot;delay&quot;:150,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]" data-textalign="['left','left','left','left']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 6, backgroundColor: 'rgba(0,0,0,0.7)' }}>
-                                </div>
-                                {/* LAYER 3  Thin text title*/}
-                                <div className="tp-caption   tp-resizeme slider-tag-line" id="slide-74-layer-3" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-130','-130','-130','-100']" data-fontsize="['22','22','20','16']" data-lineheight="['26','26','26','22']" data-width="['700','600','600','380']" data-height="none" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:300,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, fontWeight: 500, letterSpacing: 10, color: '#fff', fontFamily: '"Poppins", sans-serif', textTransform: 'uppercase' }}>{siteData.companyName}</div>
-                                {/* LAYER 4  Bold Title*/}
-                                <div className="tp-caption   tp-resizeme" id="slide-74-layer-4" data-x="['left','left','center','center']" data-hoffset="['46','46','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['-30','-30','-30','-20']" data-fontsize="['64','54','44','34']" data-lineheight="['74','64','54','44']" data-width="['850','700','600','420']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:200,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, whiteSpace: 'normal', fontWeight: 800, color: '#fff', fontFamily: '"Poppins", sans-serif' }}>{siteData.taglines[2]}</div>
-                                {/* LAYER 5  Paragraph*/}
-                                <div className="tp-caption   tp-resizeme" id="slide-74-layer-5" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['80','90','80','90']" data-fontsize="['18','18','18','16']" data-lineheight="['30','30','30','30']" data-width="['800','700','600','420']" data-height="none" data-whitespace="normal" data-type="text" data-responsive_offset="on" data-frames="[{&quot;delay&quot;:200,&quot;speed&quot;:750,&quot;sfxcolor&quot;:&quot;#fff&quot;,&quot;sfx_effect&quot;:&quot;blockfromleft&quot;,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;z:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;sfxcolor&quot;:&quot;#ffffff&quot;,&quot;sfx_effect&quot;:&quot;blocktoleft&quot;,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;z:0;&quot;,&quot;ease&quot;:&quot;Power4.easeOut&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 10, whiteSpace: 'normal', color: '#fff', fontFamily: '"Poppins", sans-serif' }}>Invest with confidence. We offer legally verified properties with guaranteed high returns.</div>
-                                {/* LAYER 6  Read More*/}
-                                <div className="tp-caption rev-btn  tp-resizeme" id="slide-74-layer-6" data-x="['left','left','center','center']" data-hoffset="['50','50','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['170','180','170','170']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="button" data-responsive_offset="on" data-frames="[{&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,
-                      &quot;speed&quot;:1500,&quot;to&quot;:&quot;o:1;&quot;,&quot;delay&quot;:1000,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},
-                      {&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:500,&quot;to&quot;:&quot;y:[-100%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power1.easeIn&quot;}]" data-textalign="['left','left','center','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 9, lineHeight: 30 }}><NavLink to={"#"} className="site-button btn-half"><span> Read More</span></NavLink></div>
-                                {/* Border left Part */}
-                                <div className="tp-caption tp-shape tp-shapewrapper " id="slide-74-layer-8" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full" data-whitespace="nowrap" data-visibility="['on','off','off','off']" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;delay&quot;:50,&quot;speed&quot;:100,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1000,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeIn&quot;}]" data-textalign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 8, backgroundColor: 'rgba(0, 0, 0, 0)', borderLeft: '40px solid #eef1f2' }}> </div>
-                                {/* Border bottom Part */}
-                                <div className="tp-caption tp-shape tp-shapewrapper " id="slide-74-layer-7" data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']" data-width="full" data-height="full" data-whitespace="nowrap" data-visibility="['on','on','off','off']" data-type="shape" data-basealign="slide" data-responsive_offset="off" data-responsive="off" data-frames="[{&quot;delay&quot;:50,&quot;speed&quot;:100,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;opacity:0;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power3.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1000,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;opacity:0;&quot;,&quot;ease&quot;:&quot;Power3.easeIn&quot;}]" data-textalign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style={{ zIndex: 8, backgroundColor: 'rgba(0, 0, 0, 0)', borderBottom: '80px solid #eef1f2' }}> </div>
-                            </li>
-                        </ul>
-                        <div className="tp-bannertimer" />
-                        {/* left side social bar*/}
-                        <div className="slide-left-social">
-                            <ul className="clearfix">
-                                <li><a href="https://www.linkedin.com" target="_blank" className="sx-title-swip" data-hover="Linkedin">Linkedin</a></li>
-                                <li><a href="https://twitter.com" target="_blank" className="sx-title-swip" data-hover="Twitter">Twitter</a></li>
-                                <li><a href="https://www.facebook.com" target="_blank" className="sx-title-swip" data-hover="Facebook">Facebook</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </>
-        );
-    }
+const Slider1 = () => {
+  const containerRef = useRef(null);
+  const [prevEl, setPrevEl] = useState(null);
+  const [nextEl, setNextEl] = useState(null);
+
+  // Animate text layers on each slide change
+  const animateSlide = useCallback((swiper) => {
+    const activeSlide = swiper.slides[swiper.activeIndex];
+    if (!activeSlide) return;
+
+    const elements = activeSlide.querySelectorAll('[data-animate]');
+    // Kill any running tweens on these elements
+    elements.forEach((el) => gsap.killTweensOf(el));
+
+    gsap.fromTo(
+      elements,
+      {
+        y: 60,
+        opacity: 0,
+        clipPath: 'inset(0 100% 0 0)',
+      },
+      {
+        y: 0,
+        opacity: 1,
+        clipPath: 'inset(0 0% 0 0)',
+        duration: 0.9,
+        ease: 'power3.out',
+        stagger: 0.15,
+      }
+    );
+  }, []);
+
+  // Cleanup all GSAP tweens on unmount
+  useGSAP(
+    () => {
+      // Initial entrance animation handled by Swiper's onSlideChange
+      return () => {
+        // Cleanup: kill all tweens inside the container
+        if (containerRef.current) {
+          const allAnimated = containerRef.current.querySelectorAll('[data-animate]');
+          allAnimated.forEach((el) => gsap.killTweensOf(el));
+        }
+      };
+    },
+    { scope: containerRef }
+  );
+
+  return (
+    <div ref={containerRef} className="hero-slider-container" style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+      <Swiper
+        modules={[EffectFade, Autoplay, Navigation]}
+        effect="fade"
+        fadeEffect={{ crossFade: true }}
+        speed={800}
+        loop={true}
+        autoplay={{
+          delay: 6000,
+          disableOnInteraction: false,
+        }}
+        navigation={{
+          prevEl,
+          nextEl,
+        }}
+        onSlideChangeTransitionStart={animateSlide}
+        onAfterInit={animateSlide}
+        style={{ width: '100%', height: '100%' }}
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            {/* Background Image */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `url(${slide.image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            />
+            {/* Dark Overlay */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 100%)',
+                zIndex: 1,
+              }}
+            />
+            {/* Content */}
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 2,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                height: '100%',
+                padding: '0 5%',
+                maxWidth: '900px',
+              }}
+            >
+              {/* Company Name / Tagline */}
+              <p
+                data-animate
+                style={{
+                  fontSize: 'clamp(12px, 2vw, 20px)',
+                  fontWeight: 500,
+                  letterSpacing: '6px',
+                  color: 'rgba(255,255,255,0.85)',
+                  textTransform: 'uppercase',
+                  marginBottom: '16px',
+                  fontFamily: '"Poppins", sans-serif',
+                }}
+              >
+                {slide.tagline}
+              </p>
+              {/* Main Title */}
+              <h1
+                data-animate
+                style={{
+                  fontSize: 'clamp(28px, 5vw, 64px)',
+                  fontWeight: 800,
+                  lineHeight: 1.15,
+                  color: '#ffffff',
+                  marginBottom: '20px',
+                  fontFamily: '"Poppins", sans-serif',
+                }}
+              >
+                {slide.title}
+              </h1>
+              {/* Description */}
+              <p
+                data-animate
+                style={{
+                  fontSize: 'clamp(14px, 1.5vw, 18px)',
+                  lineHeight: 1.7,
+                  color: 'rgba(255,255,255,0.85)',
+                  marginBottom: '32px',
+                  maxWidth: '700px',
+                  fontFamily: '"Poppins", sans-serif',
+                }}
+              >
+                {slide.description}
+              </p>
+              {/* CTA Button */}
+              <div data-animate>
+                <NavLink
+                  to="/about"
+                  className="site-button btn-half"
+                  style={{
+                    display: 'inline-block',
+                    padding: '14px 40px',
+                    fontSize: '15px',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  <span>Read More</span>
+                </NavLink>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Custom Navigation Arrows */}
+      <button
+        ref={(node) => setPrevEl(node)}
+        aria-label="Previous slide"
+        style={{
+          position: 'absolute',
+          bottom: '30px',
+          right: '90px',
+          zIndex: 10,
+          width: '50px',
+          height: '50px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(4px)',
+          border: '1px solid rgba(255,255,255,0.25)',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          color: '#fff',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+        }}
+      >
+        <ChevronLeft size={22} />
+      </button>
+      <button
+        ref={(node) => setNextEl(node)}
+        aria-label="Next slide"
+        style={{
+          position: 'absolute',
+          bottom: '30px',
+          right: '30px',
+          zIndex: 10,
+          width: '50px',
+          height: '50px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(4px)',
+          border: '1px solid rgba(255,255,255,0.25)',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          color: '#fff',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+        }}
+      >
+        <ChevronRight size={22} />
+      </button>
+
+      {/* Left Social Bar */}
+      <div
+        style={{
+          position: 'absolute',
+          left: '20px',
+          bottom: '30px',
+          zIndex: 10,
+          display: 'flex',
+          gap: '20px',
+        }}
+      >
+        {['LinkedIn', 'Twitter', 'Facebook'].map((name) => (
+          <a
+            key={name}
+            href={`https://www.${name.toLowerCase()}.com`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'rgba(255,255,255,0.6)',
+              fontSize: '13px',
+              fontWeight: 500,
+              textDecoration: 'none',
+              letterSpacing: '1px',
+              transition: 'color 0.3s ease',
+              fontFamily: '"Poppins", sans-serif',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; }}
+          >
+            {name}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Slider1;

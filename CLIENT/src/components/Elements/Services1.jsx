@@ -21,9 +21,9 @@ class Services1 extends React.Component {
                                 </div>
                             </div>
                             {/* TITLE END */}
-                            <div className="row">
+                            <div className="grid grid-cols-12 gap-8">
                                 {siteData.services.map((item, index) => (
-                                    <div className="col-lg-4 col-md-6 col-sm-12 m-b30" key={index}>
+                                    <div className="col-span-12 md:col-span-6 lg:col-span-4" key={index}>
                                         <div className="sx-icon-box-wraper  icon-count-2-outer">
                                             <div className="icon-count-2 bg-white">
                                                 <span className="icon-count-number">{"0" + item.id}</span>

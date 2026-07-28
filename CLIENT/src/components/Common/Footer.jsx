@@ -13,9 +13,9 @@ class Footer extends React.Component {
                     <div className="footer-top overlay-wraper">
                         <div className="overlay-main" />
                         <div className="container">
-                            <div className="row">
+                            <div className="grid grid-cols-12 gap-8">
                                 {/* ABOUT COMPANY */}
-                                <div className="col-lg-3 col-md-6 col-sm-6">
+                                <div className="col-span-12 sm:col-span-6 lg:col-span-3">
                                     <div className="widget widget_about">
                                         {/*<h4 class="widget-title">About Company</h4>*/}
                                         <div className="logo-footer clearfix p-b15">
@@ -33,7 +33,7 @@ class Footer extends React.Component {
                                     </div>
                                 </div>
                                 {/* RESENT POST */}
-                                <div className="col-lg-3 col-md-6 col-sm-6">
+                                <div className="col-span-12 sm:col-span-6 lg:col-span-3">
                                     <div className="widget recent-posts-entry-date">
                                         <h5 className="widget-title">Resent Post</h5>
                                         <div className="widget-post-bx">
@@ -95,7 +95,7 @@ class Footer extends React.Component {
                                     </div>
                                 </div>
                                 {/* USEFUL LINKS */}
-                                <div className="col-lg-3 col-md-6 col-sm-6 footer-col-3">
+                                <div className="col-span-12 sm:col-span-6 lg:col-span-3 footer-col-3">
                                     <div className="widget widget_services inline-links">
                                         <h5 className="widget-title">Useful links</h5>
                                         <ul>
@@ -108,7 +108,7 @@ class Footer extends React.Component {
                                     </div>
                                 </div>
                                 {/* CONTACT US */}
-                                <div className="col-lg-3 col-md-6 col-sm-6">
+                                <div className="col-span-12 sm:col-span-6 lg:col-span-3">
                                     <div className="widget widget_address_outer">
                                         <h5 className="widget-title">Contact Us</h5>
                                         <ul className="widget_address">
@@ -123,20 +123,20 @@ class Footer extends React.Component {
                         </div>
                         <div className="container">
                             <div className="call-to-action-wrap">
-                                <div className="row">
-                                    <div className="col-lg-7 col-md-6">
+                                <div className="grid grid-cols-12 gap-8 items-center">
+                                    <div className="col-span-12 md:col-span-6 lg:col-span-7">
                                         <div className="call-to-action-left">
                                             <h5 className="text-uppercase m-b10 m-t0">Subscribe to our newsletter!</h5>
                                             <span>Never miss anything from {siteData.companyName} by signing up to our newsletter.</span>
                                         </div>
                                     </div>
-                                    <div className="col-lg-5 col-md-6">
+                                    <div className="col-span-12 md:col-span-6 lg:col-span-5">
                                         <div className="call-to-action-right">
                                             <div className="widget_newsletter">
                                                 <div className="newsletter-bx">
                                                     <form role="search" method="post" action="#">
                                                         <div className="input-group">
-                                                            <input name="news-letter" className="form-control" placeholder="ENTER YOUR EMAIL" type="text" />
+                                                            <input name="news-letter" className="w-full px-4 py-2 border border-gray-300 focus:outline-none" placeholder="ENTER YOUR EMAIL" type="text" />
                                                             <span className="input-group-btn">
                                                                 <button type="button" className="site-button"><i className="fa fa-paper-plane-o" /></button>
                                                             </span>
@@ -154,7 +154,7 @@ class Footer extends React.Component {
                     <div className="footer-bottom overlay-wraper">
                         <div className="overlay-main" />
                         <div className="container">
-                            <div className="row">
+                            <div className="flex justify-center md:justify-start">
                                 <div className="sx-footer-bot-left">
                                     <span className="copyrights-text">© 2026 {siteData.companyName}. All Rights Reserved.</span>
                                 </div>

@@ -62,15 +62,15 @@ class BlogSingle extends React.Component {
                                                 <span>Interior Designer</span>
                                             </div>
                                         </blockquote>
-                                        <div className="row">
-                                            <div className="col-md-6">
+                                        <div className="grid grid-cols-12 gap-8">
+                                            <div className="col-span-12 md:col-span-6">
                                                 <div className="sx-box m-b30">
                                                     <div className="sx-media">
                                                         <img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-md-6">
+                                            <div className="col-span-12 md:col-span-6">
                                                 <div className="sx-box m-b30">
                                                     <div className="sx-media">
                                                         <img src={new URL('./../../images/blog/default/thum2.jpg', import.meta.url).href} alt="" />
@@ -81,8 +81,8 @@ class BlogSingle extends React.Component {
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. remaining essentially unchanged. It was popularised in the with the . Proin tincidunt tellus ac porta volutpat. Cras mattis congue lacus id bibendum. Mauris ut sodales libero. Maecenas feugiat sit amet enim in accumsan. Here, then, is what I wanted to tell you of my architecture. I created it with courage and idealism, but also with an awareness of the fact that what is important is life, friends, and attempting to make this unjust world a better place in which to live.</p>
                                     </div>
                                     <div className="autor-post-tag-share p-a30 bg-gray">
-                                        <div className="row">
-                                            <div className="col-md-12">
+                                        <div className="grid grid-cols-12 gap-8">
+                                            <div className="col-span-12">
                                                 <div className="widget_tag_cloud m-b15">
                                                     <h5 className="tagcloud">Tags</h5>
                                                     <div className="tagcloud">
@@ -100,7 +100,7 @@ class BlogSingle extends React.Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-md-12">
+                                            <div className="col-span-12">
                                                 <div className="clearfix single-post-share">
                                                     <h5>Share this Post:</h5>
                                                     <div className="widget_social_inks">
@@ -135,8 +135,8 @@ class BlogSingle extends React.Component {
                                 {/* TITLE END */}
                                 {/* IMAGE CAROUSEL START */}
                                 <div className="section-content">
-                                    <div className="row">
-                                        <div className="col-md-4 col-sm-12">
+                                    <div className="grid grid-cols-12 gap-8">
+                                        <div className="col-span-12 md:col-span-4">
                                             <div className="blog-post blog-grid date-style-2">
                                                 <div className="sx-post-media sx-img-effect img-reflection">
                                                     <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic1.jpg', import.meta.url).href} alt=""/></NavLink>
@@ -158,7 +158,7 @@ class BlogSingle extends React.Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-md-4 col-sm-12">
+                                        <div className="col-span-12 md:col-span-4">
                                             <div className="blog-post blog-grid date-style-2">
                                                 <div className="sx-post-media sx-img-effect img-reflection">
                                                     <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic2.jpg', import.meta.url).href} alt=""/></NavLink>
@@ -180,7 +180,7 @@ class BlogSingle extends React.Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-md-4 col-sm-12">
+                                        <div className="col-span-12 md:col-span-4">
                                             <div className="blog-post blog-grid date-style-2">
                                                 <div className="sx-post-media sx-img-effect img-reflection">
                                                     <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic3.jpg', import.meta.url).href} alt=""/></NavLink>
@@ -277,19 +277,19 @@ class BlogSingle extends React.Component {
                                                 <form className="comment-form bdr-1 bdr-solid bdr-gray p-tb15" id="commentform" method="post">
                                                     <p className="comment-form-author">
                                                         <label htmlFor="author">Name <span className="required">*</span></label>
-                                                        <input defaultValue="" className="form-control" type="text" name="user-comment" placeholder="Author" id="author" />
+                                                        <input defaultValue="" className="w-full px-4 py-2 border border-gray-300 focus:outline-none" type="text" name="user-comment" placeholder="Author" id="author" />
                                                     </p>
                                                     <p className="comment-form-email">
                                                         <label htmlFor="email">Email <span className="required">*</span></label>
-                                                        <input defaultValue="" className="form-control" type="text" name="email" placeholder="Email" id="email" />
+                                                        <input defaultValue="" className="w-full px-4 py-2 border border-gray-300 focus:outline-none" type="text" name="email" placeholder="Email" id="email" />
                                                     </p>
                                                     <p className="comment-form-url">
                                                         <label htmlFor="url">Website</label>
-                                                        <input defaultValue="" className="form-control" type="text" name="url" placeholder="Website" id="url" />
+                                                        <input defaultValue="" className="w-full px-4 py-2 border border-gray-300 focus:outline-none" type="text" name="url" placeholder="Website" id="url" />
                                                     </p>
                                                     <p className="comment-form-comment">
                                                         <label htmlFor="comment">Comment</label>
-                                                        <textarea className="form-control" rows={8} name="comment" placeholder="Comment" id="comment" defaultValue={""} />
+                                                        <textarea className="w-full px-4 py-2 border border-gray-300 focus:outline-none" rows={8} name="comment" placeholder="Comment" id="comment" defaultValue={""} />
                                                     </p>
                                                     <p className="form-submit">
                                                         <button className="site-button btn-half" type="button"><span> Submit</span></button>

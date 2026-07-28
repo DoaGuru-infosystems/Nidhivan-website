@@ -1,51 +1,70 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
 
-class Navigation extends React.Component {
+const navItems = [
+  { label: 'Home', to: '/' },
+  { label: 'About Us', to: '/about' },
+  {
+    label: 'Our Projects',
+    to: '',
+    children: [
+      { label: 'Ongoing Projects', to: '/ongoing-projects' },
+      { label: 'Completed Projects', to: '/completed-projects' },
+      { label: 'Upcoming Projects', to: '/upcoming-projects' },
+    ],
+  },
+  { label: 'Blogs', to: '/blogs' },
+  { label: 'Gallery', to: '/gallery' },
+  { label: 'Contact Us', to: '/contact-us' },
+];
 
-    componentDidMount() {
-        function loadScript(src) {
+const Navigation = ({ onLinkClick }) => {
+  const [openSubmenu, setOpenSubmenu] = React.useState(null);
 
-            return new Promise(function (resolve, reject) {
-                var script = document.createElement('script');
-                script.src = src;
-                script.addEventListener('load', function () {
-                    resolve();
-                });
-                script.addEventListener('error', function (e) {
-                    reject(e);
-                });
-                document.body.appendChild(script);
-            })
-        };
+  const toggleSubmenu = (index) => {
+    setOpenSubmenu(openSubmenu === index ? null : index);
+  };
 
-        loadScript('/assets/js/mobilenav.js');
-
-    };
-
-    render() {
-        return (
+  return (
+    <ul className="nav navbar-nav">
+      {navItems.map((item, index) => (
+        <li key={item.label} className={item.children ? 'has-child' : ''}>
+          {item.children ? (
             <>
-                <ul className="nav navbar-nav">
-                    <li className="active"><NavLink to={ "/" }>Home</NavLink></li>
-                    <li><NavLink to={ "/about" }>About Us</NavLink></li>
-
-                    <li>
-                        <NavLink to={ "" }>Our Projects</NavLink>
-                        <ul className="sub-menu">
-                            <li><NavLink to={ "/project-grid-3-columns" }> Ongoing Projects</NavLink></li>
-                            <li><NavLink to={ "/project-masonry-3-columns" }>Completed Projects</NavLink></li>
-                            <li><NavLink to={ "/project-carousel" }>Upcoming Projects</NavLink></li>
-                        </ul>
-                    </li>
-
-                    <li><NavLink to={ "/blog-grid" }>Blogs</NavLink></li>
-                    <li><NavLink to={ "/gallery" }>Gallery</NavLink></li>
-                    <li><NavLink to={ "/contact-us" }>Contact Us</NavLink></li>
-                </ul>
+              <NavLink to={item.to || '#'} onClick={(e) => { e.preventDefault(); toggleSubmenu(index); }}>
+                {item.label}
+                <ChevronDown
+                  size={14}
+                  style={{
+                    marginLeft: '4px',
+                    display: 'inline-block',
+                    verticalAlign: 'middle',
+                    transition: 'transform 0.3s ease',
+                    transform: openSubmenu === index ? 'rotate(180deg)' : 'rotate(0deg)',
+                  }}
+                />
+              </NavLink>
+              <ul
+                className="sub-menu"
+                style={{
+                  display: openSubmenu === index ? 'block' : '',
+                }}
+              >
+                {item.children.map((child) => (
+                  <li key={child.label}>
+                    <NavLink to={child.to} onClick={onLinkClick}>{child.label}</NavLink>
+                  </li>
+                ))}
+              </ul>
             </>
-        );
-    };
+          ) : (
+            <NavLink to={item.to} onClick={onLinkClick}>{item.label}</NavLink>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 export default Navigation;

@@ -1,199 +1,352 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Navigation from '../Common/Navigation';
 import { NavLink } from 'react-router-dom';
 import { siteData } from '../../data/siteContent';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { Search, X, Phone, Mail, MapPin, Menu, Loader2 } from 'lucide-react';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Input } from '../ui/input';
+import { Textarea } from '../ui/textarea';
 
-var bnr = new URL('./../../images/background/bg-map.png', import.meta.url).href;
+const formSchema = z.object({
+  username: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number must be at least 10 digits"),
+  message: z.string().min(10, "Message must be at least 10 characters")
+});
 
-class Header extends React.Component {
+import logo from '../../images/logo-1.png';
+import bgMap from '../../images/background/bg-map.png';
 
-    constructor(props) {
-        super(props);
-        this.state = { logo: new URL('./../../images/logo-1.png', import.meta.url).href };
+gsap.registerPlugin(ScrollTrigger);
+
+const Header = () => {
+  const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isQuoteActive, setIsQuoteActive] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset
+  } = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      phone: "",
+      message: ""
     }
+  });
 
-    state = { isSearchActive: false, isQuoteActive: false };
+  const onSubmit = async (data) => {
+    // Mock API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log("Header Form Data Submitted:", data);
+    alert("Thank you for getting in touch! We will contact you soon.");
+    reset();
+    setIsQuoteActive(false);
+  };
 
-    handleSearchToggle = () => {
-        this.setState({ isSearchActive: !this.state.isSearchActive });
+  // Sticky header with GSAP ScrollTrigger
+  useGSAP(
+    () => {
+      const stickyHeader = headerRef.current?.querySelector('.sticky-header');
+      if (!stickyHeader) return;
+
+      ScrollTrigger.create({
+        trigger: document.body,
+        start: 'top -100px',
+        onEnter: () => {
+          stickyHeader.classList.add('is-fixed', 'color-fill');
+        },
+        onLeaveBack: () => {
+          stickyHeader.classList.remove('is-fixed', 'color-fill');
+        },
+      });
+    },
+    { scope: headerRef }
+  );
+
+  // Close mobile menu on route change / link click
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
+  // Close mobile menu on escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+        setIsSearchActive(false);
+        setIsQuoteActive(false);
+      }
     };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
 
-    handleQuoteToggle = () => {
-        this.setState({ isQuoteActive: !this.state.isQuoteActive });
-    };
-
-    componentDidMount() {
-
-        const handleScroll = () => {
-            const offset = window.scrollY;
-
-            const stickyheader = document.querySelector('.sticky-header ');
-
-            if (offset >= 100) {
-                stickyheader.classList.add('is-fixed');
-                stickyheader.classList.add('color-fill');
-
-            } else {
-                stickyheader.classList.remove('is-fixed');
-                stickyheader.classList.remove('color-fill');
-            }
-        }
-
-        window.addEventListener('scroll', handleScroll);
-
-        window.updateTopMostParent = (logopath) => {
-            this.setState({ logo: logopath });
-        };
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
     }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
 
-    render() {
+  return (
+    <header ref={headerRef} className="site-header header-style-1 nav-wide mobile-sider-drawer-menu">
+      {/* Top Bar */}
+      <div className="top-bar bg-gray">
+        <div className="container">
+          <div className="d-flex justify-content-end">
+            <ul className="list-unstyled e-p-bx">
+              <li><span>Mail us:</span> {siteData.contactInfo.email}</li>
+              <li><span>Call us:</span>{siteData.contactInfo.phone}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-        const isSearchActive = this.state.isSearchActive;
-        const isQuoteActive = this.state.isQuoteActive;
+      {/* Main Navigation Bar */}
+      <div className="sticky-header main-bar-wraper navbar-expand-lg">
+        <div className="main-bar header-left-gray-block bg-white">
+          <div className="container clearfix">
+            {/* Logo */}
+            <div className="logo-header">
+              <div className="logo-header-inner logo-header-one">
+                <NavLink to="/">
+                  <img src={logo} alt={siteData.companyName} />
+                </NavLink>
+              </div>
+            </div>
 
-        return (
-            <>
-                <header className="site-header header-style-1 nav-wide mobile-sider-drawer-menu">
-                    <div className="top-bar bg-gray">
-                        <div className="container">
-                            <div className="d-flex justify-content-end">
-                                <ul className="list-unstyled e-p-bx">
-                                    <li><span>Mail us:</span> {siteData.contactInfo.email}</li>
-                                    <li><span>Call us:</span>{siteData.contactInfo.phone}</li>
-                                </ul>
-                            </div>
+            {/* Mobile Menu Toggle Button */}
+            <button
+              id="mobile-side-drawer"
+              type="button"
+              className="navbar-toggler collapsed"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle navigation"
+            >
+              <Menu size={24} />
+            </button>
+
+            {/* Extra Nav (Search + Get in touch) */}
+            <div className="extra-nav">
+              <div className="extra-cell">
+                <NavLink to="#" onClick={(e) => { e.preventDefault(); setIsSearchActive(!isSearchActive); }}>
+                  <Search size={18} />
+                </NavLink>
+              </div>
+              <div className="extra-cell">
+                <div className="contact-slide-show">
+                  <NavLink
+                    to="#"
+                    className="get-in-touch-btn from-top"
+                    onClick={(e) => { e.preventDefault(); setIsQuoteActive(!isQuoteActive); }}
+                  >
+                    Get in touch
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+
+            {/* MAIN NAVIGATION — Desktop */}
+            <div className="header-nav nav-dark justify-content-start">
+              <Navigation onLinkClick={closeMobileMenu} />
+            </div>
+
+            {/* MOBILE NAVIGATION — Drawer Overlay */}
+            {isMobileMenuOpen && (
+              <div
+                style={{
+                  position: 'fixed',
+                  inset: 0,
+                  zIndex: 9998,
+                  background: 'rgba(0,0,0,0.5)',
+                }}
+                onClick={closeMobileMenu}
+              />
+            )}
+            <div
+              style={{
+                position: 'fixed',
+                top: 0,
+                right: isMobileMenuOpen ? 0 : '-320px',
+                width: '300px',
+                height: '100vh',
+                background: '#fff',
+                zIndex: 9999,
+                transition: 'right 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                overflowY: 'auto',
+                boxShadow: isMobileMenuOpen ? '-4px 0 20px rgba(0,0,0,0.15)' : 'none',
+                padding: '20px',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <img src={logo} alt={siteData.companyName} style={{ height: '36px' }} />
+                <button
+                  onClick={closeMobileMenu}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
+                  aria-label="Close menu"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <Navigation onLinkClick={closeMobileMenu} />
+            </div>
+
+            {/* CONTACT SLIDE PANEL */}
+            <div
+              className="contact-slide-hide"
+              style={{
+                backgroundImage: `url(${bgMap})`,
+                right: isQuoteActive ? '0px' : '100%',
+              }}
+            >
+              <div className="contact-nav">
+                <NavLink to="#" className="contact_close" onClick={(e) => { e.preventDefault(); setIsQuoteActive(false); }}>
+                  <X size={24} />
+                </NavLink>
+                <div className="contact-nav-form">
+                  <div className="grid grid-cols-12 gap-8">
+                    <div className="col-span-12 lg:col-span-6">
+                      <div className="contact-nav-info">
+                        <div className="sx-icon-box-wraper left p-b30">
+                          <div className="icon-xs inline-icon m-b20 scale-in-center">
+                            <Phone size={18} />
+                          </div>
+                          <div className="icon-content">
+                            <h6 className="m-t0">Phone number</h6>
+                            <p>{siteData.contactInfo.phone}</p>
+                          </div>
                         </div>
-                    </div>
-                    <div className="sticky-header main-bar-wraper navbar-expand-lg">
-                        <div className="main-bar header-left-gray-block bg-white">
-                            <div className="container clearfix">
-                                <div className="logo-header">
-                                    <div className="logo-header-inner logo-header-one">
-                                        <NavLink to={"./"}>
-                                            <img src={this.state.logo} alt="Inteshape" />
-                                        </NavLink>
-                                    </div>
-                                </div>
-                                {/* NAV Toggle Button */}
-                                <button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button" className="navbar-toggler collapsed">
-                                    <span className="sr-only">Toggle navigation</span>
-                                    <span className="icon-bar icon-bar-first" />
-                                    <span className="icon-bar icon-bar-two" />
-                                    <span className="icon-bar icon-bar-three" />
-                                </button>
-                                {/* EXTRA NAV */}
-                                <div className="extra-nav">
-                                    <div className="extra-cell">
-                                        <NavLink to={"#"} onClick={this.handleSearchToggle}>
-                                            <i className="fa fa-search" />
-                                        </NavLink>
-                                    </div>
-                                    <div className="extra-cell">
-
-                                        <div className="contact-slide-show">
-                                            <NavLink to={"#"} className="get-in-touch-btn from-top" onClick={this.handleQuoteToggle}>
-                                                Get in touch</NavLink></div>
-                                    </div>
-                                </div>
-                                {/* EXTRA Nav */}
-                                {/* MAIN NAVIGATION */}
-                                <div className="header-nav nav-dark navbar-collapse collapse justify-content-start collapse">
-                                    <Navigation />
-                                </div>
-                                {/* CONTACT */}
-                                <div className="contact-slide-hide" style={{ backgroundImage: 'url(' + bnr + ')', right: isQuoteActive ? '0px' : '100%' }}>
-                                    <div className="contact-nav">
-                                        <NavLink to={"#"} className="contact_close" onClick={this.handleQuoteToggle}>Ã—</NavLink>
-                                        <div className="contact-nav-form">
-                                            <div className="row">
-                                                <div className="col-xl-6 col-lg-6 col-md-12">
-                                                    <div className=" contact-nav-info">
-                                                        <div className="sx-icon-box-wraper left p-b30">
-                                                            <div className="icon-xs inline-icon m-b20 scale-in-center"><i className="fa fa-phone" /></div>
-                                                            <div className="icon-content">
-                                                                <h6 className="m-t0">Phone number</h6>
-                                                                <p>{siteData.contactInfo.phone}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="sx-icon-box-wraper left p-b30">
-                                                            <div className="icon-xs inline-icon m-b20 scale-in-center"><i className="fa fa-envelope" /></div>
-                                                            <div className="icon-content">
-                                                                <h6 className="m-t0">Email address</h6>
-                                                                <p>{siteData.contactInfo.email}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="sx-icon-box-wraper left p-b30">
-                                                            <div className="icon-xs inline-icon m-b20 scale-in-center"><i className="fa fa-map-marker" /></div>
-                                                            <div className="icon-content">
-                                                                <h6 className="m-t0">Address info</h6>
-                                                                <p>{siteData.contactInfo.address}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="full-social-bg">
-                                                            <ul>
-                                                                <li><a href="https://www.facebook.com" target="_blank"><i className="fa fa-facebook" /></a></li>
-                                                                <li><a href="https://www.instagram.com" target="_blank"><i className="fa fa-instagram" /></a></li>
-                                                                <li><a href="https://twitter.com" target="_blank"><i className="fa fa-twitter" /></a></li>
-                                                                <li><a href="https://www.google.com" target="_blank"><i className="fa fa-google" /></a></li>
-                                                                <li><a href="https://www.tumblr.com" target="_blank" className="tumblr"><i className="fa fa-tumblr" /></a></li>
-                                                                <li><a href="https://www.youtube.com" target="_blank" className="youtube"><i className="fa fa-youtube" /></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-xl-6 col-lg-6 col-md-12 ">
-                                                    <div className="contact-nav-field shadow-lg p-a30 bg-white" style={{ backgroundImage: "url(" + bnr + ")" }}>
-                                                        <form className="cons-contact-form2 form-transparent" method="post" action="#">
-                                                            <div className="input input-animate">
-                                                                <label htmlFor="name">Name</label>
-                                                                <input defaultValue="" type="text" name="username" id="name" required />
-                                                                <span className="spin" />
-                                                            </div>
-                                                            <div className="input input-animate">
-                                                                <label htmlFor="email">Email</label>
-                                                                <input type="email" defaultValue="" name="email" id="email" required />
-                                                                <span className="spin" />
-                                                            </div>
-                                                            <div className="input input-animate">
-                                                                <label htmlFor="Phone">Phone</label>
-                                                                <input type="text" name="phone" defaultValue="" id="Phone" required />
-                                                                <span className="spin" />
-                                                            </div>
-                                                            <div className="input input-animate">
-                                                                <label htmlFor="message">Textarea</label>
-                                                                <textarea name="message" id="message" required defaultValue={""} />
-                                                                <span className="spin" />
-                                                            </div>
-                                                            <div className="text-left p-t10">
-                                                                <button type="button" className="site-button-secondry btn-half ">
-                                                                    <span>  Submit Now</span>
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* SITE SEARCH */}
-                                <div id="search" className={isSearchActive ? "open" : null}>
-                                    <span className="close" onClick={this.handleSearchToggle} />
-                                    <form role="search" id="searchform" action="/search" method="get" className="radius-xl">
-                                        <div className="input-group">
-                                            <input defaultValue="" name="q" type="search" placeholder="Type to search" />
-                                            <span className="input-group-btn"><button type="button" className="search-btn"><i className="fa fa-search arrow-animation" /></button></span>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                        <div className="sx-icon-box-wraper left p-b30">
+                          <div className="icon-xs inline-icon m-b20 scale-in-center">
+                            <Mail size={18} />
+                          </div>
+                          <div className="icon-content">
+                            <h6 className="m-t0">Email address</h6>
+                            <p>{siteData.contactInfo.email}</p>
+                          </div>
                         </div>
+                        <div className="sx-icon-box-wraper left p-b30">
+                          <div className="icon-xs inline-icon m-b20 scale-in-center">
+                            <MapPin size={18} />
+                          </div>
+                          <div className="icon-content">
+                            <h6 className="m-t0">Address info</h6>
+                            <p>{siteData.contactInfo.address}</p>
+                          </div>
+                        </div>
+                        <div className="full-social-bg">
+                          <ul>
+                            <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                            <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
-                </header>
-            </>
-        );
-    };
+                    <div className="col-span-12 lg:col-span-6">
+                      <div className="contact-nav-field shadow-lg p-a30 bg-white" style={{ backgroundImage: `url(${bgMap})` }}>
+                        <form onSubmit={handleSubmit(onSubmit)} className="cons-contact-form2 form-transparent space-y-4">
+                          <div className="relative">
+                            <Input 
+                              {...register("username")} 
+                              id="name" 
+                              type="text" 
+                              placeholder="Name" 
+                              className="w-full bg-transparent border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder-gray-500" 
+                            />
+                            {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>}
+                          </div>
+                          
+                          <div className="relative">
+                            <Input 
+                              {...register("email")} 
+                              id="email" 
+                              type="email" 
+                              placeholder="Email" 
+                              className="w-full bg-transparent border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder-gray-500" 
+                            />
+                            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                          </div>
+                          
+                          <div className="relative">
+                            <Input 
+                              {...register("phone")} 
+                              id="phone" 
+                              type="text" 
+                              placeholder="Phone" 
+                              className="w-full bg-transparent border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder-gray-500" 
+                            />
+                            {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                          </div>
+                          
+                          <div className="relative">
+                            <Textarea 
+                              {...register("message")} 
+                              id="message" 
+                              placeholder="Message" 
+                              rows={3}
+                              className="w-full bg-transparent border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder-gray-500 min-h-[80px]" 
+                            />
+                            {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
+                          </div>
+                          
+                          <div className="text-left p-t10">
+                            <button 
+                              type="submit" 
+                              disabled={isSubmitting}
+                              className="site-button-secondry btn-half disabled:opacity-70 flex items-center gap-2"
+                            >
+                              {isSubmitting ? (
+                                <>
+                                  <Loader2 size={16} className="animate-spin" />
+                                  <span>Submitting...</span>
+                                </>
+                              ) : (
+                                <span>Submit Now</span>
+                              )}
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SITE SEARCH */}
+            <div id="search" className={isSearchActive ? 'open' : undefined}>
+              <span className="close" onClick={() => setIsSearchActive(false)} />
+              <form role="search" id="searchform" action="/search" method="get" className="radius-xl">
+                <div className="input-group">
+                  <input defaultValue="" name="q" type="search" placeholder="Type to search" />
+                  <span className="input-group-btn">
+                    <button type="button" className="search-btn">
+                      <Search size={18} />
+                    </button>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 };
 
 export default Header;
-

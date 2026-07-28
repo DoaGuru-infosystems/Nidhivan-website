@@ -19,7 +19,7 @@ class Statistics1 extends React.Component {
                                         {siteData.statistics.map((stat, index) => (
                                             <div className="col-xl-3 col-md-6 m-b30" key={index}>
                                                 <div className="sx-count text-white sx-icon-box-wraper bg-repeat p-a30" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
-                                                    <h2 className="m-t0 sx-text-primary text-right"><span className="counter"><CountUp end={parseInt(stat.value)} duration={5} /></span><span>{stat.suffix}</span></h2>
+                                                    <h2 className="m-t0 sx-text-primary text-right"><span className="counter"><CountUp end={parseInt(stat.value)} duration={5} enableScrollSpy={true} scrollSpyOnce={true} /></span><span>{stat.suffix}</span></h2>
                                                     <h4 className="m-b0">{stat.label}</h4>
                                                 </div>
                                             </div>

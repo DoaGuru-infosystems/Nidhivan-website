@@ -65,9 +65,9 @@ class BlogGrid extends React.Component {
                     <div className="section-full p-tb80 bg-white inner-page-padding">
                        
                     <div className="container">
-                            <div className="masonry-outer mfp-gallery news-grid clearfix row ">
+                            <div className="masonry-outer mfp-gallery news-grid clearfix grid grid-cols-12 gap-8 ">
                                 {blogs.map((item, index) => (
-                                    <div className="masonry-item  col-lg-4 col-md-6 col-sm-12" key={index}>
+                                    <div className="masonry-item col-span-12 md:col-span-6 lg:col-span-4" key={index}>
                                     <div className="blog-post blog-grid date-style-2">
                                         <div className="sx-post-media sx-img-effect img-reflection">
                                             <NavLink to={"/blog-single"}><img src={item.image} alt="" /></NavLink>

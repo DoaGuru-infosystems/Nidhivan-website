@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const services = [
     {
@@ -26,27 +27,15 @@ var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.ur
 
 class SimilarProjects extends React.Component {
     render() {
-        const options = {
-            loop:true,
-            autoplay:false,
-            center: false,
-            items:3,
-            margin:40,
-            nav:true,
-            dots: true,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-            responsive:{
-                0:{
-                    items:1
-                },
-                768:{
-                    items:1
-                },			
-                991:{
-                    items:1
-                }
-            
-                
+        const swiperOptions = {
+            modules: [Navigation, Autoplay],
+            loop: true,
+            spaceBetween: 40,
+            navigation: true,
+            breakpoints: {
+                0: { slidesPerView: 1 },
+                768: { slidesPerView: 1 },
+                991: { slidesPerView: 1 }
             }
         };
         return (
@@ -64,9 +53,9 @@ class SimilarProjects extends React.Component {
                             </div>
                             {/* TITLE END */}
                             <div className="work-carousel-outer">
-                                <OwlCarousel className="owl-carousel mfp-gallery project-carousel project-carousel1 owl-btn-vertical-center" {...options}>
+                                <Swiper className="project-carousel project-carousel1 owl-btn-vertical-center" {...swiperOptions}>
                                     {services.map((item, index) => (
-                                        <div key={index} className="item">
+                                        <SwiperSlide key={index}>
                                             <div className="sx-box   image-single-carousel bg-cover" style={{ backgroundImage: 'url(' + item.image + ')' }}>
                                                 <div className="sx-info  p-t20 text-white">
                                                     <h4 className="sx-tilte m-t0"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
@@ -74,9 +63,9 @@ class SimilarProjects extends React.Component {
                                                     <NavLink to={"/project-detail1"} className="site-button btn-half button-sm"><span>View All</span></NavLink>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </SwiperSlide>
                                     ))}
-                                </OwlCarousel>
+                                </Swiper>
                             </div>
                         </div>
                     </div>

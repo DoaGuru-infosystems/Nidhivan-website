@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const projects = [
     {
@@ -49,83 +50,76 @@ const projects = [
 
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
-class Projects3 extends React.Component {
-    render() {
-        const options = {
-            loop: true,
-            autoplay: false,
-            center: false,
-            items: 3,
-            margin: 40,
-            nav: true,
-            dots: false,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-            responsive: {
-                0: {
-                    items: 1,
-                    margin: 15,
-                },
-                640: {
-                    items: 2,
-                    margin: 15
-                },
-                768: {
-                    items: 2,
-                    margin: 15
-                },
-                991: {
-                    items: 3,
-                    margin: 15
-                },
-                1200: {
-                    items: 3
-                }
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
-            }
-        };
-        return (
-            <>
-                <div className={`${this.props.bgcolor} section-full p-tb80  inner-page-padding`}>
-                    <div className="container-fluid">
-                        <div className="section-content">
-                            {/* TITLE START */}
-                            <div className="section-head">
-                                <div className={`${this.props.alignment} sx-separator-outer`}>
-                                    <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                                        <h3 className="sep-line-one">{this.props.title}</h3>
-                                    </div>
+const Projects3 = (props) => {
+    const [open, setOpen] = React.useState(false);
+    const [currentIndex, setCurrentIndex] = React.useState(0);
+    const slides = projects.map(item => ({ src: item.image }));
+
+    const swiperOptions = {
+        modules: [Navigation, Autoplay],
+        loop: true,
+        spaceBetween: 40,
+        slidesPerView: 3,
+        navigation: true,
+        breakpoints: {
+            0: { slidesPerView: 1, spaceBetween: 15 },
+            640: { slidesPerView: 2, spaceBetween: 15 },
+            768: { slidesPerView: 2, spaceBetween: 15 },
+            991: { slidesPerView: 3, spaceBetween: 15 },
+            1200: { slidesPerView: 3, spaceBetween: 40 }
+        }
+    };
+    return (
+        <>
+            <div className={`${props.bgcolor} section-full p-tb80  inner-page-padding`}>
+                <div className="container-fluid">
+                    <div className="section-content">
+                        {/* TITLE START */}
+                        <div className="section-head">
+                            <div className={`${props.alignment} sx-separator-outer`}>
+                                <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
+                                    <h3 className="sep-line-one">{props.title}</h3>
                                 </div>
                             </div>
-                            {/* TITLE END */}
-                            <div className="work-carousel-outer">
-                                <OwlCarousel className="owl-carousel mfp-gallery project-carousel project-carousel3 owl-btn-vertical-center p-lr80" {...options}>
-                                    {projects.map((item, index) => (
-                                        <div key={index} className="item">
-                                            <div className="project-mas hover-shadow m-a30">
-                                                <div className="image-effect-one">
-                                                    <img src={item.image} alt="" />
-                                                    <div className="figcaption">
-                                                        <a className="mfp-link" href={item.image}>
-                                                            <i className="fa fa-arrows-alt" />
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div className="project-info p-a20 bg-gray">
-                                                    <h4 className="sx-tilte m-t0"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
-                                                    <p>{item.description}</p>
-                                                    <NavLink to={"/services-detail"}><i className="link-plus bg-primary" /></NavLink>
+                        </div>
+                        {/* TITLE END */}
+                        <div className="work-carousel-outer">
+                            <Swiper className="project-carousel project-carousel3 owl-btn-vertical-center p-lr80" {...swiperOptions}>
+                                {projects.map((item, index) => (
+                                    <SwiperSlide key={index}>
+                                        <div className="project-mas hover-shadow m-a30">
+                                            <div className="image-effect-one">
+                                                <img src={item.image} alt="" className="cursor-pointer" onClick={() => { setCurrentIndex(index); setOpen(true); }} />
+                                                <div className="figcaption">
+                                                    <button className="cursor-pointer bg-transparent border-none text-white" onClick={(e) => { e.preventDefault(); setCurrentIndex(index); setOpen(true); }}>
+                                                        <i className="fa fa-arrows-alt" />
+                                                    </button>
                                                 </div>
                                             </div>
+                                            <div className="project-info p-a20 bg-gray">
+                                                <h4 className="sx-tilte m-t0"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
+                                                <p>{item.description}</p>
+                                                <NavLink to={"/services-detail"}><i className="link-plus bg-primary" /></NavLink>
+                                            </div>
                                         </div>
-                                    ))}
-                                </OwlCarousel>
-                            </div>
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                         </div>
                     </div>
                 </div>
-            </>
-        );
-    }
+            </div>
+            <Lightbox
+                open={open}
+                close={() => setOpen(false)}
+                index={currentIndex}
+                slides={slides}
+            />
+        </>
+    );
 };
 
 export default Projects3;
