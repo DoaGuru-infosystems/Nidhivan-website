@@ -10,12 +10,12 @@ import 'swiper/css/pagination';
 
 // var bgimg1 = new URL('./../../images/background/bg-8.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
-var bgimg1 = "https://images.pexels.com/photos/6985136/pexels-photo-6985136.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg1 = "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=1600&q=80"; // TEMP LIVE PREVIEW
 // var bgimg2 = new URL('./../../images/background/bg-5.png', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-var bgimg2 = "https://images.pexels.com/photos/7134997/pexels-photo-7134997.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg2 = "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?w=1600&q=80"; // TEMP LIVE PREVIEW
 var bgimg3 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 // var bgimg4 = new URL('./../../images/background/bg-12.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-var bgimg4 = "https://images.pexels.com/photos/29101878/pexels-photo-29101878.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg4 = "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 const Testimonials1 = () => {
     return (

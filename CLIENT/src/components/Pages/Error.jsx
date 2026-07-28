@@ -5,7 +5,7 @@ import Banner from './../Elements/Banner';
 // var bnrimg = new URL('./../../images/banner/8.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
-var bnrimg = "https://images.pexels.com/photos/5036525/pexels-photo-5036525.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bnrimg = "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 class Error extends React.Component {
     render() {

@@ -10,7 +10,7 @@ import { Textarea } from "../ui/textarea";
 
 // var bnrimg = new URL('./../../images/banner/9.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
-var bnrimg = "https://images.pexels.com/photos/18254867/pexels-photo-18254867.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 

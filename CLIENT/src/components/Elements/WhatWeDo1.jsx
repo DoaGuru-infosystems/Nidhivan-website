@@ -5,10 +5,10 @@ import { siteData } from '../../data/siteContent';
 // var bgimg1 = new URL('./../../images/background/bg-5.png', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
-var bgimg1 = "https://images.pexels.com/photos/6985136/pexels-photo-6985136.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg1 = "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=1600&q=80"; // TEMP LIVE PREVIEW
 // var bgimg2 = new URL('./../../images/background/bg-2.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
-var bgimg2 = "https://images.pexels.com/photos/7134997/pexels-photo-7134997.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg2 = "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?w=1600&q=80"; // TEMP LIVE PREVIEW
 var bgimg3 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class WhatWeDo1 extends React.Component {
@@ -33,7 +33,7 @@ class WhatWeDo1 extends React.Component {
                                     <div className="number-block-one animate-in-to-top">
                                         {/* <img src={new URL('./../../images/pic1.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                        <img src={"https://images.pexels.com/photos/28991200/pexels-photo-28991200.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                        <img src={"https://images.unsplash.com/photo-1502672260266-1c1c24226133?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                         <div className="figcaption bg-white text-center p-a20">
                                             <h4 className="m-a0">{siteData.services[0].title}</h4>
                                         </div>
@@ -46,7 +46,7 @@ class WhatWeDo1 extends React.Component {
                                     <div className="number-block-one animate-in-to-top">
                                         {/* <img src={new URL('./../../images/pic2.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                        <img src={"https://images.pexels.com/photos/7060814/pexels-photo-7060814.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                        <img src={"https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                         <div className="figcaption bg-white text-center p-a20">
                                             <h4 className="m-a0">{siteData.services[1].title}</h4>
                                         </div>
@@ -59,7 +59,7 @@ class WhatWeDo1 extends React.Component {
                                     <div className="number-block-one animate-in-to-top">
                                         {/* <img src={new URL('./../../images/pic3.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                        <img src={"https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                        <img src={"https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                         <div className="figcaption bg-white text-center p-a20">
                                             <h4 className="m-a0">{siteData.services[2].title}</h4>
                                         </div>

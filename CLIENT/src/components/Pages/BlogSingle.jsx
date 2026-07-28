@@ -5,7 +5,7 @@ import Banner from './../Elements/Banner';
 // var bnrimg = new URL('./../../images/banner/10.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
-var bnrimg = "https://images.pexels.com/photos/17672408/pexels-photo-17672408.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bnrimg = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80"; // TEMP LIVE PREVIEW
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class BlogSingle extends React.Component {
@@ -44,7 +44,7 @@ class BlogSingle extends React.Component {
                                         <div className="portfolio-item">
                                             {/* <img className="img-responsive" src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                            <img className="img-responsive" src={"https://images.pexels.com/photos/7060814/pexels-photo-7060814.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/> {/* TEMP LIVE PREVIEW */}
+                                            <img className="img-responsive" src={"https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80"} alt=""/> {/* TEMP LIVE PREVIEW */}
                                         </div>
                                     </div>
                                     <div className="sx-post-meta  m-t20">
@@ -73,7 +73,7 @@ class BlogSingle extends React.Component {
                                                     <div className="sx-media">
                                                         {/* <img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                        <img src={"https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/> {/* TEMP LIVE PREVIEW */}
+                                                        <img src={"https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80"} alt=""/> {/* TEMP LIVE PREVIEW */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -82,7 +82,7 @@ class BlogSingle extends React.Component {
                                                     <div className="sx-media">
                                                         {/* <img src={new URL('./../../images/blog/default/thum2.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                        <img src={"https://images.pexels.com/photos/19899071/pexels-photo-19899071.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                                        <img src={"https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,7 +150,7 @@ class BlogSingle extends React.Component {
                                                 <div className="sx-post-media sx-img-effect img-reflection">
                                                     {/* <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic1.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.pexels.com/photos/5179534/pexels-photo-5179534.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
+                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
                                                 </div>
                                                 <div className="sx-post-info p-t30">
                                                     <div className="sx-post-meta ">
@@ -174,7 +174,7 @@ class BlogSingle extends React.Component {
                                                 <div className="sx-post-media sx-img-effect img-reflection">
                                                     {/* <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic2.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.pexels.com/photos/6588599/pexels-photo-6588599.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
+                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
                                                 </div>
                                                 <div className="sx-post-info p-t30">
                                                     <div className="sx-post-meta ">
@@ -198,7 +198,7 @@ class BlogSingle extends React.Component {
                                                 <div className="sx-post-media sx-img-effect img-reflection">
                                                     {/* <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic3.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.pexels.com/photos/6933852/pexels-photo-6933852.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
+                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
                                                 </div>
                                                 <div className="sx-post-info p-t30">
                                                     <div className="sx-post-meta ">

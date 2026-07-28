@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 // var bgimg1 = new URL('./../../images/video-bg.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
-var bgimg1 = "https://images.pexels.com/photos/29101878/pexels-photo-29101878.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg1 = "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 class About3 extends React.Component {
     render() {

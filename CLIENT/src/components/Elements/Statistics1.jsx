@@ -5,10 +5,10 @@ import { siteData } from '../../data/siteContent';
 // var bgimg1 = new URL('./../../images/background/bg-1.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
-var bgimg1 = "https://images.pexels.com/photos/7134997/pexels-photo-7134997.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg1 = "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?w=1600&q=80"; // TEMP LIVE PREVIEW
 // var bgimg2 = new URL('./../../images/background/bg-5.png', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
-var bgimg2 = "https://images.pexels.com/photos/29101878/pexels-photo-29101878.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg2 = "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 class Statistics1 extends React.Component {
     

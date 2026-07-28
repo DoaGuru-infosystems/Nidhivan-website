@@ -15,7 +15,7 @@ const logos = [
 // var bgimg1 = new URL('./../../images/background/bg-12.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
-var bgimg1 = "https://images.pexels.com/photos/6985136/pexels-photo-6985136.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bgimg1 = "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=1600&q=80"; // TEMP LIVE PREVIEW
 var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class ClientsLogo1 extends React.Component {

@@ -3,7 +3,7 @@ import Banner from './../Elements/Banner';
 
 // var bnrimg = new URL('./../../images/banner/bg-1.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
-var bnrimg = "https://images.pexels.com/photos/33619257/pexels-photo-33619257.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bnrimg = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 class Terms extends React.Component {
     render() {

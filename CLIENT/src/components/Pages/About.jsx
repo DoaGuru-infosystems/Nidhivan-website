@@ -9,7 +9,7 @@ import ClientsLogo1 from './../Elements/ClientsLogo1';
 // var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
-var bnrimg = "https://images.pexels.com/photos/33619255/pexels-photo-33619255.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+var bnrimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 class About extends React.Component {
     componentDidMount() {
