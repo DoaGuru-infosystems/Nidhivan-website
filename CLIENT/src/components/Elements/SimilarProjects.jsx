@@ -7,17 +7,23 @@ import 'swiper/css/navigation';
 
 const services = [
     {
-        image: new URL('./../../images/gallery/pic1.jpg', import.meta.url).href,
+        // image: new URL('./../../images/gallery/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/6588599/pexels-photo-6588599.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Interior Work Avroko',
         description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
     },
     {
-        image: new URL('./../../images/gallery/pic2.jpg', import.meta.url).href,
+        // image: new URL('./../../images/gallery/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/6933852/pexels-photo-6933852.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Interior Work Avroko',
         description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
     },
     {
-        image: new URL('./../../images/gallery/pic3.jpg', import.meta.url).href,
+        // image: new URL('./../../images/gallery/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Interior Work Avroko',
         description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
     }

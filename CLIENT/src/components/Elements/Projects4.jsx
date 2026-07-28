@@ -7,43 +7,57 @@ import 'swiper/css/navigation';
 
 const projects = [
     {
-        image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href,
+        // image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/6933852/pexels-photo-6933852.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-one'
     },
     {
-        image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href,
+        // image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-two'
     },
     {
-        image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href,
+        // image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/28991200/pexels-photo-28991200.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-three'
     },
     {
-        image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href,
+        // image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/7060814/pexels-photo-7060814.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-four'
     },
     {
-        image: new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href,
+        // image: new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-three'
     },
     {
-        image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href,
+        // image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/19899071/pexels-photo-19899071.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-two'
     },
     {
-        image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href,
+        // image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/5179534/pexels-photo-5179534.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Chair Furniture',
         address: 'Muscat, Sultanate of Oman',
         filter: 'col-one'

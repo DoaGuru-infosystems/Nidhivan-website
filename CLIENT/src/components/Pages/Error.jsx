@@ -2,7 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Banner from './../Elements/Banner';
 
-var bnrimg = new URL('./../../images/banner/8.jpg', import.meta.url).href;
+// var bnrimg = new URL('./../../images/banner/8.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+
+
+var bnrimg = "https://images.pexels.com/photos/5036525/pexels-photo-5036525.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
 
 class Error extends React.Component {
     render() {

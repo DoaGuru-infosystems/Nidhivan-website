@@ -21,14 +21,22 @@ var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.ur
 const getImgUrl = (id) => {
     const num = (id % 7) || 1;
     switch(num) {
-        case 1: return new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href;
-        case 2: return new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href;
-        case 3: return new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href;
-        case 4: return new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href;
-        case 5: return new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href;
-        case 6: return new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href;
-        case 7: return new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href;
-        default: return new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href;
+        // case 1: return new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+        case 1: return "https://images.pexels.com/photos/6933852/pexels-photo-6933852.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+        // case 2: return new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+        case 2: return "https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+        // case 3: return new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+        case 3: return "https://images.pexels.com/photos/28991200/pexels-photo-28991200.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+        // case 4: return new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+        case 4: return "https://images.pexels.com/photos/7060814/pexels-photo-7060814.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+        // case 5: return new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+        case 5: return "https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+        // case 6: return new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+        case 6: return "https://images.pexels.com/photos/19899071/pexels-photo-19899071.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+        // case 7: return new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+        case 7: return "https://images.pexels.com/photos/5179534/pexels-photo-5179534.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+        // default: return new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+        default: return "https://images.pexels.com/photos/6588599/pexels-photo-6588599.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
     }
 };
 

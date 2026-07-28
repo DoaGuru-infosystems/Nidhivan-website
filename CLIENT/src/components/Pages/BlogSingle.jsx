@@ -2,7 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Banner from './../Elements/Banner';
 
-var bnrimg = new URL('./../../images/banner/10.jpg', import.meta.url).href;
+// var bnrimg = new URL('./../../images/banner/10.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+
+
+var bnrimg = "https://images.pexels.com/photos/17672408/pexels-photo-17672408.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 class BlogSingle extends React.Component {
@@ -39,7 +42,9 @@ class BlogSingle extends React.Component {
                                 <div className="blog-post blog-detail text-black">
                                     <div className="sx-post-media">
                                         <div className="portfolio-item">
-                                            <img className="img-responsive" src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/>
+                                            {/* <img className="img-responsive" src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                            <img className="img-responsive" src={"https://images.pexels.com/photos/7060814/pexels-photo-7060814.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/> {/* TEMP LIVE PREVIEW */}
                                         </div>
                                     </div>
                                     <div className="sx-post-meta  m-t20">
@@ -66,14 +71,18 @@ class BlogSingle extends React.Component {
                                             <div className="col-span-12 md:col-span-6">
                                                 <div className="sx-box m-b30">
                                                     <div className="sx-media">
-                                                        <img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/>
+                                                        {/* <img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                                        <img src={"https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/> {/* TEMP LIVE PREVIEW */}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="col-span-12 md:col-span-6">
                                                 <div className="sx-box m-b30">
                                                     <div className="sx-media">
-                                                        <img src={new URL('./../../images/blog/default/thum2.jpg', import.meta.url).href} alt="" />
+                                                        {/* <img src={new URL('./../../images/blog/default/thum2.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                                        <img src={"https://images.pexels.com/photos/19899071/pexels-photo-19899071.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,7 +148,9 @@ class BlogSingle extends React.Component {
                                         <div className="col-span-12 md:col-span-4">
                                             <div className="blog-post blog-grid date-style-2">
                                                 <div className="sx-post-media sx-img-effect img-reflection">
-                                                    <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic1.jpg', import.meta.url).href} alt=""/></NavLink>
+                                                    {/* <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic1.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.pexels.com/photos/5179534/pexels-photo-5179534.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
                                                 </div>
                                                 <div className="sx-post-info p-t30">
                                                     <div className="sx-post-meta ">
@@ -161,7 +172,9 @@ class BlogSingle extends React.Component {
                                         <div className="col-span-12 md:col-span-4">
                                             <div className="blog-post blog-grid date-style-2">
                                                 <div className="sx-post-media sx-img-effect img-reflection">
-                                                    <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic2.jpg', import.meta.url).href} alt=""/></NavLink>
+                                                    {/* <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic2.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.pexels.com/photos/6588599/pexels-photo-6588599.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
                                                 </div>
                                                 <div className="sx-post-info p-t30">
                                                     <div className="sx-post-meta ">
@@ -183,7 +196,9 @@ class BlogSingle extends React.Component {
                                         <div className="col-span-12 md:col-span-4">
                                             <div className="blog-post blog-grid date-style-2">
                                                 <div className="sx-post-media sx-img-effect img-reflection">
-                                                    <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic3.jpg', import.meta.url).href} alt=""/></NavLink>
+                                                    {/* <NavLink to={"/blog-masonry"}><img src={new URL('./../../images/blog/blog-grid/pic3.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.pexels.com/photos/6933852/pexels-photo-6933852.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
                                                 </div>
                                                 <div className="sx-post-info p-t30">
                                                     <div className="sx-post-meta ">

@@ -4,7 +4,9 @@ import Banner from './../Elements/Banner';
 
 const blogs = [
     {
-        image: new URL('./../../images/blog/blog-grid/pic4.jpg', import.meta.url).href,
+        // image: new URL('./../../images/blog/blog-grid/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/19899071/pexels-photo-19899071.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Weâ€™ll nail your next project, because nobody wants...',
         author: 'John',
         date: '5',
@@ -12,7 +14,9 @@ const blogs = [
         comments: '5 Comment'
     },
     {
-        image: new URL('./../../images/blog/blog-grid/pic1.jpg', import.meta.url).href,
+        // image: new URL('./../../images/blog/blog-grid/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/5179534/pexels-photo-5179534.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Helping you and your house become better acquainted.',
         author: 'John',
         date: '25',
@@ -20,7 +24,9 @@ const blogs = [
         comments: '5 Comment'
     },
     {
-        image: new URL('./../../images/blog/blog-grid/pic2.jpg', import.meta.url).href,
+        // image: new URL('./../../images/blog/blog-grid/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/6588599/pexels-photo-6588599.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Creating quality urban lifestyles, building...',
         author: 'John',
         date: '26',
@@ -28,7 +34,9 @@ const blogs = [
         comments: '5 Comment'
     },
     {
-        image: new URL('./../../images/blog/blog-grid/pic3.jpg', import.meta.url).href,
+        // image: new URL('./../../images/blog/blog-grid/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/6933852/pexels-photo-6933852.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'When it comes to your house, donâ€™t mess...',
         author: 'John',
         date: '16',
@@ -36,7 +44,9 @@ const blogs = [
         comments: '3 Comment'
     },
     {
-        image: new URL('./../../images/blog/blog-grid/pic4.jpg', import.meta.url).href,
+        // image: new URL('./../../images/blog/blog-grid/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Donâ€™t get framed by the competition, trust our...',
         author: 'John',
         date: '18',
@@ -44,7 +54,9 @@ const blogs = [
         comments: '5 Comment'
     },
     {
-        image: new URL('./../../images/blog/blog-grid/pic5.jpg', import.meta.url).href,
+        // image: new URL('./../../images/blog/blog-grid/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+
+        image: "https://images.pexels.com/photos/28991200/pexels-photo-28991200.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Weâ€™re the construction kings, building up great...',
         author: 'John',
         date: '15',
@@ -53,7 +65,10 @@ const blogs = [
     }
 ]
 
-var bnrimg = new URL('./../../images/banner/7.jpg', import.meta.url).href;
+// var bnrimg = new URL('./../../images/banner/7.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+
+
+var bnrimg = "https://images.pexels.com/photos/33619257/pexels-photo-33619257.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
 
 class BlogGrid extends React.Component {
     render() {

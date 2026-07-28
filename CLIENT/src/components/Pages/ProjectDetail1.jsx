@@ -5,7 +5,10 @@ import Projects6 from './../Elements/Projects6';
 import ReactPlayer from 'react-player';
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
-var bnrimg = new URL('./../../images/banner/2.jpg', import.meta.url).href;
+// var bnrimg = new URL('./../../images/banner/2.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+
+
+var bnrimg = "https://images.pexels.com/photos/18254867/pexels-photo-18254867.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
 
 class ProjectDetail1 extends React.Component {
     
@@ -86,17 +89,23 @@ class ProjectDetail1 extends React.Component {
                                     <div className="project-detail-outer">
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                <img src={new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href} alt="" />
+                                                {/* <img src={new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                                <img src={"https://images.pexels.com/photos/28991200/pexels-photo-28991200.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                <img src={new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href} alt="" />
+                                                {/* <img src={new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                                <img src={"https://images.pexels.com/photos/7060814/pexels-photo-7060814.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                <img src={new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href} alt="" />
+                                                {/* <img src={new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
+
+                                                <img src={"https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="sx-box">

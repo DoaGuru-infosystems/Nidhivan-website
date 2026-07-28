@@ -4,7 +4,10 @@ import Projects3 from './../Elements/Projects3';
 import Projects4 from '../Elements/Projects4';
 import SimilarProjects from './../Elements/SimilarProjects';
 
-var bnrimg = new URL('./../../images/banner/3.jpg', import.meta.url).href;
+// var bnrimg = new URL('./../../images/banner/3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+
+
+var bnrimg = "https://images.pexels.com/photos/17672408/pexels-photo-17672408.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
 
 class ProjectCorousel extends React.Component {
     render() {

@@ -6,7 +6,10 @@ import WhatWeDo3 from './../Elements/WhatWeDo3';
 import Statistics1 from './../Elements/Statistics1';
 import ClientsLogo1 from './../Elements/ClientsLogo1';
 
-var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href;
+// var bnrimg = new URL('./../../images/banner/6.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+
+
+var bnrimg = "https://images.pexels.com/photos/33619255/pexels-photo-33619255.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
 
 class About extends React.Component {
     componentDidMount() {

@@ -8,7 +8,9 @@ import * as z from "zod";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 
-var bnrimg = new URL('./../../images/banner/9.jpg', import.meta.url).href;
+// var bnrimg = new URL('./../../images/banner/9.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+
+var bnrimg = "https://images.pexels.com/photos/18254867/pexels-photo-18254867.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
