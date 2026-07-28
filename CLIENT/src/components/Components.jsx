@@ -16,6 +16,7 @@ import BlogSingle from './Pages/BlogSingle';
 import Terms from './Pages/Terms';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import Gallery from './Pages/Gallery';
+import Error from './Pages/Error';
 
 
 import ContactUs from './Pages/ContactUs';
