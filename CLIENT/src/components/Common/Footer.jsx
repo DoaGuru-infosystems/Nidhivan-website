@@ -20,7 +20,7 @@ class Footer extends React.Component {
                                         {/*<h4 class="widget-title">About Company</h4>*/}
                                         <div className="logo-footer clearfix p-b15">
                                             <NavLink to={"./"}>
-                                                <img src={new URL('./../../images/LOGO.png', import.meta.url).href} alt="Nidhivan Farms" />
+                                                <img src={new URL('./../../images/nidhivan logo.png', import.meta.url).href} alt="Nidhivan Farms" style={{ maxHeight: '200px', width: 'auto' }} />
                                             </NavLink>
                                         </div>
                                         <p>{siteData.aboutUs.shortDescription}</p>
