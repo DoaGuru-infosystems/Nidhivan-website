@@ -24,13 +24,13 @@ const getImgUrl = (id) => {
         // case 1: return new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
         case 1: return "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80"; // TEMP LIVE PREVIEW
         // case 2: return new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-        case 2: return "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80"; // TEMP LIVE PREVIEW
+        case 2: return "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80"; // TEMP LIVE PREVIEW
         // case 3: return new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-        case 3: return "https://images.unsplash.com/photo-1502672260266-1c1c24226133?w=1600&q=80"; // TEMP LIVE PREVIEW
+        case 3: return "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80"; // TEMP LIVE PREVIEW
         // case 4: return new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
         case 4: return "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80"; // TEMP LIVE PREVIEW
         // case 5: return new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-        case 5: return "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80"; // TEMP LIVE PREVIEW
+        case 5: return "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80"; // TEMP LIVE PREVIEW
         // case 6: return new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
         case 6: return "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80"; // TEMP LIVE PREVIEW
         // case 7: return new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready

@@ -22,7 +22,7 @@ const projects = [
     {
         id: 1,
         // image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Modern Villa',
         address: 'Mumbai, Maharashtra',
         filter: 'cat-1'
@@ -30,7 +30,7 @@ const projects = [
     {
         id: 2,
         // image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1502672260266-1c1c24226133?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Luxury Apartment',
         address: 'Pune, Maharashtra',
         filter: 'cat-2'
@@ -46,7 +46,7 @@ const projects = [
     {
         id: 4,
         // image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'House Blueprint',
         address: 'Bangalore, Karnataka',
         filter: 'cat-4'
@@ -86,7 +86,7 @@ const projects = [
     {
         id: 9,
         // image: new URL('./../../images/projects/portrait/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Minimalist House',
         address: 'Ahmedabad, Gujarat',
         filter: 'cat-1'

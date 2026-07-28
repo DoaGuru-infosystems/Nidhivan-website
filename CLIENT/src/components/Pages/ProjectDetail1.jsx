@@ -91,7 +91,7 @@ class ProjectDetail1 extends React.Component {
                                             <div className="sx-media">
                                                 {/* <img src={new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                <img src={"https://images.unsplash.com/photo-1502672260266-1c1c24226133?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                                <img src={"https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="project-detail-pic m-b30">
@@ -105,7 +105,7 @@ class ProjectDetail1 extends React.Component {
                                             <div className="sx-media">
                                                 {/* <img src={new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                <img src={"https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                                <img src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="sx-box">

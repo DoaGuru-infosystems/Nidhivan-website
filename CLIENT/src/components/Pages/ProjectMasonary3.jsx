@@ -46,7 +46,7 @@ const projects = [
     {
         id: 4,
         // image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Vilters',
         description: 'Landscape plans for drainage problems may also entail planting beds away ...',
         filter: 'cat-4'
@@ -54,7 +54,7 @@ const projects = [
     {
         id: 5,
         // image: new URL('./../../images/projects/square/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1502672260266-1c1c24226133?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Bellevue Projects',
         description: 'Project management is the process by which our team plans and executes...',
         filter: 'cat-5'
@@ -70,7 +70,7 @@ const projects = [
     {
         id: 7,
         // image: new URL('./../../images/projects/portrait/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Living Room',
         description: 'Landscape plans for drainage problems may also entail planting beds...',
         filter: 'cat-3'
@@ -110,7 +110,7 @@ const projects = [
     {
         id: 12,
         // image: new URL('./../../images/projects/square/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Hotel Shears',
         description: 'Landscape plans for drainage problems may also entail planting beds...',
         filter: 'cat-2'
@@ -118,7 +118,7 @@ const projects = [
     {
         id: 13,
         // image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1502672260266-1c1c24226133?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Modern Bathroom',
         description: 'We combine Interior and Exterior Design services and often provide...',
         filter: 'cat-1'
@@ -134,7 +134,7 @@ const projects = [
     {
         id: 15,
         // image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Life style building',
         description: 'Project management is the process by which our team plans and executes...',
         filter: 'cat-3'

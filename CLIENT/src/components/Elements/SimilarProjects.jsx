@@ -23,7 +23,7 @@ const services = [
     {
         // image: new URL('./../../images/gallery/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Interior Work Avroko',
         description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
     }

@@ -46,7 +46,7 @@ const blogs = [
     {
         // image: new URL('./../../images/blog/blog-grid/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Donâ€™t get framed by the competition, trust our...',
         author: 'John',
         date: '18',
@@ -56,7 +56,7 @@ const blogs = [
     {
         // image: new URL('./../../images/blog/blog-grid/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1502672260266-1c1c24226133?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Weâ€™re the construction kings, building up great...',
         author: 'John',
         date: '15',

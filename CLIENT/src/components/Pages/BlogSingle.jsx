@@ -73,7 +73,7 @@ class BlogSingle extends React.Component {
                                                     <div className="sx-media">
                                                         {/* <img src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                        <img src={"https://images.unsplash.com/photo-1613490900233-087c2b3e449a?w=1600&q=80"} alt=""/> {/* TEMP LIVE PREVIEW */}
+                                                        <img src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80"} alt=""/> {/* TEMP LIVE PREVIEW */}
                                                     </div>
                                                 </div>
                                             </div>
