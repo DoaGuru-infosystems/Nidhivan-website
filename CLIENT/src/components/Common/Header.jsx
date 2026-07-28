@@ -109,8 +109,8 @@ const Header = () => {
         <div className="container">
           <div className="d-flex justify-content-end">
             <ul className="list-unstyled e-p-bx">
-              <li><span>Mail us:</span> { siteData.contactInfo.email }</li>
-              <li><span>Call us:</span>{ siteData.contactInfo.phone }</li>
+              <li><span>Mail us:</span> <a href={`mailto:${siteData.contactInfo.email}`} style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[#F4B54B]">{ siteData.contactInfo.email }</a></li>
+              <li><span>Call us:</span> <a href={`tel:${siteData.contactInfo.phone}`} style={{ color: 'inherit', textDecoration: 'none' }} className="hover:text-[#F4B54B]">{ siteData.contactInfo.phone }</a></li>
             </ul>
           </div>
         </div>
@@ -142,11 +142,7 @@ const Header = () => {
 
             {/* Extra Nav (Search + Get in touch) */ }
             <div className="extra-nav">
-              <div className="extra-cell">
-                <NavLink to="#" onClick={ (e) => { e.preventDefault(); setIsSearchActive(!isSearchActive); } }>
-                  <Search size={ 18 } />
-                </NavLink>
-              </div>
+
               <div className="extra-cell">
                 <div className="contact-slide-show">
                   <NavLink
