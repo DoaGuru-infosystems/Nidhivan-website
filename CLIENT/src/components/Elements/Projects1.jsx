@@ -30,7 +30,7 @@ const getImgUrl = (id) => {
         // case 4: return new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
         case 4: return "https://images.pexels.com/photos/7060814/pexels-photo-7060814.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
         // case 5: return new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-        case 5: return "https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+        case 5: return "https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
         // case 6: return new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
         case 6: return "https://images.pexels.com/photos/19899071/pexels-photo-19899071.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
         // case 7: return new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready

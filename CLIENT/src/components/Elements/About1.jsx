@@ -10,11 +10,16 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const images = [
-    new URL('./../../images/about-slider/1.jpg', import.meta.url).href,
-    new URL('./../../images/about-slider/2.jpg', import.meta.url).href,
-    new URL('./../../images/about-slider/3.jpg', import.meta.url).href,
-    new URL('./../../images/about-slider/4.jpg', import.meta.url).href,
-    new URL('./../../images/about-slider/5.jpg', import.meta.url).href
+    // new URL('./../../images/about-slider/1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+    "https://images.pexels.com/photos/7534216/pexels-photo-7534216.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
+    // new URL('./../../images/about-slider/2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+    "https://images.pexels.com/photos/8606292/pexels-photo-8606292.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
+    // new URL('./../../images/about-slider/3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+    "https://images.pexels.com/photos/6794929/pexels-photo-6794929.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
+    // new URL('./../../images/about-slider/4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+    "https://images.pexels.com/photos/33342710/pexels-photo-33342710.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
+    // new URL('./../../images/about-slider/5.jpg', import.meta.url).href // ORIGINAL DUMMY - restore when real property photos are ready
+    "https://images.pexels.com/photos/18033178/pexels-photo-18033178.jpeg?auto=compress&cs=tinysrgb&w=1600" // TEMP LIVE PREVIEW
 ];
 
 // var bgimg1 = new URL('./../../images/background/bg-4.png', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready

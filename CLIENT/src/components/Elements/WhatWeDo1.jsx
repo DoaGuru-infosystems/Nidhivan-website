@@ -59,7 +59,7 @@ class WhatWeDo1 extends React.Component {
                                     <div className="number-block-one animate-in-to-top">
                                         {/* <img src={new URL('./../../images/pic3.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                        <img src={"https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                        <img src={"https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                         <div className="figcaption bg-white text-center p-a20">
                                             <h4 className="m-a0">{siteData.services[2].title}</h4>
                                         </div>

@@ -12,9 +12,12 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 
 // Import slider images
-import slide1 from '../../images/main-slider/slider1/slide1.jpg';
-import slide2 from '../../images/main-slider/slider1/slide2.jpg';
-import slide3 from '../../images/main-slider/slider1/slide3.jpg';
+// import slide1 from '../../images/main-slider/slider1/slide1.jpg'; // ORIGINAL DUMMY - restore when real property photos are ready
+const slide1 = "https://images.pexels.com/photos/33619255/pexels-photo-33619255.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+// import slide2 from '../../images/main-slider/slider1/slide2.jpg'; // ORIGINAL DUMMY - restore when real property photos are ready
+const slide2 = "https://images.pexels.com/photos/33619257/pexels-photo-33619257.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
+// import slide3 from '../../images/main-slider/slider1/slide3.jpg'; // ORIGINAL DUMMY - restore when real property photos are ready
+const slide3 = "https://images.pexels.com/photos/17672408/pexels-photo-17672408.jpeg?auto=compress&cs=tinysrgb&w=1600"; // TEMP LIVE PREVIEW
 
 gsap.registerPlugin(useGSAP);
 

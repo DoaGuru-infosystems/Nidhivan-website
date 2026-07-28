@@ -105,7 +105,7 @@ class ProjectDetail1 extends React.Component {
                                             <div className="sx-media">
                                                 {/* <img src={new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                <img src={"https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                                <img src={"https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="sx-box">

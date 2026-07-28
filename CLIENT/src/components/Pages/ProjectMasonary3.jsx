@@ -70,7 +70,7 @@ const projects = [
     {
         id: 7,
         // image: new URL('./../../images/projects/portrait/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
+        image: "https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Living Room',
         description: 'Landscape plans for drainage problems may also entail planting beds...',
         filter: 'cat-3'
@@ -134,7 +134,7 @@ const projects = [
     {
         id: 15,
         // image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
+        image: "https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Life style building',
         description: 'Project management is the process by which our team plans and executes...',
         filter: 'cat-3'

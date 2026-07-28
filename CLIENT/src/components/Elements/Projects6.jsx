@@ -44,7 +44,7 @@ const projects = [
     {
         // image: new URL('./../../images/projects/square/pic8.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.pexels.com/photos/4468806/pexels-photo-4468806.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
+        image: "https://images.pexels.com/photos/6934189/pexels-photo-6934189.jpeg?auto=compress&cs=tinysrgb&w=1600", // TEMP LIVE PREVIEW
         title: 'Vilters',
         description: 'Engineering your dreams with us the architect has always.'
     },
