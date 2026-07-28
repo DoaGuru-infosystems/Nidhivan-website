@@ -1,48 +1,56 @@
 export const siteData = {
-    companyName: "Nidhivan Real Estate",
+    companyName: "Nidhivan Developer",
     taglines: [
-        "Building Trust, Delivering Quality Homes",
-        "Find Your Dream Property in Jabalpur",
+        "Building Trust Since 20XX",
+        "Better Price, Better Farmhouse Area",
         "Your Gateway to Premium Living"
     ],
     contactInfo: {
-        address: "Nidhivan Real Estate, Jabalpur, Madhya Pradesh 482002",
-        phone: "+91 94251 00000",
-        email: "contact@nidhivanrealestate.com",
-        workingHours: "Mon - Sat: 9:00 AM - 7:00 PM"
+        address: "Near Pariyat Dam, Sundarpur, Jabalpur, Dundi Pipariya, Madhya Pradesh 482005",
+        phone: "087703 75800",
+        email: "nidhivanfarmsjabalpur@gmail.com",
+        workingHours: "Mon - Sun: 9:00 AM - 8:00 PM",
+        facebook: "https://www.facebook.com/profile.php?id=61578401472526",
+        instagram: "https://www.instagram.com/nidhivan_jbp/"
     },
     aboutUs: {
-        title: "About Nidhivan Real Estate",
-        shortDescription: "With over 10 years of trust and excellence, Nidhivan Real Estate is the leading property developer in Jabalpur, specializing in premium residential and commercial spaces.",
-        longDescription: "Nidhivan Real Estate has been at the forefront of the real estate market in Jabalpur, Madhya Pradesh for over a decade. We believe in building not just structures, but vibrant communities and lifelong relationships based on trust, transparency, and uncompromised quality. Whether you are looking for your dream home, a lucrative commercial hub, or a prime plot of land, our dedicated team is here to guide you at every step of your real estate journey.",
-        mission: "To deliver high-quality, Vastu-compliant homes and commercial spaces that provide unmatched value and elevate the standard of living for our clients.",
+        title: "About Nidhivan Developer",
+        shortDescription: "With a legacy of trust and excellence, Nidhivan Developer is a leading property developer in Jabalpur, specializing in premium farmhouses and farmland.",
+        longDescription: "Nidhivan Developer has been at the forefront of the real estate market in Jabalpur, Madhya Pradesh. Founded and led by Rohit Rajak, we believe in building not just structures, but vibrant communities and lifelong relationships based on trust, transparency, and uncompromised quality. Whether you are looking for your dream farmhouse or a prime plot of farmland, our dedicated team is here to guide you at every step of your real estate journey.",
+        mission: "To deliver high-quality farmhouses and farmlands at better prices, providing unmatched value and elevating the standard of living for our clients.",
         vision: "To be the most trusted and preferred real estate partner in Central India, known for innovation, integrity, and customer satisfaction."
     },
     services: [
         {
             id: 1,
-            title: "Residential Properties",
-            description: "Explore our premium apartments, luxury villas, and affordable housing options built with top-notch amenities and Vastu compliance.",
+            title: "Premium Farmhouses",
+            description: "Explore our premium and beautifully designed farmhouses built with top-notch amenities, offering the perfect weekend getaway or peaceful living.",
             icon: "flaticon-home"
         },
         {
             id: 2,
-            title: "Commercial Hubs",
-            description: "Strategic commercial spaces and retail shops designed to give your business maximum visibility and unparalleled growth.",
-            icon: "flaticon-building"
-        },
-        {
-            id: 3,
-            title: "Plots & Land",
-            description: "Invest in legally verified, prime location plots that guarantee high returns and provide the perfect foundation for your dreams.",
+            title: "Farmland Plots",
+            description: "Invest in legally verified, prime location agricultural and farmland plots that guarantee high returns and a secure future.",
             icon: "flaticon-real-estate"
         },
         {
+            id: 3,
+            title: "Custom Farm Development",
+            description: "We provide end-to-end development services for your farmland, including landscaping, boundary walls, and customized farmhouse construction.",
+            icon: "flaticon-building"
+        },
+        {
             id: 4,
-            title: "Home Loan & Legal Guidance",
-            description: "We provide hassle-free assistance with property legalities, registrations, and fast home loan approvals from leading banks.",
+            title: "Legal & Registry Assistance",
+            description: "We provide hassle-free assistance with property legalities, transparent documentation, and fast registrations for your peace of mind.",
             icon: "flaticon-contract"
         }
+    ],
+    whyChooseUs: [
+        "Better Price Guarantee",
+        "Better Farmhouse Area",
+        "Transparent Dealings",
+        "Prime Locations"
     ],
     statistics: [
         { label: "Happy Families", value: "500", suffix: "+" },
@@ -53,65 +61,67 @@ export const siteData = {
     projects: [
         {
             id: 1,
-            title: "Nidhivan Heights",
+            title: "Nidhivan Farms Phase 1",
             location: "Jabalpur, MP",
-            category: "Residential",
+            category: "Farmhouse",
             filter: "cat-1"
         },
         {
             id: 2,
-            title: "Nidhivan Commercial Hub",
-            location: "Jabalpur, MP",
-            category: "Commercial",
-            filter: "cat-2"
-        },
-        {
-            id: 3,
-            title: "Green Valley Villas",
-            location: "Jabalpur, MP",
-            category: "Residential",
-            filter: "cat-1"
-        },
-        {
-            id: 4,
-            title: "Nidhivan Enclave Plots",
+            title: "Nidhivan Premium Farmlands",
             location: "Jabalpur, MP",
             category: "Plots",
             filter: "cat-3"
-        },
-        {
-            id: 5,
-            title: "Nidhivan Grand Residences",
-            location: "Jabalpur, MP",
-            category: "Residential",
-            filter: "cat-1"
-        },
-        {
-            id: 6,
-            title: "Nidhivan Business Park",
-            location: "Jabalpur, MP",
-            category: "Commercial",
-            filter: "cat-2"
         }
     ],
     testimonials: [
         {
             id: 1,
-            name: "Rajesh Kumar",
-            role: "Home Buyer",
-            text: "Buying a home with Nidhivan Real Estate was a seamless experience. Their transparency and quality of construction in Jabalpur is unmatched. We are extremely happy with our new home!"
+            name: "Satyam Tiwari",
+            role: "Customer",
+            text: "A truly wonderful holiday spot located near Pariyat Dam. It's a great place to spend a few days, offering a perfect combination of clean air and stunning greenery."
         },
         {
             id: 2,
-            name: "Amit Sharma",
-            role: "Investor",
-            text: "I invested in Nidhivan Commercial Hub, and the returns have been fantastic. Their team guided me through all legalities perfectly. Highly recommended for property investments."
+            name: "Harsh Patel",
+            role: "Visitor",
+            text: "Nidhivan farms is such a great place!"
         },
         {
             id: 3,
-            name: "Priya Singh",
-            role: "Resident",
-            text: "The amenities, security, and the community vibe at Nidhivan Heights make it the best place to live in Jabalpur. Thank you for delivering exactly what was promised."
+            name: "Solar plant Solar distributer",
+            role: "Customer",
+            text: "Very nice farm house 🏡 with a cheapest rate, I really like it."
+        },
+        {
+            id: 4,
+            name: "subrato sarkar",
+            role: "Customer",
+            text: "Location, rate and quality , Very nice"
+        },
+        {
+            id: 5,
+            name: "M.S. Rekhi",
+            role: "Visitor",
+            text: "What a peaceful place with fully-fledged views greenery. nice atmosphere good site"
+        },
+        {
+            id: 6,
+            name: "Shama Afroj",
+            role: "Customer",
+            text: "Beautiful place 😊 farmhouse nidhivan in jabalpur"
+        },
+        {
+            id: 7,
+            name: "Devendra Kumar Pandey",
+            role: "Investor",
+            text: "Must buy, excellent place with full greenery and environment 👍"
+        },
+        {
+            id: 8,
+            name: "RINKU RAJAK",
+            role: "Customer",
+            text: "Best location. Nice spot amazing!"
         }
     ]
 };

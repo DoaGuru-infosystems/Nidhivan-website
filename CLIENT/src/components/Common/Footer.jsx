@@ -20,15 +20,15 @@ class Footer extends React.Component {
                                         {/*<h4 class="widget-title">About Company</h4>*/}
                                         <div className="logo-footer clearfix p-b15">
                                             <NavLink to={"./"}>
-                                                <img src={new URL('./../../images/logo-light.png', import.meta.url).href} alt="Inteshape" />
+                                                <img src={new URL('./../../images/LOGO.png', import.meta.url).href} alt="Nidhivan Farms" />
                                             </NavLink>
                                         </div>
                                         <p>{siteData.aboutUs.shortDescription}</p>
                                         <ul className="social-icons  sx-social-links">
                                             <li><a href="https://www.behance.net/" className="fa fa-behance" target="_blank"></a></li>
-                                            <li><a href="https://www.facebook.com" className="fa fa-facebook" target="_blank"></a></li>
+                                            <li><a href={siteData.contactInfo.facebook} className="fa fa-facebook" target="_blank"></a></li>
                                             <li><a href="https://twitter.com" className="fa fa-twitter" target="_blank"></a></li>
-                                            <li><a href="https://www.instagram.com" className="fa fa-instagram" target="_blank"></a></li>
+                                            <li><a href={siteData.contactInfo.instagram} className="fa fa-instagram" target="_blank"></a></li>
                                         </ul>
                                     </div>
                                 </div>

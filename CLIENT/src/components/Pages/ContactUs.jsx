@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from './../Elements/Banner';
-import GoogleMapReact from 'google-map-react';
+import GoogleMapIframe from './../Elements/GoogleMapIframe';
 import { siteData } from '../../data/siteContent';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,8 +12,6 @@ import { Textarea } from "../ui/textarea";
 
 var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80"; // TEMP LIVE PREVIEW
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
 const formSchema = z.object({
     username: z.string().min(2, "Name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
@@ -21,13 +19,6 @@ const formSchema = z.object({
 });
 
 const ContactUs = () => {
-    const defaultProps = {
-        center: {
-            lat: 34.073280,
-            lng: -118.251410
-        },
-        zoom: 12
-    };
 
     const {
         register,
@@ -156,13 +147,7 @@ const ContactUs = () => {
                 </div>
             </div>
             <div className="gmap-outline">
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: "AIzaSyAfY1DRbspf6E3jYUso-PeI_tdfRXA59i0" }}
-                    defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}
-                    >
-                    <AnyReactComponent lat={34.073280} lng={-118.251410} text={<i className="fa fa-map-marker" />}                                        />
-                </GoogleMapReact>                        
+                <GoogleMapIframe />
             </div>
         </div>
     );

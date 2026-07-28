@@ -2,38 +2,38 @@ import React from 'react';
 import CountUp from 'react-countup';
 import { siteData } from '../../data/siteContent';
 
-// var bgimg1 = new URL('./../../images/background/bg-1.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-
-
 var bgimg1 = "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?w=1600&q=80"; // TEMP LIVE PREVIEW
-// var bgimg2 = new URL('./../../images/background/bg-5.png', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-
-var bgimg2 = "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 class Statistics1 extends React.Component {
     
     render() {
         return (
             <>
-                <div className="section-full overlay-wraper sx-bg-secondry mobile-page-padding  p-t80 p-b50 bg-parallax ml-auto" data-stellar-background-ratio="0.5" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                        <div className="overlay-main bg-black opacity-05" />
-                        <div className="container">
-                            <div className="section-content">
-                                <div className="counter-blocks">
-                                    <div className="row">
-                                        {siteData.statistics.map((stat, index) => (
-                                            <div className="col-xl-3 col-md-6 m-b30" key={index}>
-                                                <div className="sx-count text-white sx-icon-box-wraper bg-repeat p-a30" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
-                                                    <h2 className="m-t0 sx-text-primary text-right"><span className="counter"><CountUp end={parseInt(stat.value)} duration={5} enableScrollSpy={true} scrollSpyOnce={true} /></span><span>{stat.suffix}</span></h2>
-                                                    <h4 className="m-b0">{stat.label}</h4>
-                                                </div>
+                <div className="section-full relative mobile-page-padding p-t80 p-b80 bg-parallax ml-auto" data-stellar-background-ratio="0.5" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
+                    {/* Darker Overlay for better contrast */}
+                    <div className="absolute inset-0 bg-black/70 z-0" />
+                    
+                    <div className="container relative z-10">
+                        <div className="section-content">
+                            <div className="counter-blocks">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                                    {siteData.statistics.map((stat, index) => (
+                                        <div className="flex flex-col items-center justify-center p-8 border border-white/10 bg-white/5 backdrop-blur-sm rounded-lg hover:-translate-y-2 transition-transform duration-300 group" key={index}>
+                                            <div className="mb-4">
+                                                <h2 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 group-hover:from-[#fb5455] group-hover:to-[#ff9a9a] transition-all duration-500 m-0 text-center">
+                                                    <span className="counter"><CountUp end={parseInt(stat.value)} duration={3} enableScrollSpy={true} scrollSpyOnce={true} /></span>
+                                                    <span>{stat.suffix}</span>
+                                                </h2>
                                             </div>
-                                        ))}
-                                    </div>
+                                            <div className="w-12 h-1 bg-[#fb5455] mb-4 group-hover:w-24 transition-all duration-500 rounded"></div>
+                                            <h4 className="m-0 text-white text-lg tracking-wider uppercase font-semibold text-center">{stat.label}</h4>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </>
         );
     }

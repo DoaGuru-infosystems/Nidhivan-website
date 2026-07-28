@@ -8,14 +8,10 @@ import { Quote } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-// var bgimg1 = new URL('./../../images/background/bg-8.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-
-var bgimg1 = "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=1600&q=80"; // TEMP LIVE PREVIEW
-// var bgimg2 = new URL('./../../images/background/bg-5.png', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-var bgimg2 = "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?w=1600&q=80"; // TEMP LIVE PREVIEW
+var bgimg1 = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80"; // Replaced ugly placeholder
+var bgimg2 = new URL('./../../images/background/bg-5.png', import.meta.url).href;
 var bgimg3 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
-// var bgimg4 = new URL('./../../images/background/bg-12.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
-var bgimg4 = "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1600&q=80"; // TEMP LIVE PREVIEW
+var bgimg4 = new URL('./../../images/background/bg-12.jpg', import.meta.url).href;
 
 const Testimonials1 = () => {
     return (
@@ -73,13 +69,12 @@ const Testimonials1 = () => {
                                 className="testimonial-home"
                             >
                                 {siteData.testimonials.map((item, index) => {
-                                    const imgUrl = new URL(`./../../images/testimonials/pic${(index % 4) + 1}.jpg`, import.meta.url).href;
                                     return (
                                         <SwiperSlide key={index}>
                                             <div className="testimonial-2 hover-animation-1 pb-12">
                                                 <div className="testimonial-detail clearfix relative mb-6">
-                                                    <div className="testimonial-pic shadow scale-in-center w-20 h-20 rounded-full overflow-hidden float-left mr-4">
-                                                        <img src={imgUrl} alt="" className="w-full h-full object-cover" />
+                                                    <div className="testimonial-pic shadow scale-in-center w-20 h-20 rounded-full overflow-hidden float-left mr-4 flex items-center justify-center bg-[#930000] text-white text-4xl font-bold">
+                                                        {item.name ? item.name.charAt(0).toUpperCase() : 'N'}
                                                     </div>
                                                     <div className="pt-2">
                                                         <h4 className="testimonial-name text-lg font-bold m-0">{item.name}</h4>

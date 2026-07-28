@@ -19,7 +19,7 @@ const formSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters")
 });
 
-import logo from '../../images/logo-1.png';
+import logo from '../../images/LOGO.png';
 import bgMap from '../../images/background/bg-map.png';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -211,11 +211,14 @@ const Header = () => {
               style={{
                 backgroundImage: `url(${bgMap})`,
                 right: isQuoteActive ? '0px' : '100%',
+                transition: 'right 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                zIndex: 9999,
+                position: 'fixed'
               }}
             >
-              <div className="contact-nav">
-                <NavLink to="#" className="contact_close" onClick={(e) => { e.preventDefault(); setIsQuoteActive(false); }}>
-                  <X size={24} />
+              <div className="contact-nav h-full overflow-y-auto pt-24 pb-12">
+                <NavLink to="#" className="contact_close absolute top-6 right-8 text-black hover:text-red-600 transition-colors z-50" onClick={(e) => { e.preventDefault(); setIsQuoteActive(false); }}>
+                  <span style={{ fontSize: '48px', lineHeight: '1' }}>&times;</span>
                 </NavLink>
                 <div className="contact-nav-form">
                   <div className="grid grid-cols-12 gap-8">
@@ -250,9 +253,10 @@ const Header = () => {
                         </div>
                         <div className="full-social-bg">
                           <ul>
-                            <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                            <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                            <li><a href={siteData.contactInfo.facebook} target="_blank" rel="noopener noreferrer" className="facebook flex items-center justify-center font-bold">f</a></li>
+                            <li><a href={siteData.contactInfo.instagram} target="_blank" rel="noopener noreferrer" className="instagram flex items-center justify-center font-bold">ig</a></li>
+                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="twitter flex items-center justify-center font-bold">t</a></li>
+                            <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="google flex items-center justify-center font-bold">yt</a></li>
                           </ul>
                         </div>
                       </div>
@@ -266,7 +270,7 @@ const Header = () => {
                               id="name" 
                               type="text" 
                               placeholder="Name" 
-                              className="w-full bg-transparent border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder-gray-500" 
+                              className="w-full bg-transparent border-0 border-b border-gray-200 rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-black placeholder-gray-400 shadow-none outline-none" 
                             />
                             {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username.message}</p>}
                           </div>
@@ -277,7 +281,7 @@ const Header = () => {
                               id="email" 
                               type="email" 
                               placeholder="Email" 
-                              className="w-full bg-transparent border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder-gray-500" 
+                              className="w-full bg-transparent border-0 border-b border-gray-200 rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-black placeholder-gray-400 shadow-none outline-none" 
                             />
                             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
                           </div>
@@ -288,7 +292,7 @@ const Header = () => {
                               id="phone" 
                               type="text" 
                               placeholder="Phone" 
-                              className="w-full bg-transparent border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder-gray-500" 
+                              className="w-full bg-transparent border-0 border-b border-gray-200 rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-black placeholder-gray-400 shadow-none outline-none" 
                             />
                             {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
                           </div>
@@ -299,7 +303,7 @@ const Header = () => {
                               id="message" 
                               placeholder="Message" 
                               rows={3}
-                              className="w-full bg-transparent border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-black placeholder-gray-500 min-h-[80px]" 
+                              className="w-full bg-transparent border-0 border-b border-gray-200 rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-black placeholder-gray-400 shadow-none outline-none resize-none min-h-[80px]" 
                             />
                             {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
                           </div>
@@ -308,15 +312,15 @@ const Header = () => {
                             <button 
                               type="submit" 
                               disabled={isSubmitting}
-                              className="site-button-secondry btn-half disabled:opacity-70 flex items-center gap-2"
+                              className="bg-black text-white px-8 py-3 text-sm font-bold tracking-[2px] disabled:opacity-70 flex items-center gap-2 hover:bg-gray-900 transition-colors"
                             >
                               {isSubmitting ? (
                                 <>
                                   <Loader2 size={16} className="animate-spin" />
-                                  <span>Submitting...</span>
+                                  <span>SUBMITTING...</span>
                                 </>
                               ) : (
-                                <span>Submit Now</span>
+                                <span>SUBMIT NOW</span>
                               )}
                             </button>
                           </div>
