@@ -63,8 +63,8 @@ class BlogSingle extends React.Component {
                                             <li className="post-category"><NavLink to={"#"}><span>{category}</span></NavLink> </li>
                                         </ul>
                                     </div>
-                                    <div className="sx-post-title ">
-                                        <h3 className="post-title">{title}</h3>
+                                    <div className="sx-post-title m-t20 m-b20">
+                                        <h3 className="post-title font-bold text-3xl md:text-4xl text-slate-900 leading-tight">{title}</h3>
                                     </div>
                                     {shortDescription && (
                                         <p className="text-base text-slate-600 italic mt-3 mb-4 border-l-4 border-[#F4B54B] pl-4">{shortDescription}</p>
