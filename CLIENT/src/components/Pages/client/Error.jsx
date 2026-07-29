@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Banner from './../Elements/Banner';
+import Banner from '../../Elements/Banner';
 
-// var bnrimg = new URL('./../../images/banner/8.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+// var bnrimg = new URL('../../../images/banner/8.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
 var bnrimg = "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=1600&q=80"; // TEMP LIVE PREVIEW
@@ -19,7 +19,7 @@ class Error extends React.Component {
                             <div className="section-content">
                                 <div className="page-notfound grid grid-cols-12 gap-6">
                                     <div className="col-span-12 md:col-span-7">
-                                        <img src={new URL('./../../images/error-404.png', import.meta.url).href} alt="" />
+                                        <img src={new URL('../../../images/error-404.png', import.meta.url).href} alt="" />
                                     </div>
                                     <div className="col-span-12 md:col-span-5">
                                         <strong>Page Not Found</strong>

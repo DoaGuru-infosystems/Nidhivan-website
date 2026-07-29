@@ -1,25 +1,25 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Pages/Home';
+import Home from './Pages/client/Home';
 import Header from './Common/Header';
 import Footer from './Common/Footer';
-import About from './Pages/About';
+import About from './Pages/client/About';
 
-import ProjectGrid3 from './Pages/ProjectGrid3';
-import ProjectMasonary3 from './Pages/ProjectMasonary3';
-import ProjectCorousel from './Pages/ProjectCorousel';
-import ProjectDetail1 from './Pages/ProjectDetail1';
+import ProjectGrid3 from './Pages/client/ProjectGrid3';
+import ProjectMasonary3 from './Pages/client/ProjectMasonary3';
+import ProjectCorousel from './Pages/client/ProjectCorousel';
+import ProjectDetail1 from './Pages/client/ProjectDetail1';
 
-import BlogGrid from './Pages/BlogGrid';
-import BlogSingle from './Pages/BlogSingle';
+import BlogGrid from './Pages/client/BlogGrid';
+import BlogSingle from './Pages/client/BlogSingle';
 
-import Terms from './Pages/Terms';
-import PrivacyPolicy from './Pages/PrivacyPolicy';
-import Gallery from './Pages/Gallery';
-import Error from './Pages/Error';
+import Terms from './Pages/client/Terms';
+import PrivacyPolicy from './Pages/client/PrivacyPolicy';
+import Gallery from './Pages/client/Gallery';
+import Error from './Pages/client/Error';
 
 
-import ContactUs from './Pages/ContactUs';
+import ContactUs from './Pages/client/ContactUs';
 import ScrollToTop from './Common/ScrollToTop';
 
 class Components extends React.Component {

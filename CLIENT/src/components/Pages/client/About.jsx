@@ -1,10 +1,10 @@
 import React from 'react';
-import Banner from './../Elements/Banner';
-import About3 from './../Elements/About3';
-import { siteData } from '../../data/siteContent';
-import Statistics1 from './../Elements/Statistics1';
-import ClientsLogo1 from './../Elements/ClientsLogo1';
-import GoogleMapIframe from './../Elements/GoogleMapIframe';
+import Banner from '../../Elements/Banner';
+import About3 from '../../Elements/About3';
+import { siteData } from '../../../data/siteContent';
+import Statistics1 from '../../Elements/Statistics1';
+import ClientsLogo1 from '../../Elements/ClientsLogo1';
+import GoogleMapIframe from '../../Elements/GoogleMapIframe';
 import { NavLink } from 'react-router-dom';
 
 var bnrimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"; // TEMP LIVE PREVIEW

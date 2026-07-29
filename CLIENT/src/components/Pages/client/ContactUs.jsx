@@ -1,15 +1,15 @@
 import React from 'react';
-import Banner from './../Elements/Banner';
-import GoogleMapIframe from './../Elements/GoogleMapIframe';
-import { siteData } from '../../data/siteContent';
+import Banner from '../../Elements/Banner';
+import GoogleMapIframe from '../../Elements/GoogleMapIframe';
+import { siteData } from '../../../data/siteContent';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+import { Input } from "../../ui/input";
+import { Textarea } from "../../ui/textarea";
 import { MapPin, Phone, Mail } from 'lucide-react';
 
-// var bnrimg = new URL('./../../images/banner/9.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+// var bnrimg = new URL('../../../images/banner/9.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80"; // TEMP LIVE PREVIEW
 

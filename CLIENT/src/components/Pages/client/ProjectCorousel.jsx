@@ -1,10 +1,10 @@
 import React from 'react';
-import Banner from './../Elements/Banner';
-import Projects3 from './../Elements/Projects3';
-import Projects4 from '../Elements/Projects4';
-import SimilarProjects from './../Elements/SimilarProjects';
+import Banner from '../../Elements/Banner';
+import Projects3 from '../../Elements/Projects3';
+import Projects4 from '../../Elements/Projects4';
+import SimilarProjects from '../../Elements/SimilarProjects';
 
-// var bnrimg = new URL('./../../images/banner/3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+// var bnrimg = new URL('../../../images/banner/3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
 var bnrimg = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80"; // TEMP LIVE PREVIEW

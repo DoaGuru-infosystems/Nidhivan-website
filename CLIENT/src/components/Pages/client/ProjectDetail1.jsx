@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Banner from './../Elements/Banner';
-import Projects6 from './../Elements/Projects6';
+import Banner from '../../Elements/Banner';
+import Projects6 from '../../Elements/Projects6';
 import ReactPlayer from 'react-player';
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
 
-// var bnrimg = new URL('./../../images/banner/2.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+// var bnrimg = new URL('../../../images/banner/2.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 
 var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80"; // TEMP LIVE PREVIEW
@@ -89,21 +89,21 @@ class ProjectDetail1 extends React.Component {
                                     <div className="project-detail-outer">
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                {/* <img src={new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
+                                                {/* <img src={new URL('../../../images/projects/portrait/pic7.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
                                                 <img src={"https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                {/* <img src={new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
+                                                {/* <img src={new URL('../../../images/projects/portrait/pic4.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
                                                 <img src={"https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="project-detail-pic m-b30">
                                             <div className="sx-media">
-                                                {/* <img src={new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
+                                                {/* <img src={new URL('../../../images/projects/portrait/pic5.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
                                                 <img src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>

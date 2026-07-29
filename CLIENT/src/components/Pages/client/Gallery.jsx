@@ -1,6 +1,6 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import Banner from './../Elements/Banner';
+import Banner from '../../Elements/Banner';
 import Masonry from 'react-masonry-css';
 import gsap from 'gsap';
 import { Flip } from 'gsap/Flip';
@@ -21,7 +21,7 @@ const filters = [
 const projects = [
     {
         id: 1,
-        // image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Modern Villa',
         address: 'Mumbai, Maharashtra',
@@ -29,7 +29,7 @@ const projects = [
     },
     {
         id: 2,
-        // image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Luxury Apartment',
         address: 'Pune, Maharashtra',
@@ -37,7 +37,7 @@ const projects = [
     },
     {
         id: 3,
-        // image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Industrial Design',
         address: 'Delhi, NCR',
@@ -45,7 +45,7 @@ const projects = [
     },
     {
         id: 4,
-        // image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'House Blueprint',
         address: 'Bangalore, Karnataka',
@@ -53,7 +53,7 @@ const projects = [
     },
     {
         id: 5,
-        // image: new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Modern Bathroom',
         address: 'Hyderabad, Telangana',
@@ -61,7 +61,7 @@ const projects = [
     },
     {
         id: 6,
-        // image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Bellevue Project',
         address: 'Chennai, Tamil Nadu',
@@ -69,7 +69,7 @@ const projects = [
     },
     {
         id: 7,
-        // image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Outdoor Pavilion',
         address: 'Kochi, Kerala',
@@ -77,7 +77,7 @@ const projects = [
     },
     {
         id: 8,
-        // image: new URL('./../../images/projects/portrait/pic8.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic8.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Museum Interiors',
         address: 'Kolkata, West Bengal',
@@ -85,7 +85,7 @@ const projects = [
     },
     {
         id: 9,
-        // image: new URL('./../../images/projects/portrait/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
+        // image: new URL('../../../images/projects/portrait/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
         image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Minimalist House',
         address: 'Ahmedabad, Gujarat',
@@ -93,10 +93,10 @@ const projects = [
     }
 ];
 
-// var bnrimg = new URL('./../../images/banner/3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
+// var bnrimg = new URL('../../../images/banner/3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
 var bnrimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"; // TEMP LIVE PREVIEW
-var bgimg1 = new URL('./../../images/background/cross-line.png', import.meta.url).href;
+var bgimg1 = new URL('../../../images/background/cross-line.png', import.meta.url).href;
 
 const breakpointColumnsObj = {
   default: 3,
