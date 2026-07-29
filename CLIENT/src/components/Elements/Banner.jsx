@@ -9,7 +9,7 @@ class Banner extends React.Component {
                 style={{ backgroundImage: `url(${this.props.bgimage})` }}
             >
                 {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-black/70 z-0" />
+                <div className="absolute inset-0 bg-black/40 z-0" />
                 
                 {/* Content Container */}
                 <div className="relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col justify-center">
