@@ -22,6 +22,18 @@ const BlogEditor = () => {
     const [saving, setSaving] = useState(false);
     const [imageError, setImageError] = useState(false);
 
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setField('image', reader.result);
+                setImageError(false);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     // Load existing blog data in edit mode
     useEffect(() => {
         if (isEditMode) {
@@ -131,10 +143,10 @@ const BlogEditor = () => {
 
                 {/* ── 2. Featured Image ── */}
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-3">
-                    <Label htmlFor="blog-image" className="text-slate-700 font-semibold text-base">
-                        Featured Image
+                    <Label className="text-slate-700 font-semibold text-base">
+                        Featured Image (URL or File)
                     </Label>
-                    <div className="flex gap-3">
+                    <div className="flex flex-col gap-3">
                         <Input
                             id="blog-image"
                             value={form.image}
@@ -142,6 +154,12 @@ const BlogEditor = () => {
                             placeholder="https://example.com/your-image.jpg"
                             className="flex-1 focus-visible:ring-[#118A43] border-slate-200"
                         />
+                        <div className="relative">
+                            <input type="file" id="blog-image-upload" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                            <Label htmlFor="blog-image-upload" className="flex items-center justify-center w-full h-10 px-4 py-2 border border-slate-200 border-dashed rounded-md cursor-pointer hover:bg-slate-50 transition-colors text-sm text-slate-600 bg-slate-50 shadow-sm font-medium">
+                                Or upload from computer
+                            </Label>
+                        </div>
                     </div>
 
                     {/* Image Preview */}
