@@ -76,6 +76,7 @@ class About extends React.Component {
 
                 <Statistics1 />
                 <ClientsLogo1 />
+                <GoogleMapIframe />
             </div>
         );
     }
