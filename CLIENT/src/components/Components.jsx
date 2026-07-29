@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Outlet, Navigate } from 'react-router-dom';
 import Home from './Pages/client/Home';
 import Header from './Common/Header';
 import Footer from './Common/Footer';
@@ -17,41 +17,71 @@ import Terms from './Pages/client/Terms';
 import PrivacyPolicy from './Pages/client/PrivacyPolicy';
 import Gallery from './Pages/client/Gallery';
 import Error from './Pages/client/Error';
-
-
 import ContactUs from './Pages/client/ContactUs';
 import ScrollToTop from './Common/ScrollToTop';
+
+// Admin Pages
+import AdminLogin from './Pages/admin/AdminLogin';
+import AdminLayout from './Pages/admin/AdminLayout';
+import BlogManagement from './Pages/admin/BlogManagement';
+import TestimonialManagement from './Pages/admin/TestimonialManagement';
+import GalleryManagement from './Pages/admin/GalleryManagement';
+import ContactLeadsManagement from './Pages/admin/ContactLeadsManagement';
+import ProjectManagement from './Pages/admin/ProjectManagement';
+import { isAdminAuthenticated } from './Pages/admin/utils/auth';
+
+const ProtectedRoute = ({ children }) => {
+    if (!isAdminAuthenticated()) {
+        return <Navigate to="/admin/login" replace />;
+    }
+    return children;
+};
+
+const ClientLayout = () => {
+    return (
+        <div className="page-wraper">
+            <Header />
+            <Outlet />
+            <Footer />
+        </div>
+    );
+};
 
 class Components extends React.Component {
     render() {
         return (
             <BrowserRouter basename="/">
                 <ScrollToTop />
-                <div className="page-wraper">
-                        <Header />
-                        <Routes>
-                            <Route path='/' element={<Home/>} />
+                <Routes>
+                    {/* ADMIN LOGIN - No Layout */}
+                    <Route path="/admin/login" element={<AdminLogin />} />
 
-                            <Route path='/about' element={<About/>} />
+                    {/* ADMIN LAYOUT - Sidebar + Protected */}
+                    <Route element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+                        <Route path="/admin/blogs" element={<BlogManagement />} />
+                        <Route path="/admin/testimonials" element={<TestimonialManagement />} />
+                        <Route path="/admin/gallery" element={<GalleryManagement />} />
+                        <Route path="/admin/leads" element={<ContactLeadsManagement />} />
+                        <Route path="/admin/projects" element={<ProjectManagement />} />
+                    </Route>
 
-                            <Route path='/ongoing-projects' element={<ProjectGrid3/>} />
-                            <Route path='/completed-projects' element={<ProjectMasonary3/>} />
-                            <Route path='/upcoming-projects' element={<ProjectCorousel/>} />
-                            <Route path='/project-detail' element={<ProjectDetail1/>} />
-
-                            <Route path='/blogs' element={<BlogGrid/>} />
-                            <Route path='/blog-single' element={<BlogSingle/>} />
-
-
-                            <Route path='/contact-us' element={<ContactUs/>} />
-                            <Route path='/terms' element={<Terms/>} />
-                            <Route path='/privacy' element={<PrivacyPolicy/>} />
-                            <Route path='/gallery' element={<Gallery/>} />
-                            
-                            <Route element={<Error/>} />
-                        </Routes>
-                        <Footer />
-                </div>
+                    {/* CLIENT LAYOUT - Header & Footer */}
+                    <Route element={<ClientLayout />}>
+                        <Route path='/' element={<Home/>} />
+                        <Route path='/about' element={<About/>} />
+                        <Route path='/ongoing-projects' element={<ProjectGrid3/>} />
+                        <Route path='/completed-projects' element={<ProjectMasonary3/>} />
+                        <Route path='/upcoming-projects' element={<ProjectCorousel/>} />
+                        <Route path='/project-detail' element={<ProjectDetail1/>} />
+                        <Route path='/blogs' element={<BlogGrid/>} />
+                        <Route path='/blog-single' element={<BlogSingle/>} />
+                        <Route path='/contact-us' element={<ContactUs/>} />
+                        <Route path='/terms' element={<Terms/>} />
+                        <Route path='/privacy' element={<PrivacyPolicy/>} />
+                        <Route path='/gallery' element={<Gallery/>} />
+                        <Route path='*' element={<Error/>} />
+                    </Route>
+                </Routes>
             </BrowserRouter>
         );
     };
