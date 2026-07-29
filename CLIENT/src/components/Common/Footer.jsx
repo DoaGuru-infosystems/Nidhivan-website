@@ -113,6 +113,15 @@ class Footer extends React.Component {
                         <div className="container mx-auto px-4 max-w-7xl">
                             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
                                 <span className="text-gray-500 text-sm">© {new Date().getFullYear()} {siteData.companyName}. All Rights Reserved.</span>
+                                
+                                {/* HIDDEN ADMIN LINK */}
+                                <NavLink 
+                                    to="/admin/login" 
+                                    className="w-8 h-8 opacity-0 cursor-default md:cursor-pointer flex-shrink-0"
+                                    title="Admin Access"
+                                    aria-label="Admin Access"
+                                ></NavLink>
+
                                 <span className="text-gray-500 text-sm flex flex-col md:flex-row items-center gap-1">
                                     Designed and developed by 
                                     <a href="https://doaguru.com" target="_blank" rel="noreferrer" className="text-[#F4B54B] font-semibold hover:text-white transition-colors">Doaguru Info Systems</a>
