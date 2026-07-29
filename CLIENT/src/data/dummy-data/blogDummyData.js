@@ -9,7 +9,8 @@ export const blogDummyData = [
     fullDate: 'Oct 15, 2025',
     comments: '12 Comment',
     status: 'Published',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    shortDescription: 'Discover the hottest interior design trends shaping homes and offices in 2026 — from biophilic design to smart integrated spaces.',
+    fullDescription: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ export const blogDummyData = [
     fullDate: 'Nov 02, 2025',
     comments: '5 Comment',
     status: 'Draft',
-    content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+    shortDescription: 'Choosing a commercial property is one of the most important decisions for your business. Here is everything you need to consider.',
+    fullDescription: '<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>'
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ export const blogDummyData = [
     fullDate: 'Dec 12, 2025',
     comments: '8 Comment',
     status: 'Published',
-    content: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
+    shortDescription: 'Smart home technology is rapidly transforming the Indian real estate landscape. Explore what the future holds for connected living.',
+    fullDescription: '<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>'
   }
 ];

@@ -113,6 +113,9 @@ class BlogGrid extends React.Component {
                                             <div className="sx-post-title ">
                                                 <h4 className="post-title"><NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}>{item.title}</NavLink></h4>
                                             </div>
+                                            {item.shortDescription && (
+                                                <p className="text-sm text-gray-600 mt-2 mb-3 line-clamp-2">{item.shortDescription}</p>
+                                            )}
                                             <div className="sx-post-readmore">
                                                 <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
                                             </div>
