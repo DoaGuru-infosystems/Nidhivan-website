@@ -4,10 +4,11 @@ import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import { Button } from '@/components/ui/button';
-import {
-    Bold, Italic, List, ListOrdered, Link2, Image as ImageIcon,
-    Heading1, Heading2, Heading3, Type, Code2, AlignLeft
-} from 'lucide-react';
+import { Bold, Italic, List, ListOrdered, Link2, Image as ImageIcon, Heading1, Heading2, Heading3, Type, Code2, AlignLeft } from 'lucide-react';
+import Editor from 'react-simple-code-editor';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-markup';
+import 'prismjs/themes/prism-tomorrow.css'; // dark theme
 
 /* ─────────────────────────────────────────
    Toolbar Button
@@ -214,15 +215,22 @@ const BlogContentEditor = ({ value, onChange }) => {
                 </>
             )}
 
-            {/* HTML Mode — raw textarea */}
+            {/* HTML Mode — highlighted code editor */}
             {mode === 'html' && (
-                <textarea
-                    value={value || ''}
-                    onChange={handleHtmlChange}
-                    placeholder={`<!-- Paste or write raw HTML here. Supports <style> and <script> tags. -->\n<p>Your content...</p>`}
-                    className="w-full min-h-[280px] p-4 font-mono text-sm text-slate-800 bg-slate-950 text-green-400 resize-y border-0 focus:outline-none focus:ring-0"
-                    spellCheck={false}
-                />
+                <div className="bg-[#2d2d2d] min-h-[280px]">
+                    <Editor
+                        value={value || ''}
+                        onValueChange={(code) => onChange(code)}
+                        highlight={code => Prism.highlight(code, Prism.languages.markup, 'markup')}
+                        padding={16}
+                        style={{
+                            fontFamily: '"Fira code", "Fira Mono", monospace',
+                            fontSize: 14,
+                            minHeight: '280px',
+                        }}
+                        textareaClassName="focus:outline-none"
+                    />
+                </div>
             )}
 
             {/* TipTap editor styles */}
