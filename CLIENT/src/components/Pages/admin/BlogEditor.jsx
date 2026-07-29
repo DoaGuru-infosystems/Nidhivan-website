@@ -23,6 +23,8 @@ const BlogEditor = () => {
                     image: existing.image || '',
                     shortDescription: existing.shortDescription || '',
                     fullDescription: existing.fullDescription || '',
+                    author: existing.author || '',
+                    category: existing.category || '',
                 };
             }
         }
@@ -31,6 +33,8 @@ const BlogEditor = () => {
             image: '',
             shortDescription: '',
             fullDescription: '',
+            author: '',
+            category: '',
         };
     });
     const [saving, setSaving] = useState(false);
@@ -78,7 +82,8 @@ const BlogEditor = () => {
                 date: new Date().getDate().toString().padStart(2, '0'),
                 month: new Date().toLocaleString('default', { month: 'short' }).toUpperCase(),
                 fullDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-                author: 'Admin',
+                author: form.author || 'Admin',
+                category: form.category || 'Architecture',
                 comments: '0 Comment',
                 status: 'Published',
             };
@@ -145,6 +150,34 @@ const BlogEditor = () => {
                         placeholder="Enter a compelling blog title..."
                         className="text-lg h-12 focus-visible:ring-[#118A43] border-slate-200"
                     />
+                </div>
+
+                {/* ── 1.5 Author & Category ── */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                    <div className="space-y-3">
+                        <Label htmlFor="blog-author" className="text-slate-700 font-semibold text-base">
+                            Author
+                        </Label>
+                        <Input
+                            id="blog-author"
+                            value={form.author}
+                            onChange={e => setField('author', e.target.value)}
+                            placeholder="e.g. John Doe (Defaults to Admin)"
+                            className="focus-visible:ring-[#118A43] border-slate-200"
+                        />
+                    </div>
+                    <div className="space-y-3">
+                        <Label htmlFor="blog-category" className="text-slate-700 font-semibold text-base">
+                            Category
+                        </Label>
+                        <Input
+                            id="blog-category"
+                            value={form.category}
+                            onChange={e => setField('category', e.target.value)}
+                            placeholder="e.g. Architecture, Real Estate..."
+                            className="focus-visible:ring-[#118A43] border-slate-200"
+                        />
+                    </div>
                 </div>
 
                 {/* ── 2. Featured Image ── */}
