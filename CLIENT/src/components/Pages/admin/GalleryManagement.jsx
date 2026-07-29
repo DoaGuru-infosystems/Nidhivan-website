@@ -17,6 +17,17 @@ const GalleryManagement = () => {
     const [newTitle, setNewTitle] = useState('');
     const [newAddress, setNewAddress] = useState('');
 
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setNewImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     useEffect(() => {
         setImages(getGalleryItems());
     }, []);
@@ -74,8 +85,23 @@ const GalleryManagement = () => {
                         </DialogHeader>
                         <div className="grid gap-5 py-4">
                             <div className="grid gap-2">
-                                <Label htmlFor="imageUrl" className="text-slate-700 font-medium">Image URL</Label>
-                                <Input id="imageUrl" value={newImage} onChange={(e) => setNewImage(e.target.value)} placeholder="https://example.com/image.jpg" className="focus-visible:ring-[#118A43]" />
+                                <Label className="text-slate-700 font-medium">Image (URL or File)</Label>
+                                <div className="flex gap-3">
+                                    <div className="flex-1 space-y-2">
+                                        <Input value={newImage} onChange={(e) => setNewImage(e.target.value)} placeholder="https://example.com/image.jpg" className="focus-visible:ring-[#118A43]" />
+                                        <div className="relative">
+                                            <input type="file" id="gallery-image-upload" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                                            <Label htmlFor="gallery-image-upload" className="flex items-center justify-center w-full h-10 px-4 py-2 border border-slate-200 border-dashed rounded-md cursor-pointer hover:bg-slate-50 transition-colors text-sm text-slate-600 bg-white shadow-sm font-medium">
+                                                Or upload from computer
+                                            </Label>
+                                        </div>
+                                    </div>
+                                    {newImage && (
+                                        <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
+                                            <img src={newImage} alt="Preview" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="title" className="text-slate-700 font-medium">Title</Label>

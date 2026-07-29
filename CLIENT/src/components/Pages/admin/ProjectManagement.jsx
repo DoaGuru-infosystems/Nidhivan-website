@@ -17,6 +17,18 @@ const ProjectManagement = () => {
     const [newType, setNewType] = useState('');
     const [newStatus, setNewStatus] = useState('');
     const [newLocation, setNewLocation] = useState('');
+    const [newImage, setNewImage] = useState('');
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setNewImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     useEffect(() => {
         setProjects(getProjects());
@@ -30,7 +42,7 @@ const ProjectManagement = () => {
             status: newStatus || 'Ongoing',
             location: newLocation || 'Jabalpur',
             category: newType || 'Residential',
-            image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80'
+            image: newImage || 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80'
         };
         const updated = [newProject, ...projects];
         setProjects(updated);
@@ -42,6 +54,7 @@ const ProjectManagement = () => {
         setNewType('');
         setNewStatus('');
         setNewLocation('');
+        setNewImage('');
     };
 
     const handleDelete = (id) => {
@@ -94,6 +107,25 @@ const ProjectManagement = () => {
                                 <Label htmlFor="location" className="text-slate-700 font-medium">Location</Label>
                                 <Input id="location" value={newLocation} onChange={(e) => setNewLocation(e.target.value)} placeholder="e.g. Main Street" className="focus-visible:ring-[#118A43]" />
                             </div>
+                            <div className="grid gap-2">
+                                <Label className="text-slate-700 font-medium">Project Image (Optional)</Label>
+                                <div className="flex gap-3">
+                                    <div className="flex-1 space-y-2">
+                                        <Input value={newImage} onChange={(e) => setNewImage(e.target.value)} placeholder="Image URL..." className="focus-visible:ring-[#118A43]" />
+                                        <div className="relative">
+                                            <input type="file" id="project-image-upload" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                                            <Label htmlFor="project-image-upload" className="flex items-center justify-center w-full h-10 px-4 py-2 border border-slate-200 border-dashed rounded-md cursor-pointer hover:bg-slate-50 transition-colors text-sm text-slate-600 bg-white shadow-sm font-medium">
+                                                Or upload from computer
+                                            </Label>
+                                        </div>
+                                    </div>
+                                    {newImage && (
+                                        <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
+                                            <img src={newImage} alt="Preview" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                         <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-slate-100">
                             <Button variant="outline" onClick={() => setIsDialogOpen(false)} className="border-slate-200 text-slate-600 hover:bg-slate-50">Cancel</Button>
@@ -121,7 +153,14 @@ const ProjectManagement = () => {
                         <TableBody>
                             {projects.map((item) => (
                                 <TableRow key={item.id} className="hover:bg-slate-50 transition-colors border-slate-100">
-                                    <TableCell className="font-medium text-slate-800 py-4 pl-6">{item.title}</TableCell>
+                                    <TableCell className="font-medium text-slate-800 py-4 pl-6">
+                                        <div className="flex items-center gap-3">
+                                            {item.image && (
+                                                <img src={item.image} alt={item.title} className="w-10 h-10 rounded-md object-cover flex-shrink-0 border border-slate-200" />
+                                            )}
+                                            {item.title}
+                                        </div>
+                                    </TableCell>
                                     <TableCell className="text-slate-600 py-4">{item.type}</TableCell>
                                     <TableCell className="text-slate-500 py-4">{item.location}</TableCell>
                                     <TableCell className="py-4">

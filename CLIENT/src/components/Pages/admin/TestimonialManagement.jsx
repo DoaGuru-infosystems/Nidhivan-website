@@ -17,6 +17,18 @@ const TestimonialManagement = () => {
     const [newClientName, setNewClientName] = useState('');
     const [newProfession, setNewProfession] = useState('');
     const [newQuote, setNewQuote] = useState('');
+    const [newImage, setNewImage] = useState('');
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setNewImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
     useEffect(() => {
         setTestimonials(getTestimonials());
@@ -27,7 +39,8 @@ const TestimonialManagement = () => {
             id: Date.now(),
             name: newClientName || 'Anonymous',
             profession: newProfession || 'Client',
-            quote: newQuote || 'No review provided.'
+            quote: newQuote || 'No review provided.',
+            image: newImage || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80' // default avatar
         };
         const updated = [newTestimonial, ...testimonials];
         setTestimonials(updated);
@@ -38,6 +51,7 @@ const TestimonialManagement = () => {
         setNewClientName('');
         setNewProfession('');
         setNewQuote('');
+        setNewImage('');
     };
 
     const handleDelete = (id) => {
@@ -78,6 +92,25 @@ const TestimonialManagement = () => {
                                 <Input id="profession" value={newProfession} onChange={(e) => setNewProfession(e.target.value)} placeholder="CEO at TechCorp" className="focus-visible:ring-[#118A43]" />
                             </div>
                             <div className="grid gap-2">
+                                <Label className="text-slate-700 font-medium">Client Photo (Optional)</Label>
+                                <div className="flex gap-3">
+                                    <div className="flex-1 space-y-2">
+                                        <Input value={newImage} onChange={(e) => setNewImage(e.target.value)} placeholder="Image URL..." className="focus-visible:ring-[#118A43]" />
+                                        <div className="relative">
+                                            <input type="file" id="testimonial-image-upload" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                                            <Label htmlFor="testimonial-image-upload" className="flex items-center justify-center w-full h-10 px-4 py-2 border border-slate-200 border-dashed rounded-md cursor-pointer hover:bg-slate-50 transition-colors text-sm text-slate-600 bg-white shadow-sm font-medium">
+                                                Or upload from computer
+                                            </Label>
+                                        </div>
+                                    </div>
+                                    {newImage && (
+                                        <div className="w-20 h-20 shrink-0 rounded-full overflow-hidden border border-slate-200 bg-slate-100">
+                                            <img src={newImage} alt="Preview" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="grid gap-2">
                                 <Label htmlFor="quote" className="text-slate-700 font-medium">Quote / Review</Label>
                                 <Textarea id="quote" value={newQuote} onChange={(e) => setNewQuote(e.target.value)} placeholder="Write their review here..." className="min-h-[120px] focus-visible:ring-[#118A43]" />
                             </div>
@@ -107,7 +140,14 @@ const TestimonialManagement = () => {
                         <TableBody>
                             {testimonials.map((item) => (
                                 <TableRow key={item.id} className="hover:bg-slate-50 transition-colors border-slate-100 group">
-                                    <TableCell className="font-medium text-slate-800 py-5 pl-6">{item.name}</TableCell>
+                                    <TableCell className="font-medium text-slate-800 py-5 pl-6">
+                                        <div className="flex items-center gap-3">
+                                            {item.image && (
+                                                <img src={item.image} alt={item.name} className="w-10 h-10 rounded-full object-cover flex-shrink-0 border border-slate-200" />
+                                            )}
+                                            {item.name}
+                                        </div>
+                                    </TableCell>
                                     <TableCell className="text-slate-500 py-5">{item.profession}</TableCell>
                                     <TableCell className="py-5">
                                         <div className="flex items-start gap-3 bg-white p-3 rounded-lg border border-slate-100 shadow-sm">
