@@ -14,9 +14,10 @@ const AdminLayout = () => {
         navigate('/admin/login');
     };
 
-    // Helper to get page title based on route
     const getPageTitle = () => {
         const path = location.pathname;
+        if (path === '/admin/blogs/new') return 'Add New Blog';
+        if (path.includes('/admin/blogs/edit/')) return 'Edit Blog Post';
         if (path.includes('/blogs')) return 'Blogs';
         if (path.includes('/testimonials')) return 'Testimonials';
         if (path.includes('/gallery')) return 'Gallery';

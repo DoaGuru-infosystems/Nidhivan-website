@@ -24,6 +24,7 @@ import ScrollToTop from './Common/ScrollToTop';
 import AdminLogin from './Pages/admin/AdminLogin';
 import AdminLayout from './Pages/admin/AdminLayout';
 import BlogManagement from './Pages/admin/BlogManagement';
+import BlogEditor from './Pages/admin/BlogEditor';
 import TestimonialManagement from './Pages/admin/TestimonialManagement';
 import GalleryManagement from './Pages/admin/GalleryManagement';
 import ContactLeadsManagement from './Pages/admin/ContactLeadsManagement';
@@ -59,6 +60,8 @@ class Components extends React.Component {
                     {/* ADMIN LAYOUT - Sidebar + Protected */}
                     <Route element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
                         <Route path="/admin/blogs" element={<BlogManagement />} />
+                        <Route path="/admin/blogs/new" element={<BlogEditor />} />
+                        <Route path="/admin/blogs/edit/:id" element={<BlogEditor />} />
                         <Route path="/admin/testimonials" element={<TestimonialManagement />} />
                         <Route path="/admin/gallery" element={<GalleryManagement />} />
                         <Route path="/admin/leads" element={<ContactLeadsManagement />} />
