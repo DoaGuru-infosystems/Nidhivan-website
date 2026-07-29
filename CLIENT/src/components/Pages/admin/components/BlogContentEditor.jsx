@@ -217,7 +217,7 @@ const BlogContentEditor = ({ value, onChange }) => {
 
             {/* HTML Mode — highlighted code editor */}
             {mode === 'html' && (
-                <div className="bg-[#2d2d2d] min-h-[280px]">
+                <div className="html-editor-container bg-[#2d2d2d] min-h-[280px]">
                     <Editor
                         value={value || ''}
                         onValueChange={(code) => onChange(code)}
@@ -260,6 +260,13 @@ const BlogContentEditor = ({ value, onChange }) => {
                     pointer-events: none;
                     float: left;
                     height: 0;
+                }
+                
+                /* Override global .tag class in custom.css for PrismJS HTML tags */
+                .html-editor-container .token.tag {
+                    background-color: transparent !important;
+                    color: #e2777a !important;
+                    padding: 0 !important;
                 }
             `}</style>
         </div>
