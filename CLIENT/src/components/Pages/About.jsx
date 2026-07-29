@@ -16,7 +16,7 @@ const servicesGrid = [
     { type: 'text', title: siteData.services[1].title, desc: siteData.services[1].description },
     
     { type: 'text', title: siteData.services[2].title, desc: siteData.services[2].description },
-    { type: 'image', src: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80' },
     { type: 'text', title: siteData.services[3].title, desc: siteData.services[3].description },
     { type: 'image', src: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80' }
 ];
@@ -76,7 +76,6 @@ class About extends React.Component {
 
                 <Statistics1 />
                 <ClientsLogo1 />
-                <GoogleMapIframe />
             </div>
         );
     }

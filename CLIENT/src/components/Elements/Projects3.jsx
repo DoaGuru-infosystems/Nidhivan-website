@@ -16,7 +16,7 @@ const projects = [
     {
         // image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Modern Bathroom',
         description: 'Analysis and planning services that help both the client and architects to work out the forthcoming project...'
     },
@@ -37,7 +37,7 @@ const projects = [
     {
         // image: new URL('./../../images/projects/square/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80", // TEMP LIVE PREVIEW
         title: 'Modish Interior',
         description: 'Our team also provides consultations on all architectural issues, even if you need specific...'
     },
@@ -90,7 +90,7 @@ const Projects3 = (props) => {
     };
     return (
         <>
-            <div className={`${props.bgcolor} section-full p-tb80  inner-page-padding`}>
+            <div className={`${props.bgcolor} section-full py-8 md:py-20`}>
                 <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}

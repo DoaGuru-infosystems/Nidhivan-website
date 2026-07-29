@@ -197,7 +197,7 @@ const ProjectMasonary3 = () => {
         <div className="page-content">
             <Banner title="Masonry With 3 Columns" pagename="Project with Masonry With 3 Columns" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
             
-            <div className="section-full p-tb80 bg-white inner-page-padding">
+            <div className="section-full py-8 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* Filter Nav */}
                     <div className="filter-wrap p-b30 text-center">

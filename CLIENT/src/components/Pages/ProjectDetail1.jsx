@@ -39,7 +39,7 @@ class ProjectDetail1 extends React.Component {
                     <Banner title="Project Details" pagename="Project Detail" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg} />
 
                     {/* SECTION CONTENT START */}
-                    <div className="section-full p-tb80 inner-page-padding stick_in_parent">
+                    <div className="section-full py-8 md:py-20 stick_in_parent">
                         <div className="max-w-7xl mx-auto px-4">
                             <div className="grid grid-cols-12 gap-8">
                                 <div className="col-span-12 md:col-span-7 lg:col-span-7 sticky_column">

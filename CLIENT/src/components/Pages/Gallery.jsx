@@ -149,7 +149,7 @@ const Gallery = () => {
         <div className="page-content">
             <Banner title="Our Gallery" pagename="Gallery" description="Explore our portfolio of breathtaking real estate projects, interior designs, and architectural marvels." bgimage={bnrimg}/>
             
-            <div className="section-full p-tb80 inner-page-padding">
+            <div className="section-full py-8 md:py-20">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="filter-wrap p-b30 text-center">
                         <ul className="filter-navigation masonry-filter clearfix flex flex-wrap justify-center gap-2">

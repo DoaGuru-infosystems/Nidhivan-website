@@ -89,7 +89,7 @@ const Projects4 = () => {
     };
     return (
         <>
-            <div className="section-full p-tb80 bg-white inner-page-padding">
+            <div className="section-full py-8 md:py-20 bg-white">
                 <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}

@@ -46,7 +46,7 @@ class SimilarProjects extends React.Component {
         };
         return (
             <>
-                <div className="section-full p-tb80 bg-gray inner-page-padding">
+                <div className="section-full py-8 md:py-20 bg-gray">
                     <div className="max-w-7xl mx-auto px-4">
                         <div className="section-content">
                             {/* TITLE START */}
