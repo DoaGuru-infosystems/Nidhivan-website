@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { getProjects } from '@/lib/dataStore';
 
 const projects = [
     {
@@ -72,7 +73,16 @@ import "yet-another-react-lightbox/styles.css";
 const Projects3 = (props) => {
     const [open, setOpen] = React.useState(false);
     const [currentIndex, setCurrentIndex] = React.useState(0);
-    const slides = projects.map(item => ({ src: item.image }));
+    const [allProjects, setAllProjects] = useState(projects);
+    const slides = allProjects.map(item => ({ src: item.image }));
+
+    useEffect(() => {
+        const dynamic = getProjects().map(item => ({
+            ...item,
+            description: item.location
+        }));
+        setAllProjects([...dynamic, ...projects]);
+    }, []);
 
     const swiperOptions = {
         modules: [Navigation, Autoplay],
@@ -104,7 +114,7 @@ const Projects3 = (props) => {
                         {/* TITLE END */}
                         <div className="work-carousel-outer">
                             <Swiper className="project-carousel project-carousel3 owl-btn-vertical-center p-lr80" {...swiperOptions}>
-                                {projects.map((item, index) => (
+                                {allProjects.map((item, index) => (
                                     <SwiperSlide key={index}>
                                         <div className="project-mas hover-shadow m-a30">
                                             <div className="image-effect-one">
@@ -116,7 +126,7 @@ const Projects3 = (props) => {
                                                 </div>
                                             </div>
                                             <div className="project-info p-a20 bg-gray">
-                                                <h4 className="sx-tilte m-t0"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
+                                                <h4 className="sx-tilte m-t0"><NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"}>{item.title}</NavLink></h4>
                                                 <p>{item.description}</p>
                                                 <NavLink to={"/services-detail"}><i className="link-plus bg-primary" /></NavLink>
                                             </div>

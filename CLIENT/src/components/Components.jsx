@@ -73,8 +73,10 @@ class Components extends React.Component {
                         <Route path='/completed-projects' element={<ProjectMasonary3/>} />
                         <Route path='/upcoming-projects' element={<ProjectCorousel/>} />
                         <Route path='/project-detail' element={<ProjectDetail1/>} />
+                        <Route path='/project-detail/:id' element={<ProjectDetail1/>} />
                         <Route path='/blogs' element={<BlogGrid/>} />
                         <Route path='/blog-single' element={<BlogSingle/>} />
+                        <Route path='/blog-single/:id' element={<BlogSingle/>} />
                         <Route path='/contact-us' element={<ContactUs/>} />
                         <Route path='/terms' element={<Terms/>} />
                         <Route path='/privacy' element={<PrivacyPolicy/>} />

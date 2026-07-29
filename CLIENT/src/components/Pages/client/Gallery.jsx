@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Banner from '../../Elements/Banner';
 import Masonry from 'react-masonry-css';
@@ -7,6 +7,7 @@ import { Flip } from 'gsap/Flip';
 import { Maximize } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import { getGalleryItems } from '@/lib/dataStore';
 
 gsap.registerPlugin(Flip);
 
@@ -15,7 +16,9 @@ const filters = [
     { label: "Decor", filter: "cat-2" },
     { label: "Outdoor", filter: "cat-3" },
     { label: "Interiors", filter: "cat-4" },
-    { label: "Residential", filter: "cat-5" }
+    { label: "Residential", filter: "cat-5" },
+    { label: "Commercial", filter: "Commercial" }, // Added for dynamic data support
+    { label: "General", filter: "General" }
 ];
 
 const projects = [
@@ -108,9 +111,21 @@ const breakpointColumnsObj = {
 const Gallery = () => {
     const [activeFilter, setActiveFilter] = useState('*');
     const galleryRef = useRef(null);
+    const [allProjects, setAllProjects] = useState(projects);
     const [filteredItems, setFilteredItems] = useState(projects);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
+
+    useEffect(() => {
+        const dynamic = getGalleryItems().map(item => ({
+            ...item,
+            // Simple map: if dynamic category matches a known label, use its filter, else use category as string
+            filter: filters.find(f => f.label === item.category)?.filter || item.category 
+        }));
+        const merged = [...dynamic, ...projects];
+        setAllProjects(merged);
+        setFilteredItems(merged);
+    }, []);
 
     // GSAP Flip animation on filter change
     useLayoutEffect(() => {
@@ -121,8 +136,8 @@ const Gallery = () => {
         
         // Apply filter logic
         const newFiltered = activeFilter === '*' 
-            ? projects 
-            : projects.filter(item => item.filter === activeFilter);
+            ? allProjects 
+            : allProjects.filter(item => item.filter === activeFilter);
             
         setFilteredItems(newFiltered);
 

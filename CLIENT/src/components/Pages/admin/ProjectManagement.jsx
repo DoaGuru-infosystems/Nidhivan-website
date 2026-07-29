@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -6,16 +6,49 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Pencil, Trash2, Plus, Building2 } from 'lucide-react';
-
-const DUMMY_PROJECTS = [
-    { id: 1, name: 'Nidhivan Heights', type: 'Residential', location: 'City Center', status: 'Ongoing' },
-    { id: 2, name: 'Nidhivan Commercial Complex', type: 'Commercial', location: 'IT Park Road', status: 'Upcoming' },
-    { id: 3, name: 'Nidhivan Greens', type: 'Residential', location: 'Suburbs', status: 'Completed' },
-];
+import { getProjects, saveProjects } from '@/lib/dataStore';
 
 const ProjectManagement = () => {
-    const [projects, setProjects] = useState(DUMMY_PROJECTS);
+    const [projects, setProjects] = useState([]);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    // Form state
+    const [newTitle, setNewTitle] = useState('');
+    const [newType, setNewType] = useState('');
+    const [newStatus, setNewStatus] = useState('');
+    const [newLocation, setNewLocation] = useState('');
+
+    useEffect(() => {
+        setProjects(getProjects());
+    }, []);
+
+    const handleSave = () => {
+        const newProject = {
+            id: Date.now(),
+            title: newTitle || 'Untitled Project',
+            type: newType || 'Residential',
+            status: newStatus || 'Ongoing',
+            location: newLocation || 'Jabalpur',
+            category: newType || 'Residential',
+            image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80'
+        };
+        const updated = [newProject, ...projects];
+        setProjects(updated);
+        saveProjects(updated);
+        setIsDialogOpen(false);
+        
+        // Reset
+        setNewTitle('');
+        setNewType('');
+        setNewStatus('');
+        setNewLocation('');
+    };
+
+    const handleDelete = (id) => {
+        const updated = projects.filter(p => p.id !== id);
+        setProjects(updated);
+        saveProjects(updated);
+    };
 
     return (
         <div className="space-y-6">
@@ -44,27 +77,27 @@ const ProjectManagement = () => {
                         </DialogHeader>
                         <div className="grid gap-5 py-4">
                             <div className="grid gap-2">
-                                <Label htmlFor="project-name" className="text-slate-700 font-medium">Project Name</Label>
-                                <Input id="project-name" placeholder="e.g. Nidhivan Plaza" className="focus-visible:ring-[#118A43]" />
+                                <Label htmlFor="project-title" className="text-slate-700 font-medium">Project Name</Label>
+                                <Input id="project-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="e.g. Nidhivan Plaza" className="focus-visible:ring-[#118A43]" />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="grid gap-2">
                                     <Label htmlFor="type" className="text-slate-700 font-medium">Type</Label>
-                                    <Input id="type" placeholder="Residential / Commercial" className="focus-visible:ring-[#118A43]" />
+                                    <Input id="type" value={newType} onChange={(e) => setNewType(e.target.value)} placeholder="Residential / Commercial" className="focus-visible:ring-[#118A43]" />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label htmlFor="status" className="text-slate-700 font-medium">Status</Label>
-                                    <Input id="status" placeholder="Ongoing / Completed" className="focus-visible:ring-[#118A43]" />
+                                    <Input id="status" value={newStatus} onChange={(e) => setNewStatus(e.target.value)} placeholder="Ongoing / Completed" className="focus-visible:ring-[#118A43]" />
                                 </div>
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="location" className="text-slate-700 font-medium">Location</Label>
-                                <Input id="location" placeholder="e.g. Main Street" className="focus-visible:ring-[#118A43]" />
+                                <Input id="location" value={newLocation} onChange={(e) => setNewLocation(e.target.value)} placeholder="e.g. Main Street" className="focus-visible:ring-[#118A43]" />
                             </div>
                         </div>
                         <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-slate-100">
                             <Button variant="outline" onClick={() => setIsDialogOpen(false)} className="border-slate-200 text-slate-600 hover:bg-slate-50">Cancel</Button>
-                            <Button onClick={() => setIsDialogOpen(false)} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white">Save Project</Button>
+                            <Button onClick={handleSave} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white">Save Project</Button>
                         </div>
                     </DialogContent>
                 </Dialog>
@@ -88,7 +121,7 @@ const ProjectManagement = () => {
                         <TableBody>
                             {projects.map((item) => (
                                 <TableRow key={item.id} className="hover:bg-slate-50 transition-colors border-slate-100">
-                                    <TableCell className="font-medium text-slate-800 py-4 pl-6">{item.name}</TableCell>
+                                    <TableCell className="font-medium text-slate-800 py-4 pl-6">{item.title}</TableCell>
                                     <TableCell className="text-slate-600 py-4">{item.type}</TableCell>
                                     <TableCell className="text-slate-500 py-4">{item.location}</TableCell>
                                     <TableCell className="py-4">
@@ -104,13 +137,20 @@ const ProjectManagement = () => {
                                             <Button variant="ghost" size="icon" className="h-8 w-8 text-[#118A43] hover:bg-[#118A43]/10 hover:text-[#0f7a3b]" title="Edit">
                                                 <Pencil size={16} />
                                             </Button>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-red-500 hover:bg-red-50 hover:text-red-700" title="Delete">
+                                            <Button onClick={() => handleDelete(item.id)} variant="ghost" size="icon" className="h-8 w-8 text-red-500 hover:bg-red-50 hover:text-red-700" title="Delete">
                                                 <Trash2 size={16} />
                                             </Button>
                                         </div>
                                     </TableCell>
                                 </TableRow>
                             ))}
+                            {projects.length === 0 && (
+                                <TableRow>
+                                    <TableCell colSpan={5} className="text-center py-8 text-slate-500">
+                                        No projects found. Add a new one!
+                                    </TableCell>
+                                </TableRow>
+                            )}
                         </TableBody>
                     </Table>
                 </CardContent>

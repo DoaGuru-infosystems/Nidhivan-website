@@ -33,6 +33,13 @@ class ProjectDetail1 extends React.Component {
 
     };
     render() {
+        const { dynamicProject } = this.props;
+        const title = dynamicProject?.title || "A multitask profession which creates any land in beautiful creation";
+        const type = dynamicProject?.type || "Construction, Branding";
+        const location = dynamicProject?.location || "Mountain View CA 94043";
+        const status = dynamicProject?.status || "Ongoing";
+        const image = dynamicProject?.image || "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80";
+
         return (
             <>
                 <div className="relative">
@@ -45,7 +52,7 @@ class ProjectDetail1 extends React.Component {
                                 <div className="col-span-12 md:col-span-7 lg:col-span-7 sticky_column">
                                     <div className="project-detail-containt">
                                         <div className="bg-white text-[#2B2B2B]">
-                                            <h3>A multitask profession which creates any land in beautiful creation </h3>
+                                            <h3>{title}</h3>
                                             <p> Designers think everything done by someone else is awful, and that they could do it better themselves, which explains why I designed my own living room carpet, I suppose. the architect represents neither a Dionysian nor an Apollinian condition: here it is the mighty act of will, the will which moves mountains, the intoxication of the strong will, which demands artistic expression. The most powerful men have always inspired the architects; the architect has always been influenced by power.</p>
                                             <div className="product-block">
                                                 <ul>
@@ -54,8 +61,8 @@ class ProjectDetail1 extends React.Component {
                                                         <p>October 10, 2022</p>
                                                     </li>
                                                     <li>
-                                                        <h4 className="m-b10">Client</h4>
-                                                        <p>Studio Massimo, Italy</p>
+                                                        <h4 className="m-b10">Status</h4>
+                                                        <p>{status}</p>
                                                     </li>
                                                     <li>
                                                         <h4 className="m-b10">Project type</h4>
@@ -91,7 +98,7 @@ class ProjectDetail1 extends React.Component {
                                             <div className="sx-media">
                                                 {/* <img src={new URL('../../../images/projects/portrait/pic7.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                <img src={"https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                                <img src={image} alt="" /> {/* TEMP LIVE PREVIEW */}
                                             </div>
                                         </div>
                                         <div className="project-detail-pic m-b30">
@@ -141,4 +148,13 @@ class ProjectDetail1 extends React.Component {
     };
 };
 
-export default ProjectDetail1;
+import { useParams } from 'react-router-dom';
+import { getProjects } from '@/lib/dataStore';
+
+const ProjectDetail1Wrapper = (props) => {
+    const { id } = useParams();
+    const dynamicProject = id ? getProjects().find(p => p.id.toString() === id) : null;
+    return <ProjectDetail1 {...props} dynamicProject={dynamicProject} />;
+};
+
+export default ProjectDetail1Wrapper;

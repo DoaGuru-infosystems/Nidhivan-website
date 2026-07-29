@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { getProjects } from '@/lib/dataStore';
 
 const projects = [
     {
@@ -62,9 +63,7 @@ const projects = [
         title: 'Living Room',
         description: 'Engineering your dreams with us the architect has always.'
     }
-]
-
-var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
+];
 
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -72,7 +71,16 @@ import "yet-another-react-lightbox/styles.css";
 const Projects6 = () => {
     const [open, setOpen] = React.useState(false);
     const [currentIndex, setCurrentIndex] = React.useState(0);
-    const slides = projects.map(item => ({ src: item.image }));
+    const [allProjects, setAllProjects] = useState(projects);
+    const slides = allProjects.map(item => ({ src: item.image }));
+
+    useEffect(() => {
+        const dynamic = getProjects().map(item => ({
+            ...item,
+            description: item.location
+        }));
+        setAllProjects([...dynamic, ...projects]);
+    }, []);
 
     const swiperOptions = {
         modules: [Navigation, Autoplay],
@@ -90,23 +98,23 @@ const Projects6 = () => {
     };
     return (
         <>
-            <div className="relative py-8 md:py-20 bg-gray">
-                <div className="max-w-7xl mx-auto px-4">
+            <div className="relative py-8 md:pt-20 md:pb-12 bg-gray">
+                <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}
-                        <div className="mb-10">
-                            <div className="sx-separator-outer separator-left">
-                                <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                                    <h3 className="sep-line-one">Similar Project</h3>
+                        <div className="mb-10 text-center">
+                            <div className="sx-separator-outer text-black">
+                                <div className="sx-separator bg-white bg-moving bg-repeat-x">
+                                    <h3 className="sep-line-one">Similar Projects</h3>
                                 </div>
                             </div>
                         </div>
                         {/* TITLE END */}
                         <div className="work-carousel-outer">
                             <Swiper className="project-carousel project-carousel3 owl-btn-vertical-center p-lr80" {...swiperOptions}>
-                                {projects.map((item, index) => (
+                                {allProjects.map((item, index) => (
                                     <SwiperSlide key={index}>
-                                        <div className="project-mas m-a30">
+                                        <div className="project-mas hover-shadow m-a30">
                                             <div className="image-effect-one">
                                                 <img src={item.image} alt="" className="cursor-pointer" onClick={() => { setCurrentIndex(index); setOpen(true); }} />
                                                 <div className="figcaption">
@@ -115,10 +123,10 @@ const Projects6 = () => {
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div className="project-info p-t20">
-                                                <h4 className="sx-tilte  m-t0"><NavLink to={"/project-detail2"}>{item.title}</NavLink></h4>
+                                            <div className="project-info p-a20 bg-white">
+                                                <h4 className="sx-tilte m-t0"><NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"}>{item.title}</NavLink></h4>
                                                 <p>{item.description}</p>
-                                                <NavLink to={"/project-detail1"}><i className="link-plus bg-primary" /></NavLink>
+                                                <NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"}><i className="link-plus bg-primary" /></NavLink>
                                             </div>
                                         </div>
                                     </SwiperSlide>

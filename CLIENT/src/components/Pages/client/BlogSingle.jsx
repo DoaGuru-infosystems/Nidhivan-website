@@ -30,6 +30,14 @@ class BlogSingle extends React.Component {
 
     };
     render() {
+        const { dynamicBlog } = this.props;
+        const title = dynamicBlog?.title || "Blog post with image slider there are many variations of passages.";
+        const date = dynamicBlog ? dynamicBlog.date : "20";
+        const month = dynamicBlog ? dynamicBlog.month : "Septembar 2022";
+        const author = dynamicBlog?.author || "Admin";
+        const category = dynamicBlog?.category || "Architecture";
+        const image = dynamicBlog?.image || "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80";
+
         return (
             <>
                 <div className="relative ">
@@ -42,20 +50,18 @@ class BlogSingle extends React.Component {
                                 <div className="blog-post blog-detail text-[#2B2B2B]">
                                     <div className="sx-post-media">
                                         <div className="portfolio-item">
-                                            {/* <img className="img-responsive" src={new URL('../../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/> ORIGINAL DUMMY - restore when real property photos are ready */}
-
-                                            <img className="img-responsive" src={"https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80"} alt=""/> {/* TEMP LIVE PREVIEW */}
+                                            <img className="img-responsive" src={image} alt=""/>
                                         </div>
                                     </div>
                                     <div className="sx-post-meta  m-t20">
                                         <ul>
-                                            <li className="post-date"><strong>20 </strong> <span>Septembar 2022</span> </li>
-                                            <li className="post-author"><NavLink to={"#"}>By <span>Admin</span></NavLink> </li>
-                                            <li className="post-category"><NavLink to={"#"}><span>Architecture</span></NavLink> </li>
+                                            <li className="post-date"><strong>{date} </strong> <span>{month}</span> </li>
+                                            <li className="post-author"><NavLink to={"#"}>By <span>{author}</span></NavLink> </li>
+                                            <li className="post-category"><NavLink to={"#"}><span>{category}</span></NavLink> </li>
                                         </ul>
                                     </div>
                                     <div className="sx-post-title ">
-                                        <h3 className="post-title">Blog post with image slider there are many variations of passages.</h3>
+                                        <h3 className="post-title">{title}</h3>
                                     </div>
                                     <div className="sx-post-text">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta.</p>
@@ -326,4 +332,13 @@ class BlogSingle extends React.Component {
     };
 };
 
-export default BlogSingle;
+import { useParams } from 'react-router-dom';
+import { getBlogs } from '@/lib/dataStore';
+
+const BlogSingleWrapper = (props) => {
+    const { id } = useParams();
+    const dynamicBlog = id ? getBlogs().find(b => b.id.toString() === id) : null;
+    return <BlogSingle {...props} dynamicBlog={dynamicBlog} />;
+};
+
+export default BlogSingleWrapper;

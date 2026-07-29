@@ -146,6 +146,8 @@ const projects = [
 var bnrimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"; // TEMP LIVE PREVIEW
 var bgimg1 = new URL('../../../images/background/cross-line.png', import.meta.url).href;
 
+import { getProjects } from '@/lib/dataStore';
+
 const breakpointColumnsObj = {
   default: 3,
   992: 3,
@@ -156,9 +158,21 @@ const breakpointColumnsObj = {
 const ProjectMasonary3 = () => {
     const [activeFilter, setActiveFilter] = useState('*');
     const galleryRef = useRef(null);
+    const [allProjects, setAllProjects] = useState(projects);
     const [filteredItems, setFilteredItems] = useState(projects);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
+
+    useEffect(() => {
+        const dynamic = getProjects().map(item => ({
+            ...item,
+            description: item.location, // mapping location to description
+            filter: filters.find(f => f.label === item.category)?.filter || item.category 
+        }));
+        const merged = [...dynamic, ...projects];
+        setAllProjects(merged);
+        setFilteredItems(merged);
+    }, []);
 
     // GSAP Flip animation on filter change
     useLayoutEffect(() => {
@@ -169,8 +183,8 @@ const ProjectMasonary3 = () => {
         
         // Filter projects
         const newFiltered = activeFilter === '*' 
-            ? projects 
-            : projects.filter(item => item.filter === activeFilter);
+            ? allProjects 
+            : allProjects.filter(item => item.filter === activeFilter);
             
         setFilteredItems(newFiltered);
 
@@ -238,9 +252,9 @@ const ProjectMasonary3 = () => {
                                             </div>
                                         </div>
                                         <div className="project-info p-a20 bg-gray p-6 rounded-b-sm relative">
-                                            <h4 className="sx-tilte m-tb0 text-lg font-bold mb-2"><NavLink to={"/project-detail1"}>{item.title}</NavLink></h4>
+                                            <h4 className="sx-tilte m-tb0 text-lg font-bold mb-2"><NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"}>{item.title}</NavLink></h4>
                                             <p className="text-gray-600 text-sm">{item.description}</p>
-                                            <NavLink to={"/project-detail1"} className="absolute right-6 -top-6 bg-[#ff5e14] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform hover:-translate-y-1">
+                                            <NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"} className="absolute right-6 -top-6 bg-[#ff5e14] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-transform hover:-translate-y-1">
                                                 <Plus size={24} />
                                             </NavLink>
                                         </div>

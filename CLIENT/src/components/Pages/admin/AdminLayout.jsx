@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { logoutAdmin } from './utils/auth';
 import { BookOpen, MessageSquare, Image as ImageIcon, Users, Building2, LogOut, ChevronDown } from 'lucide-react';
-import logo from '../../../images/nidhivan logo.png';
+import logo from '@/images/nidhivan logo.png';
 
 const AdminLayout = () => {
     const navigate = useNavigate();

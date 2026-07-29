@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { NavLink } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { siteData } from '../../data/siteContent';
 import { Maximize, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getProjects } from '@/lib/dataStore';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -46,11 +47,21 @@ const Projects1 = () => {
     const [lightboxIndex, setLightboxIndex] = useState(0);
     const [prevEl, setPrevEl] = useState(null);
     const [nextEl, setNextEl] = useState(null);
+    const [allProjects, setAllProjects] = useState(siteData.projects);
+
+    useEffect(() => {
+        const dynamic = getProjects().map(item => ({
+            ...item,
+            address: item.location,
+            filter: filters.find(f => f.label === item.category)?.filter || item.category
+        }));
+        setAllProjects([...dynamic, ...siteData.projects]);
+    }, []);
 
     // Filter projects based on active state
     const filteredProjects = activeFilter === '*'
-        ? siteData.projects
-        : siteData.projects.filter(project => project.filter === activeFilter);
+        ? allProjects
+        : allProjects.filter(project => project.filter === activeFilter);
 
     return (
         <div className="relative py-8 md:pt-20 md:pb-12 bg-white">

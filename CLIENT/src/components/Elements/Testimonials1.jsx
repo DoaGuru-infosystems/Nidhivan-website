@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CountUp from 'react-countup';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { siteData } from '../../data/siteContent';
 import { Quote } from 'lucide-react';
+import { getTestimonials } from '@/lib/dataStore';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -14,6 +15,17 @@ var bgimg3 = new URL('./../../images/background/cross-line2.png', import.meta.ur
 var bgimg4 = new URL('./../../images/background/bg-12.jpg', import.meta.url).href;
 
 const Testimonials1 = () => {
+    const [allTestimonials, setAllTestimonials] = useState(siteData.testimonials);
+
+    useEffect(() => {
+        const dynamic = getTestimonials().map(t => ({
+            ...t,
+            role: t.profession, // map profession to role
+            text: t.quote       // map quote to text
+        }));
+        setAllTestimonials([...dynamic, ...siteData.testimonials]);
+    }, []);
+
     return (
         <div className="relative w-full px-0">
             <div className="section-content">
@@ -68,7 +80,7 @@ const Testimonials1 = () => {
                                 slidesPerView={1}
                                 className="testimonial-home"
                             >
-                                {siteData.testimonials.map((item, index) => {
+                                {allTestimonials.map((item, index) => {
                                     return (
                                         <SwiperSlide key={index}>
                                             <div className="testimonial-2 hover-animation-1 pb-12">

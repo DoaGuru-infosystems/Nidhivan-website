@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Banner from '../../Elements/Banner';
+import { getBlogs } from '@/lib/dataStore';
 
 const blogs = [
     {
         // image: new URL('../../../images/blog/blog-grid/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
         image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Weâ€™ll nail your next project, because nobody wants...',
+        title: 'We’ll nail your next project, because nobody wants...',
         author: 'John',
         date: '5',
         month: 'SEP',
@@ -37,7 +38,7 @@ const blogs = [
         // image: new URL('../../../images/blog/blog-grid/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
         image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'When it comes to your house, donâ€™t mess...',
+        title: 'When it comes to your house, don’t mess...',
         author: 'John',
         date: '16',
         month: 'SEP',
@@ -47,7 +48,7 @@ const blogs = [
         // image: new URL('../../../images/blog/blog-grid/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
         image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Donâ€™t get framed by the competition, trust our...',
+        title: 'Don’t get framed by the competition, trust our...',
         author: 'John',
         date: '18',
         month: 'SEP',
@@ -57,7 +58,7 @@ const blogs = [
         // image: new URL('../../../images/blog/blog-grid/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
         image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Weâ€™re the construction kings, building up great...',
+        title: 'We’re the construction kings, building up great...',
         author: 'John',
         date: '15',
         month: 'SEP',
@@ -71,7 +72,21 @@ const blogs = [
 var bnrimg = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"; // TEMP LIVE PREVIEW
 
 class BlogGrid extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dynamicBlogs: []
+        };
+    }
+
+    componentDidMount() {
+        const dynamic = getBlogs().filter(b => b.status === 'Published');
+        this.setState({ dynamicBlogs: dynamic });
+    }
+
     render() {
+        const allBlogs = [...this.state.dynamicBlogs, ...blogs];
+
         return (
             <>
                 <div className="relative">
@@ -81,25 +96,25 @@ class BlogGrid extends React.Component {
                        
                     <div className="max-w-7xl mx-auto px-4">
                             <div className="masonry-outer mfp-gallery news-grid clearfix grid grid-cols-12 gap-8 ">
-                                {blogs.map((item, index) => (
+                                {allBlogs.map((item, index) => (
                                     <div className="masonry-item col-span-12 md:col-span-6 lg:col-span-4" key={index}>
                                     <div className="blog-post blog-grid date-style-2">
                                         <div className="sx-post-media sx-img-effect img-reflection">
-                                            <NavLink to={"/blog-single"}><img src={item.image} alt="" /></NavLink>
+                                            <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}><img src={item.image} alt="" /></NavLink>
                                         </div>
                                         <div className="sx-post-info p-t30">
                                             <div className="sx-post-meta ">
                                                 <ul>
                                                     <li className="post-date"><strong>{item.date}</strong> <span>{item.month}</span> </li>
-                                                    <li className="post-author"><NavLink to={"/blog-single"}>By <span>{item.author}</span></NavLink> </li>
-                                                    <li className="post-comment"> <NavLink to={"/blog-single"}>{item.comments}</NavLink> </li>
+                                                    <li className="post-author"><NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}>By <span>{item.author}</span></NavLink> </li>
+                                                    <li className="post-comment"> <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}>{item.comments}</NavLink> </li>
                                                 </ul>
                                             </div>
                                             <div className="sx-post-title ">
-                                                <h4 className="post-title"><NavLink to={"/blog-single"}>{item.title}</NavLink></h4>
+                                                <h4 className="post-title"><NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}>{item.title}</NavLink></h4>
                                             </div>
                                             <div className="sx-post-readmore">
-                                                <NavLink to={"/blog-single"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
+                                                <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
                                             </div>
                                         </div>
                                     </div>

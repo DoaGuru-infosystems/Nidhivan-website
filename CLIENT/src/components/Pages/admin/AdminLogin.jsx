@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { loginAdmin, DEMO_CREDENTIALS_DISPLAY } from './utils/auth';
 import { Building2, Lock, Mail, User, ShieldCheck } from 'lucide-react';
-import logo from '../../../images/nidhivan logo.png';
+import logo from '@/images/nidhivan logo.png';
 
 const AdminLogin = () => {
     const navigate = useNavigate();

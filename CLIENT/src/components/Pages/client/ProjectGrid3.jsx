@@ -97,12 +97,26 @@ const projects = [
 var bnrimg = "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=1600&q=80"; // TEMP LIVE PREVIEW
 var bgimg1 = new URL('../../../images/background/cross-line.png', import.meta.url).href;
 
+import { getProjects } from '@/lib/dataStore';
+
 const ProjectGrid3 = () => {
     const [activeFilter, setActiveFilter] = useState('*');
     const galleryRef = useRef(null);
+    const [allProjects, setAllProjects] = useState(projects);
     const [filteredItems, setFilteredItems] = useState(projects);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
+
+    useEffect(() => {
+        const dynamic = getProjects().map(item => ({
+            ...item,
+            address: item.location, // map location to address
+            filter: filters.find(f => f.label === item.category)?.filter || item.category 
+        }));
+        const merged = [...dynamic, ...projects];
+        setAllProjects(merged);
+        setFilteredItems(merged);
+    }, []);
 
     // GSAP Flip animation on filter change
     useLayoutEffect(() => {
@@ -113,8 +127,8 @@ const ProjectGrid3 = () => {
         
         // Apply filter logic
         const newFiltered = activeFilter === '*' 
-            ? projects 
-            : projects.filter(item => item.filter === activeFilter);
+            ? allProjects 
+            : allProjects.filter(item => item.filter === activeFilter);
             
         setFilteredItems(newFiltered);
 
@@ -135,7 +149,7 @@ const ProjectGrid3 = () => {
                 )
             });
         });
-    }, [activeFilter]);
+    }, [activeFilter, allProjects]);
 
     return (
         <div className="relative">
@@ -169,7 +183,7 @@ const ProjectGrid3 = () => {
                                         <img src={item.image} alt={item.title} className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110" />
                                     </div>
                                     <div className="sx-info p-t20 text-white absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                                        <h4 className="sx-tilte text-xl font-bold mb-1"><NavLink to={"/project-detail1"} className="text-white">{item.title}</NavLink></h4>
+                                        <h4 className="sx-tilte text-xl font-bold mb-1"><NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"} className="text-white">{item.title}</NavLink></h4>
                                         <p className="m-b0 text-sm text-gray-200">{item.address}</p>
                                     </div>
                                     <button 
