@@ -90,7 +90,7 @@ const Projects4 = () => {
     return (
         <>
             <div className="section-full p-tb80 bg-white inner-page-padding">
-                <div className="container-fluid">
+                <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}
                         <div className="section-head">

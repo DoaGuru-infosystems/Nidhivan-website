@@ -91,7 +91,7 @@ const Projects6 = () => {
     return (
         <>
             <div className="section-full p-tb80 bg-gray inner-page-padding">
-                <div className="container">
+                <div className="max-w-7xl mx-auto px-4">
                     <div className="section-content">
                         {/* TITLE START */}
                         <div className="section-head">

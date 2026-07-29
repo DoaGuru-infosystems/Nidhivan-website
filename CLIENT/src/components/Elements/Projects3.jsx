@@ -91,7 +91,7 @@ const Projects3 = (props) => {
     return (
         <>
             <div className={`${props.bgcolor} section-full p-tb80  inner-page-padding`}>
-                <div className="container-fluid">
+                <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}
                         <div className="section-head">

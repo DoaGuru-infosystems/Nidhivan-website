@@ -45,7 +45,7 @@ class About extends React.Component {
                 
                 {/* Custom What We Do - Matching Original Theme Checkerboard */}
                 <div className="section-full bg-white">
-                    <div className="container p-t80 p-b40">
+                    <div className="max-w-7xl mx-auto px-4 p-t80 p-b40">
                         <div className="section-head text-center">
                             <h2 className="sx-title text-4xl font-bold mb-4">What We Do</h2>
                             <div className="sx-separator-outer separator-center">

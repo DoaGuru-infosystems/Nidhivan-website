@@ -15,7 +15,7 @@ var bgimg4 = new URL('./../../images/background/bg-12.jpg', import.meta.url).hre
 
 const Testimonials1 = () => {
     return (
-        <div className="section-full container-fluid px-0">
+        <div className="section-full w-full px-0">
             <div className="section-content">
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="bg-gray bg-cover bg-no-repeat" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>

@@ -13,7 +13,7 @@ class Statistics1 extends React.Component {
                     {/* Darker Overlay for better contrast */}
                     <div className="absolute inset-0 bg-black/70 z-0" />
                     
-                    <div className="container relative z-10">
+                    <div className="max-w-7xl mx-auto px-4 relative z-10">
                         <div className="section-content">
                             <div className="counter-blocks">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

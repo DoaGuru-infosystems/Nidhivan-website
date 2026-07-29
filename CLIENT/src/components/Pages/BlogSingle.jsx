@@ -36,7 +36,7 @@ class BlogSingle extends React.Component {
                     <Banner title="Blog Single Style" pagename="Blog Single" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                     {/* SECTION CONTENT START */}
                     <div className="section-full p-t80 p-b50 inner-page-padding">
-                        <div className="container">
+                        <div className="max-w-7xl mx-auto px-4">
                             <div className="blog-single-space max-w900 ml-auto mr-auto">
                                 {/* BLOG START */}
                                 <div className="blog-post blog-detail text-black">

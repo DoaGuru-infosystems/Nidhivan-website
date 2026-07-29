@@ -55,7 +55,7 @@ const Projects1 = () => {
     return (
         <div className="section-full mobile-page-padding p-t80 p-b50 bg-white">
             <div className="section-content">
-                <div className="container">
+                <div className="max-w-7xl mx-auto px-4">
                     {/* TITLE START */}
                     <div className="section-head">
                         <div className="sx-separator-outer separator-center">
@@ -68,7 +68,7 @@ const Projects1 = () => {
                 </div>
                 
                 <div className="filter-carousal-1-outer relative z-10">
-                    <div className="container">
+                    <div className="max-w-7xl mx-auto px-4">
                         {/* FILTER NAV START */}
                         <div className="text-center clearfix filter-pos-right shadow m-b30">
                             <ul className="btn-filter-wrap flex flex-wrap justify-center gap-2 p-4">

@@ -150,7 +150,7 @@ const Gallery = () => {
             <Banner title="Our Gallery" pagename="Gallery" description="Explore our portfolio of breathtaking real estate projects, interior designs, and architectural marvels." bgimage={bnrimg}/>
             
             <div className="section-full p-tb80 inner-page-padding">
-                <div className="container">
+                <div className="max-w-7xl mx-auto px-4">
                     <div className="filter-wrap p-b30 text-center">
                         <ul className="filter-navigation masonry-filter clearfix flex flex-wrap justify-center gap-2">
                             <li className={`cursor-pointer px-4 py-2 font-semibold transition-colors rounded ${activeFilter === '*' ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'}`} 

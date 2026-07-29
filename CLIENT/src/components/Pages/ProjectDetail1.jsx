@@ -40,7 +40,7 @@ class ProjectDetail1 extends React.Component {
 
                     {/* SECTION CONTENT START */}
                     <div className="section-full p-tb80 inner-page-padding stick_in_parent">
-                        <div className="container">
+                        <div className="max-w-7xl mx-auto px-4">
                             <div className="grid grid-cols-12 gap-8">
                                 <div className="col-span-12 md:col-span-7 lg:col-span-7 sticky_column">
                                     <div className="project-detail-containt">

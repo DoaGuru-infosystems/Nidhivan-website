@@ -11,7 +11,7 @@ class WhatWeDo1 extends React.Component {
         return (
             <>
                 <div className="section-full  mobile-page-padding bg-white  p-t80 p-b30 bg-repeat overflow-hide" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                    <div className="container right-half-bg-image-outer">
+                    <div className="max-w-7xl mx-auto px-4 right-half-bg-image-outer">
                         {/* <div className="right-half-bg-image bg-parallax bg-fixed bg-top-right" data-stellar-background-ratio={0} style={{ backgroundImage: 'url(' + bgimg2 + ')' }} /> */}
                         {/* TITLE START */}
                         <div className="section-head">

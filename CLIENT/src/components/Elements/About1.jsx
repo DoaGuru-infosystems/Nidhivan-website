@@ -23,7 +23,7 @@ var aboutBeforeImg = "https://images.unsplash.com/photo-1512917774080-9991f1c4c7
 const About1 = () => {
     return (
         <div className="section-full mobile-page-padding p-t80 p-b80 bg-white bg-no-repeat bg-bottom-left" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-            <div className="container">
+            <div className="max-w-7xl mx-auto px-4">
                 {/* TITLE START */}
                 <div className="section-head">
                     <div className="sx-separator-outer separator-left">

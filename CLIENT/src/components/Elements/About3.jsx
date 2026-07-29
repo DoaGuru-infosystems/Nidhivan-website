@@ -12,7 +12,7 @@ class About3 extends React.Component {
         return (
             <>
                 <div className={`${this.props.bgcolor} section-full mobile-page-padding p-t80 p-b50`}>
-                    <div className="container">
+                    <div className="max-w-7xl mx-auto px-4">
                         <div className="section-content">
                             <div className="grid grid-cols-12 gap-8">
                                 <div className="col-span-12 lg:col-span-6">

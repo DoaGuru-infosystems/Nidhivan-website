@@ -7,7 +7,7 @@ class Banner extends React.Component {
             <>
                 <div className="sx-bnr-inr overlay-wraper bg-parallax bg-top-center" data-stellar-background-ratio="0.5" style={{ backgroundImage: 'url(' + this.props.bgimage + ')' }}>
                     <div className="overlay-main bg-black opacity-07" />
-                    <div className="container">
+                    <div className="max-w-7xl mx-auto px-4">
                         <div className="sx-bnr-inr-entry">
                             <div className="banner-title-outer">
                                 <div className="banner-title-name">

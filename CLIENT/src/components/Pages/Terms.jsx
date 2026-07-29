@@ -13,7 +13,7 @@ class Terms extends React.Component {
                     <Banner title="Terms & Conditions" pagename="Terms & Conditions" description="Please read our terms and conditions carefully before using our services." bgimage={bnrimg}/>
                     
                     <div className="section-full p-tb80 inner-page-padding">
-                        <div className="container">
+                        <div className="max-w-7xl mx-auto px-4">
                             <div className="section-content">
                                 <div>
                                         <h3>1. Introduction</h3>

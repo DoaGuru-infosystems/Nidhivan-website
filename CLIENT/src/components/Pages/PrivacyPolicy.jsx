@@ -13,7 +13,7 @@ class PrivacyPolicy extends React.Component {
                     <Banner title="Privacy Policy" pagename="Privacy Policy" description="We value your privacy. Learn how we collect, use, and protect your data." bgimage={bnrimg}/>
                     
                     <div className="section-full p-tb80 inner-page-padding">
-                        <div className="container">
+                        <div className="max-w-7xl mx-auto px-4">
                             <div className="section-content">
                                 <div>
                                         <h3>1. Information Collection</h3>

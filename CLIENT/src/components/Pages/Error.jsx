@@ -15,7 +15,7 @@ class Error extends React.Component {
                     <Banner title="Error 404" pagename="Error" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                     {/* SECTION CONTENTG START */}
                     <div className="section-full mobile-page-padding p-tb150 bg-bottom-left bg-no-repeat" style={{ backgroundImage: 'url(images/background/bg-4.png)' }}>
-                        <div className="container">
+                        <div className="max-w-7xl mx-auto px-4">
                             <div className="section-content">
                                 <div className="page-notfound grid grid-cols-12 gap-6">
                                     <div className="col-span-12 md:col-span-7">

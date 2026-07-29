@@ -11,7 +11,7 @@ class Services1 extends React.Component {
             <>
                 <div className="section-full mobile-page-padding p-t80  p-b50 bg-gray">
                     <div className="section-content">
-                        <div className="container">
+                        <div className="max-w-7xl mx-auto px-4">
                             {/* TITLE START */}
                             <div className="section-head">
                                 <div className="sx-separator-outer separator-left">

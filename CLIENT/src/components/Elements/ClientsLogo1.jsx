@@ -20,7 +20,7 @@ class ClientsLogo1 extends React.Component {
         return (
             <>
                 <div className="section-full  mobile-page-padding bg-gray  p-t80 p-b10 bg-repeat" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                    <div className="container">
+                    <div className="max-w-7xl mx-auto px-4">
                         {/* TITLE START */}
                         <div className="section-head">
                             <div className="sx-separator-outer separator-left">
