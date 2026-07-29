@@ -6,6 +6,7 @@ import Testimonials1 from '../../Elements/Testimonials1';
 import Services1 from '../../Elements/Services1';
 import Projects1 from '../../Elements/Projects1';
 import ClientsLogo1 from '../../Elements/ClientsLogo1';
+import BlogsHome from '../../Elements/BlogsHome';
 import GoogleMapIframe from '../../Elements/GoogleMapIframe';
 
 class Home extends React.Component {
@@ -20,6 +21,7 @@ class Home extends React.Component {
                     <Services1 />
                     <Projects1 />
                     <ClientsLogo1 isHome={true} />
+                    <BlogsHome />
                     <GoogleMapIframe />
                 </div>
                 </>
