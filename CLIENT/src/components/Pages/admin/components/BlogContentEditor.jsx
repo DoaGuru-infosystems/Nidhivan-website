@@ -227,6 +227,7 @@ const BlogContentEditor = ({ value, onChange }) => {
                             fontFamily: '"Fira code", "Fira Mono", monospace',
                             fontSize: 14,
                             minHeight: '280px',
+                            color: '#e2e8f0', // slate-200 (white/light gray)
                         }}
                         textareaClassName="focus:outline-none"
                     />
