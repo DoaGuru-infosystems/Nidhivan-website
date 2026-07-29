@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { loginAdmin, DEMO_CREDENTIALS_DISPLAY } from './utils/auth';
 import { Building2, Lock, Mail, User, ShieldCheck } from 'lucide-react';
+import logo from '../../../images/nidhivan logo.png';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
@@ -66,7 +67,7 @@ const AdminLogin = () => {
             {/* Logo Header */}
             <div className="mb-8 z-10 flex flex-col items-center">
                 <img 
-                    src={new URL('../../../../images/nidhivan logo.png', import.meta.url).href} 
+                    src={logo} 
                     alt="Nidhivan Logo" 
                     className="h-20 w-auto object-contain mb-4 drop-shadow-md"
                 />

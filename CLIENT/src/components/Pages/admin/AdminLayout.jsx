@@ -3,6 +3,7 @@ import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { logoutAdmin } from './utils/auth';
 import { BookOpen, MessageSquare, Image as ImageIcon, Users, Building2, LogOut, ChevronDown } from 'lucide-react';
+import logo from '../../../images/nidhivan logo.png';
 
 const AdminLayout = () => {
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ const AdminLayout = () => {
             <aside className="w-64 bg-white border-r border-slate-200 shadow-sm flex flex-col z-10">
                 <div className="p-6 border-b border-slate-100 flex justify-center items-center h-20">
                     <img 
-                        src={new URL('../../../../images/nidhivan logo.png', import.meta.url).href} 
+                        src={logo} 
                         alt="Nidhivan Logo" 
                         className="max-h-12 w-auto object-contain"
                     />
