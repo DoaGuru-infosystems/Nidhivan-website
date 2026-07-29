@@ -5,7 +5,7 @@ class Banner extends React.Component {
     render() {
         return (
             <>
-                <div className="sx-bnr-inr overlay-wraper bg-parallax bg-top-center flex items-center relative h-[500px] bg-cover bg-fixed" data-stellar-background-ratio="0.5" style={{ backgroundImage: 'url(' + this.props.bgimage + ')' }}>
+                <div className="sx-bnr-inr overlay-wraper bg-parallax bg-top-center flex items-center relative h-[500px] bg-cover bg-center bg-scroll" data-stellar-background-ratio="0.5" style={{ backgroundImage: 'url(' + this.props.bgimage + ')', backgroundAttachment: 'scroll' }}>
                     <div className="overlay-main bg-black/70 absolute inset-0 z-0" />
                     <div className="max-w-7xl mx-auto px-4 relative z-10 w-full">
                         <div className="sx-bnr-inr-entry w-full">
