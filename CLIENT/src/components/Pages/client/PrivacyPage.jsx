@@ -5,7 +5,7 @@ import Banner from '../../Elements/Banner';
 
 var bnrimg = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"; // TEMP LIVE PREVIEW
 
-class PrivacyPolicy extends React.Component {
+class PrivacyPage extends React.Component {
     render() {
         return (
             <>
@@ -37,4 +37,4 @@ class PrivacyPolicy extends React.Component {
     };
 };
 
-export default PrivacyPolicy;
+export default PrivacyPage;

@@ -14,7 +14,7 @@ import BlogGrid from './Pages/client/BlogGrid';
 import BlogSingle from './Pages/client/BlogSingle';
 
 import Terms from './Pages/client/Terms';
-import PrivacyPolicy from './Pages/client/PrivacyPolicy';
+import PrivacyPage from './Pages/client/PrivacyPage';
 import Gallery from './Pages/client/Gallery';
 import Error from './Pages/client/Error';
 import ContactUs from './Pages/client/ContactUs';
@@ -82,7 +82,7 @@ class Components extends React.Component {
                         <Route path='/blog-single/:id' element={<BlogSingle/>} />
                         <Route path='/contact-us' element={<ContactUs/>} />
                         <Route path='/terms' element={<Terms/>} />
-                        <Route path='/privacy' element={<PrivacyPolicy/>} />
+                        <Route path='/privacy' element={<PrivacyPage/>} />
                         <Route path='/gallery' element={<Gallery/>} />
                         <Route path='*' element={<Error/>} />
                     </Route>
