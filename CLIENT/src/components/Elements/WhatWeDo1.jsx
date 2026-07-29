@@ -23,7 +23,7 @@ class WhatWeDo1 extends React.Component {
                         </div>
                         {/* TITLE END */}
                         <div className="section-content">
-                            <div className="row number-block-one-outer justify-content-center">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 number-block-one-outer">
                                 {siteData.services.map((service, index) => {
                                     const images = [
                                         "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80",
@@ -32,7 +32,7 @@ class WhatWeDo1 extends React.Component {
                                         "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80"
                                     ];
                                     return (
-                                        <div className="col-lg-3 col-md-6 col-sm-6 m-b30" key={index}>
+                                        <div className="number-block-one-item m-b30" key={index}>
                                             <div className="number-block-one animate-in-to-top">
                                                 <img src={images[index % images.length]} alt="" style={{height: '250px', objectFit: 'cover', width: '100%'}} />
                                                 <div className="figcaption bg-white text-center p-a20">
@@ -47,13 +47,13 @@ class WhatWeDo1 extends React.Component {
                                 })}
                             </div>
                             <div className="large-title-block full-content bg-gray">
-                                <div className="row">
-                                    <div className="col-lg-6 col-md-12 col-sm-12">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div className="">
                                         <div className="large-title">
                                             <h3 className="m-tb0">We deliver excellence in real estate and property investments.</h3>
                                         </div>
                                     </div>
-                                    <div className="col-lg-6 col-md-12	col-sm-12">
+                                    <div className="">
                                         <div className="large-title-info">
                                             <p>Discover strategic properties, secure your investments, and build a foundation for your dreams with our expert guidance.</p>
                                             <div className="text-left">

@@ -22,11 +22,11 @@ class WhatWeDo3 extends React.Component {
                         </div>
                         {/* TITLE END */}
                         <div className="section-content">
-                            <div className="row number-block-three-outer justify-content-center">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 number-block-three-outer">
                                 {siteData.services.map((item, index) => {
                                     const imgUrl = new URL(`./../../images/services/service-projects/${index + 1}.jpg`, import.meta.url).href;
                                     return (
-                                    <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 m-b30" key={index}>
+                                    <div className="m-b30" key={index}>
                                         <div className="number-block-three slide-ani-top">
                                             <div className="sx-media">
                                                 <img src={imgUrl} alt="" />

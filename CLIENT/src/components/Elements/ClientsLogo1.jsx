@@ -32,9 +32,9 @@ class ClientsLogo1 extends React.Component {
                         {/* TITLE END */}
                         <div className="section-content">
                             <div className="client-grid m-b40">
-                                <div className="row justify-content-center">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                                     {logos.map((item, index) => (
-                                        <div className="col-lg-3 col-md-4 col-sm-6 col-6 m-b30" key={index}>
+                                        <div className="m-b30" key={index}>
                                             <NavLink to={"/about-1"} className="client-logo-pic">
                                                 <img src={item.image} alt=""/>
                                                 <div>

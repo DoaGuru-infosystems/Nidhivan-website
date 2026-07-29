@@ -15,8 +15,7 @@ class Terms extends React.Component {
                     <div className="section-full p-tb80 inner-page-padding">
                         <div className="container">
                             <div className="section-content">
-                                <div className="row">
-                                    <div className="col-md-12">
+                                <div>
                                         <h3>1. Introduction</h3>
                                         <p>Welcome to our terms and conditions. These terms govern your use of our website and services. By accessing or using our services, you agree to be bound by these terms.</p>
                                         
@@ -28,7 +27,6 @@ class Terms extends React.Component {
                                         
                                         <h3>4. Changes to Terms</h3>
                                         <p>We reserve the right to modify these terms at any time. We will notify users of any changes by updating the terms on our website. Your continued use of the site implies acceptance of the updated terms.</p>
-                                    </div>
                                 </div>
                             </div>
                         </div>

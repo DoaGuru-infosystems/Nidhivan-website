@@ -15,8 +15,7 @@ class PrivacyPolicy extends React.Component {
                     <div className="section-full p-tb80 inner-page-padding">
                         <div className="container">
                             <div className="section-content">
-                                <div className="row">
-                                    <div className="col-md-12">
+                                <div>
                                         <h3>1. Information Collection</h3>
                                         <p>We collect information you provide directly to us, such as when you create or modify your account, request on-demand services, contact customer support, or otherwise communicate with us.</p>
                                         
@@ -28,7 +27,6 @@ class PrivacyPolicy extends React.Component {
                                         
                                         <h3>4. Security</h3>
                                         <p>We take reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction.</p>
-                                    </div>
                                 </div>
                             </div>
                         </div>

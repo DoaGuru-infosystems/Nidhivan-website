@@ -126,7 +126,7 @@ class BlogSingle extends React.Component {
                                         </div>
                                     </div>
                                     <div className="post-controls p-t30">
-                                        <div className="d-flex justify-content-between">
+                                        <div className="flex justify-between">
                                             <div className="prev-post"><NavLink to={"#"}>Prev Article</NavLink></div>
                                             <div className="next-post"><NavLink to={"#"}>Next Article</NavLink></div>
                                         </div>

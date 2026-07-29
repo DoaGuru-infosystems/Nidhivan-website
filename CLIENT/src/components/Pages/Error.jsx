@@ -17,11 +17,11 @@ class Error extends React.Component {
                     <div className="section-full mobile-page-padding p-tb150 bg-bottom-left bg-no-repeat" style={{ backgroundImage: 'url(images/background/bg-4.png)' }}>
                         <div className="container">
                             <div className="section-content">
-                                <div className="page-notfound row">
-                                    <div className="col-md-7">
+                                <div className="page-notfound grid grid-cols-12 gap-6">
+                                    <div className="col-span-12 md:col-span-7">
                                         <img src={new URL('./../../images/error-404.png', import.meta.url).href} alt="" />
                                     </div>
-                                    <div className="col-md-5">
+                                    <div className="col-span-12 md:col-span-5">
                                         <strong>Page Not Found</strong>
                                         <span className="title">Error 404</span>
                                         <p>The Page Requested Could not be foundwe're working on it</p>
