@@ -13,11 +13,25 @@ const BlogEditor = () => {
     const { id } = useParams(); // present = edit mode, absent = new mode
     const isEditMode = !!id;
 
-    const [form, setForm] = useState({
-        title: '',
-        image: '',
-        shortDescription: '',
-        fullDescription: '',
+    const [form, setForm] = useState(() => {
+        if (isEditMode) {
+            const blogs = getBlogs();
+            const existing = blogs.find(b => b.id.toString() === id);
+            if (existing) {
+                return {
+                    title: existing.title || '',
+                    image: existing.image || '',
+                    shortDescription: existing.shortDescription || '',
+                    fullDescription: existing.fullDescription || '',
+                };
+            }
+        }
+        return {
+            title: '',
+            image: '',
+            shortDescription: '',
+            fullDescription: '',
+        };
     });
     const [saving, setSaving] = useState(false);
     const [imageError, setImageError] = useState(false);
@@ -34,20 +48,12 @@ const BlogEditor = () => {
         }
     };
 
-    // Load existing blog data in edit mode
+    // Redirect if blog not found in edit mode
     useEffect(() => {
         if (isEditMode) {
             const blogs = getBlogs();
             const existing = blogs.find(b => b.id.toString() === id);
-            if (existing) {
-                setForm({
-                    title: existing.title || '',
-                    image: existing.image || '',
-                    shortDescription: existing.shortDescription || '',
-                    fullDescription: existing.fullDescription || '',
-                });
-            } else {
-                // Blog not found — go back
+            if (!existing) {
                 navigate('/admin/blogs');
             }
         }
