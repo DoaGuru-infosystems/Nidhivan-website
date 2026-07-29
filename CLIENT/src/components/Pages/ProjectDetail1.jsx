@@ -35,16 +35,16 @@ class ProjectDetail1 extends React.Component {
     render() {
         return (
             <>
-                <div className="page-content">
+                <div className="relative">
                     <Banner title="Project Details" pagename="Project Detail" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg} />
 
                     {/* SECTION CONTENT START */}
-                    <div className="section-full py-8 md:py-20 stick_in_parent">
+                    <div className="relative py-8 md:py-20 stick_in_parent">
                         <div className="max-w-7xl mx-auto px-4">
                             <div className="grid grid-cols-12 gap-8">
                                 <div className="col-span-12 md:col-span-7 lg:col-span-7 sticky_column">
                                     <div className="project-detail-containt">
-                                        <div className="bg-white text-black">
+                                        <div className="bg-white text-[#2B2B2B]">
                                             <h3>A multitask profession which creates any land in beautiful creation </h3>
                                             <p> Designers think everything done by someone else is awful, and that they could do it better themselves, which explains why I designed my own living room carpet, I suppose. the architect represents neither a Dionysian nor an Apollinian condition: here it is the mighty act of will, the will which moves mountains, the intoxication of the strong will, which demands artistic expression. The most powerful men have always inspired the architects; the architect has always been influenced by power.</p>
                                             <div className="product-block">

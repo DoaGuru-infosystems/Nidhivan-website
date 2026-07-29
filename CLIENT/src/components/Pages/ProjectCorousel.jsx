@@ -13,7 +13,7 @@ class ProjectCorousel extends React.Component {
     render() {
         return (
             <>
-                <div className="page-content">
+                <div className="relative">
                     <Banner title="Carousel All Type" pagename="Project Carousel" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                     
                     <Projects3 alignment="separator-left" title="Carousel style 1" bgcolor="bg-gray" />

@@ -90,11 +90,11 @@ const Projects6 = () => {
     };
     return (
         <>
-            <div className="section-full py-8 md:py-20 bg-gray">
+            <div className="relative py-8 md:py-20 bg-gray">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="section-content">
                         {/* TITLE START */}
-                        <div className="section-head">
+                        <div className="mb-10">
                             <div className="sx-separator-outer separator-left">
                                 <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                                     <h3 className="sep-line-one">Similar Project</h3>

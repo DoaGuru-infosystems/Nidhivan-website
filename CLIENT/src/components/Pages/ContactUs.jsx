@@ -44,10 +44,10 @@ const ContactUs = () => {
     };
 
     return (
-        <div className="page-content bg-gray-50/50">
+        <div className="relative bg-gray-50/50">
             <Banner title="Contact Us" pagename="Contact Us" description={siteData.aboutUs.shortDescription} bgimage={bnrimg}/>
             
-            <div className="section-full py-20">
+            <div className="relative py-20">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-start">
                         

@@ -11,7 +11,7 @@ class About3 extends React.Component {
     render() {
         return (
             <>
-                <div className={`${this.props.bgcolor} section-full mobile-page-padding p-t80 p-b50`}>
+                <div className={`${this.props.bgcolor} relative py-8 md:pt-20 md:pb-12`}>
                     <div className="max-w-7xl mx-auto px-4">
                         <div className="section-content">
                             <div className="grid grid-cols-12 gap-8">
@@ -50,7 +50,7 @@ class About3 extends React.Component {
                                         {/* Play Button */}
                                         <Dialog>
                                             <DialogTrigger asChild>
-                                                <button className="relative z-20 w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center text-black hover:scale-110 transition-transform cursor-pointer shadow-xl border-none outline-none focus:outline-none">
+                                                <button className="relative z-20 w-[80px] h-[80px] bg-white rounded-full flex items-center justify-center text-[#2B2B2B] hover:scale-110 transition-transform cursor-pointer shadow-xl border-none outline-none focus:outline-none">
                                                     <Play className="icon" style={{fill: 'currentColor', width: '28px', height: '28px', marginLeft: '4px'}} />
                                                     {/* Pulse effect */}
                                                     <div className="absolute inset-0 rounded-full border border-white animate-ping"></div>

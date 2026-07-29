@@ -213,14 +213,14 @@ const Header = () => {
               } }
             >
               <div className="contact-nav h-full overflow-y-auto pt-24 pb-12">
-                <NavLink to="#" className="contact_close absolute top-6 right-8 text-black hover:text-red-600 transition-colors z-50" onClick={ (e) => { e.preventDefault(); setIsQuoteActive(false); } }>
+                <NavLink to="#" className="contact_close absolute top-6 right-8 text-[#2B2B2B] hover:text-red-600 transition-colors z-50" onClick={ (e) => { e.preventDefault(); setIsQuoteActive(false); } }>
                   <span style={ { fontSize: '48px', lineHeight: '1' } }>&times;</span>
                 </NavLink>
                 <div className="contact-nav-form">
                   <div className="grid grid-cols-12 gap-8">
                     <div className="col-span-12 lg:col-span-6">
                       <div className="contact-nav-info">
-                        <div className="sx-icon-box-wraper left p-b30">
+                        <div className="sx-icon-box-wraper left pb-8">
                           <div className="icon-xs inline-icon m-b20 scale-in-center">
                             <Phone size={ 18 } />
                           </div>
@@ -229,7 +229,7 @@ const Header = () => {
                             <p>{ siteData.contactInfo.phone }</p>
                           </div>
                         </div>
-                        <div className="sx-icon-box-wraper left p-b30">
+                        <div className="sx-icon-box-wraper left pb-8">
                           <div className="icon-xs inline-icon m-b20 scale-in-center">
                             <Mail size={ 18 } />
                           </div>
@@ -238,7 +238,7 @@ const Header = () => {
                             <p>{ siteData.contactInfo.email }</p>
                           </div>
                         </div>
-                        <div className="sx-icon-box-wraper left p-b30">
+                        <div className="sx-icon-box-wraper left pb-8">
                           <div className="icon-xs inline-icon m-b20 scale-in-center">
                             <MapPin size={ 18 } />
                           </div>

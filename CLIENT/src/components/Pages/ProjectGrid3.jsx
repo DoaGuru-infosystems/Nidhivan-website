@@ -138,13 +138,13 @@ const ProjectGrid3 = () => {
     }, [activeFilter]);
 
     return (
-        <div className="page-content">
+        <div className="relative">
             <Banner title="Grid 3 Columns" pagename="Project With Grid 3 Columns" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
             
-            <div className="section-full py-8 md:py-20">
+            <div className="relative py-8 md:py-20">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* Filter Nav */}
-                    <div className="filter-wrap p-b30 text-center">
+                    <div className="filter-wrap pb-8 text-center">
                         <ul className="filter-navigation masonry-filter clearfix flex flex-wrap justify-center gap-2">
                             <li className={`cursor-pointer px-4 py-2 font-semibold transition-colors rounded ${activeFilter === '*' ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'}`} 
                                 onClick={() => setActiveFilter('*')}>
@@ -173,7 +173,7 @@ const ProjectGrid3 = () => {
                                         <p className="m-b0 text-sm text-gray-200">{item.address}</p>
                                     </div>
                                     <button 
-                                        className="absolute top-4 right-4 bg-white w-10 h-10 rounded-full flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md border-none cursor-pointer hover:scale-110 z-10" 
+                                        className="absolute top-4 right-4 bg-white w-10 h-10 rounded-full flex items-center justify-center text-[#2B2B2B] opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md border-none cursor-pointer hover:scale-110 z-10" 
                                         onClick={(e) => { e.preventDefault(); setLightboxIndex(index); setLightboxOpen(true); }}
                                     >
                                         <Maximize size={16} />

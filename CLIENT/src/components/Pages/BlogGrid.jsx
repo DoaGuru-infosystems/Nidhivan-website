@@ -74,10 +74,10 @@ class BlogGrid extends React.Component {
     render() {
         return (
             <>
-                <div className="page-content">
+                <div className="relative">
                     <Banner title="Blog Grid Style" pagename="Blog Grid" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                    
-                    <div className="section-full py-8 md:py-20 bg-white">
+                    <div className="relative py-8 md:py-20 bg-white">
                        
                     <div className="max-w-7xl mx-auto px-4">
                             <div className="masonry-outer mfp-gallery news-grid clearfix grid grid-cols-12 gap-8 ">

@@ -37,16 +37,16 @@ class About extends React.Component {
     
     render() {
         return (
-            <div className="page-content">
+            <div className="relative">
                 <Banner title="About Us" pagename="About Us" description={siteData.aboutUs.shortDescription} bgimage={bnrimg}/>
                 
                 {/* About Section */}
                 <About3 bgcolor="bg-gray" />
                 
                 {/* Custom What We Do - Matching Original Theme Checkerboard */}
-                <div className="section-full bg-white">
-                    <div className="max-w-7xl mx-auto px-4 p-t80 p-b40">
-                        <div className="section-head text-center">
+                <div className="relative bg-white">
+                    <div className="max-w-7xl mx-auto px-4 pt-20 pb-10">
+                        <div className="mb-10 text-center">
                             <h2 className="sx-title text-4xl font-bold mb-4">What We Do</h2>
                             <div className="sx-separator-outer separator-center">
                                 <div className="sx-separator bg-black bg-moving bg-repeat-x"></div>
@@ -66,7 +66,7 @@ class About extends React.Component {
                                     <div className="w-full h-full bg-[#f7f7f7] p-8 flex flex-col justify-center items-center text-center hover:bg-gray-200 transition-colors">
                                         <h4 className="text-xl font-bold mb-4 sx-tilte">{item.title}</h4>
                                         <p className="text-gray-600 mb-6 text-sm line-clamp-4">{item.desc}</p>
-                                        <NavLink to="/about" className="site-button-link text-black hover:text-[#fb5455] font-semibold tracking-wider text-sm">READ MORE</NavLink>
+                                        <NavLink to="/about" className="site-button-link text-[#2B2B2B] hover:text-[#fb5455] font-semibold tracking-wider text-sm">READ MORE</NavLink>
                                     </div>
                                 )}
                             </div>

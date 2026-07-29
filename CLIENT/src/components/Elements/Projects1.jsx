@@ -53,11 +53,11 @@ const Projects1 = () => {
         : siteData.projects.filter(project => project.filter === activeFilter);
 
     return (
-        <div className="section-full mobile-page-padding p-t80 p-b50 bg-white">
+        <div className="relative py-8 md:pt-20 md:pb-12 bg-white">
             <div className="section-content">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* TITLE START */}
-                    <div className="section-head">
+                    <div className="mb-10">
                         <div className="sx-separator-outer separator-center">
                             <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                                 <h3 className="sep-line-one">All Projects</h3>
@@ -92,7 +92,7 @@ const Projects1 = () => {
                         {/* FILTER NAV END */}
                     </div>
 
-                    <div className="filter-carousal-1 w-full p-b30 px-4 md:px-12 relative">
+                    <div className="filter-carousal-1 w-full pb-8 px-4 md:px-12 relative">
                         {/* Custom Navigation */}
                         <button ref={(node) => setPrevEl(node)} className="absolute left-2 top-1/3 z-20 bg-white w-10 h-10 flex items-center justify-center shadow-md hover:bg-gray-100 transition-colors rounded-full">
                             <ChevronLeft size={20} className="text-gray-800" />
@@ -133,7 +133,7 @@ const Projects1 = () => {
                                                     <h4 className="sx-tilte text-xl font-bold mb-1 pointer-events-auto"><NavLink to={"/about"} className="text-white">{item.title}</NavLink></h4>
                                                     <p className="m-b0 text-sm text-gray-200">{item.location}</p>
                                                 </div>
-                                                <button className="cursor-pointer absolute top-4 right-4 bg-white w-10 h-10 rounded-full flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md border-none" onClick={(e) => { e.preventDefault(); setLightboxIndex(index); setLightboxOpen(true); }}>
+                                                <button className="cursor-pointer absolute top-4 right-4 bg-white w-10 h-10 rounded-full flex items-center justify-center text-[#2B2B2B] opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md border-none" onClick={(e) => { e.preventDefault(); setLightboxIndex(index); setLightboxOpen(true); }}>
                                                     <Maximize size={16} />
                                                 </button>
                                             </div>

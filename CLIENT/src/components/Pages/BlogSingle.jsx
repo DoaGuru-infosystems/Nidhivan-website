@@ -32,14 +32,14 @@ class BlogSingle extends React.Component {
     render() {
         return (
             <>
-                <div className="page-content ">
+                <div className="relative ">
                     <Banner title="Blog Single Style" pagename="Blog Single" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
                     {/* SECTION CONTENT START */}
-                    <div className="section-full py-8 md:pt-20 md:pb-12">
+                    <div className="relative py-8 md:pt-20 md:pb-12">
                         <div className="max-w-7xl mx-auto px-4">
                             <div className="blog-single-space max-w900 ml-auto mr-auto">
                                 {/* BLOG START */}
-                                <div className="blog-post blog-detail text-black">
+                                <div className="blog-post blog-detail text-[#2B2B2B]">
                                     <div className="sx-post-media">
                                         <div className="portfolio-item">
                                             {/* <img className="img-responsive" src={new URL('./../../images/blog/default/thum1.jpg', import.meta.url).href} alt=""/> ORIGINAL DUMMY - restore when real property photos are ready */}
@@ -134,7 +134,7 @@ class BlogSingle extends React.Component {
                                 </div>
                                 {/* OUR BLOG START */}
                                 {/* TITLE START */}
-                                <div className="section-head">
+                                <div className="mb-10">
                                     <div className="sx-separator-outer separator-left">
                                         <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                                             <h3 className="sep-line-one">Blog</h3>

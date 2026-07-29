@@ -15,13 +15,13 @@ var bgimg4 = new URL('./../../images/background/bg-12.jpg', import.meta.url).hre
 
 const Testimonials1 = () => {
     return (
-        <div className="section-full w-full px-0">
+        <div className="relative w-full px-0">
             <div className="section-content">
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="bg-gray bg-cover bg-no-repeat" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                        <div className="sx-left-part mobile-page-padding p-8 md:p-16 lg:p-24">
+                        <div className="sx-left-part py-8 md:py-0 p-8 md:p-16 lg:p-24">
                             {/* TITLE START */}
-                            <div className="section-head">
+                            <div className="mb-10">
                                 <div className="sx-separator-outer separator-left">
                                     <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg3 + ')' }}>
                                         <h3 className="sep-line-one">Infographic</h3>
@@ -33,7 +33,7 @@ const Testimonials1 = () => {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                                     {siteData.statistics.map((stat, index) => (
                                         <div key={index}>
-                                            <div className="sx-count text-black sx-icon-box-wraper bg-repeat bg-white p-a30 shadow-md transition-transform hover:-translate-y-2" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
+                                            <div className="sx-count text-[#2B2B2B] sx-icon-box-wraper bg-repeat bg-white p-a30 shadow-md transition-transform hover:-translate-y-2" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
                                                 <h2 className="st-count-number sx-text-primary text-left flex items-baseline">
                                                     <span className="counter"><CountUp end={parseInt(stat.value)} duration={5} enableScrollSpy={true} scrollSpyOnce={true} /></span>
                                                     <span>{stat.suffix}</span>
@@ -48,9 +48,9 @@ const Testimonials1 = () => {
                     </div>
                     
                     <div className="bg-white bg-repeat" style={{ backgroundImage: 'url(' + bgimg4 + ')' }}>
-                        <div className="sx-right-part mobile-page-padding p-8 md:p-16 lg:p-24 lg:pl-16">
+                        <div className="sx-right-part py-8 md:py-0 p-8 md:p-16 lg:p-24 lg:pl-16">
                             {/* TITLE START */}
-                            <div className="section-head">
+                            <div className="mb-10">
                                 <div className="sx-separator-outer separator-left">
                                     <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg3 + ')' }}>
                                         <h3 className="sep-line-one">Testimonial</h3>

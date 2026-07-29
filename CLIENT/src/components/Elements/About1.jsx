@@ -22,10 +22,10 @@ var aboutBeforeImg = "https://images.unsplash.com/photo-1512917774080-9991f1c4c7
 
 const About1 = () => {
     return (
-        <div className="section-full mobile-page-padding p-t80 p-b80 bg-white bg-no-repeat bg-bottom-left" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
+        <div className="relative py-8 md:py-20 bg-white bg-no-repeat bg-bottom-left" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
             <div className="max-w-7xl mx-auto px-4">
                 {/* TITLE START */}
-                <div className="section-head">
+                <div className="mb-10">
                     <div className="sx-separator-outer separator-left">
                         <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
                             <h3 className="sep-line-one">About us</h3>

@@ -9,7 +9,7 @@ class Statistics1 extends React.Component {
     render() {
         return (
             <>
-                <div className="section-full relative mobile-page-padding p-t80 p-b80 bg-parallax ml-auto" data-stellar-background-ratio="0.5" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
+                <div className="relative py-8 md:py-20 bg-parallax ml-auto" data-stellar-background-ratio="0.5" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                     {/* Darker Overlay for better contrast */}
                     <div className="absolute inset-0 bg-black/70 z-0" />
                     

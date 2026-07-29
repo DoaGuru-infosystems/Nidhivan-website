@@ -194,13 +194,13 @@ const ProjectMasonary3 = () => {
     }, [activeFilter]);
 
     return (
-        <div className="page-content">
+        <div className="relative">
             <Banner title="Masonry With 3 Columns" pagename="Project with Masonry With 3 Columns" description="The essence of interior design will always be about people and how they live. It is about the realities of what makes for an attractive, civilized." bgimage={bnrimg}/>
             
-            <div className="section-full py-8 md:py-20 bg-white">
+            <div className="relative py-8 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* Filter Nav */}
-                    <div className="filter-wrap p-b30 text-center">
+                    <div className="filter-wrap pb-8 text-center">
                         <ul className="filter-navigation masonry-filter clearfix flex flex-wrap justify-center gap-2">
                             <li className={`cursor-pointer px-4 py-2 font-semibold transition-colors rounded ${activeFilter === '*' ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'}`} 
                                 onClick={() => setActiveFilter('*')}>
@@ -230,7 +230,7 @@ const ProjectMasonary3 = () => {
                                             <img src={item.image} alt={item.title} className="w-full transition-transform duration-500 group-hover:scale-110" />
                                             <div className="figcaption absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                                 <button 
-                                                    className="bg-white w-12 h-12 rounded-full flex items-center justify-center text-black shadow-md transition-transform hover:scale-110 border-none cursor-pointer" 
+                                                    className="bg-white w-12 h-12 rounded-full flex items-center justify-center text-[#2B2B2B] shadow-md transition-transform hover:scale-110 border-none cursor-pointer" 
                                                     onClick={(e) => { e.preventDefault(); setLightboxIndex(index); setLightboxOpen(true); }}
                                                 >
                                                     <Maximize size={20} />

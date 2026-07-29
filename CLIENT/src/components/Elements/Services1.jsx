@@ -9,11 +9,11 @@ class Services1 extends React.Component {
 
         return (
             <>
-                <div className="section-full mobile-page-padding p-t80  p-b50 bg-gray">
+                <div className="relative py-8 md:pt-20 md:pb-12 bg-gray">
                     <div className="section-content">
                         <div className="max-w-7xl mx-auto px-4">
                             {/* TITLE START */}
-                            <div className="section-head">
+                            <div className="mb-10">
                                 <div className="sx-separator-outer separator-left">
                                     <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                                         <h3 className="sep-line-one ">All Services</h3>

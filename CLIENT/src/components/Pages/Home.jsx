@@ -12,7 +12,7 @@ class Home extends React.Component {
     render() {
         return (
             <>
-                <div className="page-content">
+                <div className="relative">
                     <Slider1 />
                     <About1 />
                     <WhatWeDo1 />

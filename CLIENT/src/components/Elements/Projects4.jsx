@@ -89,11 +89,11 @@ const Projects4 = () => {
     };
     return (
         <>
-            <div className="section-full py-8 md:py-20 bg-white">
+            <div className="relative py-8 md:py-20 bg-white">
                 <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}
-                        <div className="section-head">
+                        <div className="mb-10">
                             <div className="sx-separator-outer separator-left">
                                 <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                                     <h3 className="sep-line-one">Carousel style 2</h3>

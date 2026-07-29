@@ -9,10 +9,10 @@ class PrivacyPolicy extends React.Component {
     render() {
         return (
             <>
-                <div className="page-content">
+                <div className="relative">
                     <Banner title="Privacy Policy" pagename="Privacy Policy" description="We value your privacy. Learn how we collect, use, and protect your data." bgimage={bnrimg}/>
                     
-                    <div className="section-full py-8 md:py-20">
+                    <div className="relative py-8 md:py-20">
                         <div className="max-w-7xl mx-auto px-4">
                             <div className="section-content">
                                 <div>

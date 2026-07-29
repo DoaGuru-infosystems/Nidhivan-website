@@ -9,10 +9,10 @@ class Terms extends React.Component {
     render() {
         return (
             <>
-                <div className="page-content">
+                <div className="relative">
                     <Banner title="Terms & Conditions" pagename="Terms & Conditions" description="Please read our terms and conditions carefully before using our services." bgimage={bnrimg}/>
                     
-                    <div className="section-full py-8 md:py-20">
+                    <div className="relative py-8 md:py-20">
                         <div className="max-w-7xl mx-auto px-4">
                             <div className="section-content">
                                 <div>

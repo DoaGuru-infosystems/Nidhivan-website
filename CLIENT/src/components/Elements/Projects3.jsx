@@ -90,11 +90,11 @@ const Projects3 = (props) => {
     };
     return (
         <>
-            <div className={`${props.bgcolor} section-full py-8 md:py-20`}>
+            <div className={`${props.bgcolor} relative py-8 md:py-20`}>
                 <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}
-                        <div className="section-head">
+                        <div className="mb-10">
                             <div className={`${props.alignment} sx-separator-outer`}>
                                 <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
                                     <h3 className="sep-line-one">{props.title}</h3>
