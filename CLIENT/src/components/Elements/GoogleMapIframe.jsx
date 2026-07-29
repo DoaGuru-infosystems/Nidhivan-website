@@ -1,8 +1,19 @@
 import React from 'react';
 
 const GoogleMapIframe = () => {
+    var bgimg1 = new URL('../../images/background/cross-line2.png', import.meta.url).href;
     return (
         <div className="container mx-auto px-4 my-12 relative group">
+            {/* TITLE START */}
+            <div className="mb-10 text-center flex flex-col items-center">
+                <div className="sx-separator-outer separator-center mb-4">
+                    <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
+                        <h3 className="sep-line-one">Our Location</h3>
+                    </div>
+                </div>
+                <p className="text-gray-600">Find us easily with the map below and visit our property for a closer look.</p>
+            </div>
+            {/* TITLE END */}
             <div className="relative rounded-2xl overflow-hidden shadow-xl border border-gray-100">
                 {/* Map container with scale effect on hover */}
                 <div className="w-full transition-transform duration-700 ease-in-out group-hover:scale-105">
