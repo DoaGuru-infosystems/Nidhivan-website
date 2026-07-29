@@ -106,14 +106,14 @@ class BlogGrid extends React.Component {
                                     </div>
                                 ))}
                             </div>    
-                            <ul className="pagination m-t30 m-b0">
-                                <li><NavLink to={"#"}>Â«</NavLink></li>
-                                <li className="active"><NavLink to={"#"}>1</NavLink></li>
-                                <li><NavLink to={"#"}>2</NavLink></li>
-                                <li><NavLink to={"#"}>3</NavLink></li>
-                                <li><NavLink to={"#"}>4</NavLink></li>
-                                <li><NavLink to={"#"}>5</NavLink></li>
-                                <li><NavLink to={"#"}>Â»</NavLink></li>
+                            <ul className="flex justify-center items-center space-x-2 mt-8 mb-4">
+                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">&laquo;</NavLink></li>
+                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md bg-[#fb5455] text-white shadow-md">1</NavLink></li>
+                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">2</NavLink></li>
+                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">3</NavLink></li>
+                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">4</NavLink></li>
+                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">5</NavLink></li>
+                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">&raquo;</NavLink></li>
                             </ul>
                         </div>
                        
