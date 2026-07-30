@@ -118,6 +118,9 @@ export const fetchContactLeads = () =>
 export const deleteContactLead = (id) => 
   apiCall(`/user-data/${id}`, { method: 'DELETE' }, { success: true });
 
+export const submitContactForm = (formData) => 
+  apiCall('/contact', { method: 'POST', body: JSON.stringify(formData) }, { success: true });
+
 // ==========================================
 // Testimonials
 // ==========================================
@@ -174,6 +177,9 @@ export const fetchGalleryCategories = () =>
 
 export const createGalleryCategory = (formData) => 
   apiCall('/features/gallery-categories', { method: 'POST', body: formData, isMultipart: true }, { success: true, insertId: Date.now() });
+
+export const deleteGalleryCategory = (id) =>
+  apiCall(`/features/gallery-categories/${id}`, { method: 'DELETE' }, { success: true });
 
 export const fetchImagesByCategory = (categoryId) => 
   apiCall(`/features/gallery-images/category/${categoryId}`, { method: 'GET' }, galleryDummyData);

@@ -30,7 +30,7 @@ const ContactLeadsManagement = () => {
                 id: lead.id,
                 name: lead.full_name || lead.name || 'Unknown',
                 email: lead.email,
-                date: new Date(lead.created_at || lead.date).toLocaleDateString(),
+                date: new Date(lead.created_date || lead.created_at || lead.date || Date.now()).toLocaleDateString(),
                 message: lead.message,
                 isNew: lead.isNew || false
             }));

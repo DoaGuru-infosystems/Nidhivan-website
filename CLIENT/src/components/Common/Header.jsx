@@ -5,7 +5,8 @@ import { siteData } from '../../data/siteContent';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Search, X, Phone, Mail, MapPin, Menu, Loader2 } from 'lucide-react';
+import { Menu, X, Phone, Mail, MapPin, Loader2, Search } from 'lucide-react';
+import { submitContactForm } from '../../lib/api';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -46,12 +47,28 @@ const Header = () => {
   });
 
   const onSubmit = async (data) => {
-    // Mock API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("Header Form Data Submitted:", data);
-    alert("Thank you for getting in touch! We will contact you soon.");
-    reset();
-    setIsQuoteActive(false);
+    try {
+      const formData = {
+        name: data.username,
+        email: data.email,
+        mobile_no: data.phone || "Not Provided",
+        subject: "Header Contact Inquiry",
+        message: data.message
+      };
+      
+      const response = await submitContactForm(formData);
+      
+      if (response && response.success) {
+        alert("Thank you for getting in touch! We will contact you soon.");
+        reset();
+        setIsQuoteActive(false);
+      } else {
+        alert("Failed to submit inquiry. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+      alert("An error occurred while submitting. Please try again.");
+    }
   };
 
   // Sticky header with GSAP ScrollTrigger

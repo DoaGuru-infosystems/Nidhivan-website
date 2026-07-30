@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Trash2, Plus, UploadCloud, Folder, ArrowLeft, Image as ImageIcon } from 'lucide-react';
+import { Trash2, Plus, UploadCloud, Folder, ArrowLeft, Image as ImageIcon, X } from 'lucide-react';
 import { 
     fetchGalleryCategories, 
     createGalleryCategory, 
+    deleteGalleryCategory,
     fetchImagesByCategory, 
     createGalleryImages, 
-    deleteGalleryImage 
+    deleteGalleryImage,
+    getMediaUrl 
 } from '@/lib/api';
 
 const GalleryManagement = () => {
@@ -22,7 +24,7 @@ const GalleryManagement = () => {
     const [isCatDialogOpen, setIsCatDialogOpen] = useState(false);
     const [newCatTitle, setNewCatTitle] = useState('');
     const [catThumbFile, setCatThumbFile] = useState(null);
-    const [catThumbPreview, setCatThumbPreview] = useState('');
+    const [catThumbPreview, setCatThumbPreview] = useState([]);
     const [catSaving, setCatSaving] = useState(false);
 
     // Images state
@@ -53,34 +55,69 @@ const GalleryManagement = () => {
 
     // ----- Category Handlers -----
     const handleCatThumbUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setCatThumbFile(file);
-            setCatThumbPreview(URL.createObjectURL(file));
+        const files = Array.from(e.target.files);
+        if (files.length > 0) {
+            const newFiles = catThumbFile ? [...catThumbFile, ...files] : files;
+            setCatThumbFile(newFiles);
+            setCatThumbPreview(newFiles.map(file => URL.createObjectURL(file)));
         }
+        e.target.value = null; // Reset to allow re-selecting the same file if needed
+    };
+
+    const handleRemoveSelectedImage = (indexToRemove) => {
+        const newFiles = catThumbFile.filter((_, idx) => idx !== indexToRemove);
+        setCatThumbFile(newFiles.length > 0 ? newFiles : null);
+        setCatThumbPreview(newFiles.length > 0 ? newFiles.map(file => URL.createObjectURL(file)) : []);
     };
 
     const handleSaveCategory = async () => {
+        if (!newCatTitle || !catThumbFile || catThumbFile.length === 0) return;
         setCatSaving(true);
         try {
+            // 1. Create Category with the first image as thumbnail
             const formData = new FormData();
-            formData.append('title', newCatTitle || 'Unnamed Category');
-            if (catThumbFile) {
-                formData.append('thumbnail_image', catThumbFile);
+            formData.append('title', newCatTitle);
+            formData.append('thumbnail_image', catThumbFile[0]);
+            const catRes = await createGalleryCategory(formData);
+            const newCatId = catRes?.id || catRes?.insertId;
+
+            // 2. Upload all selected images into the new category
+            if (newCatId) {
+                const imgFormData = new FormData();
+                imgFormData.append('category_id', newCatId);
+                imgFormData.append('title', newImgTitle);
+                imgFormData.append('address', newImgAddress);
+                catThumbFile.forEach(file => {
+                    imgFormData.append('images', file);
+                });
+                await createGalleryImages(imgFormData);
             }
-            await createGalleryCategory(formData);
+
             await loadCategories();
             setIsCatDialogOpen(false);
             setNewCatTitle('');
+            setNewImgTitle('');
+            setNewImgAddress('');
             setCatThumbFile(null);
-            setCatThumbPreview('');
+            setCatThumbPreview([]);
         } catch (error) {
             console.error("Save category failed", error);
-            // Optimistic for dummy fallback
-            setCategories([{ id: Date.now(), title: newCatTitle, thumbnail_image: catThumbPreview }, ...categories]);
+            alert("Failed to save category and images. Please try again.");
             setIsCatDialogOpen(false);
         } finally {
             setCatSaving(false);
+        }
+    };
+
+    const handleDeleteCategory = async (e, id) => {
+        e.stopPropagation(); // Prevent category click
+        if (!window.confirm("Are you sure you want to delete this category? All images inside it might be affected.")) return;
+        try {
+            await deleteGalleryCategory(id);
+            setCategories(prev => prev.filter(cat => cat.id !== id));
+        } catch (error) {
+            console.error("Delete category failed", error);
+            alert("Failed to delete category.");
         }
     };
 
@@ -159,58 +196,14 @@ const GalleryManagement = () => {
                         </div>
                     </div>
                     
-                    <Dialog open={isImgDialogOpen} onOpenChange={setIsImgDialogOpen}>
-                        <DialogTrigger asChild>
-                            <Button className="bg-[#118A43] hover:bg-[#0f7a3b] text-white flex items-center gap-2">
-                                <UploadCloud size={16} />
-                                Upload Images
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-[500px] p-6 rounded-xl">
-                            <DialogHeader className="mb-4">
-                                <DialogTitle className="text-2xl text-[#1e1e1e]">Upload to {viewingCategory.title || viewingCategory.category_name}</DialogTitle>
-                                <DialogDescription className="text-slate-500">
-                                    Upload up to 50 images at once.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <div className="grid gap-5 py-4">
-                                <div className="grid gap-2">
-                                    <Label className="text-slate-700 font-medium">Select Images</Label>
-                                    <input 
-                                        type="file" 
-                                        multiple 
-                                        accept="image/*" 
-                                        onChange={handleMultipleImageUpload} 
-                                        className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#118A43]/10 file:text-[#118A43] hover:file:bg-[#118A43]/20"
-                                    />
-                                    {imgFiles.length > 0 && (
-                                        <p className="text-sm text-green-600 mt-1">{imgFiles.length} files selected</p>
-                                    )}
-                                </div>
-                                <div className="grid gap-2">
-                                    <Label htmlFor="title" className="text-slate-700 font-medium">Title (Optional)</Label>
-                                    <Input id="title" value={newImgTitle} onChange={(e) => setNewImgTitle(e.target.value)} placeholder="e.g. Modern Villa" className="focus-visible:ring-[#118A43]" />
-                                </div>
-                                <div className="grid gap-2">
-                                    <Label htmlFor="address" className="text-slate-700 font-medium">Address (Optional)</Label>
-                                    <Input id="address" value={newImgAddress} onChange={(e) => setNewImgAddress(e.target.value)} placeholder="e.g. Jabalpur, MP" className="focus-visible:ring-[#118A43]" />
-                                </div>
-                            </div>
-                            <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-slate-100">
-                                <Button variant="outline" onClick={() => setIsImgDialogOpen(false)} className="border-slate-200 text-slate-600">Cancel</Button>
-                                <Button onClick={handleSaveImages} disabled={imgSaving || imgFiles.length === 0} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white">
-                                    {imgSaving ? 'Uploading...' : 'Upload'}
-                                </Button>
-                            </div>
-                        </DialogContent>
-                    </Dialog>
+                    <div></div>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     {images.map((img) => (
                         <div key={img.id} className="group relative rounded-xl overflow-hidden border border-slate-200 shadow-sm aspect-square bg-slate-100">
                             <img 
-                                src={img.image_url || img.image} 
+                                src={img.image_url ? getMediaUrl(img.image_url) : (img.image ? getMediaUrl(img.image) : '')} 
                                 alt={img.title || "Gallery Item"}
                                 className="object-cover w-full h-full"
                             />
@@ -254,7 +247,7 @@ const GalleryManagement = () => {
                             Add Category
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[400px] p-6 rounded-xl">
+                    <DialogContent className="sm:max-w-[600px] p-6 rounded-xl">
                         <DialogHeader className="mb-4">
                             <DialogTitle className="text-2xl text-[#1e1e1e]">New Category</DialogTitle>
                             <DialogDescription className="text-slate-500">
@@ -267,20 +260,47 @@ const GalleryManagement = () => {
                                 <Input id="cat-title" value={newCatTitle} onChange={(e) => setNewCatTitle(e.target.value)} placeholder="e.g. Interior Designs" className="focus-visible:ring-[#118A43]" />
                             </div>
                             <div className="grid gap-2">
-                                <Label className="text-slate-700 font-medium">Thumbnail Image</Label>
+                                <Label className="text-slate-700 font-medium">Gallery Images (First is Thumbnail)</Label>
                                 <div className="flex gap-3 items-center">
                                     <div className="flex-1 relative">
-                                        <input type="file" id="cat-thumb-upload" accept="image/*" onChange={handleCatThumbUpload} className="hidden" />
+                                        <input type="file" multiple id="cat-thumb-upload" accept="image/*" onChange={handleCatThumbUpload} className="hidden" />
                                         <Label htmlFor="cat-thumb-upload" className="flex items-center justify-center w-full h-10 px-4 py-2 border border-slate-200 border-dashed rounded-md cursor-pointer hover:bg-slate-50 transition-colors text-sm text-slate-600 bg-white shadow-sm font-medium">
                                             Choose File
                                         </Label>
+                                        {catThumbFile && catThumbFile.length > 0 && (
+                                            <p className="text-xs text-green-600 mt-2 font-medium">
+                                                {catThumbFile.length} {catThumbFile.length === 1 ? 'file' : 'files'} selected
+                                            </p>
+                                        )}
                                     </div>
-                                    {catThumbPreview && (
-                                        <div className="w-12 h-12 shrink-0 rounded-lg overflow-hidden border border-slate-200 bg-slate-100">
-                                            <img src={catThumbPreview} alt="Preview" className="w-full h-full object-cover" />
-                                        </div>
-                                    )}
                                 </div>
+                                {catThumbPreview && catThumbPreview.length > 0 && (
+                                    <div className="flex gap-2 mt-2 overflow-x-auto pb-2 custom-scrollbar">
+                                        {catThumbPreview.map((preview, idx) => (
+                                            <div key={idx} className="w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 relative group">
+                                                <img src={preview} alt={`Preview ${idx + 1}`} className="w-full h-full object-cover" />
+                                                {idx === 0 && (
+                                                    <div className="absolute bottom-0 left-0 w-full bg-black/60 text-white text-[10px] text-center font-semibold py-0.5">Thumbnail</div>
+                                                )}
+                                                <button 
+                                                    onClick={() => handleRemoveSelectedImage(idx)} 
+                                                    className="absolute top-1 right-1 bg-white/90 rounded-full text-red-500 hover:text-red-700 shadow-sm flex items-center justify-center p-1"
+                                                    title="Remove image"
+                                                >
+                                                    <X size={14} />
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="img-title" className="text-slate-700 font-medium">Image Title (Optional)</Label>
+                                <Input id="img-title" value={newImgTitle} onChange={(e) => setNewImgTitle(e.target.value)} placeholder="e.g. Modern Villa" className="focus-visible:ring-[#118A43]" />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="img-address" className="text-slate-700 font-medium">Image Address (Optional)</Label>
+                                <Input id="img-address" value={newImgAddress} onChange={(e) => setNewImgAddress(e.target.value)} placeholder="e.g. Jabalpur, MP" className="focus-visible:ring-[#118A43]" />
                             </div>
                         </div>
                         <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-slate-100">
@@ -302,13 +322,21 @@ const GalleryManagement = () => {
                     >
                         <div className="h-40 bg-slate-100 relative overflow-hidden">
                             {cat.thumbnail_image ? (
-                                <img src={cat.thumbnail_image} alt={cat.title || cat.category_name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <img src={getMediaUrl(cat.thumbnail_image)} alt={cat.title || cat.category_name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center text-slate-400">
                                     <ImageIcon size={40} className="opacity-30" />
                                 </div>
                             )}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute top-2 right-2">
+                                <button 
+                                    onClick={(e) => handleDeleteCategory(e, cat.id)} 
+                                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                    <Trash2 size={16} />
+                                </button>
+                            </div>
                             <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
                                 <Folder className="text-[#F4B54B]" size={20} />
                                 <h3 className="text-white font-semibold truncate">{cat.title || cat.category_name}</h3>

@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from '../../Elements/Banner';
 import GoogleMapIframe from '../../Elements/GoogleMapIframe';
 import { siteData } from '../../../data/siteContent';
+import { submitContactForm } from '../../../lib/api';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -36,11 +37,27 @@ const ContactUs = () => {
     });
 
     const onSubmit = async (data) => {
-        // Mock API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log("Form Data Submitted:", data);
-        alert("Thank you for your message! We will get back to you soon.");
-        reset();
+        try {
+            const formData = {
+                name: data.username,
+                email: data.email,
+                mobile_no: data.phone || "Not Provided", // Map or fallback
+                subject: "Contact Us Form Inquiry",
+                message: data.message
+            };
+            
+            const response = await submitContactForm(formData);
+            
+            if (response && response.success) {
+                alert("Thank you for your message! We will get back to you soon.");
+                reset();
+            } else {
+                alert("Failed to submit inquiry. Please try again later.");
+            }
+        } catch (error) {
+            console.error("Submit error:", error);
+            alert("An error occurred while submitting. Please try again.");
+        }
     };
 
     return (

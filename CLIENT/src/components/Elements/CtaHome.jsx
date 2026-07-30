@@ -1,9 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { submitContactForm } from '../../lib/api';
 
 var bgimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"; // Luxury house background
 
 const CtaHome = () => {
+    const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            const data = {
+                name: formData.name,
+                email: formData.email,
+                mobile_no: formData.phone,
+                subject: "Quick Inquiry from Home Page",
+                message: "Please contact me for a free consultation."
+            };
+            const response = await submitContactForm(data);
+            if (response && response.success) {
+                alert("Thank you for your inquiry! We will contact you soon.");
+                setFormData({ name: '', phone: '', email: '' });
+            } else {
+                alert("Failed to submit inquiry. Please try again later.");
+            }
+        } catch (error) {
+            console.error("Submit error:", error);
+            alert("An error occurred while submitting. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="relative py-16 md:py-24 bg-slate-900 overflow-hidden" style={{ backgroundImage: `url(${bgimg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
             {/* Dark Overlay */}
@@ -31,18 +61,18 @@ const CtaHome = () => {
                     <div className="lg:col-span-5">
                         <div className="bg-white p-8 rounded-xl shadow-2xl">
                             <h3 className="text-2xl font-bold text-slate-800 mb-6 text-center">Quick Inquiry</h3>
-                            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                            <form className="space-y-4" onSubmit={handleSubmit}>
                                 <div>
-                                    <input type="text" placeholder="Your Name" className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#118A43] focus:border-transparent transition-all" />
+                                    <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#118A43] focus:border-transparent transition-all" />
                                 </div>
                                 <div>
-                                    <input type="tel" placeholder="Phone Number" className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#118A43] focus:border-transparent transition-all" />
+                                    <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#118A43] focus:border-transparent transition-all" />
                                 </div>
                                 <div>
-                                    <input type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#118A43] focus:border-transparent transition-all" />
+                                    <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#118A43] focus:border-transparent transition-all" />
                                 </div>
-                                <button type="submit" className="w-full bg-[#fb5455] hover:bg-[#e04546] text-white font-bold py-3 rounded-md transition-colors shadow-md">
-                                    Get a Free Consultation
+                                <button type="submit" disabled={isSubmitting} className="w-full bg-[#fb5455] hover:bg-[#e04546] text-white font-bold py-3 rounded-md transition-colors shadow-md disabled:opacity-70">
+                                    {isSubmitting ? "Submitting..." : "Get a Free Consultation"}
                                 </button>
                             </form>
                         </div>

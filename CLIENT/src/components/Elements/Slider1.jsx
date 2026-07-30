@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Autoplay, Navigation } from 'swiper/modules';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, PhoneCall, MessageCircle, Mail } from 'lucide-react';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -187,23 +187,67 @@ const Slider1 = () => {
               >
                 {slide.description}
               </p>
-              {/* CTA Button */}
-              <div data-animate>
-                <NavLink
-                  to="/about"
-                  className="site-button btn-half"
+              {/* CTA Buttons */}
+              <div data-animate style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+                <a
+                  href={`tel:${siteData.contactInfo.phone}`}
+                  className="site-button"
                   style={{
-                    display: 'inline-block',
-                    padding: '14px 40px',
-                    fontSize: '15px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '12px 24px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     textTransform: 'uppercase',
                     letterSpacing: '1px',
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  <span>Read More</span>
-                </NavLink>
+                  <PhoneCall size={18} />
+                  <span>Call Us</span>
+                </a>
+                <a
+                  href={`https://wa.me/91${siteData.contactInfo.phone.replace(/\D/g, '').replace(/^0/, '')}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="site-button"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '12px 24px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    transition: 'all 0.3s ease',
+                    backgroundColor: '#25D366', // WhatsApp color
+                    borderColor: '#25D366',
+                    color: '#fff',
+                  }}
+                >
+                  <MessageCircle size={18} />
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href={`mailto:${siteData.contactInfo.email}`}
+                  className="site-button"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '12px 24px',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  <Mail size={18} />
+                  <span>Email</span>
+                </a>
               </div>
             </div>
           </SwiperSlide>

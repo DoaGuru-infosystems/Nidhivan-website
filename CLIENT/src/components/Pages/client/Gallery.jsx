@@ -1,5 +1,5 @@
 import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Banner from '../../Elements/Banner';
 import Masonry from 'react-masonry-css';
 import gsap from 'gsap';
@@ -109,7 +109,8 @@ const breakpointColumnsObj = {
 };
 
 const Gallery = () => {
-    const [activeFilter, setActiveFilter] = useState('*');
+    const location = useLocation();
+    const [activeFilter, setActiveFilter] = useState(location.state?.activeCategory || '*');
     const galleryRef = useRef(null);
     const [allProjects, setAllProjects] = useState(projects);
     const [filteredItems, setFilteredItems] = useState(projects);
@@ -128,14 +129,7 @@ const Gallery = () => {
                 
                 const cats = categoriesRes.data || categoriesRes;
                 const newFilters = cats.map(c => ({ label: c.title, filter: c.id.toString() }));
-                // Combine existing static filters and dynamic categories (filter out duplicates by label if needed, but this works)
-                const combinedFilters = [...filters];
-                newFilters.forEach(nf => {
-                    if (!combinedFilters.some(cf => cf.label === nf.label)) {
-                        combinedFilters.push(nf);
-                    }
-                });
-                setDynamicFilters(combinedFilters);
+                setDynamicFilters(newFilters);
 
                 const imgs = imagesRes.data || imagesRes;
                 const dynamic = imgs.map((item, index) => ({
