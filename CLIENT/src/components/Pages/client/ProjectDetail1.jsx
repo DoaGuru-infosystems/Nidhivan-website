@@ -12,7 +12,7 @@ var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=160
 
 class ProjectDetail1 extends React.Component {
     
-    };
+    
     render() {
         const { dynamicProject } = this.props;
         if (!dynamicProject) {
