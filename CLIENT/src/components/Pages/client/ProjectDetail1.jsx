@@ -12,25 +12,6 @@ var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=160
 
 class ProjectDetail1 extends React.Component {
     
-    componentDidMount() {
-        function loadScript(src) {
-
-            return new Promise(function (resolve, reject) {
-                var script = document.createElement('script');
-                script.src = src;
-                script.addEventListener('load', function () {
-                    resolve();
-                });
-                script.addEventListener('error', function (e) {
-                    reject(e);
-                });
-                document.body.appendChild(script);
-                document.body.removeChild(script);
-            })
-        };
-
-        loadScript('/assets/js/custom.js');
-
     };
     render() {
         const { dynamicProject } = this.props;
@@ -178,7 +159,7 @@ const ProjectDetail1Wrapper = (props) => {
                     if (projectData) {
                         setDynamicProject({
                             ...projectData,
-                            image: projectData.images && projectData.images.length > 0 ? getMediaUrl(projectData.images[0]) : null
+                            image: projectData.images && projectData.images.length > 0 ? getMediaUrl(projectData.images[0].image_url || projectData.images[0].image || projectData.images[0]) : null
                         });
                     }
                 } catch (error) {

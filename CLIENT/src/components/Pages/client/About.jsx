@@ -32,7 +32,7 @@ class About extends React.Component {
                 document.body.appendChild(script);
             });
         }
-        loadScript('/assets/js/custom.js');
+        ;
     }
     
     render() {
