@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2, Plus, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { fetchAllBlogsAdmin, deleteBlog } from '@/lib/api';
+import { fetchAllBlogsAdmin, deleteBlog, getMediaUrl } from '@/lib/api';
 
 const BlogManagement = () => {
     const [blogs, setBlogs] = useState([]);
@@ -73,7 +73,7 @@ const BlogManagement = () => {
                                         <div className="flex items-center gap-3">
                                             {item.image_url || item.image ? (
                                                 <img
-                                                    src={item.image_url || item.image}
+                                                    src={item.image_url ? getMediaUrl(item.image_url) : (item.image ? getMediaUrl(item.image) : '')}
                                                     alt=""
                                                     className="w-12 h-12 rounded-lg object-cover flex-shrink-0 border border-slate-100"
                                                 />

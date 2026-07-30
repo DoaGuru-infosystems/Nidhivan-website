@@ -45,7 +45,7 @@ const SimilarProjects = (props) => {
                     description: item.location,
                     image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (services[item.id % services.length]?.image || services[0].image)
                 }));
-                setAllProjects([...dynamic, ...services]);
+                setAllProjects(dynamic);
             } catch (error) {
                 console.error("Failed to load projects", error);
             }

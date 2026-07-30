@@ -86,7 +86,7 @@ const Projects3 = (props) => {
                     description: item.location,
                     image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (projects[item.id % projects.length]?.image || projects[0].image)
                 }));
-                setAllProjects([...dynamic, ...projects]);
+                setAllProjects(dynamic);
             } catch (error) {
                 console.error("Failed to load projects", error);
             }

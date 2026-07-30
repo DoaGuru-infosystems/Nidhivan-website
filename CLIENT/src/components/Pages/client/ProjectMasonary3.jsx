@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Banner from '../../Elements/Banner';
 import Masonry from 'react-masonry-css';
@@ -174,7 +174,7 @@ const ProjectMasonary3 = () => {
                     filter: filters.find(f => f.label === item.category)?.filter || item.category,
                     image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (projects[item.id % projects.length]?.image || projects[0].image)
                 }));
-                const merged = [...dynamic, ...projects];
+                const merged = dynamic;
                 setAllProjects(merged);
                 setFilteredItems(merged);
             } catch (error) {
@@ -223,23 +223,7 @@ const ProjectMasonary3 = () => {
             
             <div className="relative py-8 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4">
-                    {/* Filter Nav */}
-                    <div className="filter-wrap pb-8 text-center">
-                        <ul className="filter-navigation masonry-filter clearfix flex flex-wrap justify-center gap-2">
-                            <li className={`cursor-pointer px-4 py-2 font-semibold transition-colors rounded ${activeFilter === '*' ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'}`} 
-                                onClick={() => setActiveFilter('*')}>
-                                All
-                            </li>
-                            {filters.map((item, index) => (
-                                <li key={index} 
-                                    className={`cursor-pointer px-4 py-2 font-semibold transition-colors rounded ${activeFilter === item.filter ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
-                                    onClick={() => setActiveFilter(item.filter)}>
-                                    {item.label}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    
+
                     {/* GALLERY CONTENT */}
                     <div ref={galleryRef}>
                         <Masonry

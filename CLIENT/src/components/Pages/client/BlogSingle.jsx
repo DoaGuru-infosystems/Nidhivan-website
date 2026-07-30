@@ -27,7 +27,7 @@ class BlogSingle extends React.Component {
             })
         };
 
-        loadScript('/assets/js/custom.js');
+        loadScript('/assets/js/custom.js').catch(e => console.warn('custom.js not found'));
 
     };
     render() {
@@ -144,196 +144,10 @@ class BlogSingle extends React.Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="post-controls p-t30">
-                                        <div className="flex justify-between">
-                                            <div className="prev-post"><NavLink to={"#"}>Prev Article</NavLink></div>
-                                            <div className="next-post"><NavLink to={"#"}>Next Article</NavLink></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* OUR BLOG START */}
-                                {/* TITLE START */}
-                                <div className="mb-10">
-                                    <div className="sx-separator-outer separator-left">
-                                        <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                                            <h3 className="sep-line-one">Blog</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* TITLE END */}
-                                {/* IMAGE CAROUSEL START */}
-                                <div className="section-content">
-                                    <div className="grid grid-cols-12 gap-8">
-                                        <div className="col-span-12 md:col-span-4">
-                                            <div className="blog-post blog-grid date-style-2">
-                                                <div className="sx-post-media sx-img-effect img-reflection">
-                                                    {/* <NavLink to={"/blog-masonry"}><img src={new URL('../../../images/blog/blog-grid/pic1.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
 
-                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
-                                                </div>
-                                                <div className="sx-post-info p-t30">
-                                                    <div className="sx-post-meta ">
-                                                        <ul>
-                                                            <li className="post-date"><strong>05</strong> <span>Sep</span> </li>
-                                                            <li className="post-author"><NavLink to={"/blog-masonry"}>By <span>John</span></NavLink> </li>
-                                                            <li className="post-comment"> <NavLink to={"/blog-masonry"}>5 Comments</NavLink> </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="sx-post-title ">
-                                                        <h4 className="post-title"><NavLink to={"/blog-masonry"}>WeÃ¢â‚¬â„¢ll nail your next project, because...</NavLink></h4>
-                                                    </div>
-                                                    <div className="sx-post-readmore">
-                                                        <NavLink to={"/blog-masonry"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-span-12 md:col-span-4">
-                                            <div className="blog-post blog-grid date-style-2">
-                                                <div className="sx-post-media sx-img-effect img-reflection">
-                                                    {/* <NavLink to={"/blog-masonry"}><img src={new URL('../../../images/blog/blog-grid/pic2.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
-
-                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
-                                                </div>
-                                                <div className="sx-post-info p-t30">
-                                                    <div className="sx-post-meta ">
-                                                        <ul>
-                                                            <li className="post-date"><strong>25</strong> <span>Sep</span> </li>
-                                                            <li className="post-author"><NavLink to={"/blog-masonry"}>By <span>John</span></NavLink> </li>
-                                                            <li className="post-comment"> <NavLink to={"/blog-masonry"}>5 Comments</NavLink> </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="sx-post-title ">
-                                                        <h4 className="post-title"><NavLink to={"/blog-masonry"}>Helping you and your house become...</NavLink></h4>
-                                                    </div>
-                                                    <div className="sx-post-readmore">
-                                                        <NavLink to={"/blog-masonry"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-span-12 md:col-span-4">
-                                            <div className="blog-post blog-grid date-style-2">
-                                                <div className="sx-post-media sx-img-effect img-reflection">
-                                                    {/* <NavLink to={"/blog-masonry"}><img src={new URL('../../../images/blog/blog-grid/pic3.jpg', import.meta.url).href} alt=""/></NavLink> ORIGINAL DUMMY - restore when real property photos are ready */}
-
-                                                    <NavLink to={"/blog-masonry"}><img src={"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80"} alt=""/></NavLink> {/* TEMP LIVE PREVIEW */}
-                                                </div>
-                                                <div className="sx-post-info p-t30">
-                                                    <div className="sx-post-meta ">
-                                                        <ul>
-                                                            <li className="post-date"><strong>05</strong> <span>Sep</span> </li>
-                                                            <li className="post-author"><NavLink to={"/blog-masonry"}>By <span>John</span></NavLink> </li>
-                                                            <li className="post-comment"> <NavLink to={"/blog-masonry"}>5 Comments</NavLink> </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="sx-post-title ">
-                                                        <h4 className="post-title"><NavLink to={"/blog-masonry"}>Creating quality urban lifestyles, building...</NavLink></h4>
-                                                    </div>
-                                                    <div className="sx-post-readmore">
-                                                        <NavLink to={"/blog-masonry"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                {/* OUR BLOG END */}
-                                <div className="clear" id="comment-list">
-                                    <div className="comments-area" id="comments">
-                                        <h2 className="comments-title">3 Comments</h2>
-                                        <div className="comments-outer p-tb30">
-                                            {/* COMMENT LIST START */}
-                                            <ol className="comment-list">
-                                                <li className="comment">
-                                                    {/* COMMENT BLOCK */}
-                                                    <div className="comment-body">
-                                                        <div className="comment-meta">
-                                                            <NavLink to={"#"}>20 Sep 2022</NavLink>
-                                                        </div>
-                                                        <div className="comment-author vcard">
-                                                            <img className="avatar photo" src={new URL('../../../images/testimonials/pic4.jpg', import.meta.url).href} alt=""/>
-                                                            <cite className="fn"> Schiocchet </cite>
-                                                            <span className="says">says:</span>
-                                                        </div>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                                                        <div className="reply">
-                                                            <NavLink to={"#"} className="comment-reply-link letter-spacing-2 text-uppercase">Reply</NavLink>
-                                                        </div>
-                                                    </div>
-                                                    {/* SUB COMMENT BLOCK */}
-                                                    <ol className="children">
-                                                        <li className="comment odd parent">
-                                                            <div className="comment-body">
-                                                                <div className="comment-meta">
-                                                                    <NavLink to={"#"}>22 Sep 2022</NavLink>
-                                                                </div>
-                                                                <div className="comment-author vcard">
-                                                                    <img className="avatar photo" src={new URL('../../../images/testimonials/pic3.jpg', import.meta.url).href} alt=""/>
-                                                                    <cite className="fn">Brayden</cite>
-                                                                    <span className="says">says:</span>
-                                                                </div>
-                                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words. </p>
-                                                                <div className="reply">
-                                                                    <NavLink to={"#"} className="comment-reply-link letter-spacing-2 text-uppercase">Reply</NavLink>
-                                                                </div>
-                                                            </div>
-                                                            <ol className="children">
-                                                                <li className="comment odd parent">
-                                                                    <div className="comment-body">
-                                                                        <div className="comment-meta">
-                                                                            <NavLink to={"#"}>24 Oct 2019</NavLink>
-                                                                        </div>
-                                                                        <div className="comment-author vcard">
-                                                                            <img className="avatar photo" src={new URL('../../../images/testimonials/pic2.jpg', import.meta.url).href} alt="" />
-                                                                            <cite className="fn">Diego</cite>
-                                                                            <span className="says">says:</span>
-                                                                        </div>
-                                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
-                                                                        <div className="reply">
-                                                                            <NavLink to={"#"} className="comment-reply-link letter-spacing-2 text-uppercase">Reply</NavLink>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ol>
-                                                        </li>
-                                                    </ol>
-                                                </li>
-                                            </ol>
-                                            {/* COMMENT LIST END */}
-                                            {/* LEAVE A REPLY START */}
-                                            <div className="comment-respond m-t30" id="respond">
-                                                <h2 className="comment-reply-title" id="reply-title">Leave a Comments
-                                                    <small>
-                                                    <NavLink to={"#"} style={{ display: 'none' }} id="cancel-comment-reply-link" rel="nofollow">Cancel reply</NavLink>
-                                                    </small>
-                                                </h2>
-                                                <form className="comment-form bdr-1 bdr-solid bdr-gray p-tb15" id="commentform" method="post">
-                                                    <p className="comment-form-author">
-                                                        <label htmlFor="author">Name <span className="required">*</span></label>
-                                                        <input defaultValue="" className="w-full px-4 py-2 border border-gray-300 focus:outline-none" type="text" name="user-comment" placeholder="Author" id="author" />
-                                                    </p>
-                                                    <p className="comment-form-email">
-                                                        <label htmlFor="email">Email <span className="required">*</span></label>
-                                                        <input defaultValue="" className="w-full px-4 py-2 border border-gray-300 focus:outline-none" type="text" name="email" placeholder="Email" id="email" />
-                                                    </p>
-                                                    <p className="comment-form-url">
-                                                        <label htmlFor="url">Website</label>
-                                                        <input defaultValue="" className="w-full px-4 py-2 border border-gray-300 focus:outline-none" type="text" name="url" placeholder="Website" id="url" />
-                                                    </p>
-                                                    <p className="comment-form-comment">
-                                                        <label htmlFor="comment">Comment</label>
-                                                        <textarea className="w-full px-4 py-2 border border-gray-300 focus:outline-none" rows={8} name="comment" placeholder="Comment" id="comment" defaultValue={""} />
-                                                    </p>
-                                                    <p className="form-submit">
-                                                        <button className="site-button btn-half" type="button"><span> Submit</span></button>
-                                                    </p>
-                                                </form>
-                                            </div>
-                                            {/* LEAVE A REPLY END */}
-                                        </div>
-                                    </div>
-                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -405,12 +219,12 @@ const BlogSingleWrapper = (props) => {
                         setDynamicBlog({
                             ...blogData,
                             title: blogData.title,
-                            date: new Date(blogData.created_at).getDate(),
-                            month: new Date(blogData.created_at).toLocaleString('default', { month: 'short' }) + ' ' + new Date(blogData.created_at).getFullYear(),
+                            date: new Date(blogData.published_date).getDate(),
+                            month: new Date(blogData.published_date).toLocaleString('default', { month: 'short' }) + ' ' + new Date(blogData.published_date).getFullYear(),
                             author: blogData.author,
                             category: blogData.category,
-                            image: blogData.cover_image ? getMediaUrl(blogData.cover_image) : null,
-                            shortDescription: blogData.shortDescription,
+                            image: blogData.image_url ? getMediaUrl(blogData.image_url) : null,
+                            shortDescription: blogData.short_description,
                             fullDescription: blogData.content
                         });
                     }

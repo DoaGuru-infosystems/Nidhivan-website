@@ -28,7 +28,7 @@ const Testimonials1 = () => {
                     role: t.designation || t.profession, // Support both new backend format and dummy format
                     text: t.text_content || t.quote
                 }));
-                setAllTestimonials([...dynamic, ...siteData.testimonials]);
+                setAllTestimonials(dynamic);
             } catch (error) {
                 console.error("Failed to load testimonials", error);
             }

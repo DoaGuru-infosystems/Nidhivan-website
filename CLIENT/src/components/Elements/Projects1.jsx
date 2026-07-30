@@ -61,7 +61,7 @@ const Projects1 = () => {
                     // If image doesn't exist, fallback to getImgUrl
                     imgUrl: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : getImgUrl(item.id)
                 }));
-                setAllProjects([...dynamic, ...siteData.projects]);
+                setAllProjects(dynamic);
             } catch (error) {
                 console.error("Failed to load projects", error);
             }

@@ -12,13 +12,11 @@ const BlogsHome = () => {
             try {
                 const response = await fetchAllBlogsClient();
                 const data = response.data || response;
-                const published = data
-                    .filter(b => b.status === 'Published')
-                    .map(b => ({
+                const published = data.map(b => ({
                         ...b,
-                        image: b.cover_image ? getMediaUrl(b.cover_image) : "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80",
-                        month: new Date(b.created_at).toLocaleString('default', { month: 'short' }),
-                        date: new Date(b.created_at).getDate()
+                        image: b.image_url ? getMediaUrl(b.image_url) : "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80",
+                        month: new Date(b.published_date).toLocaleString('default', { month: 'short' }),
+                        date: new Date(b.published_date).getDate()
                     }));
                 setLatestBlogs(published.slice(0, 5));
             } catch (error) {

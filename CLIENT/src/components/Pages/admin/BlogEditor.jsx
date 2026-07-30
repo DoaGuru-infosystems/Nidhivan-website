@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
 import { ArrowLeft, Save, Eye } from 'lucide-react';
-import { fetchBlogById, createBlog, updateBlog } from '@/lib/api';
+import { fetchBlogById, createBlog, updateBlog, getMediaUrl } from '@/lib/api';
 import BlogContentEditor from './components/BlogContentEditor';
 
 const BlogEditor = () => {
@@ -48,7 +48,7 @@ const BlogEditor = () => {
                             meta_keywords: data.meta_keywords || '',
                             is_published: data.is_published === 1 || data.is_published === true || data.status === 'Published'
                         });
-                        setPreviewUrl(data.image_url || data.image || '');
+                        setPreviewUrl(data.image_url ? getMediaUrl(data.image_url) : (data.image ? getMediaUrl(data.image) : ''));
                     } else {
                         navigate('/admin/blogs');
                     }

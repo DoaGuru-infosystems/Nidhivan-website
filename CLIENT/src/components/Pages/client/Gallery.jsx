@@ -147,7 +147,7 @@ const Gallery = () => {
                     image: item.image_url ? getMediaUrl(item.image_url) : (projects[index % projects.length]?.image)
                 }));
 
-                const merged = [...dynamic, ...projects];
+                const merged = dynamic;
                 setAllProjects(merged);
                 setFilteredItems(merged);
             } catch (error) {
