@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { Pencil, Trash2, Plus, Building2 } from 'lucide-react';
-import { fetchAllProjects, createProject, updateProject, deleteProject } from '@/lib/api';
+import { fetchAllProjects, createProject, updateProject, deleteProject, getMediaUrl } from '@/lib/api';
 
 const ProjectManagement = () => {
     const [projects, setProjects] = useState([]);
@@ -69,9 +69,9 @@ const ProjectManagement = () => {
         // Handle both possible backend structures for images
         let previews = [];
         if (item.images && Array.isArray(item.images)) {
-            previews = item.images.map(img => img.image_url || img.image || img);
+            previews = item.images.map(img => getMediaUrl(img.image_url || img.image || img));
         } else if (item.image) {
-            previews = [item.image];
+            previews = [getMediaUrl(item.image)];
         }
         setImgPreviews(previews);
         setIsDialogOpen(true);
@@ -130,10 +130,13 @@ const ProjectManagement = () => {
 
     // Helper to extract first image safely
     const getFirstImage = (item) => {
+        let img = '';
         if (item.images && Array.isArray(item.images) && item.images.length > 0) {
-            return item.images[0].image_url || item.images[0].image || item.images[0];
+            img = item.images[0].image_url || item.images[0].image || item.images[0];
+        } else {
+            img = item.image || item.image_url || '';
         }
-        return item.image || item.image_url || '';
+        return img ? getMediaUrl(img) : '';
     };
 
     return (

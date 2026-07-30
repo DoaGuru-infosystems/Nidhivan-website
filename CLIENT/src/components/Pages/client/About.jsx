@@ -3,7 +3,7 @@ import Banner from '../../Elements/Banner';
 import About3 from '../../Elements/About3';
 import { siteData } from '../../../data/siteContent';
 import Statistics1 from '../../Elements/Statistics1';
-import ClientsLogo1 from '../../Elements/ClientsLogo1';
+import HomeGalleryCategories from '../../Elements/HomeGalleryCategories';
 import GoogleMapIframe from '../../Elements/GoogleMapIframe';
 import { NavLink } from 'react-router-dom';
 
@@ -75,7 +75,7 @@ class About extends React.Component {
                 </div>
 
                 <Statistics1 />
-                <ClientsLogo1 />
+                <HomeGalleryCategories />
                 <GoogleMapIframe />
             </div>
         );

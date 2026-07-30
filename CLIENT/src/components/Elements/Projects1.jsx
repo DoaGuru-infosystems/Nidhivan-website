@@ -59,7 +59,7 @@ const Projects1 = () => {
                     address: item.location,
                     filter: filters.find(f => f.label === item.category)?.filter || item.category,
                     // If image doesn't exist, fallback to getImgUrl
-                    imgUrl: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : getImgUrl(item.id)
+                    imgUrl: item.images && item.images.length > 0 ? getMediaUrl(item.images[0].image_url || item.images[0].image || item.images[0]) : getImgUrl(item.id)
                 }));
                 setAllProjects(dynamic);
             } catch (error) {
@@ -150,7 +150,7 @@ const Projects1 = () => {
                                                 <div className="sx-thum-bx overflow-hidden">
                                                     <img src={item.imgUrl || getImgUrl(item.id)} alt={item.title} style={{ height: '400px' }} className="w-full object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer" onClick={() => { setLightboxIndex(index); setLightboxOpen(true); }} />
                                                 </div>
-                                                <div className="sx-info p-t20 text-white absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                                                <div className="sx-info p-t20 text-white absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 transition-all duration-300 pointer-events-none">
                                                     <h4 className="sx-tilte text-xl font-bold mb-1 pointer-events-auto"><NavLink to={"/about"} className="text-white">{item.title}</NavLink></h4>
                                                     <p className="m-b0 text-sm text-gray-200">{item.location}</p>
                                                 </div>

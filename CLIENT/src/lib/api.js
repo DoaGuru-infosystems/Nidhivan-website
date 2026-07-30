@@ -202,7 +202,7 @@ export const fetchAllProjects = () =>
   apiCall('/projects/allProjects', { method: 'GET' }, projectsDummyData);
 
 export const createProject = (formData) => 
-  apiCall('/projects/createProject', { method: 'POST', body: formData, isMultipart: true }, { success: true });
+  apiCall('/projects/admin-create', { method: 'POST', body: formData, isMultipart: true }, { success: true });
 
 export const updateProject = (id, formData) => 
   apiCall(`/projects/adminUpdateProject/${id}`, { method: 'PUT', body: formData, isMultipart: true }, { success: true });

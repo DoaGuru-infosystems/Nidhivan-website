@@ -55,14 +55,10 @@ const HomeGalleryCategories = () => {
                 `}
             </style>
 
-            <div className="container">
-                <div className="section-head text-center">
-                    <div className="wt-separator-outer separator-center">
-                        <div className="wt-separator">
-                            <span className="text-primary uppercase font-bold tracking-wider text-sm">Portfolio</span>
-                        </div>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mt-2 mb-8">Our Gallery Categories</h2>
+            <div className="w-full">
+                <div className="section-head flex flex-col items-center text-center">
+                    <span className="text-[#9C652A] uppercase font-bold tracking-widest text-sm mb-2">Portfolio</span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#5F351D] mb-8 uppercase">Our Gallery Categories</h2>
                 </div>
             </div>
 
@@ -79,13 +75,13 @@ const HomeGalleryCategories = () => {
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6">
-                                <h3 className="text-white text-xl md:text-2xl font-bold mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center p-6 transition-colors duration-300 group-hover:bg-black/60">
+                                <h3 className="text-white text-2xl md:text-3xl font-bold mb-5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 uppercase tracking-wide text-center">
                                     {cat.title}
                                 </h3>
                                 <button 
                                     onClick={() => handleCategoryClick(cat.id)}
-                                    className="bg-primary text-white w-max px-5 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-black"
+                                    className="bg-[#9C652A] text-white w-max px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#F9BA51] hover:text-[#5F351D] shadow-lg"
                                 >
                                     Know More
                                     <ArrowRight size={16} />
@@ -99,10 +95,10 @@ const HomeGalleryCategories = () => {
             <div className="text-center mt-12">
                 <button 
                     onClick={() => navigate('/gallery')}
-                    className="inline-flex items-center gap-3 bg-black hover:bg-primary text-white px-8 py-3.5 rounded-full text-base font-semibold transition-all shadow-lg hover:shadow-primary/30"
+                    className="inline-flex items-center gap-3 bg-[#9C652A] text-white hover:bg-[#F9BA51] hover:text-[#5F351D] px-10 py-4 rounded-full text-lg font-bold transition-all shadow-lg"
                 >
-                    More About
-                    <ArrowRight size={18} />
+                    Explore Full Gallery
+                    <ArrowRight size={20} />
                 </button>
             </div>
         </div>

@@ -75,9 +75,17 @@ class BlogGrid extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dynamicBlogs: []
+            dynamicBlogs: [],
+            currentPage: 1,
+            blogsPerPage: 5
         };
     }
+
+    handlePageChange = (pageNumber, e) => {
+        if(e) e.preventDefault();
+        this.setState({ currentPage: pageNumber });
+        window.scrollTo({ top: 300, behavior: 'smooth' });
+    };
 
     async componentDidMount() {
         try {
@@ -96,7 +104,13 @@ class BlogGrid extends React.Component {
     }
 
     render() {
-        const allBlogs = this.state.dynamicBlogs;
+        const { dynamicBlogs, currentPage, blogsPerPage } = this.state;
+        
+        // Calculate pagination variables
+        const indexOfLastBlog = currentPage * blogsPerPage;
+        const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+        const currentBlogs = dynamicBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
+        const totalPages = Math.ceil(dynamicBlogs.length / blogsPerPage);
 
         return (
             <>
@@ -107,7 +121,7 @@ class BlogGrid extends React.Component {
                        
                     <div className="max-w-7xl mx-auto px-4">
                             <div className="masonry-outer mfp-gallery news-grid clearfix grid grid-cols-12 gap-8 ">
-                                {allBlogs.map((item, index) => (
+                                {currentBlogs.map((item, index) => (
                                     <div className="masonry-item col-span-12 md:col-span-6 lg:col-span-4" key={index}>
                                     <div className="blog-post blog-grid date-style-2">
                                         <div className="sx-post-media sx-img-effect img-reflection">
@@ -134,16 +148,37 @@ class BlogGrid extends React.Component {
                                     </div>
                                     </div>
                                 ))}
-                            </div>    
-                            <ul className="flex justify-center items-center space-x-2 mt-8 mb-4">
-                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">&laquo;</NavLink></li>
-                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md bg-[#fb5455] text-white shadow-md">1</NavLink></li>
-                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">2</NavLink></li>
-                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">3</NavLink></li>
-                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">4</NavLink></li>
-                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">5</NavLink></li>
-                                <li><NavLink to={"#"} className="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100 transition-colors">&raquo;</NavLink></li>
-                            </ul>
+                            </div>
+                            {totalPages > 1 && (
+                                <ul className="flex justify-center items-center space-x-2 mt-8 mb-4">
+                                    <li>
+                                        <button 
+                                            onClick={(e) => currentPage > 1 && this.handlePageChange(currentPage - 1, e)} 
+                                            className={`flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 transition-colors ${currentPage === 1 ? 'bg-gray-50 text-gray-300 cursor-not-allowed' : 'bg-white text-gray-500 hover:bg-gray-100'}`}
+                                            disabled={currentPage === 1}
+                                        >&laquo;</button>
+                                    </li>
+                                    
+                                    {[...Array(totalPages)].map((_, i) => (
+                                        <li key={i}>
+                                            <button 
+                                                onClick={(e) => this.handlePageChange(i + 1, e)} 
+                                                className={`flex items-center justify-center w-10 h-10 rounded-md shadow-sm transition-colors ${currentPage === i + 1 ? 'bg-[#9C652A] text-white font-bold' : 'border border-gray-300 bg-white text-gray-500 hover:bg-gray-100'}`}
+                                            >
+                                                {i + 1}
+                                            </button>
+                                        </li>
+                                    ))}
+                                    
+                                    <li>
+                                        <button 
+                                            onClick={(e) => currentPage < totalPages && this.handlePageChange(currentPage + 1, e)} 
+                                            className={`flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 transition-colors ${currentPage === totalPages ? 'bg-gray-50 text-gray-300 cursor-not-allowed' : 'bg-white text-gray-500 hover:bg-gray-100'}`}
+                                            disabled={currentPage === totalPages}
+                                        >&raquo;</button>
+                                    </li>
+                                </ul>
+                            )}
                         </div>
                        
                     </div>
