@@ -6,34 +6,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { fetchAllProjects, getMediaUrl } from '@/lib/api';
 
-const services = [
-    {
-        // image: new URL('./../../images/gallery/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Interior Work Avroko',
-        description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
-    },
-    {
-        // image: new URL('./../../images/gallery/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Interior Work Avroko',
-        description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
-    },
-    {
-        // image: new URL('./../../images/gallery/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Interior Work Avroko',
-        description: 'Many of our projects cannot be featured in this section due to the Security levels of the space.'
-    }
-]
 
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 const SimilarProjects = (props) => {
-    const [allProjects, setAllProjects] = useState(services);
+    const [allProjects, setAllProjects] = useState([]);
 
     useEffect(() => {
         const loadProjects = async () => {
@@ -79,6 +57,11 @@ const SimilarProjects = (props) => {
                         </div>
                         {/* TITLE END */}
                         <div className="work-carousel-outer">
+                            {allProjects.length === 0 ? (
+                                <div className="text-center py-12 text-gray-500 font-medium w-full">
+                                    No projects available
+                                </div>
+                            ) : (
                             <Swiper className="project-carousel project-carousel1 owl-btn-vertical-center" {...swiperOptions}>
                                 {allProjects.map((item, index) => (
                                     <SwiperSlide key={index}>
@@ -92,6 +75,7 @@ const SimilarProjects = (props) => {
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
+                            )}
                         </div>
                     </div>
                 </div>
