@@ -27,7 +27,7 @@ const UpcomingProjectsCarousel1 = (props) => {
                 const dynamic = data.map(item => ({
                     ...item,
                     description: item.location,
-                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (projects[item.id % projects.length]?.image || projects[0].image)
+                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0].image_url || item.images[0].image || item.images[0]) : null
                 }));
                 setAllProjects(dynamic);
             } catch (error) {
