@@ -55,12 +55,9 @@ const SimilarProjectsCarousel = () => {
                 <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}
-                        <div className="mb-10 text-center">
-                            <div className="sx-separator-outer text-black">
-                                <div className="sx-separator bg-white bg-moving bg-repeat-x">
-                                    <h3 className="sep-line-one">Similar Projects</h3>
-                                </div>
-                            </div>
+                        <div className="mb-12 text-left">
+                            <h2 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Similar Projects</h2>
+                            <p className="text-slate-500 mt-2">Explore other properties that match this style</p>
                         </div>
                         {/* TITLE END */}
                         <div className="work-carousel-outer">
@@ -69,22 +66,42 @@ const SimilarProjectsCarousel = () => {
                                     No projects available
                                 </div>
                             ) : (
-                            <Swiper className="project-carousel project-carousel3 owl-btn-vertical-center p-lr80" {...swiperOptions}>
+                            <Swiper className="pb-12" {...swiperOptions}>
                                 {allProjects.map((item, index) => (
                                     <SwiperSlide key={index}>
-                                        <div className="project-mas hover-shadow m-a30">
-                                            <div className="image-effect-one">
-                                                <img src={item.image} alt="" className="cursor-pointer" onClick={() => { setCurrentIndex(index); setOpen(true); }} />
-                                                <div className="figcaption">
-                                                    <button className="cursor-pointer bg-transparent border-none text-white" onClick={(e) => { e.preventDefault(); setCurrentIndex(index); setOpen(true); }}>
-                                                        <i className="fa fa-arrows-alt" />
-                                                    </button>
-                                                </div>
+                                        <div className="group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-md transition-all duration-300">
+                                            <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                                                <img 
+                                                    src={item.image || "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80"} 
+                                                    alt={item.title} 
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                                                />
+                                                {item.status && (
+                                                    <div className="absolute top-4 left-4">
+                                                        <span className="bg-white/90 backdrop-blur text-slate-800 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                                                            {item.status}
+                                                        </span>
+                                                    </div>
+                                                )}
                                             </div>
-                                            <div className="project-info p-a20 bg-white">
-                                                <h4 className="sx-tilte m-t0"><NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"}>{item.title}</NavLink></h4>
-                                                <p>{item.description}</p>
-                                                <NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"}><i className="link-plus bg-primary" /></NavLink>
+                                            <div className="p-6">
+                                                <h4 className="text-lg font-bold text-slate-800 mb-2 truncate">
+                                                    <NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"} className="hover:text-[#118A43] transition-colors">
+                                                        {item.title}
+                                                    </NavLink>
+                                                </h4>
+                                                <p className="text-slate-500 text-sm mb-4 line-clamp-2">
+                                                    {item.description || item.location || "No description provided."}
+                                                </p>
+                                                <NavLink 
+                                                    to={item.id ? `/project-detail/${item.id}` : "/project-detail"} 
+                                                    className="inline-flex items-center text-sm font-semibold text-[#118A43] hover:text-[#0d6e35] transition-colors"
+                                                >
+                                                    View Details 
+                                                    <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </NavLink>
                                             </div>
                                         </div>
                                     </SwiperSlide>
