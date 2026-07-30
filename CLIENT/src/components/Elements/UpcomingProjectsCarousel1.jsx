@@ -24,7 +24,10 @@ const UpcomingProjectsCarousel1 = (props) => {
             try {
                 const response = await fetchAllProjects();
                 const data = response.data || response;
-                const dynamic = data.map(item => ({
+                // Filter for upcoming projects only
+                const upcomingData = data.filter(item => item.status && item.status.toLowerCase() === 'upcoming');
+                
+                const dynamic = upcomingData.map(item => ({
                     ...item,
                     description: item.location,
                     image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0].image_url || item.images[0].image || item.images[0]) : null
