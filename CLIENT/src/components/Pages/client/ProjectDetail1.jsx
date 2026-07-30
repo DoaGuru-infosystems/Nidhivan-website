@@ -72,52 +72,27 @@ class ProjectDetail1 extends React.Component {
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div className="m-b0">
-                                                <div className="sx-divider divider-1px  bg-black"><i className="icon-dot c-square" /></div>
-                                            </div>
-                                            <ul className="social-icons social-square social-darkest m-b0">
-                                            <li><a href="https://www.facebook.com" target="_blank" className="fa fa-facebook" /></li>
-                                                <li><a href="https://twitter.com" target="_blank" className="fa fa-twitter" /></li>
-                                                <li><a href="https://in.linkedin.com" target="_blank" className="fa fa-linkedin" /></li>
-                                                <li><a href="https://rss.com" target="_blank" className="fa fa-rss" /></li>
-                                                <li><a href="https://www.youtube.com" target="_blank" className="fa fa-youtube" /></li>
-                                                <li><a href="https://www.instagram.com" target="_blank" className="fa fa-instagram" /></li>
-                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-span-12 md:col-span-5 lg:col-span-5">
                                     <div className="project-detail-outer">
-                                        {dynamicProject.images && dynamicProject.images.length > 0 ? (
-                                            dynamicProject.images.map((img, idx) => (
-                                                <div className="project-detail-pic m-b30" key={idx}>
-                                                    <div className="sx-media">
-                                                        <img src={getMediaUrl(img.image_url || img.image || img)} alt={`${title} - Image ${idx + 1}`} />
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            {dynamicProject.images && dynamicProject.images.length > 0 ? (
+                                                dynamicProject.images.map((img, idx) => (
+                                                    <div className="project-detail-pic" key={idx}>
+                                                        <div className="sx-media rounded-lg overflow-hidden h-full">
+                                                            <img src={getMediaUrl(img.image_url || img.image || img)} alt={`${title} - Image ${idx + 1}`} className="w-full h-full object-cover" style={{minHeight: "250px"}}/>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <div className="project-detail-pic">
+                                                    <div className="sx-media rounded-lg overflow-hidden">
+                                                        <img src={image} alt={title} className="w-full h-full object-cover" />
                                                     </div>
                                                 </div>
-                                            ))
-                                        ) : (
-                                            <div className="project-detail-pic m-b30">
-                                                <div className="sx-media">
-                                                    <img src={image} alt={title} />
-                                                </div>
-                                            </div>
-                                        )}
-                                        <div className="sx-box">
-                                            <div className="sx-thum-bx sx-img-overlay1 sx-img-effect yt-thum-box">
-                                                <img src="https://img.youtube.com/vi/Oy2QIiSQT2U/0.jpg" alt="" />
-                                                <Dialog>
-                                                    <DialogTrigger asChild>
-                                                        <button className="play-now">
-                                                            <i className="icon fa fa-play" />
-                                                            <span className="ripple" />
-                                                        </button>
-                                                    </DialogTrigger>
-                                                    <DialogContent className="sm:max-w-[800px] p-0 bg-transparent border-none shadow-none">
-                                                        <ReactPlayer url='https://www.youtube.com/watch?v=Oy2QIiSQT2U' width="100%" height="450px" />
-                                                    </DialogContent>
-                                                </Dialog>
-                                            </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
