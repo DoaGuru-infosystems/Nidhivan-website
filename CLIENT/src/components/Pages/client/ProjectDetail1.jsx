@@ -52,7 +52,7 @@ class ProjectDetail1 extends React.Component {
                                                 <ul>
                                                     <li>
                                                         <h4 className="m-b10">Date</h4>
-                                                        <p>October 10, 2022</p>
+                                                        <p>{new Date(dynamicProject.created_at).toLocaleDateString()}</p>
                                                     </li>
                                                     <li>
                                                         <h4 className="m-b10">Status</h4>
@@ -60,15 +60,15 @@ class ProjectDetail1 extends React.Component {
                                                     </li>
                                                     <li>
                                                         <h4 className="m-b10">Project type</h4>
-                                                        <p>Contruction, Brading</p>
+                                                        <p>{type}</p>
                                                     </li>
                                                     <li>
                                                         <h4 className="m-b10">Location</h4>
-                                                        <p>Mountain View CA 94043</p>
+                                                        <p>{location}</p>
                                                     </li>
                                                     <li>
-                                                        <h4 className="m-b10">Year</h4>
-                                                        <p>2022</p>
+                                                        <h4 className="m-b10">Category</h4>
+                                                        <p>{dynamicProject.category}</p>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -88,27 +88,21 @@ class ProjectDetail1 extends React.Component {
                                 </div>
                                 <div className="col-span-12 md:col-span-5 lg:col-span-5">
                                     <div className="project-detail-outer">
-                                        <div className="project-detail-pic m-b30">
-                                            <div className="sx-media">
-                                                {/* <img src={new URL('../../../images/projects/portrait/pic7.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
-
-                                                <img src={image} alt="" /> {/* TEMP LIVE PREVIEW */}
+                                        {dynamicProject.images && dynamicProject.images.length > 0 ? (
+                                            dynamicProject.images.map((img, idx) => (
+                                                <div className="project-detail-pic m-b30" key={idx}>
+                                                    <div className="sx-media">
+                                                        <img src={getMediaUrl(img.image_url || img.image || img)} alt={`${title} - Image ${idx + 1}`} />
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="project-detail-pic m-b30">
+                                                <div className="sx-media">
+                                                    <img src={image} alt={title} />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="project-detail-pic m-b30">
-                                            <div className="sx-media">
-                                                {/* <img src={new URL('../../../images/projects/portrait/pic4.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
-
-                                                <img src={"https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
-                                            </div>
-                                        </div>
-                                        <div className="project-detail-pic m-b30">
-                                            <div className="sx-media">
-                                                {/* <img src={new URL('../../../images/projects/portrait/pic5.jpg', import.meta.url).href} alt="" /> ORIGINAL DUMMY - restore when real property photos are ready */}
-
-                                                <img src={"https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80"} alt="" /> {/* TEMP LIVE PREVIEW */}
-                                            </div>
-                                        </div>
+                                        )}
                                         <div className="sx-box">
                                             <div className="sx-thum-bx sx-img-overlay1 sx-img-effect yt-thum-box">
                                                 <img src="https://img.youtube.com/vi/Oy2QIiSQT2U/0.jpg" alt="" />
@@ -128,10 +122,7 @@ class ProjectDetail1 extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="project-detail-containt-2 m-t50">
-                                <h3>Creating a sustainable future through building preservation, green architecture, and smart design</h3>
-                                <p className="m-b0"> Designers think everything done by someone else is awful, and that they could do it better themselves, which explains why I designed my own living room carpet, I suppose. the architect represents neither a Dionysian nor an Apollinian condition: here it is the mighty act of will, the will which moves mountains, the intoxication of the strong will, which demands artistic expression. The most powerful men have always inspired the architects; the architect has always been influenced by power.</p>
-                            </div>
+                            {/* Removing dummy bottom text since no description field exists yet */}
                         </div>
                     </div>
                     {/* SECTION CONTENT END  */}
