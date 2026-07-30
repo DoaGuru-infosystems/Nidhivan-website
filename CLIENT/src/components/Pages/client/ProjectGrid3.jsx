@@ -97,7 +97,7 @@ const projects = [
 var bnrimg = "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=1600&q=80"; // TEMP LIVE PREVIEW
 var bgimg1 = new URL('../../../images/background/cross-line.png', import.meta.url).href;
 
-import { getProjects } from '@/lib/dataStore';
+import { fetchAllProjects, getMediaUrl } from '@/lib/api';
 
 const ProjectGrid3 = () => {
     const [activeFilter, setActiveFilter] = useState('*');
@@ -108,14 +108,24 @@ const ProjectGrid3 = () => {
     const [lightboxIndex, setLightboxIndex] = useState(0);
 
     useEffect(() => {
-        const dynamic = getProjects().map(item => ({
-            ...item,
-            address: item.location, // map location to address
-            filter: filters.find(f => f.label === item.category)?.filter || item.category 
-        }));
-        const merged = [...dynamic, ...projects];
-        setAllProjects(merged);
-        setFilteredItems(merged);
+        const loadProjects = async () => {
+            try {
+                const response = await fetchAllProjects();
+                const data = response.data || response;
+                const dynamic = data.map(item => ({
+                    ...item,
+                    address: item.location,
+                    filter: filters.find(f => f.label === item.category)?.filter || item.category,
+                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (projects[item.id % projects.length]?.image || projects[0].image)
+                }));
+                const merged = [...dynamic, ...projects];
+                setAllProjects(merged);
+                setFilteredItems(merged);
+            } catch (error) {
+                console.error("Failed to load projects", error);
+            }
+        };
+        loadProjects();
     }, []);
 
     // GSAP Flip animation on filter change

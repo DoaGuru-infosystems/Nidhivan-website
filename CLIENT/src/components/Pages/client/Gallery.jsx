@@ -7,7 +7,7 @@ import { Flip } from 'gsap/Flip';
 import { Maximize } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { getGalleryItems } from '@/lib/dataStore';
+import { fetchAllGalleryImages, fetchGalleryCategories, getMediaUrl } from '@/lib/api';
 
 gsap.registerPlugin(Flip);
 
@@ -116,15 +116,45 @@ const Gallery = () => {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
 
+    const [dynamicFilters, setDynamicFilters] = useState(filters);
+
     useEffect(() => {
-        const dynamic = getGalleryItems().map(item => ({
-            ...item,
-            // Simple map: if dynamic category matches a known label, use its filter, else use category as string
-            filter: filters.find(f => f.label === item.category)?.filter || item.category 
-        }));
-        const merged = [...dynamic, ...projects];
-        setAllProjects(merged);
-        setFilteredItems(merged);
+        const loadData = async () => {
+            try {
+                const [categoriesRes, imagesRes] = await Promise.all([
+                    fetchGalleryCategories(),
+                    fetchAllGalleryImages()
+                ]);
+                
+                const cats = categoriesRes.data || categoriesRes;
+                const newFilters = cats.map(c => ({ label: c.title, filter: c.id.toString() }));
+                // Combine existing static filters and dynamic categories (filter out duplicates by label if needed, but this works)
+                const combinedFilters = [...filters];
+                newFilters.forEach(nf => {
+                    if (!combinedFilters.some(cf => cf.label === nf.label)) {
+                        combinedFilters.push(nf);
+                    }
+                });
+                setDynamicFilters(combinedFilters);
+
+                const imgs = imagesRes.data || imagesRes;
+                const dynamic = imgs.map((item, index) => ({
+                    ...item,
+                    id: `dyn-${item.id}`,
+                    title: item.title || `Gallery Image ${index + 1}`,
+                    address: '',
+                    filter: item.category_id ? item.category_id.toString() : 'General',
+                    image: item.image_url ? getMediaUrl(item.image_url) : (projects[index % projects.length]?.image)
+                }));
+
+                const merged = [...dynamic, ...projects];
+                setAllProjects(merged);
+                setFilteredItems(merged);
+            } catch (error) {
+                console.error("Failed to load gallery", error);
+            }
+        };
+        loadData();
     }, []);
 
     // GSAP Flip animation on filter change
@@ -172,7 +202,7 @@ const Gallery = () => {
                                 onClick={() => setActiveFilter('*')}>
                                 All
                             </li>
-                            {filters.map((item, index) => (
+                            {dynamicFilters.map((item, index) => (
                                 <li key={index} 
                                     className={`cursor-pointer px-4 py-2 font-semibold transition-colors rounded ${activeFilter === item.filter ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
                                     onClick={() => setActiveFilter(item.filter)}>

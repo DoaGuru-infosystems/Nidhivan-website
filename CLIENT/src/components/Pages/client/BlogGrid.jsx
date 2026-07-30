@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Banner from '../../Elements/Banner';
-import { getBlogs } from '@/lib/dataStore';
+import { fetchAllBlogsClient, getMediaUrl } from '@/lib/api';
 
 const blogs = [
     {
@@ -79,9 +79,20 @@ class BlogGrid extends React.Component {
         };
     }
 
-    componentDidMount() {
-        const dynamic = getBlogs().filter(b => b.status === 'Published');
-        this.setState({ dynamicBlogs: dynamic });
+    async componentDidMount() {
+        try {
+            const response = await fetchAllBlogsClient();
+            const data = response.data || response;
+            const published = data.filter(b => b.status === 'Published').map(b => ({
+                ...b,
+                image: b.cover_image ? getMediaUrl(b.cover_image) : "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80",
+                month: new Date(b.created_at).toLocaleString('default', { month: 'short' }),
+                date: new Date(b.created_at).getDate()
+            }));
+            this.setState({ dynamicBlogs: published });
+        } catch (error) {
+            console.error("Failed to load blogs", error);
+        }
     }
 
     render() {
@@ -100,24 +111,24 @@ class BlogGrid extends React.Component {
                                     <div className="masonry-item col-span-12 md:col-span-6 lg:col-span-4" key={index}>
                                     <div className="blog-post blog-grid date-style-2">
                                         <div className="sx-post-media sx-img-effect img-reflection">
-                                            <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}><img src={item.image} alt="" /></NavLink>
+                                            <NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"}><img src={item.image} alt="" className="w-full h-56 object-cover" /></NavLink>
                                         </div>
                                         <div className="sx-post-info p-t30">
                                             <div className="sx-post-meta ">
                                                 <ul>
                                                     <li className="post-date"><strong>{item.date}</strong> <span>{item.month}</span> </li>
-                                                    <li className="post-author"><NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}>By <span>{item.author}</span></NavLink> </li>
-                                                    <li className="post-comment"> <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}>{item.comments}</NavLink> </li>
+                                                    <li className="post-author"><NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"}>By <span>{item.author || 'Admin'}</span></NavLink> </li>
+                                                    <li className="post-comment"> <NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"}>{item.comments || '0 Comment'}</NavLink> </li>
                                                 </ul>
                                             </div>
                                             <div className="sx-post-title ">
-                                                <h4 className="post-title"><NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}>{item.title}</NavLink></h4>
+                                                <h4 className="post-title"><NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"}>{item.title}</NavLink></h4>
                                             </div>
                                             {item.shortDescription && (
                                                 <p className="text-sm text-gray-600 mt-2 mb-3 line-clamp-2">{item.shortDescription}</p>
                                             )}
                                             <div className="sx-post-readmore">
-                                                <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
+                                                <NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"} title="READ MORE" rel="bookmark" className="site-button-link">View More</NavLink>
                                             </div>
                                         </div>
                                     </div>

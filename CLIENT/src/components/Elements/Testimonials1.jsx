@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { siteData } from '../../data/siteContent';
 import { Quote } from 'lucide-react';
-import { getTestimonials } from '@/lib/dataStore';
+import { fetchAllTestimonials } from '@/lib/api';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -18,12 +18,22 @@ const Testimonials1 = () => {
     const [allTestimonials, setAllTestimonials] = useState(siteData.testimonials);
 
     useEffect(() => {
-        const dynamic = getTestimonials().map(t => ({
-            ...t,
-            role: t.profession, // map profession to role
-            text: t.quote       // map quote to text
-        }));
-        setAllTestimonials([...dynamic, ...siteData.testimonials]);
+        const loadTestimonials = async () => {
+            try {
+                const response = await fetchAllTestimonials();
+                const data = response.data || response;
+                const dynamic = data.map(t => ({
+                    ...t,
+                    name: t.client_name,
+                    role: t.designation || t.profession, // Support both new backend format and dummy format
+                    text: t.text_content || t.quote
+                }));
+                setAllTestimonials([...dynamic, ...siteData.testimonials]);
+            } catch (error) {
+                console.error("Failed to load testimonials", error);
+            }
+        };
+        loadTestimonials();
     }, []);
 
     return (

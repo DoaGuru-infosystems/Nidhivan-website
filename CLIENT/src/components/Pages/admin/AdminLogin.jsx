@@ -4,12 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
-import { loginAdmin, DEMO_CREDENTIALS_DISPLAY } from './utils/auth';
+import { loginAdminApi, registerAdminApi } from '@/lib/api';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '@/store/UserSlice';
 import { Building2, Lock, Mail, User, ShieldCheck } from 'lucide-react';
 import logo from '@/images/nidhivan logo.png';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // Login State
     const [loginEmail, setLoginEmail] = useState('');
@@ -26,17 +29,20 @@ const AdminLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoginError('');
-        
-        const result = await loginAdmin(loginEmail, loginPassword);
-        
-        if (result.success) {
+        try {
+            const result = await loginAdminApi(loginEmail, loginPassword);
+            
+            // Expected result should contain user and token, depending on your backend
+            // Let's dispatch the full result or token to Redux
+            dispatch(loginUser(result));
+            
             navigate('/admin/blogs');
-        } else {
-            setLoginError(result.error || 'Invalid credentials.');
+        } catch (err) {
+            setLoginError(err.message || 'Invalid credentials.');
         }
     };
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         setRegMessage('');
 
@@ -50,14 +56,19 @@ const AdminLogin = () => {
             return;
         }
 
-        setRegMessage('Account created — please login.');
-        // Reset fields
-        setRegName('');
-        setRegEmail('');
-        setRegPassword('');
-        setRegConfirm('');
+        try {
+            const result = await registerAdminApi(regName, regEmail, regPassword);
+            setRegMessage(result.message || 'Account created — please login.');
+            
+            // Optional: Auto-fill login fields or reset reg fields
+            setRegName('');
+            setRegEmail('');
+            setRegPassword('');
+            setRegConfirm('');
+        } catch (err) {
+            setRegMessage(err.message || 'Registration failed.');
+        }
     };
-
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 relative overflow-hidden">
             {/* Background Decorative Elements */}
@@ -87,18 +98,6 @@ const AdminLogin = () => {
                         <CardDescription className="text-slate-500 text-base">Enter your credentials to access the dashboard.</CardDescription>
                     </CardHeader>
                     <CardContent className="p-8">
-                        {/* DEMO CREDENTIALS BANNER */}
-                        <div className="mb-6 p-4 bg-[#F4B54B]/10 border border-[#F4B54B]/30 rounded-xl text-sm text-[#8c6523] flex flex-col gap-1">
-                            <strong className="flex items-center gap-2 text-[#d99c36] mb-1">
-                                <Lock size={16} /> Demo Credentials
-                            </strong>
-                            <div className="grid grid-cols-[80px_1fr] gap-2 items-center">
-                                <span className="opacity-80">Email:</span> 
-                                <code className="bg-white px-2 py-1 rounded shadow-sm font-semibold tracking-wide text-slate-700">{DEMO_CREDENTIALS_DISPLAY.username}</code>
-                                <span className="opacity-80">Password:</span> 
-                                <code className="bg-white px-2 py-1 rounded shadow-sm font-semibold tracking-wide text-slate-700">{DEMO_CREDENTIALS_DISPLAY.password}</code>
-                            </div>
-                        </div>
 
                         <form onSubmit={handleLogin} className="space-y-5">
                             <div className="space-y-2">
@@ -108,7 +107,7 @@ const AdminLogin = () => {
                                     <Input 
                                         id="login-email" 
                                         type="email" 
-                                        placeholder={DEMO_CREDENTIALS_DISPLAY.username}
+                                        placeholder="admin@example.com"
                                         value={loginEmail}
                                         onChange={(e) => setLoginEmail(e.target.value)}
                                         required

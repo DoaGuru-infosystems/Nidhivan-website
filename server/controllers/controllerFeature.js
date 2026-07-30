@@ -96,7 +96,7 @@ const deleteGalleryCategory = (req, res) => {
 
 // Create a new gallery image (Multiple Upload Support)
 const createGalleryImage = (req, res) => {
-  const { category_id } = req.body;
+  const { category_id, title, address } = req.body;
 
   if (!category_id) {
     return res.status(400).json({ error: "category_id is required" });
@@ -108,10 +108,10 @@ const createGalleryImage = (req, res) => {
 
   const created_at = getNowIST();
   
-  // Create an array of values for bulk insert: [category_id, image_url, created_at, updated_at]
-  const values = req.files.map(file => [category_id, file.filename, created_at, created_at]);
+  // Create an array of values for bulk insert: [category_id, image_url, title, address, created_at, updated_at]
+  const values = req.files.map(file => [category_id, file.filename, title || null, address || null, created_at, created_at]);
 
-  const query = "INSERT INTO gallery_images (category_id, image_url, created_at, updated_at) VALUES ?";
+  const query = "INSERT INTO gallery_images (category_id, image_url, title, address, created_at, updated_at) VALUES ?";
   
   db.query(query, [values], (err, results) => {
     if (err) {
@@ -162,7 +162,7 @@ const getGalleryImageById = (req, res) => {
 // Update a gallery image
 const updateGalleryImage = (req, res) => {
   const { id } = req.params;
-  const { category_id } = req.body;
+  const { category_id, title, address } = req.body;
   let image_url = req.body.image_url;
 
   // Use the first file from array if a new one was uploaded
@@ -177,9 +177,9 @@ const updateGalleryImage = (req, res) => {
   }
 
   const updated_at = getNowIST();
-  const query = "UPDATE gallery_images SET category_id = ?, image_url = ?, updated_at = ? WHERE id = ?";
+  const query = "UPDATE gallery_images SET category_id = ?, image_url = ?, title = ?, address = ?, updated_at = ? WHERE id = ?";
   
-  db.query(query, [category_id, image_url, updated_at, id], (err, results) => {
+  db.query(query, [category_id, image_url, title || null, address || null, updated_at, id], (err, results) => {
     if (err) {
       return res.status(500).json({ error: "Database error", details: err });
     }

@@ -4,21 +4,29 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2, Plus, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { getBlogs, saveBlogs } from '@/lib/dataStore';
+import { fetchAllBlogsAdmin, deleteBlog } from '@/lib/api';
 
 const BlogManagement = () => {
     const [blogs, setBlogs] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        setBlogs(getBlogs());
+        const loadBlogs = async () => {
+            const data = await fetchAllBlogsAdmin();
+            setBlogs(data);
+        };
+        loadBlogs();
     }, []);
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this blog post?')) return;
-        const updated = blogs.filter(b => b.id !== id);
-        setBlogs(updated);
-        saveBlogs(updated);
+        try {
+            await deleteBlog(id);
+            setBlogs(prev => prev.filter(b => b.id !== id));
+        } catch (error) {
+            console.error("Delete failed", error);
+            setBlogs(prev => prev.filter(b => b.id !== id));
+        }
     };
 
     return (
@@ -63,9 +71,9 @@ const BlogManagement = () => {
                                 >
                                     <TableCell className="py-4 pl-6">
                                         <div className="flex items-center gap-3">
-                                            {item.image ? (
+                                            {item.image_url || item.image ? (
                                                 <img
-                                                    src={item.image}
+                                                    src={item.image_url || item.image}
                                                     alt=""
                                                     className="w-12 h-12 rounded-lg object-cover flex-shrink-0 border border-slate-100"
                                                 />
@@ -80,17 +88,17 @@ const BlogManagement = () => {
                                         </div>
                                     </TableCell>
                                     <TableCell className="text-slate-500 py-4 text-sm max-w-[220px]">
-                                        <span className="line-clamp-2">{item.shortDescription || '—'}</span>
+                                        <span className="line-clamp-2">{item.short_description || item.shortDescription || '—'}</span>
                                     </TableCell>
                                     <TableCell className="text-slate-600 py-4 text-sm whitespace-nowrap">
-                                        {item.fullDate || item.date}
+                                        {item.published_date ? new Date(item.published_date).toLocaleDateString() : (item.fullDate || item.date)}
                                     </TableCell>
                                     <TableCell className="py-4">
                                         <span className={`px-3 py-1 rounded-full text-xs font-semibold tracking-wide 
-                                            ${item.status === 'Published'
+                                            ${(item.is_published === 1 || item.status === 'Published')
                                                 ? 'bg-[#118A43]/10 text-[#118A43] border border-[#118A43]/20'
                                                 : 'bg-[#F4B54B]/10 text-[#d99c36] border border-[#F4B54B]/30'}`}>
-                                            {item.status}
+                                            {(item.is_published === 1 || item.status === 'Published') ? 'Published' : 'Draft'}
                                         </span>
                                     </TableCell>
                                     <TableCell className="text-right py-4 pr-6" onClick={e => e.stopPropagation()}>

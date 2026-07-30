@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { getProjects } from '@/lib/dataStore';
+import { fetchAllProjects, getMediaUrl } from '@/lib/api';
 
 const projects = [
     {
@@ -77,11 +77,21 @@ const Projects3 = (props) => {
     const slides = allProjects.map(item => ({ src: item.image }));
 
     useEffect(() => {
-        const dynamic = getProjects().map(item => ({
-            ...item,
-            description: item.location
-        }));
-        setAllProjects([...dynamic, ...projects]);
+        const loadProjects = async () => {
+            try {
+                const response = await fetchAllProjects();
+                const data = response.data || response;
+                const dynamic = data.map(item => ({
+                    ...item,
+                    description: item.location,
+                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (projects[item.id % projects.length]?.image || projects[0].image)
+                }));
+                setAllProjects([...dynamic, ...projects]);
+            } catch (error) {
+                console.error("Failed to load projects", error);
+            }
+        };
+        loadProjects();
     }, []);
 
     const swiperOptions = {

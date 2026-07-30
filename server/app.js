@@ -11,6 +11,7 @@ const FeatureRoute = require("./routers/routerFeature");
 const BlogRoute = require("./routers/routerBlog");
 const TestimonialRoute = require("./routers/routerTestimonials");
 const SitemapRoute = require("./routers/routerSitemap");
+const ProjectRoute = require("./routers/routerProjects");
 const app = express();
 
 app.use(express.json());
@@ -25,6 +26,7 @@ app.use("/auth/admin/api", AdminRoute);
 app.use("/api/features", FeatureRoute);
 app.use("/api/blogs", BlogRoute);
 app.use("/api/testimonials", TestimonialRoute);
+app.use("/api/projects", ProjectRoute);
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { getBlogs } from '@/lib/dataStore';
+import { fetchAllBlogsClient, getMediaUrl } from '@/lib/api';
 
 var bgimg1 = new URL('../../images/background/cross-line2.png', import.meta.url).href;
 
@@ -8,9 +8,24 @@ const BlogsHome = () => {
     const [latestBlogs, setLatestBlogs] = useState([]);
 
     useEffect(() => {
-        // Get all published blogs and take the latest 5
-        const dynamic = getBlogs().filter(b => b.status === 'Published');
-        setLatestBlogs(dynamic.slice(0, 5));
+        const loadBlogs = async () => {
+            try {
+                const response = await fetchAllBlogsClient();
+                const data = response.data || response;
+                const published = data
+                    .filter(b => b.status === 'Published')
+                    .map(b => ({
+                        ...b,
+                        image: b.cover_image ? getMediaUrl(b.cover_image) : "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80",
+                        month: new Date(b.created_at).toLocaleString('default', { month: 'short' }),
+                        date: new Date(b.created_at).getDate()
+                    }));
+                setLatestBlogs(published.slice(0, 5));
+            } catch (error) {
+                console.error("Failed to load blogs", error);
+            }
+        };
+        loadBlogs();
     }, []);
 
     if (latestBlogs.length === 0) return null;
@@ -33,23 +48,23 @@ const BlogsHome = () => {
                         <div className="col-span-12 md:col-span-6 lg:col-span-4" key={index}>
                             <div className="blog-post blog-grid date-style-2 h-full flex flex-col shadow-sm rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
                                 <div className="sx-post-media sx-img-effect img-reflection">
-                                    <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"}><img src={item.image} alt="" className="w-full h-56 object-cover" /></NavLink>
+                                    <NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"}><img src={item.image} alt="" className="w-full h-56 object-cover" /></NavLink>
                                 </div>
                                 <div className="sx-post-info p-6 flex flex-col flex-grow">
                                     <div className="sx-post-meta mb-3">
                                         <ul className="flex items-center text-sm text-gray-500 gap-4">
                                             <li className="post-date text-[#118A43]"><strong>{item.date}</strong> <span className="ml-1 uppercase">{item.month}</span> </li>
-                                            <li className="post-author"><NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"} className="hover:text-[#118A43]">By <span>{item.author}</span></NavLink> </li>
+                                            <li className="post-author"><NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"} className="hover:text-[#118A43]">By <span>{item.author || 'Admin'}</span></NavLink> </li>
                                         </ul>
                                     </div>
                                     <div className="sx-post-title mb-3">
-                                        <h4 className="post-title text-xl font-semibold leading-snug"><NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"} className="hover:text-[#118A43]">{item.title}</NavLink></h4>
+                                        <h4 className="post-title text-xl font-semibold leading-snug"><NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"} className="hover:text-[#118A43]">{item.title}</NavLink></h4>
                                     </div>
                                     {item.shortDescription && (
                                         <p className="text-sm text-gray-600 mb-4 line-clamp-3">{item.shortDescription}</p>
                                     )}
                                     <div className="sx-post-readmore mt-auto pt-2 border-t border-gray-100">
-                                        <NavLink to={item.id ? `/blog-single/${item.id}` : "/blog-single"} title="READ MORE" rel="bookmark" className="text-sm font-semibold text-[#118A43] hover:text-[#0f7a3b]">View More &rarr;</NavLink>
+                                        <NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"} title="READ MORE" rel="bookmark" className="text-sm font-semibold text-[#118A43] hover:text-[#0f7a3b]">View More &rarr;</NavLink>
                                     </div>
                                 </div>
                             </div>

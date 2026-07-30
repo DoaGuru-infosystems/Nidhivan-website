@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Eye, Mail, Calendar, User, MessageSquare } from 'lucide-react';
+import { Eye, Mail, Calendar, User, MessageSquare, Trash2 } from 'lucide-react';
+import { fetchContactLeads, deleteContactLead } from '@/lib/api';
 
-const DUMMY_LEADS = [
+export const DUMMY_LEADS = [
     { id: 1, name: 'Suresh Kumar', email: 'suresh.k@example.com', date: 'Oct 20, 2025', message: 'I am interested in buying a 3BHK flat in your upcoming project. Please send details.', isNew: true },
     { id: 2, name: 'Priya Verma', email: 'priya.v@example.com', date: 'Oct 21, 2025', message: 'What is the starting price for commercial shops?', isNew: true },
     { id: 3, name: 'Amit Singh', email: 'amit99@example.com', date: 'Oct 22, 2025', message: 'Can we schedule a site visit this weekend?', isNew: false },
@@ -20,6 +21,34 @@ const ContactLeadsManagement = () => {
         setSelectedLead(lead);
         setIsDialogOpen(true);
         // If it was new, mark it as read in a real app
+    };
+
+    useEffect(() => {
+        const loadLeads = async () => {
+            const data = await fetchContactLeads();
+            const mappedLeads = data.map(lead => ({
+                id: lead.id,
+                name: lead.full_name || lead.name || 'Unknown',
+                email: lead.email,
+                date: new Date(lead.created_at || lead.date).toLocaleDateString(),
+                message: lead.message,
+                isNew: lead.isNew || false
+            }));
+            setLeads(mappedLeads);
+        };
+        loadLeads();
+    }, []);
+
+    const handleDelete = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this lead?')) return;
+        try {
+            await deleteContactLead(id);
+            setLeads(prev => prev.filter(l => l.id !== id));
+        } catch (error) {
+            console.error('Delete failed', error);
+            // Even if delete API fails (which shouldn't if backend is down, it returns fallback), remove from UI for optimistic update
+            setLeads(prev => prev.filter(l => l.id !== id));
+        }
     };
 
     return (
@@ -59,15 +88,25 @@ const ContactLeadsManagement = () => {
                                     <TableCell className="text-slate-600 py-4">{lead.email}</TableCell>
                                     <TableCell className="text-slate-500 py-4">{lead.date}</TableCell>
                                     <TableCell className="text-right py-4 pr-6">
-                                        <Button 
-                                            variant="ghost" 
-                                            size="sm" 
-                                            className="text-[#118A43] hover:text-[#0f7a3b] hover:bg-[#118A43]/10 font-medium"
-                                            onClick={() => handleViewMessage(lead)}
-                                        >
-                                            <Eye size={16} className="mr-2" />
-                                            View Details
-                                        </Button>
+                                        <div className="flex justify-end gap-2">
+                                            <Button 
+                                                variant="ghost" 
+                                                size="sm" 
+                                                className="text-[#118A43] hover:text-[#0f7a3b] hover:bg-[#118A43]/10 font-medium"
+                                                onClick={() => handleViewMessage(lead)}
+                                            >
+                                                <Eye size={16} className="mr-2" />
+                                                View Details
+                                            </Button>
+                                            <Button 
+                                                variant="ghost" 
+                                                size="icon" 
+                                                className="text-red-500 hover:text-red-700 hover:bg-red-50 h-8 w-8"
+                                                onClick={() => handleDelete(lead.id)}
+                                            >
+                                                <Trash2 size={16} />
+                                            </Button>
+                                        </div>
                                     </TableCell>
                                 </TableRow>
                             ))}

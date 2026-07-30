@@ -29,10 +29,11 @@ import TestimonialManagement from './Pages/admin/TestimonialManagement';
 import GalleryManagement from './Pages/admin/GalleryManagement';
 import ContactLeadsManagement from './Pages/admin/ContactLeadsManagement';
 import ProjectManagement from './Pages/admin/ProjectManagement';
-import { isAdminAuthenticated } from './Pages/admin/utils/auth';
+import { useSelector } from 'react-redux';
 
 const ProtectedRoute = ({ children }) => {
-    if (!isAdminAuthenticated()) {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    if (!isAuthenticated) {
         return <Navigate to="/admin/login" replace />;
     }
     return children;

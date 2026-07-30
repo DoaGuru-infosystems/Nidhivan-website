@@ -346,7 +346,8 @@ class BlogSingle extends React.Component {
 };
 
 import { useParams } from 'react-router-dom';
-import { getBlogs } from '@/lib/dataStore';
+import { fetchBlogBySlug, getMediaUrl } from '@/lib/api';
+import { useState } from 'react';
 
 /* ─────────────────────────────────────────
    DynamicHtmlRenderer
@@ -385,18 +386,42 @@ const DynamicHtmlRenderer = ({ html }) => {
         <div
             ref={containerRef}
             className="dynamic-blog-content"
-            // NOTE: Intentionally rendering raw/unsanitized HTML (including <script>) —
-            // this is a conscious tradeoff for a single-trusted-admin context.
-            // Revisit with sanitization (e.g. DOMPurify) before this becomes
-            // multi-admin or exposed to any non-trusted input source.
             dangerouslySetInnerHTML={{ __html: html }}
         />
     );
 };
 
 const BlogSingleWrapper = (props) => {
-    const { id } = useParams();
-    const dynamicBlog = id ? getBlogs().find(b => b.id.toString() === id) : null;
+    const { id } = useParams(); // 'id' holds the slug from the URL based on route setup
+    const [dynamicBlog, setDynamicBlog] = useState(null);
+
+    useEffect(() => {
+        const loadBlog = async () => {
+            if (id) {
+                try {
+                    const response = await fetchBlogBySlug(id);
+                    const blogData = response.data || response;
+                    if (blogData) {
+                        setDynamicBlog({
+                            ...blogData,
+                            title: blogData.title,
+                            date: new Date(blogData.created_at).getDate(),
+                            month: new Date(blogData.created_at).toLocaleString('default', { month: 'short' }) + ' ' + new Date(blogData.created_at).getFullYear(),
+                            author: blogData.author,
+                            category: blogData.category,
+                            image: blogData.cover_image ? getMediaUrl(blogData.cover_image) : null,
+                            shortDescription: blogData.shortDescription,
+                            fullDescription: blogData.content
+                        });
+                    }
+                } catch (error) {
+                    console.error("Failed to load blog", error);
+                }
+            }
+        };
+        loadBlog();
+    }, [id]);
+
     return <BlogSingle {...props} dynamicBlog={dynamicBlog} />;
 };
 

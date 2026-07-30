@@ -123,7 +123,7 @@ const getSingleBlog = (req, res) => {
 
 const createBlog = (req, res) => {
   try {
-    const { title, meta_title, content, meta_description, meta_keywords } = req.body;
+    const { title, meta_title, content, meta_description, meta_keywords, author, category, short_description } = req.body;
     console.log(req.body);
 
     const is_published = req.body.is_published === "true" ? 1 : 0;
@@ -153,7 +153,7 @@ const createBlog = (req, res) => {
 
         // Insert new blog
         db.query(
-          "INSERT INTO blogs (title, meta_title, slug, content, image_url, meta_description, meta_keywords, is_published, published_date, updated_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          "INSERT INTO blogs (title, meta_title, slug, content, image_url, meta_description, meta_keywords, author, category, short_description, is_published, published_date, updated_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
           [
             title,
             meta_title,
@@ -162,6 +162,9 @@ const createBlog = (req, res) => {
             imageUrl,
             meta_description,
             meta_keywords,
+            author,
+            category,
+            short_description,
             is_published,
             published_date,
             updated_date
@@ -209,7 +212,7 @@ const getBlogById = (req, res) => {
 
 const updateBlog = (req, res) => {
   try {
-    const { title, meta_title, content, meta_description, meta_keywords } = req.body;
+    const { title, meta_title, content, meta_description, meta_keywords, author, category, short_description } = req.body;
     const blogId = req.params.id;
 
     const is_published = req.body.is_published === "true" ? 1 : 0;
@@ -242,7 +245,7 @@ const updateBlog = (req, res) => {
 
       const updateQuery = `
         UPDATE blogs 
-        SET title = ?, meta_title = ?, slug = ?, content = ?, image_url = ?, meta_description = ?, meta_keywords = ?, is_published = ?, updated_date = ? 
+        SET title = ?, meta_title = ?, slug = ?, content = ?, image_url = ?, meta_description = ?, meta_keywords = ?, author = ?, category = ?, short_description = ?, is_published = ?, updated_date = ? 
         WHERE id = ?
       `;
 
@@ -254,6 +257,9 @@ const updateBlog = (req, res) => {
         imageUrl,
         meta_description !== undefined ? meta_description : results[0].meta_description,
         meta_keywords !== undefined ? meta_keywords : results[0].meta_keywords,
+        author !== undefined ? author : results[0].author,
+        category !== undefined ? category : results[0].category,
+        short_description !== undefined ? short_description : results[0].short_description,
         is_published,
         updated_date,
         blogId,

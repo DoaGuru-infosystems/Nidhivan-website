@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { siteData } from '../../data/siteContent';
 import { Maximize, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getProjects } from '@/lib/dataStore';
+import { fetchAllProjects, getMediaUrl } from '@/lib/api';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -50,12 +50,23 @@ const Projects1 = () => {
     const [allProjects, setAllProjects] = useState(siteData.projects);
 
     useEffect(() => {
-        const dynamic = getProjects().map(item => ({
-            ...item,
-            address: item.location,
-            filter: filters.find(f => f.label === item.category)?.filter || item.category
-        }));
-        setAllProjects([...dynamic, ...siteData.projects]);
+        const loadProjects = async () => {
+            try {
+                const response = await fetchAllProjects();
+                const data = response.data || response;
+                const dynamic = data.map(item => ({
+                    ...item,
+                    address: item.location,
+                    filter: filters.find(f => f.label === item.category)?.filter || item.category,
+                    // If image doesn't exist, fallback to getImgUrl
+                    imgUrl: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : getImgUrl(item.id)
+                }));
+                setAllProjects([...dynamic, ...siteData.projects]);
+            } catch (error) {
+                console.error("Failed to load projects", error);
+            }
+        };
+        loadProjects();
     }, []);
 
     // Filter projects based on active state
@@ -133,12 +144,11 @@ const Projects1 = () => {
                                 className="project-carousel"
                             >
                                 {filteredProjects.map((item, index) => {
-                                    const imgUrl = getImgUrl(item.id);
                                     return (
-                                        <SwiperSlide key={item.id} className="item fadingcol overflow-hide">
+                                        <SwiperSlide key={`${item.id}-${index}`} className="item fadingcol overflow-hide">
                                             <div className="sx-box image-hover-block relative group">
                                                 <div className="sx-thum-bx overflow-hidden">
-                                                    <img src={imgUrl} alt={item.title} style={{ height: '400px' }} className="w-full object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer" onClick={() => { setLightboxIndex(index); setLightboxOpen(true); }} />
+                                                    <img src={item.imgUrl || getImgUrl(item.id)} alt={item.title} style={{ height: '400px' }} className="w-full object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer" onClick={() => { setLightboxIndex(index); setLightboxOpen(true); }} />
                                                 </div>
                                                 <div className="sx-info p-t20 text-white absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
                                                     <h4 className="sx-tilte text-xl font-bold mb-1 pointer-events-auto"><NavLink to={"/about"} className="text-white">{item.title}</NavLink></h4>
@@ -160,7 +170,7 @@ const Projects1 = () => {
                 open={lightboxOpen}
                 close={() => setLightboxOpen(false)}
                 index={lightboxIndex}
-                slides={filteredProjects.map(item => ({ src: getImgUrl(item.id) }))}
+                slides={filteredProjects.map(item => ({ src: item.imgUrl || getImgUrl(item.id) }))}
             />
         </div>
     );

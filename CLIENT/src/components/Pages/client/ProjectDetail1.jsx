@@ -149,11 +149,33 @@ class ProjectDetail1 extends React.Component {
 };
 
 import { useParams } from 'react-router-dom';
-import { getProjects } from '@/lib/dataStore';
+import { fetchProjectById, getMediaUrl } from '@/lib/api';
+import { useState, useEffect } from 'react';
 
 const ProjectDetail1Wrapper = (props) => {
     const { id } = useParams();
-    const dynamicProject = id ? getProjects().find(p => p.id.toString() === id) : null;
+    const [dynamicProject, setDynamicProject] = useState(null);
+
+    useEffect(() => {
+        const loadProject = async () => {
+            if (id) {
+                try {
+                    const data = await fetchProjectById(id);
+                    const projectData = data.data || data;
+                    if (projectData) {
+                        setDynamicProject({
+                            ...projectData,
+                            image: projectData.images && projectData.images.length > 0 ? getMediaUrl(projectData.images[0]) : null
+                        });
+                    }
+                } catch (error) {
+                    console.error("Failed to load project", error);
+                }
+            }
+        };
+        loadProject();
+    }, [id]);
+
     return <ProjectDetail1 {...props} dynamicProject={dynamicProject} />;
 };
 

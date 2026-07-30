@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { logoutAdmin } from './utils/auth';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '@/store/UserSlice';
 import { BookOpen, MessageSquare, Image as ImageIcon, Users, Building2, LogOut, ChevronDown } from 'lucide-react';
 import logo from '@/images/nidhivan logo.png';
 
@@ -9,8 +10,10 @@ const AdminLayout = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const dispatch = useDispatch();
+
     const handleLogout = () => {
-        logoutAdmin();
+        dispatch(logoutUser());
         navigate('/admin/login');
     };
 
