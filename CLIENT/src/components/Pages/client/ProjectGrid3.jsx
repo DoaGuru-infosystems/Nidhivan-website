@@ -17,80 +17,6 @@ const filters = [
     { label: "Residential", filter: "cat-5" }
 ];
 
-const projects = [
-    {
-        id: 1,
-        // image: new URL('../../../images/projects/portrait/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Interior Work Avroko',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-1'
-    },
-    {
-        id: 2,
-        // image: new URL('../../../images/projects/portrait/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Vilters',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-2'
-    },
-    {
-        id: 3,
-        // image: new URL('../../../images/projects/portrait/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Industrial Design',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-3'
-    },
-    {
-        id: 4,
-        // image: new URL('../../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'House Bluprint',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-4'
-    },
-    {
-        id: 5,
-        // image: new URL('../../../images/projects/portrait/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modern Bathroom',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-5'
-    },
-    {
-        id: 6,
-        // image: new URL('../../../images/projects/portrait/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Bellevue Project',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-4'
-    },
-    {
-        id: 7,
-        // image: new URL('../../../images/projects/portrait/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Qatar Pavilion',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-3'
-    },
-    {
-        id: 8,
-        // image: new URL('../../../images/projects/portrait/pic8.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Museum',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-2'
-    },
-    {
-        id: 9,
-        // image: new URL('../../../images/projects/portrait/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modern house',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'cat-1'
-    }
-];
 
 // var bnrimg = new URL('../../../images/banner/3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
@@ -102,8 +28,8 @@ import { fetchAllProjects, getMediaUrl } from '@/lib/api';
 const ProjectGrid3 = () => {
     const [activeFilter, setActiveFilter] = useState('*');
     const galleryRef = useRef(null);
-    const [allProjects, setAllProjects] = useState(projects);
-    const [filteredItems, setFilteredItems] = useState(projects);
+    const [allProjects, setAllProjects] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
 
@@ -116,7 +42,7 @@ const ProjectGrid3 = () => {
                     ...item,
                     address: item.location,
                     filter: filters.find(f => f.label === item.category)?.filter || item.category,
-                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (projects[item.id % projects.length]?.image || projects[0].image)
+                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : null
                 }));
                 const merged = dynamic;
                 setAllProjects(merged);
@@ -170,7 +96,12 @@ const ProjectGrid3 = () => {
 
                     {/* GALLERY CONTENT */}
                     <div ref={galleryRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-12">
-                        {filteredItems.map((item, index) => (
+                        {filteredItems.length === 0 ? (
+                            <div className="col-span-1 sm:col-span-2 md:col-span-3 text-center w-full py-12 text-gray-500 text-xl font-medium">
+                                No content available
+                            </div>
+                        ) : (
+                            filteredItems.map((item, index) => (
                             <div key={item.id} className="gallery-item" data-filter={item.filter}>
                                 <div className="sx-box image-hover-block relative group overflow-hidden rounded-sm">
                                     <div className="sx-thum-bx">
@@ -188,7 +119,8 @@ const ProjectGrid3 = () => {
                                     </button>
                                 </div>
                             </div>
-                        ))}
+                            ))
+                        )}
                     </div>
                     
                     <div className="text-center load-more-btn-outer" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>

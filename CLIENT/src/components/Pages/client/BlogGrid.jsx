@@ -3,68 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Banner from '../../Elements/Banner';
 import { fetchAllBlogsClient, getMediaUrl } from '@/lib/api';
 
-const blogs = [
-    {
-        // image: new URL('../../../images/blog/blog-grid/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'We’ll nail your next project, because nobody wants...',
-        author: 'John',
-        date: '5',
-        month: 'SEP',
-        comments: '5 Comment'
-    },
-    {
-        // image: new URL('../../../images/blog/blog-grid/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Helping you and your house become better acquainted.',
-        author: 'John',
-        date: '25',
-        month: 'SEP',
-        comments: '5 Comment'
-    },
-    {
-        // image: new URL('../../../images/blog/blog-grid/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Creating quality urban lifestyles, building...',
-        author: 'John',
-        date: '26',
-        month: 'SEP',
-        comments: '5 Comment'
-    },
-    {
-        // image: new URL('../../../images/blog/blog-grid/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'When it comes to your house, don’t mess...',
-        author: 'John',
-        date: '16',
-        month: 'SEP',
-        comments: '3 Comment'
-    },
-    {
-        // image: new URL('../../../images/blog/blog-grid/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Don’t get framed by the competition, trust our...',
-        author: 'John',
-        date: '18',
-        month: 'SEP',
-        comments: '5 Comment'
-    },
-    {
-        // image: new URL('../../../images/blog/blog-grid/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'We’re the construction kings, building up great...',
-        author: 'John',
-        date: '15',
-        month: 'SEP',
-        comments: '2 Comment'
-    }
-]
 
 // var bnrimg = new URL('../../../images/banner/7.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
@@ -120,6 +59,11 @@ class BlogGrid extends React.Component {
                     <div className="relative py-8 md:py-20 bg-white">
                        
                     <div className="max-w-7xl mx-auto px-4">
+                        {dynamicBlogs.length === 0 ? (
+                            <div className="text-center py-20 text-gray-500 text-xl font-medium w-full">
+                                No blogs available
+                            </div>
+                        ) : (
                             <div className="masonry-outer mfp-gallery news-grid clearfix grid grid-cols-12 gap-8 ">
                                 {currentBlogs.map((item, index) => (
                                     <div className="masonry-item col-span-12 md:col-span-6 lg:col-span-4" key={index}>
@@ -149,6 +93,9 @@ class BlogGrid extends React.Component {
                                     </div>
                                 ))}
                             </div>
+                        )}
+                            
+                            {/* Pagination */}
                             {totalPages > 1 && (
                                 <ul className="flex justify-center items-center space-x-2 mt-8 mb-4">
                                     <li>

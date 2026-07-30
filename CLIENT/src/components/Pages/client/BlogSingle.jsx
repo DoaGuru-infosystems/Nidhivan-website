@@ -32,14 +32,27 @@ class BlogSingle extends React.Component {
     };
     render() {
         const { dynamicBlog } = this.props;
-        const title = dynamicBlog?.title || "Blog post with image slider there are many variations of passages.";
-        const date = dynamicBlog ? dynamicBlog.date : "20";
-        const month = dynamicBlog ? dynamicBlog.month : "Septembar 2022";
-        const author = dynamicBlog?.author || "Admin";
-        const category = dynamicBlog?.category || "Architecture";
-        const image = dynamicBlog?.image || "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80";
-        const shortDescription = dynamicBlog?.shortDescription || null;
-        const fullDescription = dynamicBlog?.fullDescription || null;
+        if (!dynamicBlog) {
+            return (
+                <div className="relative">
+                    <Banner title="Blog Single" pagename="Blog Single" description="" bgimage={bnrimg}/>
+                    <div className="relative py-8 md:pt-20 md:pb-12">
+                        <div className="max-w-7xl mx-auto px-4 text-center">
+                            <h2 className="text-2xl font-semibold text-gray-600">Blog not found or loading...</h2>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const title = dynamicBlog.title;
+        const date = dynamicBlog.date;
+        const month = dynamicBlog.month;
+        const author = dynamicBlog.author || "Admin";
+        const category = dynamicBlog.category || "Architecture";
+        const image = dynamicBlog.image;
+        const shortDescription = dynamicBlog.shortDescription;
+        const fullDescription = dynamicBlog.fullDescription;
 
         return (
             <>

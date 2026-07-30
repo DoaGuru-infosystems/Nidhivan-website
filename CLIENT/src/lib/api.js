@@ -110,10 +110,9 @@ export const registerAdminApi = async (name, email, password) => {
 // ==========================================
 // Contact Leads
 // ==========================================
-import { DUMMY_LEADS } from '../components/Pages/admin/ContactLeadsManagement'; // We will export it
 
 export const fetchContactLeads = () => 
-  apiCall('/user-data', { method: 'GET' }, DUMMY_LEADS);
+  apiCall('/user-data', { method: 'GET' });
 
 export const deleteContactLead = (id) => 
   apiCall(`/user-data/${id}`, { method: 'DELETE' }, { success: true });
@@ -124,13 +123,12 @@ export const submitContactForm = (formData) =>
 // ==========================================
 // Testimonials
 // ==========================================
-import { testimonialsDummyData } from '../data/dummy-data/testimonialsDummyData';
 
 export const fetchAllTestimonials = () => 
-  apiCall('/testimonials/getAllTestimonials', { method: 'GET' }, testimonialsDummyData);
+  apiCall('/testimonials/getAllTestimonials', { method: 'GET' });
 
 export const fetchTestimonialById = (id) => 
-  apiCall(`/testimonials/getTestimonialById/${id}`, { method: 'GET' }, testimonialsDummyData.find(t => t.id.toString() === id.toString()) || null);
+  apiCall(`/testimonials/getTestimonialById/${id}`, { method: 'GET' });
 
 export const createTestimonial = (formData) => 
   apiCall('/testimonials/createTestimonial', { method: 'POST', body: formData, isMultipart: true }, { success: true });
@@ -144,19 +142,18 @@ export const deleteTestimonial = (id) =>
 // ==========================================
 // Blogs
 // ==========================================
-import { blogDummyData } from '../data/dummy-data/blogDummyData';
 
 export const fetchAllBlogsAdmin = () => 
-  apiCall('/blogs/allBlogsForAdmin', { method: 'GET' }, blogDummyData);
+  apiCall('/blogs/allBlogsForAdmin', { method: 'GET' });
 
 export const fetchAllBlogsClient = () => 
-  apiCall('/blogs/allBlogs', { method: 'GET' }, blogDummyData);
+  apiCall('/blogs/allBlogs', { method: 'GET' });
 
 export const fetchBlogBySlug = (slug) => 
-  apiCall(`/blogs/${slug}`, { method: 'GET' }, blogDummyData.find(b => b.slug === slug) || null);
+  apiCall(`/blogs/${slug}`, { method: 'GET' });
 
 export const fetchBlogById = (id) => 
-  apiCall(`/blogs/blogGetForEditing/${id}`, { method: 'GET' }, blogDummyData.find(b => b.id.toString() === id.toString()) || null);
+  apiCall(`/blogs/blogGetForEditing/${id}`, { method: 'GET' });
 
 export const createBlog = (formData) => 
   apiCall('/blogs/admin-create', { method: 'POST', body: formData, isMultipart: true }, { success: true });
@@ -170,7 +167,7 @@ export const deleteBlog = (id) =>
 // ==========================================
 // Gallery
 // ==========================================
-import { galleryDummyData } from '../data/dummy-data/galleryDummyData';
+
 
 export const fetchGalleryCategories = () => 
   apiCall('/features/gallery-categories', { method: 'GET' }, [{ id: 1, title: 'General', thumbnail_image: '' }]);
@@ -182,10 +179,10 @@ export const deleteGalleryCategory = (id) =>
   apiCall(`/features/gallery-categories/${id}`, { method: 'DELETE' }, { success: true });
 
 export const fetchImagesByCategory = (categoryId) => 
-  apiCall(`/features/gallery-images/category/${categoryId}`, { method: 'GET' }, galleryDummyData);
+  apiCall(`/features/gallery-images/category/${categoryId}`, { method: 'GET' });
 
 export const fetchAllGalleryImages = () => 
-  apiCall('/features/gallery-images', { method: 'GET' }, galleryDummyData);
+  apiCall('/features/gallery-images', { method: 'GET' });
 
 export const createGalleryImages = (formData) => 
   apiCall('/features/gallery-images', { method: 'POST', body: formData, isMultipart: true }, { success: true });
@@ -196,10 +193,10 @@ export const deleteGalleryImage = (id) =>
 // ==========================================
 // Projects
 // ==========================================
-import { projectsDummyData } from '../data/dummy-data/projectsDummyData';
+
 
 export const fetchAllProjects = () => 
-  apiCall('/projects/allProjects', { method: 'GET' }, projectsDummyData);
+  apiCall('/projects/allProjects', { method: 'GET' });
 
 export const createProject = (formData) => 
   apiCall('/projects/admin-create', { method: 'POST', body: formData, isMultipart: true }, { success: true });
@@ -211,4 +208,4 @@ export const deleteProject = (id) =>
   apiCall(`/projects/deleteByAdmin/${id}`, { method: 'DELETE' }, { success: true });
 
 export const fetchProjectById = (id) => 
-  apiCall(`/projects/getProject/${id}`, { method: 'GET' }, projectsDummyData.find(p => p.id.toString() === id.toString()) || null);
+  apiCall(`/projects/getProject/${id}`, { method: 'GET' });

@@ -6,72 +6,17 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { fetchAllProjects, getMediaUrl } from '@/lib/api';
 
-const projects = [
-    {
-        // image: new URL('./../../images/projects/square/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Life style building',
-        description: 'Engineering your dreams with us the architect has always.'
-    },
-    {
-        // image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modern Bathroom',
-        description: 'Engineering your dreams with us the architect has always.'
-    },
-    {
-        // image: new URL('./../../images/projects/square/pic10.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Dream House',
-        description: 'Engineering your dreams with us the architect has always.'
-    },
-    {
-        // image: new URL('./../../images/projects/square/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Bellevue Projects',
-        description: 'Engineering your dreams with us the architect has always.'
-    },
-    {
-        // image: new URL('./../../images/projects/square/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modish Interior',
-        description: 'Engineering your dreams with us the architect has always.'
-    },
-    {
-        // image: new URL('./../../images/projects/square/pic8.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Vilters',
-        description: 'Engineering your dreams with us the architect has always.'
-    },
-    {
-        // image: new URL('./../../images/projects/square/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Dream Home',
-        description: 'Engineering your dreams with us the architect has always.'
-    },
-    {
-        // image: new URL('./../../images/projects/square/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Living Room',
-        description: 'Engineering your dreams with us the architect has always.'
-    }
-];
+var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-const Projects6 = () => {
+const UpcomingProjectsCarousel1 = (props) => {
     const [open, setOpen] = React.useState(false);
     const [currentIndex, setCurrentIndex] = React.useState(0);
-    const [allProjects, setAllProjects] = useState(projects);
+    const [allProjects, setAllProjects] = useState([]);
     const slides = allProjects.map(item => ({ src: item.image }));
 
     useEffect(() => {
@@ -108,19 +53,24 @@ const Projects6 = () => {
     };
     return (
         <>
-            <div className="relative py-8 md:pt-20 md:pb-12 bg-gray">
+            <div className={`${props.bgcolor} relative py-8 md:py-20`}>
                 <div className="w-full">
                     <div className="section-content">
                         {/* TITLE START */}
-                        <div className="mb-10 text-center">
-                            <div className="sx-separator-outer text-black">
-                                <div className="sx-separator bg-white bg-moving bg-repeat-x">
-                                    <h3 className="sep-line-one">Similar Projects</h3>
+                        <div className="mb-10">
+                            <div className={`${props.alignment} sx-separator-outer`}>
+                                <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
+                                    <h3 className="sep-line-one">{props.title}</h3>
                                 </div>
                             </div>
                         </div>
                         {/* TITLE END */}
                         <div className="work-carousel-outer">
+                            {allProjects.length === 0 ? (
+                                <div className="text-center py-12 text-gray-500 font-medium w-full">
+                                    No projects available
+                                </div>
+                            ) : (
                             <Swiper className="project-carousel project-carousel3 owl-btn-vertical-center p-lr80" {...swiperOptions}>
                                 {allProjects.map((item, index) => (
                                     <SwiperSlide key={index}>
@@ -133,15 +83,16 @@ const Projects6 = () => {
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div className="project-info p-a20 bg-white">
+                                            <div className="project-info p-a20 bg-gray">
                                                 <h4 className="sx-tilte m-t0"><NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"}>{item.title}</NavLink></h4>
                                                 <p>{item.description}</p>
-                                                <NavLink to={item.id ? `/project-detail/${item.id}` : "/project-detail"}><i className="link-plus bg-primary" /></NavLink>
+                                                <NavLink to={"/services-detail"}><i className="link-plus bg-primary" /></NavLink>
                                             </div>
                                         </div>
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -156,4 +107,4 @@ const Projects6 = () => {
     );
 };
 
-export default Projects6;
+export default UpcomingProjectsCarousel1;

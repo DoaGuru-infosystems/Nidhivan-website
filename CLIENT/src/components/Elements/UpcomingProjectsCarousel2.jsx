@@ -6,74 +6,17 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { fetchAllProjects, getMediaUrl } from '@/lib/api';
 
-const projects = [
-    {
-        // image: new URL('./../../images/projects/portrait/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
 
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-one'
-    },
-    {
-        // image: new URL('./../../images/projects/portrait/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-two'
-    },
-    {
-        // image: new URL('./../../images/projects/portrait/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-three'
-    },
-    {
-        // image: new URL('./../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-four'
-    },
-    {
-        // image: new URL('./../../images/projects/portrait/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-three'
-    },
-    {
-        // image: new URL('./../../images/projects/portrait/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-two'
-    },
-    {
-        // image: new URL('./../../images/projects/portrait/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-
-        image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Chair Furniture',
-        address: 'Muscat, Sultanate of Oman',
-        filter: 'col-one'
-    }
-]
 
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-const Projects4 = () => {
+const UpcomingProjectsCarousel2 = () => {
     const [open, setOpen] = React.useState(false);
     const [currentIndex, setCurrentIndex] = React.useState(0);
-    const [allProjects, setAllProjects] = useState(projects);
+    const [allProjects, setAllProjects] = useState([]);
     const slides = allProjects.map(item => ({ src: item.image }));
 
     useEffect(() => {
@@ -84,7 +27,7 @@ const Projects4 = () => {
                 const dynamic = data.map(item => ({
                     ...item,
                     address: item.location,
-                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (projects[item.id % projects.length]?.image || projects[0].image)
+                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0].image_url || item.images[0].image || item.images[0]) : null
                 }));
                 setAllProjects(dynamic);
             } catch (error) {
@@ -122,6 +65,11 @@ const Projects4 = () => {
                     </div>
                     {/* TITLE END */}
                     <div className="work-carousel-outer">
+                        {allProjects.length === 0 ? (
+                            <div className="text-center py-12 text-gray-500 font-medium w-full">
+                                No projects available
+                            </div>
+                        ) : (
                         <Swiper className="project-carousel project-carousel4 owl-btn-vertical-center p-lr80" {...swiperOptions}>
                             {allProjects.map((item, index) => (
                                 <SwiperSlide key={index}>
@@ -140,6 +88,7 @@ const Projects4 = () => {
                                 </SwiperSlide>
                             ))}
                         </Swiper>
+                        )}
                     </div>
                 </div>
             </div>
@@ -153,4 +102,4 @@ const Projects4 = () => {
     );
 };
 
-export default Projects4;
+export default UpcomingProjectsCarousel2;

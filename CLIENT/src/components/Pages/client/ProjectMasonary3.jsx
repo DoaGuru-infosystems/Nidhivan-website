@@ -18,128 +18,6 @@ const filters = [
     { label: "Residential", filter: "cat-5" }
 ];
 
-const projects = [
-    {
-        id: 1,
-        // image: new URL('../../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Life style building',
-        description: 'We combine Interior and Exterior Design services and often provide...',
-        filter: 'cat-1'
-    },
-    {
-        id: 2,
-        // image: new URL('../../../images/projects/square/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modern Bathroom',
-        description: 'Landscape plans for drainage problems may also entail planting.',
-        filter: 'cat-2'
-    },
-    {
-        id: 3,
-        // image: new URL('../../../images/projects/square/pic10.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Dream House',
-        description: 'We provide a range of architectural 3D modeling services to our customers...',
-        filter: 'cat-3'
-    },
-    {
-        id: 4,
-        // image: new URL('../../../images/projects/portrait/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Vilters',
-        description: 'Landscape plans for drainage problems may also entail planting beds away ...',
-        filter: 'cat-4'
-    },
-    {
-        id: 5,
-        // image: new URL('../../../images/projects/square/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Bellevue Projects',
-        description: 'Project management is the process by which our team plans and executes...',
-        filter: 'cat-5'
-    },
-    {
-        id: 6,
-        // image: new URL('../../../images/projects/square/pic8.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modish Interior',
-        description: 'Our team also provides consultations on all architectural issues, even if you need...',
-        filter: 'cat-4'
-    },
-    {
-        id: 7,
-        // image: new URL('../../../images/projects/portrait/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Living Room',
-        description: 'Landscape plans for drainage problems may also entail planting beds...',
-        filter: 'cat-3'
-    },
-    {
-        id: 8,
-        // image: new URL('../../../images/projects/square/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Wall Interior',
-        description: 'We combine Interior and Exterior Design services and often provide...',
-        filter: 'cat-2'
-    },
-    {
-        id: 9,
-        // image: new URL('../../../images/projects/portrait/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Dream Home',
-        description: 'We combine Interior and Exterior Design services and often provide...',
-        filter: 'cat-3'
-    },
-    {
-        id: 10,
-        // image: new URL('../../../images/projects/portrait/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Queens Museum',
-        description: 'We combine Interior and Exterior Design services and often provide...',
-        filter: 'cat-3'
-    },
-    {
-        id: 11,
-        // image: new URL('../../../images/projects/square/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Life style building',
-        description: 'Project management is the process by which our team plans and executes...',
-        filter: 'cat-1'
-    },
-    {
-        id: 12,
-        // image: new URL('../../../images/projects/square/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Hotel Shears',
-        description: 'Landscape plans for drainage problems may also entail planting beds...',
-        filter: 'cat-2'
-    },
-    {
-        id: 13,
-        // image: new URL('../../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modern Bathroom',
-        description: 'We combine Interior and Exterior Design services and often provide...',
-        filter: 'cat-1'
-    },
-    {
-        id: 14,
-        // image: new URL('../../../images/projects/square/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Dream House',
-        description: 'Landscape plans for drainage problems may also entail planting beds...',
-        filter: 'cat-2'
-    },
-    {
-        id: 15,
-        // image: new URL('../../../images/projects/square/pic10.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Life style building',
-        description: 'Project management is the process by which our team plans and executes...',
-        filter: 'cat-3'
-    }
-];
 
 // var bnrimg = new URL('../../../images/banner/9.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
@@ -158,8 +36,8 @@ const breakpointColumnsObj = {
 const ProjectMasonary3 = () => {
     const [activeFilter, setActiveFilter] = useState('*');
     const galleryRef = useRef(null);
-    const [allProjects, setAllProjects] = useState(projects);
-    const [filteredItems, setFilteredItems] = useState(projects);
+    const [allProjects, setAllProjects] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
 
@@ -172,7 +50,7 @@ const ProjectMasonary3 = () => {
                     ...item,
                     description: item.location,
                     filter: filters.find(f => f.label === item.category)?.filter || item.category,
-                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : (projects[item.id % projects.length]?.image || projects[0].image)
+                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : null
                 }));
                 const merged = dynamic;
                 setAllProjects(merged);
@@ -226,6 +104,11 @@ const ProjectMasonary3 = () => {
 
                     {/* GALLERY CONTENT */}
                     <div ref={galleryRef}>
+                        {filteredItems.length === 0 ? (
+                            <div className="text-center w-full py-12 text-gray-500 text-xl font-medium">
+                                No content available
+                            </div>
+                        ) : (
                         <Masonry
                           breakpointCols={breakpointColumnsObj}
                           className="flex w-auto gap-8 mb-12"
@@ -256,6 +139,7 @@ const ProjectMasonary3 = () => {
                                 </div>
                             ))}
                         </Masonry>
+                        )}
                     </div>
                     
                     <div className="text-center load-more-btn-outer" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>

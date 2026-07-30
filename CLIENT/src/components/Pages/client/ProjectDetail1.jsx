@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Banner from '../../Elements/Banner';
-import Projects6 from '../../Elements/Projects6';
+import SimilarProjectsCarousel from '../../Elements/SimilarProjectsCarousel';
 import ReactPlayer from 'react-player';
 import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
 
@@ -34,12 +34,25 @@ class ProjectDetail1 extends React.Component {
     };
     render() {
         const { dynamicProject } = this.props;
-        const title = dynamicProject?.title || "A multitask profession which creates any land in beautiful creation";
-        const type = dynamicProject?.type || "Construction, Branding";
-        const location = dynamicProject?.location || "Mountain View CA 94043";
-        const status = dynamicProject?.status || "Ongoing";
-        const image = dynamicProject?.image || "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80";
+        if (!dynamicProject) {
+            return (
+                <div className="relative">
+                    <Banner title="Project Details" pagename="Project Detail" description="" bgimage={bnrimg} />
+                    <div className="relative py-8 md:py-20">
+                        <div className="max-w-7xl mx-auto px-4 text-center">
+                            <h2 className="text-2xl font-semibold text-gray-600">Project not found or loading...</h2>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
 
+        const title = dynamicProject.title;
+        const type = dynamicProject.type || dynamicProject.category;
+        const location = dynamicProject.location;
+        const status = dynamicProject.status;
+        const image = dynamicProject.image;
+        
         return (
             <>
                 <div className="relative">
@@ -53,7 +66,7 @@ class ProjectDetail1 extends React.Component {
                                     <div className="project-detail-containt">
                                         <div className="bg-white text-[#2B2B2B]">
                                             <h3>{title}</h3>
-                                            <p> Designers think everything done by someone else is awful, and that they could do it better themselves, which explains why I designed my own living room carpet, I suppose. the architect represents neither a Dionysian nor an Apollinian condition: here it is the mighty act of will, the will which moves mountains, the intoxication of the strong will, which demands artistic expression. The most powerful men have always inspired the architects; the architect has always been influenced by power.</p>
+                                            <p>{dynamicProject.content || dynamicProject.description || "No description available for this project."}</p>
                                             <div className="product-block">
                                                 <ul>
                                                     <li>
@@ -141,7 +154,7 @@ class ProjectDetail1 extends React.Component {
                         </div>
                     </div>
                     {/* SECTION CONTENT END  */}
-                    <Projects6 />
+                    <SimilarProjectsCarousel />
                 </div>
                 </>
         );

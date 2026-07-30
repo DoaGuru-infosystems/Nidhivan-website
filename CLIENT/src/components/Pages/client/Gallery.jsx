@@ -21,80 +21,6 @@ const filters = [
     { label: "General", filter: "General" }
 ];
 
-const projects = [
-    {
-        id: 1,
-        // image: new URL('../../../images/projects/portrait/pic1.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modern Villa',
-        address: 'Mumbai, Maharashtra',
-        filter: 'cat-1'
-    },
-    {
-        id: 2,
-        // image: new URL('../../../images/projects/portrait/pic2.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1745794621090-d856c53b0cc2?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Luxury Apartment',
-        address: 'Pune, Maharashtra',
-        filter: 'cat-2'
-    },
-    {
-        id: 3,
-        // image: new URL('../../../images/projects/portrait/pic3.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Industrial Design',
-        address: 'Delhi, NCR',
-        filter: 'cat-3'
-    },
-    {
-        id: 4,
-        // image: new URL('../../../images/projects/portrait/pic4.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'House Blueprint',
-        address: 'Bangalore, Karnataka',
-        filter: 'cat-4'
-    },
-    {
-        id: 5,
-        // image: new URL('../../../images/projects/portrait/pic5.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Modern Bathroom',
-        address: 'Hyderabad, Telangana',
-        filter: 'cat-5'
-    },
-    {
-        id: 6,
-        // image: new URL('../../../images/projects/portrait/pic6.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Bellevue Project',
-        address: 'Chennai, Tamil Nadu',
-        filter: 'cat-4'
-    },
-    {
-        id: 7,
-        // image: new URL('../../../images/projects/portrait/pic7.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Outdoor Pavilion',
-        address: 'Kochi, Kerala',
-        filter: 'cat-3'
-    },
-    {
-        id: 8,
-        // image: new URL('../../../images/projects/portrait/pic8.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Museum Interiors',
-        address: 'Kolkata, West Bengal',
-        filter: 'cat-2'
-    },
-    {
-        id: 9,
-        // image: new URL('../../../images/projects/portrait/pic9.jpg', import.meta.url).href, // ORIGINAL DUMMY - restore when real property photos are ready
-        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80", // TEMP LIVE PREVIEW
-        title: 'Minimalist House',
-        address: 'Ahmedabad, Gujarat',
-        filter: 'cat-1'
-    }
-];
 
 // var bnrimg = new URL('../../../images/banner/3.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
@@ -112,8 +38,8 @@ const Gallery = () => {
     const location = useLocation();
     const [activeFilter, setActiveFilter] = useState(location.state?.activeCategory || '*');
     const galleryRef = useRef(null);
-    const [allProjects, setAllProjects] = useState(projects);
-    const [filteredItems, setFilteredItems] = useState(projects);
+    const [allProjects, setAllProjects] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
 
@@ -207,6 +133,11 @@ const Gallery = () => {
                     </div>
                     
                     <div ref={galleryRef}>
+                        {filteredItems.length === 0 ? (
+                            <div className="text-center w-full py-12 text-gray-500 text-xl font-medium">
+                                No content available
+                            </div>
+                        ) : (
                         <Masonry
                             breakpointCols={breakpointColumnsObj}
                             className="flex w-auto gap-8 mb-12"
@@ -232,6 +163,7 @@ const Gallery = () => {
                             </div>
                             ))}
                         </Masonry>
+                        )}
                     </div>
                     
                     <div className="text-center load-more-btn-outer" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
