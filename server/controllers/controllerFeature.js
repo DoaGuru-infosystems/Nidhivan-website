@@ -1,5 +1,7 @@
 const { db } = require("../db");
 const { getNowIST } = require("../utils/datatime");
+const fs = require("fs");
+const path = require("path");
 
 // Create a new gallery category
 const createGalleryCategory = (req, res) => {
@@ -79,16 +81,37 @@ const updateGalleryCategory = (req, res) => {
 // Delete a gallery category
 const deleteGalleryCategory = (req, res) => {
   const { id } = req.params;
-  const query = "DELETE FROM gallery_categories WHERE id = ?";
-  
-  db.query(query, [id], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: "Database error", details: err });
-    }
-    if (results.affectedRows === 0) {
-      return res.status(404).json({ error: "Category not found" });
-    }
-    return res.status(200).json({ message: "Category deleted successfully" });
+
+  // 1. Fetch category thumbnail and images to delete their files
+  db.query("SELECT thumbnail_image FROM gallery_categories WHERE id = ?", [id], (err, catResults) => {
+    if (err) return res.status(500).json({ error: "Database error", details: err });
+    if (catResults.length === 0) return res.status(404).json({ error: "Category not found" });
+
+    const catThumbnail = catResults[0].thumbnail_image;
+
+    db.query("SELECT image_url FROM gallery_images WHERE category_id = ?", [id], (imgErr, imgResults) => {
+      if (imgErr) return res.status(500).json({ error: "Database error", details: imgErr });
+
+      const imageFiles = imgResults.map(row => row.image_url);
+
+      // 2. Delete from database
+      const query = "DELETE FROM gallery_categories WHERE id = ?";
+      db.query(query, [id], (deleteErr, results) => {
+        if (deleteErr) return res.status(500).json({ error: "Database error", details: deleteErr });
+        if (results.affectedRows === 0) return res.status(404).json({ error: "Category not found" });
+
+        // 3. Delete files from upload folder
+        const filesToDelete = [catThumbnail, ...imageFiles].filter(Boolean);
+        filesToDelete.forEach(filename => {
+          const filePath = path.join(__dirname, "../public/uploads", filename);
+          fs.unlink(filePath, (unlinkErr) => {
+            if (unlinkErr) console.error("Failed to delete file:", unlinkErr);
+          });
+        });
+
+        return res.status(200).json({ message: "Category deleted successfully" });
+      });
+    });
   });
 };
 
@@ -193,16 +216,27 @@ const updateGalleryImage = (req, res) => {
 // Delete a gallery image
 const deleteGalleryImage = (req, res) => {
   const { id } = req.params;
-  const query = "DELETE FROM gallery_images WHERE id = ?";
-  
-  db.query(query, [id], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: "Database error", details: err });
-    }
-    if (results.affectedRows === 0) {
-      return res.status(404).json({ error: "Image not found" });
-    }
-    return res.status(200).json({ message: "Image deleted successfully" });
+
+  db.query("SELECT image_url FROM gallery_images WHERE id = ?", [id], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database error", details: err });
+    if (results.length === 0) return res.status(404).json({ error: "Image not found" });
+
+    const filename = results[0].image_url;
+
+    const query = "DELETE FROM gallery_images WHERE id = ?";
+    db.query(query, [id], (deleteErr, deleteResults) => {
+      if (deleteErr) return res.status(500).json({ error: "Database error", details: deleteErr });
+      if (deleteResults.affectedRows === 0) return res.status(404).json({ error: "Image not found" });
+
+      if (filename) {
+        const filePath = path.join(__dirname, "../public/uploads", filename);
+        fs.unlink(filePath, (unlinkErr) => {
+          if (unlinkErr) console.error("Failed to delete file:", unlinkErr);
+        });
+      }
+
+      return res.status(200).json({ message: "Image deleted successfully" });
+    });
   });
 };
 

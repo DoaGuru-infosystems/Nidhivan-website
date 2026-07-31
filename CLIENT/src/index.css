@@ -187,18 +187,7 @@ img {
     font-family: var(--font-serif) !important;
   }
   
-  /* Override headings that use text-brand-ink to resolve to Brand Green */
-  :is(h1, h2, h3, h4, h5, h6, .heading-font).text-brand-ink {
-    color: var(--color-brand-green) !important;
-  }
-  
-  /* Make links and icons resolve to Brand Green if they were set to ink */
-  a.text-brand-ink, svg.text-brand-ink {
-    color: var(--color-brand-green) !important;
-  }
-  a.hover\:text-brand-ink:hover {
-    color: #0b7340 !important; /* Slightly darker green */
-  }
+
   h1 { font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
   h2 { font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
   h3 { font-weight: 600; line-height: 1.25; }

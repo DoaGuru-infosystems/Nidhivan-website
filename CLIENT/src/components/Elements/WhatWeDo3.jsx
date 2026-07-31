@@ -8,6 +8,7 @@ var bgimg2 = new URL('./../../images/background/cross-line2.png', import.meta.ur
 
 class WhatWeDo3 extends React.Component {
     render() {
+        const { title = "What We Do", data = siteData.services } = this.props;
         return (
             <>
                 <div className="relative  py-8 md:py-0 bg-white  pt-20 pb-12 bg-repeat overflow-hide" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
@@ -16,15 +17,15 @@ class WhatWeDo3 extends React.Component {
                         <div className="mb-10">
                             <div className="sx-separator-outer separator-center">
                                 <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
-                                    <h3 className="sep-line-one">What We Do</h3>
+                                    <h3 className="sep-line-one">{title}</h3>
                                 </div>
                             </div>
                         </div>
                         {/* TITLE END */}
                         <div className="section-content">
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 number-block-three-outer">
-                                {siteData.services.map((item, index) => {
-                                    const imgUrl = new URL(`./../../images/services/service-projects/${index + 1}.jpg`, import.meta.url).href;
+                                {data.map((item, index) => {
+                                    const imgUrl = item.image || new URL(`./../../images/services/service-projects/${index + 1}.jpg`, import.meta.url).href;
                                     return (
                                     <div className="m-b30" key={index}>
                                         <div className="number-block-three slide-ani-top">

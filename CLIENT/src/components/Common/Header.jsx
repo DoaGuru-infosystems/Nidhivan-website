@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Navigation from '../Common/Navigation';
 import { NavLink, useLocation } from 'react-router-dom';
 import { siteData } from '../../data/siteContent';
-import { Menu, X, Phone, Mail, MapPin, Loader2, Search } from 'lucide-react';
+import { Menu, X, Phone, Mail, MapPin, Loader2, Search, User, MessageSquare } from 'lucide-react';
 import { submitContactForm } from '../../lib/api';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -376,70 +376,96 @@ const Header = () => {
                 </div>
               </div>
               <div className="col-span-12 lg:col-span-6">
-                <div className="contact-nav-field shadow-xl p-10 bg-white" style={ { backgroundImage: `url(${bgMap})` } }>
-                  <form onSubmit={ handleSubmit(onSubmit) } className="cons-contact-form2 form-transparent space-y-6">
-                    <div className="relative">
-                      <Input
-                        { ...register("username") }
-                        id="name"
-                        type="text"
-                        placeholder="Name"
-                        className="w-full bg-transparent border-0 border-b border-gray-200 rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-black placeholder-gray-400 shadow-none outline-none text-lg"
-                      />
-                      { errors.username && <p className="text-red-500 text-xs mt-1">{ errors.username.message }</p> }
+                <div 
+                  className="contact-nav-field shadow-2xl p-10 bg-white rounded-2xl relative border border-gray-100" 
+                  style={{ 
+                    backgroundImage: `url(${bgMap})`,
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                  }}
+                >
+                  <div className="relative z-10">
+                    <div className="mb-8">
+                      <h3 className="text-3xl font-bold text-[#2B2B2B] mb-2">Send us a Message</h3>
+                      <p className="text-gray-500 text-sm">We'll get back to you as soon as possible.</p>
                     </div>
+                    
+                    <form onSubmit={ handleSubmit(onSubmit) } className="mt-6">
+                      <div className="relative mb-5 group">
+                        <div className="absolute left-4 top-[14px] text-gray-400 group-focus-within:text-[#D9A44A] transition-colors">
+                          <User size={18} />
+                        </div>
+                        <Input
+                          { ...register("username") }
+                          id="name"
+                          type="text"
+                          placeholder="Your Name"
+                          className="w-full bg-gray-50/60 border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#D9A44A]/20 focus-visible:border-[#D9A44A] placeholder-gray-400 shadow-sm outline-none text-base transition-all"
+                        />
+                        { errors.username && <p className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{ errors.username.message }</p> }
+                      </div>
 
-                    <div className="relative">
-                      <Input
-                        { ...register("email") }
-                        id="email"
-                        type="email"
-                        placeholder="Email"
-                        className="w-full bg-transparent border-0 border-b border-gray-200 rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-black placeholder-gray-400 shadow-none outline-none text-lg"
-                      />
-                      { errors.email && <p className="text-red-500 text-xs mt-1">{ errors.email.message }</p> }
-                    </div>
+                      <div className="relative mb-5 group">
+                        <div className="absolute left-4 top-[14px] text-gray-400 group-focus-within:text-[#D9A44A] transition-colors">
+                          <Mail size={18} />
+                        </div>
+                        <Input
+                          { ...register("email") }
+                          id="email"
+                          type="email"
+                          placeholder="Email Address"
+                          className="w-full bg-gray-50/60 border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#D9A44A]/20 focus-visible:border-[#D9A44A] placeholder-gray-400 shadow-sm outline-none text-base transition-all"
+                        />
+                        { errors.email && <p className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{ errors.email.message }</p> }
+                      </div>
 
-                    <div className="relative">
-                      <Input
-                        { ...register("phone") }
-                        id="phone"
-                        type="text"
-                        placeholder="Phone"
-                        className="w-full bg-transparent border-0 border-b border-gray-200 rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-black placeholder-gray-400 shadow-none outline-none text-lg"
-                      />
-                      { errors.phone && <p className="text-red-500 text-xs mt-1">{ errors.phone.message }</p> }
-                    </div>
+                      <div className="relative mb-5 group">
+                        <div className="absolute left-4 top-[14px] text-gray-400 group-focus-within:text-[#D9A44A] transition-colors">
+                          <Phone size={18} />
+                        </div>
+                        <Input
+                          { ...register("phone") }
+                          id="phone"
+                          type="text"
+                          placeholder="Phone Number"
+                          className="w-full bg-gray-50/60 border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#D9A44A]/20 focus-visible:border-[#D9A44A] placeholder-gray-400 shadow-sm outline-none text-base transition-all"
+                        />
+                        { errors.phone && <p className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{ errors.phone.message }</p> }
+                      </div>
 
-                    <div className="relative">
-                      <Textarea
-                        { ...register("message") }
-                        id="message"
-                        placeholder="Message"
-                        rows={ 3 }
-                        className="w-full bg-transparent border-0 border-b border-gray-200 rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-black placeholder-gray-400 shadow-none outline-none resize-none min-h-[100px] text-lg"
-                      />
-                      { errors.message && <p className="text-red-500 text-xs mt-1">{ errors.message.message }</p> }
-                    </div>
+                      <div className="relative mb-6 group">
+                        <div className="absolute left-4 top-[14px] text-gray-400 group-focus-within:text-[#D9A44A] transition-colors">
+                          <MessageSquare size={18} />
+                        </div>
+                        <Textarea
+                          { ...register("message") }
+                          id="message"
+                          placeholder="How can we help you?"
+                          rows={ 4 }
+                          className="w-full bg-gray-50/60 border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#D9A44A]/20 focus-visible:border-[#D9A44A] placeholder-gray-400 shadow-sm outline-none resize-none min-h-[120px] text-base transition-all"
+                        />
+                        { errors.message && <p className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{ errors.message.message }</p> }
+                      </div>
 
-                    <div className="text-left pt-6">
-                      <button
-                        type="submit"
-                        disabled={ isSubmitting }
-                        className="w-full"
-                        style={ { backgroundColor: '#D9A44A', color: '#fff', padding: '14px', fontWeight: 'bold', letterSpacing: '1px' } }
-                      >
-                        { isSubmitting ? (
-                          <div className="flex justify-center items-center gap-2">
-                            <Loader2 size={ 16 } className="animate-spin" />
-                            <span>SUBMITTING...</span>
-                          </div>
-                        ) : (
-                          <span>SUBMIT INQUIRY</span>
-                        ) }
-                      </button>
-                    </div>
-                  </form>
+                      <div className="text-left">
+                        <button
+                          type="submit"
+                          disabled={ isSubmitting }
+                          className="w-full bg-[#D9A44A] hover:bg-[#c4923e] hover:-translate-y-0.5 text-white py-4 rounded-xl font-bold tracking-wider transition-all shadow-md hover:shadow-xl flex justify-center items-center gap-2"
+                        >
+                          { isSubmitting ? (
+                            <>
+                              <Loader2 size={ 18 } className="animate-spin" />
+                              <span>SUBMITTING...</span>
+                            </>
+                          ) : (
+                            <span>SUBMIT INQUIRY</span>
+                          ) }
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>

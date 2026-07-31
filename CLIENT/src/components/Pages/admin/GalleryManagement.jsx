@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Trash2, Plus, UploadCloud, Folder, ArrowLeft, Image as ImageIcon, X } from 'lucide-react';
+import { Trash2, Plus, UploadCloud, Folder, ArrowLeft, Image as ImageIcon, X, Edit } from 'lucide-react';
 import { 
     fetchGalleryCategories, 
     createGalleryCategory, 
+    updateGalleryCategory,
     deleteGalleryCategory,
     fetchImagesByCategory, 
-    createGalleryImages, 
+    createGalleryImages,
+    updateGalleryImage,
     deleteGalleryImage,
     getMediaUrl 
 } from '@/lib/api';
@@ -26,6 +28,14 @@ const GalleryManagement = () => {
     const [catThumbFile, setCatThumbFile] = useState(null);
     const [catThumbPreview, setCatThumbPreview] = useState([]);
     const [catSaving, setCatSaving] = useState(false);
+    const [isCatDragging, setIsCatDragging] = useState(false);
+
+    // Categories Edit state
+    const [isEditCatDialogOpen, setIsEditCatDialogOpen] = useState(false);
+    const [editingCategory, setEditingCategory] = useState(null);
+    const [editCatTitle, setEditCatTitle] = useState('');
+    const [editCatThumbFile, setEditCatThumbFile] = useState(null);
+    const [editCatThumbPreview, setEditCatThumbPreview] = useState(null);
 
     // Images state
     const [images, setImages] = useState([]);
@@ -34,6 +44,14 @@ const GalleryManagement = () => {
     const [newImgAddress, setNewImgAddress] = useState('');
     const [imgFiles, setImgFiles] = useState([]); // Multiple files
     const [imgSaving, setImgSaving] = useState(false);
+
+    // Images Edit state
+    const [isEditImgDialogOpen, setIsEditImgDialogOpen] = useState(false);
+    const [editingImage, setEditingImage] = useState(null);
+    const [editImgTitle, setEditImgTitle] = useState('');
+    const [editImgAddress, setEditImgAddress] = useState('');
+    const [editImgFile, setEditImgFile] = useState(null);
+    const [editImgPreview, setEditImgPreview] = useState(null);
 
     useEffect(() => {
         if (!viewingCategory) {
@@ -109,6 +127,37 @@ const GalleryManagement = () => {
         }
     };
 
+    const openEditCategory = (e, cat) => {
+        e.stopPropagation();
+        setEditingCategory(cat);
+        setEditCatTitle(cat.title || cat.category_name);
+        setEditCatThumbFile(null);
+        setEditCatThumbPreview(cat.thumbnail_image ? getMediaUrl(cat.thumbnail_image) : null);
+        setIsEditCatDialogOpen(true);
+    };
+
+    const handleUpdateCategory = async () => {
+        if (!editCatTitle) return;
+        setCatSaving(true);
+        try {
+            const formData = new FormData();
+            formData.append('title', editCatTitle);
+            if (editCatThumbFile) {
+                formData.append('thumbnail_image', editCatThumbFile);
+            } else if (editingCategory.thumbnail_image) {
+                formData.append('thumbnail_image', editingCategory.thumbnail_image);
+            }
+            await updateGalleryCategory(editingCategory.id, formData);
+            await loadCategories();
+            setIsEditCatDialogOpen(false);
+        } catch (error) {
+            console.error("Update category failed", error);
+            alert("Failed to update category.");
+        } finally {
+            setCatSaving(false);
+        }
+    };
+
     const handleDeleteCategory = async (e, id) => {
         e.stopPropagation(); // Prevent category click
         if (!window.confirm("Are you sure you want to delete this category? All images inside it might be affected.")) return;
@@ -166,6 +215,41 @@ const GalleryManagement = () => {
         }
     };
 
+    const openEditImage = (img) => {
+        setEditingImage(img);
+        setEditImgTitle(img.title || '');
+        setEditImgAddress(img.address || '');
+        setEditImgFile(null);
+        setEditImgPreview(img.image_url ? getMediaUrl(img.image_url) : (img.image ? getMediaUrl(img.image) : ''));
+        setIsEditImgDialogOpen(true);
+    };
+
+    const handleUpdateImage = async () => {
+        setImgSaving(true);
+        try {
+            const formData = new FormData();
+            formData.append('category_id', viewingCategory.id);
+            formData.append('title', editImgTitle);
+            formData.append('address', editImgAddress);
+            if (editImgFile) {
+                formData.append('images', editImgFile);
+            } else {
+                const existingImage = editingImage.image_url || editingImage.image;
+                if (existingImage) {
+                    formData.append('image_url', existingImage);
+                }
+            }
+            await updateGalleryImage(editingImage.id, formData);
+            await loadImages(viewingCategory.id);
+            setIsEditImgDialogOpen(false);
+        } catch (error) {
+            console.error("Update image failed", error);
+            alert("Failed to update image.");
+        } finally {
+            setImgSaving(false);
+        }
+    };
+
     const handleDeleteImage = async (id) => {
         if (!window.confirm("Delete this image?")) return;
         try {
@@ -196,7 +280,42 @@ const GalleryManagement = () => {
                         </div>
                     </div>
                     
-                    <div></div>
+                    {/* Add Image to Category Button */}
+                    <Dialog open={isImgDialogOpen} onOpenChange={setIsImgDialogOpen}>
+                        <DialogTrigger asChild>
+                            <Button className="bg-[#118A43] hover:bg-[#0f7a3b] text-white flex items-center gap-2">
+                                <UploadCloud size={16} />
+                                Upload Images
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[500px]">
+                            <DialogHeader>
+                                <DialogTitle>Upload Images</DialogTitle>
+                                <DialogDescription>Add new images to this category.</DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                                <div className="grid gap-2">
+                                    <Label>Select Images</Label>
+                                    <Input type="file" multiple accept="image/*" onChange={handleMultipleImageUpload} />
+                                    {imgFiles.length > 0 && <p className="text-sm text-green-600">{imgFiles.length} files selected</p>}
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label>Title (Optional)</Label>
+                                    <Input value={newImgTitle} onChange={(e) => setNewImgTitle(e.target.value)} placeholder="Title for all uploaded images" />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label>Address (Optional)</Label>
+                                    <Input value={newImgAddress} onChange={(e) => setNewImgAddress(e.target.value)} placeholder="Address for all uploaded images" />
+                                </div>
+                            </div>
+                            <div className="flex justify-end gap-3 mt-4">
+                                <Button variant="outline" onClick={() => setIsImgDialogOpen(false)}>Cancel</Button>
+                                <Button onClick={handleSaveImages} disabled={imgSaving || imgFiles.length === 0} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white">
+                                    {imgSaving ? 'Uploading...' : 'Upload'}
+                                </Button>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -209,7 +328,10 @@ const GalleryManagement = () => {
                             />
                             
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-between p-3">
-                                <div className="flex justify-end">
+                                <div className="flex justify-end gap-2">
+                                    <button onClick={() => openEditImage(img)} className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg">
+                                        <Edit size={16} />
+                                    </button>
                                     <button onClick={() => handleDeleteImage(img.id)} className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg">
                                         <Trash2 size={16} />
                                     </button>
@@ -227,6 +349,45 @@ const GalleryManagement = () => {
                         No images found in this category. Upload some!
                     </div>
                 )}
+
+                {/* Edit Image Dialog */}
+                <Dialog open={isEditImgDialogOpen} onOpenChange={setIsEditImgDialogOpen}>
+                    <DialogContent className="sm:max-w-[500px]">
+                        <DialogHeader>
+                            <DialogTitle>Edit Image</DialogTitle>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                            {editImgPreview && (
+                                <div className="w-full h-40 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 relative">
+                                    <img src={editImgPreview} alt="Preview" className="w-full h-full object-cover" />
+                                </div>
+                            )}
+                            <div className="grid gap-2">
+                                <Label>Change Image (Optional)</Label>
+                                <Input type="file" accept="image/*" onChange={(e) => {
+                                    if(e.target.files[0]) {
+                                        setEditImgFile(e.target.files[0]);
+                                        setEditImgPreview(URL.createObjectURL(e.target.files[0]));
+                                    }
+                                }} />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label>Title</Label>
+                                <Input value={editImgTitle} onChange={(e) => setEditImgTitle(e.target.value)} placeholder="Title" />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label>Address</Label>
+                                <Input value={editImgAddress} onChange={(e) => setEditImgAddress(e.target.value)} placeholder="Address" />
+                            </div>
+                        </div>
+                        <div className="flex justify-end gap-3 mt-4">
+                            <Button variant="outline" onClick={() => setIsEditImgDialogOpen(false)}>Cancel</Button>
+                            <Button onClick={handleUpdateImage} disabled={imgSaving} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white">
+                                {imgSaving ? 'Saving...' : 'Save Changes'}
+                            </Button>
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </div>
         );
     }
@@ -264,8 +425,35 @@ const GalleryManagement = () => {
                                 <div className="flex gap-3 items-center">
                                     <div className="flex-1 relative">
                                         <input type="file" multiple id="cat-thumb-upload" accept="image/*" onChange={handleCatThumbUpload} className="hidden" />
-                                        <Label htmlFor="cat-thumb-upload" className="flex items-center justify-center w-full h-10 px-4 py-2 border border-slate-200 border-dashed rounded-md cursor-pointer hover:bg-slate-50 transition-colors text-sm text-slate-600 bg-white shadow-sm font-medium">
-                                            Choose File
+                                        <Label 
+                                            htmlFor="cat-thumb-upload" 
+                                            onDragOver={(e) => { 
+                                                e.preventDefault(); 
+                                                e.stopPropagation(); 
+                                                setIsCatDragging(true);
+                                            }}
+                                            onDragLeave={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setIsCatDragging(false);
+                                            }}
+                                            onDrop={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setIsCatDragging(false);
+                                                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                                                    const files = Array.from(e.dataTransfer.files);
+                                                    const newFiles = catThumbFile ? [...catThumbFile, ...files] : files;
+                                                    setCatThumbFile(newFiles);
+                                                    setCatThumbPreview(newFiles.map(file => URL.createObjectURL(file)));
+                                                }
+                                            }}
+                                            className={`flex flex-col items-center justify-center w-full h-32 px-4 py-4 border-2 border-dashed rounded-xl cursor-pointer transition-all ${isCatDragging ? 'border-[#118A43] bg-[#118A43]/10' : 'border-slate-300 hover:border-[#118A43]/50 hover:bg-slate-50 bg-slate-50/50'}`}>
+                                            <UploadCloud className={`w-10 h-10 mb-3 transition-colors ${isCatDragging ? 'text-[#118A43]' : 'text-slate-400'}`} />
+                                            <span className="text-sm font-medium text-slate-700">
+                                                {isCatDragging ? 'Drop images here...' : 'Choose files or drag & drop here'}
+                                            </span>
+                                            <span className="text-xs text-slate-400 mt-1">JPEG, PNG, WEBP files allowed</span>
                                         </Label>
                                         {catThumbFile && catThumbFile.length > 0 && (
                                             <p className="text-xs text-green-600 mt-2 font-medium">
@@ -329,7 +517,13 @@ const GalleryManagement = () => {
                                 </div>
                             )}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                            <div className="absolute top-2 right-2">
+                            <div className="absolute top-2 right-2 flex gap-2">
+                                <button 
+                                    onClick={(e) => openEditCategory(e, cat)} 
+                                    className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                    <Edit size={16} />
+                                </button>
                                 <button 
                                     onClick={(e) => handleDeleteCategory(e, cat.id)} 
                                     className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
@@ -350,6 +544,41 @@ const GalleryManagement = () => {
                     No categories found. Create one to get started!
                 </div>
             )}
+
+            {/* Edit Category Dialog */}
+            <Dialog open={isEditCatDialogOpen} onOpenChange={setIsEditCatDialogOpen}>
+                <DialogContent className="sm:max-w-[500px]">
+                    <DialogHeader>
+                        <DialogTitle>Edit Category</DialogTitle>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                        <div className="grid gap-2">
+                            <Label>Category Title</Label>
+                            <Input value={editCatTitle} onChange={(e) => setEditCatTitle(e.target.value)} placeholder="Category Title" />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Change Thumbnail (Optional)</Label>
+                            {editCatThumbPreview && (
+                                <div className="w-32 h-32 rounded-lg overflow-hidden border border-slate-200 mb-2">
+                                    <img src={editCatThumbPreview} alt="Preview" className="w-full h-full object-cover" />
+                                </div>
+                            )}
+                            <Input type="file" accept="image/*" onChange={(e) => {
+                                if(e.target.files[0]) {
+                                    setEditCatThumbFile(e.target.files[0]);
+                                    setEditCatThumbPreview(URL.createObjectURL(e.target.files[0]));
+                                }
+                            }} />
+                        </div>
+                    </div>
+                    <div className="flex justify-end gap-3 mt-4">
+                        <Button variant="outline" onClick={() => setIsEditCatDialogOpen(false)}>Cancel</Button>
+                        <Button onClick={handleUpdateCategory} disabled={catSaving || !editCatTitle} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white">
+                            {catSaving ? 'Saving...' : 'Save Changes'}
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 };

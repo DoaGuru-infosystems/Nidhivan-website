@@ -175,6 +175,9 @@ export const fetchGalleryCategories = () =>
 export const createGalleryCategory = (formData) => 
   apiCall('/features/gallery-categories', { method: 'POST', body: formData, isMultipart: true }, { success: true, insertId: Date.now() });
 
+export const updateGalleryCategory = (id, formData) =>
+  apiCall(`/features/gallery-categories/${id}`, { method: 'PUT', body: formData, isMultipart: true }, { success: true });
+
 export const deleteGalleryCategory = (id) =>
   apiCall(`/features/gallery-categories/${id}`, { method: 'DELETE' }, { success: true });
 
@@ -186,6 +189,9 @@ export const fetchAllGalleryImages = () =>
 
 export const createGalleryImages = (formData) => 
   apiCall('/features/gallery-images', { method: 'POST', body: formData, isMultipart: true }, { success: true });
+
+export const updateGalleryImage = (id, formData) =>
+  apiCall(`/features/gallery-images/${id}`, { method: 'PUT', body: formData, isMultipart: true }, { success: true });
 
 export const deleteGalleryImage = (id) => 
   apiCall(`/features/gallery-images/${id}`, { method: 'DELETE' }, { success: true });

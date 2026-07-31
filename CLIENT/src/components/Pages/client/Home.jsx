@@ -16,8 +16,8 @@ class Home extends React.Component {
             <>
                 <div className="relative">
                     <Slider1 />
-                    <AboutTrust />
                     <StatsBar />
+                    <AboutTrust />
                     <ServicesGrid />
                     <HomeProjectsFilter />
                     <HomeGalleryCategories />
