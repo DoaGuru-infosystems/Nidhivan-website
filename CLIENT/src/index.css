@@ -226,3 +226,15 @@ img {
   top: 100px;
   align-self: flex-start;
 }
+
+.dynamic-blog-content h1, .dynamic-blog-content h2, .dynamic-blog-content h3 { font-family: var(--font-serif); font-weight: 700; color: var(--color-brand-ink); margin-top: 2rem; margin-bottom: 1rem; }
+.dynamic-blog-content h1 { font-size: 2.25rem; }
+.dynamic-blog-content h2 { font-size: 1.875rem; }
+.dynamic-blog-content h3 { font-size: 1.5rem; }
+.dynamic-blog-content p { margin-bottom: 1.25rem; line-height: 1.8; color: #4a5568; }
+.dynamic-blog-content ul, .dynamic-blog-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #4a5568; line-height: 1.8; }
+.dynamic-blog-content ul { list-style-type: disc; }
+.dynamic-blog-content ol { list-style-type: decimal; }
+.dynamic-blog-content a { color: var(--color-brand-gold); font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+.dynamic-blog-content a:hover { text-decoration: underline; }
+.dynamic-blog-content img { border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); margin-top: 2rem; margin-bottom: 2rem; }
