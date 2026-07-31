@@ -50,7 +50,7 @@ const ProjectMasonary3 = () => {
                     ...item,
                     description: item.location,
                     filter: filters.find(f => f.label === item.category)?.filter || item.category,
-                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0]) : null
+                    image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0].image_url || item.images[0].image || item.images[0]) : null
                 }));
                 const merged = dynamic;
                 setAllProjects(merged);

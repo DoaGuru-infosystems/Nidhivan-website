@@ -6,8 +6,6 @@ import Footer from './Common/Footer';
 import About from './Pages/client/About';
 
 import ProjectGrid3 from './Pages/client/ProjectGrid3';
-import ProjectMasonary3 from './Pages/client/ProjectMasonary3';
-import ProjectCorousel from './Pages/client/ProjectCorousel';
 import ProjectDetail1 from './Pages/client/ProjectDetail1';
 
 import BlogGrid from './Pages/client/BlogGrid';
@@ -73,9 +71,12 @@ class Components extends React.Component {
                     <Route element={<ClientLayout />}>
                         <Route path='/' element={<Home/>} />
                         <Route path='/about' element={<About/>} />
-                        <Route path='/ongoing-projects' element={<ProjectGrid3/>} />
-                        <Route path='/completed-projects' element={<ProjectMasonary3/>} />
-                        <Route path='/upcoming-projects' element={<ProjectCorousel/>} />
+                        
+                        {/* Reusing ProjectGrid3 for all project listings */}
+                        <Route path='/ongoing-projects' element={<ProjectGrid3 statusFilter="ongoing" pageTitle="Ongoing Projects" />} />
+                        <Route path='/completed-projects' element={<ProjectGrid3 statusFilter="completed" pageTitle="Completed Projects" />} />
+                        <Route path='/upcoming-projects' element={<ProjectGrid3 statusFilter="upcoming" pageTitle="Upcoming Projects" />} />
+                        
                         <Route path='/project-detail' element={<ProjectDetail1/>} />
                         <Route path='/project-detail/:id' element={<ProjectDetail1/>} />
                         <Route path='/blogs' element={<BlogGrid/>} />

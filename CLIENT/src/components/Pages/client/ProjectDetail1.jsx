@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import Banner from '../../Elements/Banner';
 import SimilarProjectsCarousel from '../../Elements/SimilarProjectsCarousel';
-import { fetchProjectById, getMediaUrl } from '@/lib/api';
-import { MapPin, Calendar, Tag, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
+import { fetchProjectById, getMediaUrl, submitContactForm } from '@/lib/api';
+import { MapPin, Calendar, Tag, Layers, ChevronLeft, ChevronRight, Phone, Mail } from 'lucide-react';
 
 var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80";
 
 /* ─────────────────────────────────────────
    Swipeable Image Carousel
-   Touch-swipe + arrow nav + dot indicators
 ───────────────────────────────────────── */
 const ImageCarousel = ({ images, title }) => {
     const [active, setActive] = useState(0);
@@ -40,92 +38,153 @@ const ImageCarousel = ({ images, title }) => {
     if (count === 0) return null;
 
     return (
-        <div className="relative w-full overflow-hidden rounded-2xl bg-slate-900 aspect-[16/10] md:aspect-[16/9] shadow-lg shadow-slate-900/10">
+        <div className="relative w-full overflow-hidden rounded-2xl bg-slate-900 aspect-[16/10] shadow-lg mb-10">
             <div
                 className="flex h-full transition-transform duration-500 ease-out"
-                style={ { transform: `translateX(-${active * 100}%)` } }
-                onTouchStart={ onTouchStart }
-                onTouchMove={ onTouchMove }
-                onTouchEnd={ onTouchEnd }
+                style={{ transform: `translateX(-${active * 100}%)` }}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
             >
-                { images.map((src, idx) => (
-                    <div key={ idx } className="w-full h-full flex-shrink-0 flex items-center justify-center bg-slate-100">
+                {images.map((src, idx) => (
+                    <div key={idx} className="w-full h-full flex-shrink-0 flex items-center justify-center bg-slate-100">
                         <img
-                            src={ src }
-                            alt={ `${title} — photo ${idx + 1}` }
+                            src={src}
+                            alt={`${title} — photo ${idx + 1}`}
                             className="w-full h-full object-contain select-none"
-                            draggable={ false }
+                            draggable={false}
                         />
                     </div>
-                )) }
+                ))}
             </div>
 
-            { count > 1 && (
+            {count > 1 && (
                 <>
                     <button
-                        onClick={ prev }
+                        onClick={prev}
                         aria-label="Previous photo"
-                        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-slate-800 flex items-center justify-center shadow-md transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#118A43]"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-brand-gold text-brand-ink hover:text-white flex items-center justify-center shadow-md transition-colors"
                     >
-                        <ChevronLeft size={ 20 } />
+                        <ChevronLeft size={20} />
                     </button>
                     <button
-                        onClick={ next }
+                        onClick={next}
                         aria-label="Next photo"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-slate-800 flex items-center justify-center shadow-md transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#118A43]"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-brand-gold text-brand-ink hover:text-white flex items-center justify-center shadow-md transition-colors"
                     >
-                        <ChevronRight size={ 20 } />
+                        <ChevronRight size={20} />
                     </button>
 
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/30 backdrop-blur-sm px-3 py-2 rounded-full">
-                        { images.map((_, idx) => (
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/40 backdrop-blur-sm px-3 py-2 rounded-full">
+                        {images.map((_, idx) => (
                             <button
-                                key={ idx }
-                                onClick={ () => goTo(idx) }
-                                aria-label={ `Go to photo ${idx + 1}` }
-                                className={ `transition-all rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-white ${idx === active ? 'w-6 h-2 bg-white' : 'w-2 h-2 bg-white/60 hover:bg-white/90'
-                                    }` }
+                                key={idx}
+                                onClick={() => goTo(idx)}
+                                aria-label={`Go to photo ${idx + 1}`}
+                                className={`transition-all rounded-full ${idx === active ? 'w-6 h-2 bg-brand-gold' : 'w-2 h-2 bg-white/60 hover:bg-white/90'}`}
                             />
-                        )) }
-                    </div>
-
-                    <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full tracking-wide">
-                        { active + 1 } / { count }
+                        ))}
                     </div>
                 </>
-            ) }
+            )}
         </div>
     );
 };
 
 /* ─────────────────────────────────────────
-   Fact row — single label/value pair
+   Fact row
 ───────────────────────────────────────── */
 const FactRow = ({ icon: Icon, label, value, last }) => (
-    <div className={ `flex items-start gap-3 py-4 ${!last ? 'border-b border-slate-100' : ''}` }>
-        <div className="w-9 h-9 rounded-lg bg-[#118A43]/10 text-[#118A43] flex items-center justify-center flex-shrink-0 mt-0.5">
-            <Icon size={ 17 } />
+    <div className={`flex items-start gap-3 py-4 ${!last ? 'border-b border-gray-100' : ''}`}>
+        <div className="w-10 h-10 rounded-lg bg-brand-green/10 text-brand-green flex items-center justify-center flex-shrink-0">
+            <Icon size={18} />
         </div>
         <div>
-            <div className="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-0.5">{ label }</div>
-            <div className="text-slate-800 font-medium">{ value || '—' }</div>
+            <div className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-1">{label}</div>
+            <div className="text-brand-ink font-bold">{value || '—'}</div>
         </div>
     </div>
 );
 
 const STATUS_STYLES = {
-    completed: 'bg-[#118A43]/10 text-[#118A43] border-[#118A43]/20',
-    ongoing: 'bg-[#F4B54B]/15 text-[#8c6523] border-[#F4B54B]/30',
-    default: 'bg-slate-100 text-slate-600 border-slate-200',
+    completed: 'bg-brand-green/10 text-brand-green border-brand-green/20',
+    ongoing: 'bg-brand-gold/15 text-yellow-700 border-brand-gold/30',
+    default: 'bg-gray-100 text-gray-600 border-gray-200',
 };
 
 const StatusBadge = ({ status }) => {
     const key = (status || '').toLowerCase();
     const style = STATUS_STYLES[key] || STATUS_STYLES.default;
     return (
-        <span className={ `inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-wide border ${style}` }>
-            { status || 'Status unavailable' }
+        <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase border ${style}`}>
+            {status || 'Status unavailable'}
         </span>
+    );
+};
+
+/* ─────────────────────────────────────────
+   Inquire Form Sidebar
+───────────────────────────────────────── */
+const InquireForm = ({ projectName }) => {
+    const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            const data = {
+                name: formData.name,
+                email: formData.email,
+                mobile_no: formData.phone,
+                subject: `Inquiry for ${projectName}`,
+                message: "I am interested in this project. Please contact me with more details."
+            };
+            const response = await submitContactForm(data);
+            if (response && response.success) {
+                alert("Thank you! Your inquiry has been sent.");
+                setFormData({ name: '', phone: '', email: '' });
+            } else {
+                alert("Failed to submit inquiry. Please try again later.");
+            }
+        } catch (error) {
+            alert("An error occurred while submitting.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    return (
+        <div className="bg-brand-ink rounded-2xl shadow-xl p-8 border-t-4 border-brand-gold sticky top-24">
+            <h3 className="text-2xl font-bold text-white mb-2 heading-font">Inquire Now</h3>
+            <p className="text-gray-300 text-sm mb-6">Interested in this property? Leave your details and we will get back to you.</p>
+            
+            <form className="space-y-4" onSubmit={handleSubmit}>
+                <div>
+                    <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                </div>
+                <div>
+                    <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full px-4 py-3 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                </div>
+                <div>
+                    <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                </div>
+                <button type="submit" disabled={isSubmitting} className="w-full bg-brand-gold hover:bg-white text-brand-ink font-bold py-3.5 rounded-md transition-colors shadow-md disabled:opacity-70 uppercase tracking-wider mt-2">
+                    {isSubmitting ? "Sending..." : "Request Details"}
+                </button>
+            </form>
+
+            <div className="mt-8 pt-6 border-t border-gray-700 space-y-4">
+                <a href="tel:+919876543210" className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Phone size={18} /></div>
+                    <span className="font-bold">+91 98765 43210</span>
+                </a>
+                <a href="mailto:info@nidhivandeveloper.com" className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Mail size={18} /></div>
+                    <span className="font-bold">info@nidhivandeveloper.com</span>
+                </a>
+            </div>
+        </div>
     );
 };
 
@@ -138,13 +197,12 @@ class ProjectDetail1 extends React.Component {
 
         if (loading) {
             return (
-                <div className="relative">
-                    <Banner title="Project Details" pagename="Project Detail" description="" bgimage={ bnrimg } />
-                    <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
+                <div className="min-h-screen bg-bg-cream pt-32 pb-20 px-4">
+                    <div className="max-w-6xl mx-auto">
                         <div className="animate-pulse space-y-6">
-                            <div className="h-80 md:h-[420px] bg-slate-200 rounded-2xl" />
-                            <div className="h-6 bg-slate-200 rounded w-1/3" />
-                            <div className="h-4 bg-slate-200 rounded w-2/3" />
+                            <div className="h-96 bg-gray-200 rounded-2xl" />
+                            <div className="h-8 bg-gray-200 rounded w-1/3" />
+                            <div className="h-4 bg-gray-200 rounded w-2/3" />
                         </div>
                     </div>
                 </div>
@@ -153,12 +211,9 @@ class ProjectDetail1 extends React.Component {
 
         if (!dynamicProject) {
             return (
-                <div className="relative">
-                    <Banner title="Project Details" pagename="Project Detail" description="" bgimage={ bnrimg } />
-                    <div className="max-w-3xl mx-auto px-4 py-20 md:py-28 text-center">
-                        <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-3">This project couldn't be found</h2>
-                        <p className="text-slate-500">It may have been removed, or the link might be incorrect. Take a look at similar projects below.</p>
-                    </div>
+                <div className="min-h-screen bg-bg-cream pt-32 pb-20 px-4 flex flex-col justify-center items-center">
+                    <h2 className="text-3xl font-bold text-brand-ink mb-4 heading-font">Project Not Found</h2>
+                    <p className="text-gray-500 mb-8">It may have been removed, or the link might be incorrect.</p>
                     <SimilarProjectsCarousel />
                 </div>
             );
@@ -180,66 +235,70 @@ class ProjectDetail1 extends React.Component {
         const formattedDate = created_at
             ? new Date(created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
             : null;
+            
+        const heroImage = images.length > 0 ? images[0] : bnrimg;
 
         return (
-            <div className="relative bg-[#fafaf9]">
-                <Banner
-                    title={ title || 'Project Details' }
-                    pagename="Project Detail"
-                    description=""
-                    bgimage={ bnrimg }
-                />
-
-                <div className="relative py-10 md:py-20">
-                    <div className="max-w-6xl mx-auto px-4 md:px-6">
-
-                        {/* ── Carousel ── */ }
-                        <ImageCarousel images={ images } title={ title } />
-
-                        {/* ── Title row (mobile-first, appears under carousel) ── */ }
-                        <div className="mt-6 md:mt-8 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-                            <div>
-                                <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">{ title }</h1>
-                                { location && (
-                                    <div className="flex items-center gap-1.5 text-slate-500 mt-1.5">
-                                        <MapPin size={ 15 } />
-                                        <span className="text-sm">{ location }</span>
-                                    </div>
-                                ) }
+            <div className="relative bg-bg-cream">
+                
+                {/* ── Hero Image with Title Overlay ── */}
+                <div className="relative w-full h-[60vh] min-h-[400px] flex flex-col justify-end">
+                    <div className="absolute inset-0">
+                        <img src={heroImage} alt={title} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/60 to-transparent"></div>
+                    </div>
+                    
+                    <div className="relative z-10 max-w-7xl mx-auto w-full px-4 pb-16">
+                        {status && <div className="mb-4"><StatusBadge status={status} /></div>}
+                        <h1 className="text-4xl md:text-6xl font-bold text-brand-gold heading-font mb-4 drop-shadow-lg">{title}</h1>
+                        {location && (
+                            <div className="flex items-center gap-2 text-white/90 text-lg">
+                                <MapPin size={20} className="text-brand-green" />
+                                <span>{location}</span>
                             </div>
-                            { status && <StatusBadge status={ status } /> }
-                        </div>
+                        )}
+                    </div>
+                </div>
 
-                        {/* ── Content grid ── */ }
-                        <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div className="relative py-16">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
-                            {/* Description */ }
-                            <div className="md:col-span-7">
-                                <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
-                                    <h2 className="text-lg font-bold text-slate-800 mb-4">About this project</h2>
-                                    <p className="text-slate-600 leading-relaxed whitespace-pre-line">
-                                        { content || description || "Details for this project are being finalised. Please check back shortly, or get in touch with our team for more information." }
-                                    </p>
-                                </div>
-                            </div>
-
-                            {/* Facts card */ }
-                            <div className="md:col-span-5">
-                                <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8 md:sticky md:top-24">
-                                    <h2 className="text-lg font-bold text-slate-800 mb-2">Project details</h2>
-                                    <div>
-                                        <FactRow icon={ Tag } label="Type" value={ displayType } />
-                                        <FactRow icon={ Layers } label="Category" value={ category } />
-                                        <FactRow icon={ MapPin } label="Location" value={ location } />
-                                        <FactRow icon={ Calendar } label="Listed on" value={ formattedDate } last />
+                            {/* ── Main Content (Left) ── */}
+                            <div className="lg:col-span-8">
+                                
+                                <ImageCarousel images={images} title={title} />
+                                
+                                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 mb-10">
+                                    <h2 className="text-2xl font-bold text-brand-ink mb-6 heading-font border-b border-gray-100 pb-4">Project Overview</h2>
+                                    <div className="text-gray-600 leading-relaxed whitespace-pre-line text-lg">
+                                        {content || description || "Details for this project are being finalised. Please check back shortly, or get in touch with our team for more information."}
                                     </div>
                                 </div>
+                                
+                                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+                                    <h2 className="text-2xl font-bold text-brand-ink mb-6 heading-font border-b border-gray-100 pb-4">Key Details</h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+                                        <FactRow icon={Tag} label="Type" value={displayType} />
+                                        <FactRow icon={Layers} label="Category" value={category} />
+                                        <FactRow icon={MapPin} label="Location" value={location} />
+                                        <FactRow icon={Calendar} label="Listed on" value={formattedDate} last />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {/* ── Sidebar (Right) ── */}
+                            <div className="lg:col-span-4">
+                                <InquireForm projectName={title} />
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <SimilarProjectsCarousel />
+                <div className="bg-white py-16 border-t border-gray-100">
+                    <SimilarProjectsCarousel />
+                </div>
             </div>
         );
     }
@@ -280,7 +339,7 @@ const ProjectDetail1Wrapper = (props) => {
         return () => { cancelled = true; };
     }, [id]);
 
-    return <ProjectDetail1 { ...props } dynamicProject={ dynamicProject } loading={ loading } />;
+    return <ProjectDetail1 {...props} dynamicProject={dynamicProject} loading={loading} />;
 };
 
 export default ProjectDetail1Wrapper;
