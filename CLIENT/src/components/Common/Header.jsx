@@ -385,7 +385,7 @@ const Header = () => {
                     <p className="text-gray-500 text-sm">We'll get back to you as soon as possible.</p>
                   </div>
                   
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
                     <div className="relative group">
                       <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#C49242] transition-colors">
                         <User size={16} />
@@ -395,6 +395,8 @@ const Header = () => {
                         id="name"
                         type="text"
                         placeholder="Your Name"
+                        maxLength="50"
+                        onInput={(e) => { e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, ''); }}
                         className="w-full bg-white border border-gray-200 rounded-full pl-12 pr-6 py-3 h-11 focus-visible:ring-1 focus-visible:ring-[#C49242] focus-visible:border-[#C49242] placeholder-gray-400 outline-none text-sm transition-all"
                       />
                       {errors.username && <p className="text-red-500 text-xs mt-1 ml-4 font-medium">{errors.username.message}</p>}
@@ -409,6 +411,7 @@ const Header = () => {
                         id="email"
                         type="email"
                         placeholder="Email Address"
+                        maxLength="100"
                         className="w-full bg-white border border-gray-200 rounded-full pl-12 pr-6 py-3 h-11 focus-visible:ring-1 focus-visible:ring-[#C49242] focus-visible:border-[#C49242] placeholder-gray-400 outline-none text-sm transition-all"
                       />
                       {errors.email && <p className="text-red-500 text-xs mt-1 ml-4 font-medium">{errors.email.message}</p>}
@@ -423,6 +426,8 @@ const Header = () => {
                         id="phone"
                         type="text"
                         placeholder="Phone Number"
+                        maxLength="10"
+                        onInput={(e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10); }}
                         className="w-full bg-white border border-gray-200 rounded-full pl-12 pr-6 py-3 h-11 focus-visible:ring-1 focus-visible:ring-[#C49242] focus-visible:border-[#C49242] placeholder-gray-400 outline-none text-sm transition-all"
                       />
                       {errors.phone && <p className="text-red-500 text-xs mt-1 ml-4 font-medium">{errors.phone.message}</p>}

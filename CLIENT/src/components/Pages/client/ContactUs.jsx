@@ -115,13 +115,15 @@ const ContactUs = () => {
                         {/* RIGHT COLUMN: FORM */}
                         <div className="bg-white rounded-3xl shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] p-8 md:p-10">
                             <h3 className="text-2xl font-bold text-neutral-900 mb-6">Send us a message</h3>
-                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
                                 <div>
                                     <label className="block text-sm font-medium text-neutral-700 mb-1">Your Name</label>
                                     <Input 
                                         {...register("username")} 
                                         type="text" 
                                         placeholder="John Doe" 
+                                        maxLength="50"
+                                        onInput={(e) => { e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, ''); }}
                                         className="w-full bg-neutral-50 border-neutral-200 focus:bg-white transition-colors rounded-xl h-12"
                                     />
                                     {errors.username && <p className="text-red-500 text-sm mt-1.5">{errors.username.message}</p>}
@@ -133,6 +135,7 @@ const ContactUs = () => {
                                         {...register("email")} 
                                         type="email" 
                                         placeholder="john@example.com" 
+                                        maxLength="100"
                                         className="w-full bg-neutral-50 border-neutral-200 focus:bg-white transition-colors rounded-xl h-12"
                                     />
                                     {errors.email && <p className="text-red-500 text-sm mt-1.5">{errors.email.message}</p>}

@@ -191,6 +191,8 @@ const Slider1 = () => {
               <div data-animate style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
                 <a
                   href={`tel:${siteData.contactInfo.phone}`}
+                  target="_blank"
+                  rel="noreferrer"
                   className="site-button"
                   style={{
                     display: 'inline-flex',
@@ -232,6 +234,8 @@ const Slider1 = () => {
                 </a>
                 <a
                   href={`mailto:${siteData.contactInfo.email}`}
+                  target="_blank"
+                  rel="noreferrer"
                   className="site-button"
                   style={{
                     display: 'inline-flex',

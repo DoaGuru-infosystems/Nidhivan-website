@@ -161,13 +161,13 @@ const InquireForm = ({ projectName }) => {
             
             <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 <div>
-                    <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                    <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50)})} maxLength="50" className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
                 </div>
                 <div>
-                    <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                    <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10)})} maxLength="10" className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
                 </div>
                 <div>
-                    <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                    <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value.slice(0, 100)})} maxLength="100" className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
                 </div>
                 <button type="submit" disabled={isSubmitting} className="w-full bg-brand-gold hover:bg-white text-brand-ink font-bold py-4 rounded-md transition-colors shadow-md disabled:opacity-70 uppercase tracking-wider mt-2">
                     {isSubmitting ? "Sending..." : "Request Details"}
