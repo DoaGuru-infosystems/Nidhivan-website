@@ -33,28 +33,8 @@ const HomeGalleryCategories = () => {
         return null;
     }
 
-    // Duplicate array to make seamless marquee
-    const marqueeItems = [...categories, ...categories, ...categories, ...categories];
-
     return (
-        <div className="section-full p-t100 p-b80 bg-white mobile-page-padding overflow-hidden relative">
-            <style>
-                { `
-                @keyframes marqueeRightToLeft {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
-                }
-                .marquee-container {
-                    display: flex;
-                    width: max-content;
-                    animation: marqueeRightToLeft 40s linear infinite;
-                }
-                .marquee-container:hover {
-                    animation-play-state: paused;
-                }
-                `}
-            </style>
-
+        <div className="section-full p-t100 p-b80 bg-white mobile-page-padding relative">
             <div className="w-full">
                 <div className="section-head flex flex-col items-center text-center">
                     <span className="text-[#9C652A] uppercase font-bold tracking-widest text-sm mb-2">Portfolio</span>
@@ -67,9 +47,9 @@ const HomeGalleryCategories = () => {
                     <p className="text-gray-500 text-xl font-medium">No data found</p>
                 </div>
             ) : (
-                <div className="w-full relative py-4">
-                    <div className="marquee-container gap-6 px-3">
-                        { marqueeItems.map((cat, index) => (
+                <div className="w-full relative py-4 container mx-auto">
+                    <div className="flex flex-wrap justify-center gap-6 px-3">
+                        { categories.map((cat, index) => (
                             <div
                                 key={ `${cat.id}-${index}` }
                                 className="w-[280px] h-[350px] md:w-[320px] md:h-[400px] shrink-0 rounded-2xl overflow-hidden relative group shadow-lg bg-slate-100"

@@ -168,15 +168,40 @@ const updateTestimonial = (req, res) => {
 const deleteTestimonial = (req, res) => {
   try {
     const id = req.params.id;
-    db.query("DELETE FROM testimonials WHERE id = ?", [id], (err, result) => {
+
+    // First fetch the image_url
+    db.query("SELECT image_url FROM testimonials WHERE id = ?", [id], (err, results) => {
       if (err) {
-        console.error("Error deleting testimonial:", err);
+        console.error("Error fetching testimonial for deletion:", err);
         return res.status(500).json({ message: "Server error" });
       }
-      if (result.affectedRows === 0) {
+      if (results.length === 0) {
         return res.status(404).json({ message: "Testimonial not found" });
       }
-      res.json({ message: "Testimonial deleted successfully" });
+
+      const imageUrl = results[0].image_url;
+
+      // Delete from database
+      db.query("DELETE FROM testimonials WHERE id = ?", [id], (deleteErr, result) => {
+        if (deleteErr) {
+          console.error("Error deleting testimonial:", deleteErr);
+          return res.status(500).json({ message: "Server error" });
+        }
+        
+        // Delete image file if it exists
+        if (imageUrl) {
+          const fs = require('fs');
+          const path = require('path');
+          const filePath = path.join(__dirname, "../public/uploads", imageUrl);
+          fs.unlink(filePath, (unlinkErr) => {
+            if (unlinkErr && unlinkErr.code !== 'ENOENT') {
+              console.error("Failed to delete testimonial image file:", unlinkErr);
+            }
+          });
+        }
+
+        res.json({ message: "Testimonial and image deleted successfully" });
+      });
     });
   } catch (error) {
     console.error("Error deleting testimonial:", error);

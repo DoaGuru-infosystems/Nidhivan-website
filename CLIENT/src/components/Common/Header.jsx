@@ -315,10 +315,10 @@ const Header = () => {
         </div>
       </div>
 
-      {/* CONTACT SLIDE PANEL */ }
+      {/* CONTACT SLIDE PANEL */}
       <div
         className="contact-slide-hide"
-        style={ {
+        style={{
           backgroundImage: `url(${bgMap})`,
           right: isQuoteActive ? '0px' : '100%',
           transition: 'right 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -327,145 +327,138 @@ const Header = () => {
           top: 0,
           width: '100vw',
           height: '100vh',
-          background: '#fff',
-        } }
+          background: '#fcfcfc',
+        }}
       >
-        <div className="contact-nav h-full overflow-y-auto pt-24 pb-12">
-          <NavLink to="#" className="contact_close absolute top-6 right-8 text-[#2B2B2B] hover:text-red-600 transition-colors z-50" onClick={ (e) => { e.preventDefault(); setIsQuoteActive(false); } }>
-            <span style={ { fontSize: '48px', lineHeight: '1' } }>&times;</span>
+        <div className="contact-nav h-full overflow-y-auto pt-20 pb-12 flex flex-col justify-center">
+          <NavLink to="#" className="contact_close absolute top-6 right-8 text-[#2B2B2B] hover:text-red-600 transition-colors z-50" onClick={(e) => { e.preventDefault(); setIsQuoteActive(false); }}>
+            <span style={{ fontSize: '48px', lineHeight: '1' }}>&times;</span>
           </NavLink>
-          <div className="contact-nav-form container max-w-[1200px] mx-auto">
-            <div className="grid grid-cols-12 gap-8">
-              <div className="col-span-12 lg:col-span-6">
-                <div className="contact-nav-info">
-                  <div className="sx-icon-box-wraper left pb-8">
-                    <div className="icon-xs inline-icon m-b20 scale-in-center">
-                      <Phone size={ 18 } />
+          <div className="container max-w-[1000px] mx-auto px-4 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
+              
+              {/* Left Side: Contact Info */}
+              <div className="border-[8px] border-[#C49242] bg-white p-10 flex flex-col justify-center min-h-[450px]">
+                <div className="space-y-8">
+                  {/* Phone */}
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Phone size={18} className="text-[#333]" />
+                      <h6 className="m-0 font-bold uppercase tracking-wider text-[#C49242] text-[13px]">Phone number</h6>
                     </div>
-                    <div className="icon-content">
-                      <h6 className="m-t0 font-bold uppercase tracking-wider mb-2">Phone number</h6>
-                      <p className="text-gray-600">{ siteData.contactInfo.phone }</p>
-                    </div>
+                    <p className="text-gray-600 ml-8 text-sm">{siteData.contactInfo.phone}</p>
                   </div>
-                  <div className="sx-icon-box-wraper left pb-8">
-                    <div className="icon-xs inline-icon m-b20 scale-in-center">
-                      <Mail size={ 18 } />
+                  {/* Email */}
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Mail size={18} className="text-[#333]" />
+                      <h6 className="m-0 font-bold uppercase tracking-wider text-[#C49242] text-[13px]">Email address</h6>
                     </div>
-                    <div className="icon-content">
-                      <h6 className="m-t0 font-bold uppercase tracking-wider mb-2">Email address</h6>
-                      <p className="text-gray-600">{ siteData.contactInfo.email }</p>
-                    </div>
+                    <p className="text-gray-600 ml-8 text-sm">{siteData.contactInfo.email}</p>
                   </div>
-                  <div className="sx-icon-box-wraper left pb-8">
-                    <div className="icon-xs inline-icon m-b20 scale-in-center">
-                      <MapPin size={ 18 } />
+                  {/* Address */}
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-3 mb-2">
+                      <MapPin size={18} className="text-[#333]" />
+                      <h6 className="m-0 font-bold uppercase tracking-wider text-[#C49242] text-[13px]">Address info</h6>
                     </div>
-                    <div className="icon-content">
-                      <h6 className="m-t0 font-bold uppercase tracking-wider mb-2">Address info</h6>
-                      <p className="text-gray-600">{ siteData.contactInfo.address }</p>
-                    </div>
-                  </div>
-                  <div className="full-social-bg mt-8">
-                    <ul className="flex gap-4">
-                      <li><a href={ siteData.contactInfo.facebook } target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 flex items-center justify-center font-bold hover:bg-[#D9A44A] hover:text-white transition-colors rounded-full text-black">f</a></li>
-                      <li><a href={ siteData.contactInfo.instagram } target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 flex items-center justify-center font-bold hover:bg-[#D9A44A] hover:text-white transition-colors rounded-full text-black">ig</a></li>
-                      <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 flex items-center justify-center font-bold hover:bg-[#D9A44A] hover:text-white transition-colors rounded-full text-black">t</a></li>
-                      <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 flex items-center justify-center font-bold hover:bg-[#D9A44A] hover:text-white transition-colors rounded-full text-black">yt</a></li>
-                    </ul>
+                    <p className="text-gray-600 ml-8 text-sm leading-relaxed max-w-[280px]">{siteData.contactInfo.address}</p>
                   </div>
                 </div>
+
+                {/* Socials */}
+                <div className="mt-12 ml-8">
+                  <ul className="flex gap-3">
+                    <li><a href={siteData.contactInfo.facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 border border-[#333] flex items-center justify-center font-bold hover:bg-[#C49242] hover:text-white hover:border-[#C49242] transition-colors rounded-full text-[#333] text-sm">f</a></li>
+                    <li><a href={siteData.contactInfo.instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 border border-[#333] flex items-center justify-center font-bold hover:bg-[#C49242] hover:text-white hover:border-[#C49242] transition-colors rounded-full text-[#333] text-sm">ig</a></li>
+                    <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 border border-[#333] flex items-center justify-center font-bold hover:bg-[#C49242] hover:text-white hover:border-[#C49242] transition-colors rounded-full text-[#333] text-sm">t</a></li>
+                    <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 border border-[#333] flex items-center justify-center font-bold hover:bg-[#C49242] hover:text-white hover:border-[#C49242] transition-colors rounded-full text-[#333] text-sm">yt</a></li>
+                  </ul>
+                </div>
               </div>
-              <div className="col-span-12 lg:col-span-6">
-                <div 
-                  className="contact-nav-field shadow-2xl p-10 bg-white rounded-2xl relative border border-gray-100" 
-                  style={{ 
-                    backgroundImage: `url(${bgMap})`,
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'contain',
-                  }}
-                >
-                  <div className="relative z-10">
-                    <div className="mb-8">
-                      <h3 className="text-3xl font-bold text-[#2B2B2B] mb-2">Send us a Message</h3>
-                      <p className="text-gray-500 text-sm">We'll get back to you as soon as possible.</p>
-                    </div>
-                    
-                    <form onSubmit={ handleSubmit(onSubmit) } className="mt-6">
-                      <div className="relative mb-5 group">
-                        <div className="absolute left-4 top-[14px] text-gray-400 group-focus-within:text-[#D9A44A] transition-colors">
-                          <User size={18} />
-                        </div>
-                        <Input
-                          { ...register("username") }
-                          id="name"
-                          type="text"
-                          placeholder="Your Name"
-                          className="w-full bg-gray-50/60 border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#D9A44A]/20 focus-visible:border-[#D9A44A] placeholder-gray-400 shadow-sm outline-none text-base transition-all"
-                        />
-                        { errors.username && <p className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{ errors.username.message }</p> }
-                      </div>
 
-                      <div className="relative mb-5 group">
-                        <div className="absolute left-4 top-[14px] text-gray-400 group-focus-within:text-[#D9A44A] transition-colors">
-                          <Mail size={18} />
-                        </div>
-                        <Input
-                          { ...register("email") }
-                          id="email"
-                          type="email"
-                          placeholder="Email Address"
-                          className="w-full bg-gray-50/60 border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#D9A44A]/20 focus-visible:border-[#D9A44A] placeholder-gray-400 shadow-sm outline-none text-base transition-all"
-                        />
-                        { errors.email && <p className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{ errors.email.message }</p> }
-                      </div>
-
-                      <div className="relative mb-5 group">
-                        <div className="absolute left-4 top-[14px] text-gray-400 group-focus-within:text-[#D9A44A] transition-colors">
-                          <Phone size={18} />
-                        </div>
-                        <Input
-                          { ...register("phone") }
-                          id="phone"
-                          type="text"
-                          placeholder="Phone Number"
-                          className="w-full bg-gray-50/60 border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#D9A44A]/20 focus-visible:border-[#D9A44A] placeholder-gray-400 shadow-sm outline-none text-base transition-all"
-                        />
-                        { errors.phone && <p className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{ errors.phone.message }</p> }
-                      </div>
-
-                      <div className="relative mb-6 group">
-                        <div className="absolute left-4 top-[14px] text-gray-400 group-focus-within:text-[#D9A44A] transition-colors">
-                          <MessageSquare size={18} />
-                        </div>
-                        <Textarea
-                          { ...register("message") }
-                          id="message"
-                          placeholder="How can we help you?"
-                          rows={ 4 }
-                          className="w-full bg-gray-50/60 border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#D9A44A]/20 focus-visible:border-[#D9A44A] placeholder-gray-400 shadow-sm outline-none resize-none min-h-[120px] text-base transition-all"
-                        />
-                        { errors.message && <p className="text-red-500 text-xs mt-1.5 ml-1 font-medium">{ errors.message.message }</p> }
-                      </div>
-
-                      <div className="text-left">
-                        <button
-                          type="submit"
-                          disabled={ isSubmitting }
-                          className="w-full bg-[#D9A44A] hover:bg-[#c4923e] hover:-translate-y-0.5 text-white py-4 rounded-xl font-bold tracking-wider transition-all shadow-md hover:shadow-xl flex justify-center items-center gap-2"
-                        >
-                          { isSubmitting ? (
-                            <>
-                              <Loader2 size={ 18 } className="animate-spin" />
-                              <span>SUBMITTING...</span>
-                            </>
-                          ) : (
-                            <span>SUBMIT INQUIRY</span>
-                          ) }
-                        </button>
-                      </div>
-                    </form>
+              {/* Right Side: Form */}
+              <div className="bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-10 border border-gray-100 relative min-h-[450px]">
+                <div className="relative z-10">
+                  <div className="mb-6">
+                    <h3 className="text-3xl font-bold text-[#333] mb-2" style={{ fontFamily: 'var(--font-serif)' }}>Send us a Message</h3>
+                    <p className="text-gray-500 text-sm">We'll get back to you as soon as possible.</p>
                   </div>
+                  
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <div className="relative group">
+                      <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#C49242] transition-colors">
+                        <User size={16} />
+                      </div>
+                      <Input
+                        {...register("username")}
+                        id="name"
+                        type="text"
+                        placeholder="Your Name"
+                        className="w-full bg-white border border-gray-200 rounded-full pl-12 pr-6 py-3 h-11 focus-visible:ring-1 focus-visible:ring-[#C49242] focus-visible:border-[#C49242] placeholder-gray-400 outline-none text-sm transition-all"
+                      />
+                      {errors.username && <p className="text-red-500 text-xs mt-1 ml-4 font-medium">{errors.username.message}</p>}
+                    </div>
+
+                    <div className="relative group">
+                      <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#C49242] transition-colors">
+                        <Mail size={16} />
+                      </div>
+                      <Input
+                        {...register("email")}
+                        id="email"
+                        type="email"
+                        placeholder="Email Address"
+                        className="w-full bg-white border border-gray-200 rounded-full pl-12 pr-6 py-3 h-11 focus-visible:ring-1 focus-visible:ring-[#C49242] focus-visible:border-[#C49242] placeholder-gray-400 outline-none text-sm transition-all"
+                      />
+                      {errors.email && <p className="text-red-500 text-xs mt-1 ml-4 font-medium">{errors.email.message}</p>}
+                    </div>
+
+                    <div className="relative group">
+                      <div className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#C49242] transition-colors">
+                        <Phone size={16} />
+                      </div>
+                      <Input
+                        {...register("phone")}
+                        id="phone"
+                        type="text"
+                        placeholder="Phone Number"
+                        className="w-full bg-white border border-gray-200 rounded-full pl-12 pr-6 py-3 h-11 focus-visible:ring-1 focus-visible:ring-[#C49242] focus-visible:border-[#C49242] placeholder-gray-400 outline-none text-sm transition-all"
+                      />
+                      {errors.phone && <p className="text-red-500 text-xs mt-1 ml-4 font-medium">{errors.phone.message}</p>}
+                    </div>
+
+                    <div className="relative group">
+                      <div className="absolute left-5 top-[16px] text-gray-400 group-focus-within:text-[#C49242] transition-colors">
+                        <MessageSquare size={16} />
+                      </div>
+                      <Textarea
+                        {...register("message")}
+                        id="message"
+                        placeholder="How can we help you?"
+                        rows={4}
+                        className="w-full bg-white border border-gray-200 rounded-2xl pl-12 pr-6 py-3.5 focus-visible:ring-1 focus-visible:ring-[#C49242] focus-visible:border-[#C49242] placeholder-gray-400 outline-none resize-none min-h-[110px] text-sm transition-all"
+                      />
+                      {errors.message && <p className="text-red-500 text-xs mt-1 ml-4 font-medium">{errors.message.message}</p>}
+                    </div>
+
+                    <div className="text-left pt-2">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-[#DBA74D] hover:bg-[#C49242] text-white py-3.5 rounded-xl font-bold tracking-wide transition-all flex justify-center items-center gap-2"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 size={18} className="animate-spin" />
+                            <span className="uppercase text-[13px]">SUBMITTING...</span>
+                          </>
+                        ) : (
+                          <span className="uppercase text-[13px]">SUBMIT INQUIRY</span>
+                        )}
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

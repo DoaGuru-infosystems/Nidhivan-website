@@ -232,6 +232,19 @@ const BlogEditor = () => {
                         <div className="space-y-2">
                             <Label htmlFor="meta-keywords">Meta Keywords</Label>
                             <Input id="meta-keywords" value={form.meta_keywords} onChange={e => setField('meta_keywords', e.target.value)} placeholder="comma, separated, keywords" />
+                            {form.meta_keywords && (
+                                <div className="flex flex-wrap gap-2 mt-3 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <span className="text-xs text-slate-500 w-full mb-1">Keywords preview (how they will appear):</span>
+                                    {(form.meta_keywords.includes(',') 
+                                        ? form.meta_keywords.split(',').map(k => k.trim()).filter(Boolean)
+                                        : form.meta_keywords.split(/\s+/).filter(Boolean)
+                                    ).map((kw, idx) => (
+                                        <span key={idx} className="px-2.5 py-1 bg-[#118A43]/10 text-[#118A43] rounded-md text-xs font-semibold">
+                                            {kw}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="meta-desc">Meta Description</Label>

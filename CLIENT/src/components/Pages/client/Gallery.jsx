@@ -58,6 +58,18 @@ const Gallery = () => {
             setDynamicFilters(newFilters);
 
             const imgs = imagesRes.data || imagesRes;
+            
+            // Create image items from the categories' thumbnail images
+            const catThumbnails = cats
+                .filter(c => c.thumbnail_image)
+                .map((c, index) => ({
+                    id: `cat-thumb-${c.id}`,
+                    title: c.title || `Category ${index + 1}`,
+                    address: '',
+                    filter: c.id.toString(),
+                    image: getMediaUrl(c.thumbnail_image)
+                }));
+
             const dynamic = imgs.map((item, index) => ({
                 ...item,
                 id: `dyn-${item.id}`,
@@ -67,8 +79,11 @@ const Gallery = () => {
                 image: item.image_url ? getMediaUrl(item.image_url) : "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"
             }));
 
-            setAllProjects(dynamic);
-            setFilteredItems(dynamic);
+            // Combine both category thumbnails and regular images
+            const allImgs = [...catThumbnails, ...dynamic];
+
+            setAllProjects(allImgs);
+            setFilteredItems(allImgs);
         } catch (error) {
             console.error("Failed to load gallery", error);
             setIsError(true);

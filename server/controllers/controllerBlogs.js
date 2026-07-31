@@ -25,16 +25,10 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
   fileFilter: (req, file, cb) => {
-    const filetypes = /jpeg|jpg|png|webp/;
-    const extname = filetypes.test(
-      path.extname(file.originalname).toLowerCase(),
-    );
-    const mimetype = filetypes.test(file.mimetype);
-
-    if (mimetype && extname) {
+    if (file.mimetype && file.mimetype.startsWith("image/")) {
       return cb(null, true);
     } else {
-      cb("Error: Images only!");
+      cb(new Error("Error: Images only!"));
     }
   },
 });
@@ -282,15 +276,40 @@ const updateBlog = (req, res) => {
 const deleteBlog = (req, res) => {
   try {
     const blogId = req.params.id;
-    db.query("DELETE FROM blogs WHERE id = ?", [blogId], (err, result) => {
+    
+    // First fetch the image_url
+    db.query("SELECT image_url FROM blogs WHERE id = ?", [blogId], (err, results) => {
       if (err) {
-        console.error("Error deleting blog:", err);
+        console.error("Error fetching blog for deletion:", err);
         return res.status(500).json({ message: "Server error" });
       }
-      if (result.affectedRows === 0) {
+      if (results.length === 0) {
         return res.status(404).json({ message: "Blog not found" });
       }
-      res.json({ message: "Blog deleted successfully" });
+
+      const imageUrl = results[0].image_url;
+
+      // Delete from database
+      db.query("DELETE FROM blogs WHERE id = ?", [blogId], (deleteErr, result) => {
+        if (deleteErr) {
+          console.error("Error deleting blog:", deleteErr);
+          return res.status(500).json({ message: "Server error" });
+        }
+        
+        // Delete image file if it exists
+        if (imageUrl) {
+          const fs = require('fs');
+          const path = require('path');
+          const filePath = path.join(__dirname, "../public/uploads", imageUrl);
+          fs.unlink(filePath, (unlinkErr) => {
+            if (unlinkErr && unlinkErr.code !== 'ENOENT') {
+              console.error("Failed to delete blog image file:", unlinkErr);
+            }
+          });
+        }
+
+        res.json({ message: "Blog and image deleted successfully" });
+      });
     });
   } catch (error) {
     console.error("Error deleting blog:", error);

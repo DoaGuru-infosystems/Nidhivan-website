@@ -30,11 +30,23 @@ const DynamicHtmlRenderer = ({ html }) => {
     }, [html]);
 
     return (
-        <div
-            ref={containerRef}
-            className="dynamic-blog-content"
-            dangerouslySetInnerHTML={{ __html: html }}
-        />
+        <>
+            <style>{`
+                .dynamic-blog-content h1, 
+                .dynamic-blog-content h2, 
+                .dynamic-blog-content h3, 
+                .dynamic-blog-content h4, 
+                .dynamic-blog-content h5, 
+                .dynamic-blog-content h6 {
+                    color: #885023 !important;
+                }
+            `}</style>
+            <div
+                ref={containerRef}
+                className="dynamic-blog-content"
+                dangerouslySetInnerHTML={{ __html: html }}
+            />
+        </>
     );
 };
 
@@ -63,6 +75,7 @@ class BlogSingle extends React.Component {
         const month = dynamicBlog.month;
         const author = dynamicBlog.author || "Admin";
         const category = dynamicBlog.category || "General";
+        const keywords = dynamicBlog.keywords || [];
         const image = dynamicBlog.image || bnrimg;
         const shortDescription = dynamicBlog.shortDescription;
         const fullDescription = dynamicBlog.fullDescription;
@@ -148,6 +161,23 @@ class BlogSingle extends React.Component {
                                         </div>
                                     </div>
                                     
+                                    {/* Keywords Widget */}
+                                    {keywords && keywords.length > 0 && (
+                                        <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                                            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+                                                <Tag size={24} className="text-brand-gold" />
+                                                <h3 className="text-2xl font-bold text-brand-ink heading-font">Tags</h3>
+                                            </div>
+                                            <div className="flex flex-wrap gap-2">
+                                                {keywords.map((kw, idx) => (
+                                                    <span key={idx} className="px-3 py-1.5 bg-brand-green/10 text-brand-gold rounded-lg text-sm font-semibold">
+                                                        {kw}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
                                     {/* Author Widget */}
                                     <div className="bg-brand-ink rounded-2xl p-8 shadow-xl border-t-4 border-brand-gold">
                                         <h3 className="text-xl font-bold text-white mb-2 heading-font">About the Author</h3>
@@ -185,6 +215,14 @@ const BlogSingleWrapper = (props) => {
                     const response = await fetchBlogBySlug(id);
                     const blogData = response.data || response;
                     if (blogData) {
+                        const parseKeywords = (kwString) => {
+                            if (!kwString) return [];
+                            if (kwString.includes(',')) {
+                                return kwString.split(',').map(k => k.trim()).filter(Boolean);
+                            }
+                            return kwString.split(/\s+/).filter(Boolean);
+                        };
+
                         setDynamicBlog({
                             ...blogData,
                             title: blogData.title,
@@ -192,6 +230,7 @@ const BlogSingleWrapper = (props) => {
                             month: new Date(blogData.published_date).toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' }),
                             author: blogData.author,
                             category: blogData.category,
+                            keywords: parseKeywords(blogData.meta_keywords || blogData.keywords),
                             image: blogData.image_url ? getMediaUrl(blogData.image_url) : null,
                             shortDescription: blogData.short_description,
                             fullDescription: blogData.content

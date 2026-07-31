@@ -226,16 +226,42 @@ const updateProject = (req, res) => {
 const deleteProject = (req, res) => {
   try {
     const projectId = req.params.id;
-    // project_images will be deleted automatically due to ON DELETE CASCADE
-    db.query("DELETE FROM projects WHERE id = ?", [projectId], (err, result) => {
+    
+    // First fetch all images associated with this project to delete files
+    db.query("SELECT image_url FROM project_images WHERE project_id = ?", [projectId], (err, imageResults) => {
       if (err) {
-        console.error("Error deleting project:", err);
+        console.error("Error fetching project images for deletion:", err);
         return res.status(500).json({ message: "Server error" });
       }
-      if (result.affectedRows === 0) {
-        return res.status(404).json({ message: "Project not found" });
-      }
-      res.json({ message: "Project deleted successfully" });
+
+      const imageUrls = imageResults.map(row => row.image_url).filter(Boolean);
+
+      // project_images will be deleted automatically due to ON DELETE CASCADE
+      db.query("DELETE FROM projects WHERE id = ?", [projectId], (deleteErr, result) => {
+        if (deleteErr) {
+          console.error("Error deleting project:", deleteErr);
+          return res.status(500).json({ message: "Server error" });
+        }
+        if (result.affectedRows === 0) {
+          return res.status(404).json({ message: "Project not found" });
+        }
+
+        // Delete all associated image files
+        if (imageUrls.length > 0) {
+          const fs = require('fs');
+          const path = require('path');
+          imageUrls.forEach(url => {
+            const filePath = path.join(__dirname, "../public/uploads", url);
+            fs.unlink(filePath, (unlinkErr) => {
+              if (unlinkErr && unlinkErr.code !== 'ENOENT') {
+                console.error(`Failed to delete project image file (${url}):`, unlinkErr);
+              }
+            });
+          });
+        }
+
+        res.json({ message: "Project and images deleted successfully" });
+      });
     });
   } catch (error) {
     console.error("Error deleting project:", error);

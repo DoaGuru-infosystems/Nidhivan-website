@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Switcher from '../Elements/Switcher';
 import { siteData } from '../../data/siteContent';
+import { fetchAllBlogsClient } from '../../lib/api';
 
-class Footer extends React.Component {
-    render() {
-        return (
+const Footer = () => {
+    const [recentBlogs, setRecentBlogs] = useState([]);
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const response = await fetchAllBlogsClient();
+                const data = response.data || response;
+                const published = data.slice(0, 4).map(b => ({
+                    ...b,
+                    month: new Date(b.published_date).toLocaleString('default', { month: 'short' }),
+                    date: new Date(b.published_date).getDate()
+                }));
+                setRecentBlogs(published);
+            } catch (error) {
+                console.error("Failed to load blogs in footer", error);
+            }
+        };
+        fetchBlogs();
+    }, []);
+
+    return (
             <>
                 <footer className="bg-brand-ink text-gray-300 relative border-t-4 border-brand-gold">
                     {/* FOOTER TOP */}
                     <div className="pt-20 pb-12">
-                        <div className="container mx-auto px-4 max-w-7xl">
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+                        <div className="container mx-auto px-4 max-w-[1500px]">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 xl:gap-14">
                                 
                                 {/* ABOUT COMPANY */}
-                                <div className="lg:col-span-4">
+                                <div>
                                     <div className="mb-6 bg-white/5 inline-block p-4 rounded-xl border border-white/10">
                                         <NavLink to={"./"}>
                                             <img src={new URL('./../../images/nidhivan logo.png', import.meta.url).href} alt="Nidhivan Farms" style={{ maxHeight: '100px', width: 'auto' }} />
@@ -38,36 +58,28 @@ class Footer extends React.Component {
                                 </div>
 
                                 {/* RECENT POSTS */}
-                                <div className="lg:col-span-3">
+                                <div>
                                     <h5 className="text-xl font-bold text-white mb-6 flex items-center gap-2 heading-font"><span className="w-2 h-2 rounded-full bg-brand-gold"></span> Recent Posts</h5>
                                     <div className="space-y-5">
-                                        {/* Post 1 */}
-                                        <div className="flex gap-4 group">
-                                            <div className="flex flex-col items-center justify-center w-14 h-14 rounded-lg bg-brand-green/20 border border-brand-green/30 text-brand-gold flex-shrink-0 group-hover:bg-brand-gold group-hover:text-brand-ink transition-colors">
-                                                <strong className="text-xl leading-none font-bold heading-font">15</strong>
-                                                <span className="text-xs uppercase font-medium">Sep</span>
+                                        {recentBlogs.length > 0 ? recentBlogs.map((blog, idx) => (
+                                            <div key={idx} className="flex gap-4 group">
+                                                <div className="flex flex-col items-center justify-center w-14 h-14 rounded-lg bg-brand-green/20 border border-brand-green/30 text-brand-gold flex-shrink-0 group-hover:bg-brand-gold group-hover:text-brand-ink transition-colors">
+                                                    <strong className="text-xl leading-none font-bold heading-font">{blog.date}</strong>
+                                                    <span className="text-xs uppercase font-medium">{blog.month}</span>
+                                                </div>
+                                                <div>
+                                                    <h6 className="text-sm font-semibold text-[#885023] mb-1 leading-snug group-hover:text-brand-gold transition-colors heading-font"><NavLink to={blog.slug ? `/blog-single/${blog.slug}` : "/blog-single"}>{blog.title}</NavLink></h6>
+                                                    <p className="text-xs text-[#885023]"><i className="fa fa-user mr-1 text-brand-gold"></i> By {blog.author || 'Admin'}</p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <h6 className="text-sm font-semibold text-white mb-1 leading-snug group-hover:text-brand-gold transition-colors heading-font"><NavLink to={"/blog-single"}>Explore our new premium farmlands.</NavLink></h6>
-                                                <p className="text-xs text-gray-400"><i className="fa fa-user mr-1 text-brand-gold"></i> By Admin</p>
-                                            </div>
-                                        </div>
-                                        {/* Post 2 */}
-                                        <div className="flex gap-4 group">
-                                            <div className="flex flex-col items-center justify-center w-14 h-14 rounded-lg bg-brand-green/20 border border-brand-green/30 text-brand-gold flex-shrink-0 group-hover:bg-brand-gold group-hover:text-brand-ink transition-colors">
-                                                <strong className="text-xl leading-none font-bold heading-font">17</strong>
-                                                <span className="text-xs uppercase font-medium">Sep</span>
-                                            </div>
-                                            <div>
-                                                <h6 className="text-sm font-semibold text-white mb-1 leading-snug group-hover:text-brand-gold transition-colors heading-font"><NavLink to={"/blog-single"}>Benefits of investing in nature.</NavLink></h6>
-                                                <p className="text-xs text-gray-400"><i className="fa fa-user mr-1 text-brand-gold"></i> By Admin</p>
-                                            </div>
-                                        </div>
+                                        )) : (
+                                            <p className="text-sm text-gray-400">No recent posts available.</p>
+                                        )}
                                     </div>
                                 </div>
 
                                 {/* USEFUL LINKS */}
-                                <div className="lg:col-span-2">
+                                <div>
                                     <h5 className="text-xl font-bold text-white mb-6 flex items-center gap-2 heading-font"><span className="w-2 h-2 rounded-full bg-brand-gold"></span> Useful Links</h5>
                                     <ul className="space-y-3">
                                         <li><NavLink to={"/about"} className="hover:text-brand-gold transition-colors flex items-center gap-2"><i className="fa fa-angle-right text-brand-gold"></i> About</NavLink></li>
@@ -78,8 +90,18 @@ class Footer extends React.Component {
                                     </ul>
                                 </div>
 
+                                {/* OUR PROJECTS */}
+                                <div>
+                                    <h5 className="text-xl font-bold text-white mb-6 flex items-center gap-2 heading-font"><span className="w-2 h-2 rounded-full bg-brand-gold"></span> Our Projects</h5>
+                                    <ul className="space-y-3">
+                                        <li><NavLink to={"/ongoing-projects"} className="hover:text-brand-gold transition-colors flex items-center gap-2"><i className="fa fa-angle-right text-brand-gold"></i> Ongoing Projects</NavLink></li>
+                                        <li><NavLink to={"/completed-projects"} className="hover:text-brand-gold transition-colors flex items-center gap-2"><i className="fa fa-angle-right text-brand-gold"></i> Completed Projects</NavLink></li>
+                                        <li><NavLink to={"/upcoming-projects"} className="hover:text-brand-gold transition-colors flex items-center gap-2"><i className="fa fa-angle-right text-brand-gold"></i> Upcoming Projects</NavLink></li>
+                                    </ul>
+                                </div>
+
                                 {/* CONTACT US */}
-                                <div className="lg:col-span-3">
+                                <div>
                                     <h5 className="text-xl font-bold text-white mb-6 flex items-center gap-2 heading-font"><span className="w-2 h-2 rounded-full bg-brand-gold"></span> Contact Us</h5>
                                     <ul className="space-y-4">
                                         <li className="flex gap-3 items-start">
@@ -133,7 +155,6 @@ class Footer extends React.Component {
 
             </>
         );
-    };
 };
 
 export default Footer;
