@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 
 const navItems = [
@@ -21,6 +21,7 @@ const navItems = [
 
 const Navigation = ({ onLinkClick }) => {
   const [openSubmenu, setOpenSubmenu] = React.useState(null);
+  const location = useLocation();
 
   const toggleSubmenu = (index) => {
     setOpenSubmenu(openSubmenu === index ? null : index);
@@ -32,7 +33,11 @@ const Navigation = ({ onLinkClick }) => {
         <li key={item.label} className={item.children ? 'has-child' : ''}>
           {item.children ? (
             <>
-              <NavLink to={item.to || '#'} onClick={(e) => { e.preventDefault(); toggleSubmenu(index); }}>
+              <a 
+                href={item.to || '#'} 
+                onClick={(e) => { e.preventDefault(); toggleSubmenu(index); }} 
+                className={`cursor-pointer ${item.children.some(child => child.to === location.pathname) ? 'active' : ''}`}
+              >
                 {item.label}
                 <ChevronDown
                   size={14}
@@ -44,7 +49,7 @@ const Navigation = ({ onLinkClick }) => {
                     transform: openSubmenu === index ? 'rotate(180deg)' : 'rotate(0deg)',
                   }}
                 />
-              </NavLink>
+              </a>
               <ul
                 className="sub-menu"
                 style={{
@@ -53,13 +58,13 @@ const Navigation = ({ onLinkClick }) => {
               >
                 {item.children.map((child) => (
                   <li key={child.label}>
-                    <NavLink to={child.to} onClick={onLinkClick}>{child.label}</NavLink>
+                    <NavLink to={child.to} end onClick={onLinkClick}>{child.label}</NavLink>
                   </li>
                 ))}
               </ul>
             </>
           ) : (
-            <NavLink to={item.to} onClick={onLinkClick}>{item.label}</NavLink>
+            <NavLink to={item.to} end onClick={onLinkClick}>{item.label}</NavLink>
           )}
         </li>
       ))}
