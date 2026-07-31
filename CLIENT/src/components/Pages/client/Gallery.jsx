@@ -64,7 +64,7 @@ const Gallery = () => {
                     title: item.title || `Gallery Image ${index + 1}`,
                     address: '',
                     filter: item.category_id ? item.category_id.toString() : 'General',
-                    image: item.image_url ? getMediaUrl(item.image_url) : (projects[index % projects.length]?.image)
+                    image: item.image_url ? getMediaUrl(item.image_url) : "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"
                 }));
 
                 const merged = dynamic;
@@ -108,23 +108,23 @@ const Gallery = () => {
                 )
             });
         });
-    }, [activeFilter]);
+    }, [activeFilter, allProjects]);
 
     return (
-        <div className="relative">
+        <div className="relative bg-bg-cream min-h-screen">
             <Banner title="Our Gallery" pagename="Gallery" description="Explore our portfolio of breathtaking real estate projects, interior designs, and architectural marvels." bgimage={bnrimg}/>
             
-            <div className="relative py-8 md:py-20">
+            <div className="relative py-12 md:py-20">
                 <div className="max-w-7xl mx-auto px-4">
-                    <div className="filter-wrap pb-8 text-center">
-                        <ul className="filter-navigation masonry-filter clearfix flex flex-wrap justify-center gap-2">
-                            <li className={`cursor-pointer px-4 py-2 font-semibold transition-colors rounded ${activeFilter === '*' ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'}`} 
+                    <div className="filter-wrap mb-12 text-center">
+                        <ul className="flex flex-wrap justify-center gap-3">
+                            <li className={`cursor-pointer px-6 py-2.5 font-bold tracking-wider uppercase text-sm rounded-full transition-all duration-300 shadow-sm ${activeFilter === '*' ? 'bg-brand-gold text-brand-ink' : 'bg-white text-gray-600 hover:bg-brand-ink hover:text-white border border-gray-200'}`} 
                                 onClick={() => setActiveFilter('*')}>
                                 All
                             </li>
                             {dynamicFilters.map((item, index) => (
                                 <li key={index} 
-                                    className={`cursor-pointer px-4 py-2 font-semibold transition-colors rounded ${activeFilter === item.filter ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+                                    className={`cursor-pointer px-6 py-2.5 font-bold tracking-wider uppercase text-sm rounded-full transition-all duration-300 shadow-sm ${activeFilter === item.filter ? 'bg-brand-gold text-brand-ink' : 'bg-white text-gray-600 hover:bg-brand-ink hover:text-white border border-gray-200'}`}
                                     onClick={() => setActiveFilter(item.filter)}>
                                     {item.label}
                                 </li>
@@ -134,8 +134,8 @@ const Gallery = () => {
                     
                     <div ref={galleryRef}>
                         {filteredItems.length === 0 ? (
-                            <div className="text-center w-full py-12 text-gray-500 text-xl font-medium">
-                                No content available
+                            <div className="text-center w-full py-20 text-gray-500 text-xl font-medium bg-white rounded-2xl shadow-sm border border-gray-100">
+                                No images found for this category.
                             </div>
                         ) : (
                         <Masonry
@@ -145,19 +145,19 @@ const Gallery = () => {
                         >
                             {filteredItems.map((item, index) => (
                                 <div key={item.id} className="gallery-item mb-8" data-filter={item.filter}>
-                                    <div className="sx-box image-hover-block relative group overflow-hidden rounded-sm">
+                                    <div className="sx-box image-hover-block relative group overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-300">
                                         <div className="sx-thum-bx overflow-hidden">
-                                            <img src={item.image} alt={item.title} className="w-full object-cover transition-transform duration-500 group-hover:scale-110" style={{ height: ['300px', '450px', '380px', '500px', '320px'][index % 5] }} />
+                                            <img src={item.image} alt={item.title} className="w-full object-cover transition-transform duration-700 group-hover:scale-110" style={{ height: ['300px', '450px', '380px', '500px', '320px'][index % 5] }} />
                                         </div>
-                                    <div className="sx-info p-t20 text-white absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                                        <h4 className="sx-tilte text-xl font-bold mb-1"><NavLink to={"#"} style={{ pointerEvents: 'none' }} className="text-white">{item.title}</NavLink></h4>
-                                        <p className="m-b0 text-sm text-gray-200">{item.address}</p>
+                                    <div className="sx-info p-t20 text-white absolute bottom-0 left-0 w-full bg-gradient-to-t from-brand-ink/90 via-brand-ink/50 to-transparent p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                                        <h4 className="text-2xl font-bold mb-1 heading-font text-brand-gold drop-shadow-md">{item.title}</h4>
+                                        {item.address && <p className="m-b0 text-sm text-gray-200">{item.address}</p>}
                                     </div>
                                     <button 
-                                        className="absolute top-4 right-4 bg-white w-10 h-10 rounded-full flex items-center justify-center text-[#2B2B2B] opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md border-none cursor-pointer hover:scale-110 z-10" 
+                                        className="absolute top-4 right-4 bg-white w-12 h-12 rounded-full flex items-center justify-center text-brand-ink opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg border-none cursor-pointer hover:bg-brand-gold hover:text-white hover:scale-110 z-10" 
                                         onClick={(e) => { e.preventDefault(); setLightboxIndex(index); setLightboxOpen(true); }}
                                     >
-                                        <Maximize size={16} />
+                                        <Maximize size={20} />
                                     </button>
                                 </div>
                             </div>
@@ -166,9 +166,6 @@ const Gallery = () => {
                         )}
                     </div>
                     
-                    <div className="text-center load-more-btn-outer" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                        <button className="site-button-secondry btn-half"><span>Load More</span></button>
-                    </div>
                 </div>
             </div>
 
