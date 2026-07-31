@@ -154,7 +154,7 @@ const Slider1 = () => {
                   color: 'rgba(255,255,255,0.85)',
                   textTransform: 'uppercase',
                   marginBottom: '16px',
-                  fontFamily: '"Poppins", sans-serif',
+                  fontFamily: 'var(--font-sans)',
                 }}
               >
                 {slide.tagline}
@@ -168,7 +168,7 @@ const Slider1 = () => {
                   lineHeight: 1.15,
                   color: '#ffffff',
                   marginBottom: '20px',
-                  fontFamily: '"Poppins", sans-serif',
+                  fontFamily: 'var(--font-serif)',
                 }}
               >
                 {slide.title}
@@ -182,7 +182,7 @@ const Slider1 = () => {
                   color: 'rgba(255,255,255,0.85)',
                   marginBottom: '32px',
                   maxWidth: '700px',
-                  fontFamily: '"Poppins", sans-serif',
+                  fontFamily: 'var(--font-sans)',
                 }}
               >
                 {slide.description}
@@ -340,7 +340,7 @@ const Slider1 = () => {
               textDecoration: 'none',
               letterSpacing: '1px',
               transition: 'color 0.3s ease',
-              fontFamily: '"Poppins", sans-serif',
+              fontFamily: 'var(--font-sans)',
             }}
             onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; }}
             onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; }}

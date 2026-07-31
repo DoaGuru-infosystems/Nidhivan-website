@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import CountUp from 'react-countup';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { siteData } from '../../data/siteContent';
@@ -8,11 +7,6 @@ import { fetchAllTestimonials } from '@/lib/api';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-var bgimg1 = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80"; // Replaced ugly placeholder
-var bgimg2 = new URL('./../../images/background/bg-5.png', import.meta.url).href;
-var bgimg3 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
-var bgimg4 = new URL('./../../images/background/bg-12.jpg', import.meta.url).href;
 
 const Testimonials1 = () => {
     const [allTestimonials, setAllTestimonials] = useState(siteData.testimonials);
@@ -37,87 +31,58 @@ const Testimonials1 = () => {
     }, []);
 
     return (
-        <div className="relative w-full px-0">
-            <div className="section-content">
-                <div className="grid grid-cols-1 lg:grid-cols-2">
-                    <div className="bg-gray bg-cover bg-no-repeat" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                        <div className="sx-left-part py-8 md:py-0 p-8 md:p-16 lg:p-24">
-                            {/* TITLE START */}
-                            <div className="mb-10">
-                                <div className="sx-separator-outer separator-left">
-                                    <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg3 + ')' }}>
-                                        <h3 className="sep-line-one">Infographic</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* TITLE END */}
-                            <div className="counter-blocks">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                                    {siteData.statistics.map((stat, index) => (
-                                        <div key={index}>
-                                            <div className="sx-count text-[#2B2B2B] sx-icon-box-wraper bg-repeat bg-white p-a30 shadow-md transition-transform hover:-translate-y-2" style={{ backgroundImage: 'url(' + bgimg2 + ')' }}>
-                                                <h2 className="st-count-number sx-text-primary text-left flex items-baseline">
-                                                    <span className="counter"><CountUp end={parseInt(stat.value)} duration={5} enableScrollSpy={true} scrollSpyOnce={true} /></span>
-                                                    <span>{stat.suffix}</span>
-                                                </h2>
-                                                <h4 className="m-tb0">{stat.label}</h4>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="bg-white bg-repeat" style={{ backgroundImage: 'url(' + bgimg4 + ')' }}>
-                        <div className="sx-right-part py-8 md:py-0 p-8 md:p-16 lg:p-24 lg:pl-16">
-                            {/* TITLE START */}
-                            <div className="mb-10">
-                                <div className="sx-separator-outer separator-left">
-                                    <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg3 + ')' }}>
-                                        <h3 className="sep-line-one">Testimonial</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* TITLE END */}
-                            {/* TESTIMONIAL START */}
-                            <Swiper
-                                modules={[Autoplay, Pagination]}
-                                loop={true}
-                                autoplay={{ delay: 6000, disableOnInteraction: false }}
-                                pagination={{ clickable: true, el: '.testimonial-pagination' }}
-                                spaceBetween={30}
-                                slidesPerView={1}
-                                className="testimonial-home"
-                            >
-                                {allTestimonials.map((item, index) => {
-                                    return (
-                                        <SwiperSlide key={index}>
-                                            <div className="testimonial-2 hover-animation-1 pb-12">
-                                                <div className="testimonial-detail clearfix relative mb-6">
-                                                    <div className="testimonial-pic shadow scale-in-center w-20 h-20 rounded-full overflow-hidden float-left mr-4 flex items-center justify-center bg-[#930000] text-white text-4xl font-bold">
-                                                        {item.name ? item.name.charAt(0).toUpperCase() : 'N'}
-                                                    </div>
-                                                    <div className="pt-2">
-                                                        <h4 className="testimonial-name text-lg font-bold m-0">{item.name}</h4>
-                                                        <span className="testimonial-position text-sm text-gray-500">{item.role}</span>
-                                                    </div>
-                                                    <Quote className="absolute right-0 top-4 text-gray-200 w-12 h-12" />
-                                                </div>
-                                                <div className="testimonial-text bg-white shadow-sm p-6 rounded-lg relative z-10">
-                                                    <p className="italic text-gray-600 m-0">{item.text}</p>
-                                                </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    );
-                                })}
-                            </Swiper>
-                            <div className="testimonial-pagination flex justify-start mt-4 gap-2"></div>
-                        </div>
-                    </div>
+        <section className="py-20 bg-bg-cream">
+            <div className="max-w-7xl mx-auto px-4">
+                
+                {/* Section Header */}
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <h4 className="text-brand-green font-semibold uppercase tracking-wider mb-2">Testimonials</h4>
+                    <h2 className="text-4xl md:text-5xl heading-font text-brand-ink mb-4">What Our Clients Say</h2>
+                    <div className="w-24 h-1 bg-brand-gold mx-auto"></div>
                 </div>
+
+                {/* TESTIMONIAL START */}
+                <Swiper
+                    modules={[Autoplay, Pagination]}
+                    loop={true}
+                    autoplay={{ delay: 6000, disableOnInteraction: false }}
+                    pagination={{ clickable: true, el: '.testimonial-pagination' }}
+                    spaceBetween={30}
+                    breakpoints={{
+                        640: { slidesPerView: 1 },
+                        768: { slidesPerView: 2 },
+                        1024: { slidesPerView: 3 },
+                    }}
+                    className="pb-16"
+                >
+                    {allTestimonials.map((item, index) => {
+                        return (
+                            <SwiperSlide key={index}>
+                                <div className="bg-white rounded-xl p-8 border border-gray-100 shadow-sm relative h-full flex flex-col justify-between mt-8 hover:-translate-y-2 transition-transform duration-300">
+                                    <Quote className="absolute -top-6 right-8 text-brand-gold opacity-20 w-16 h-16" />
+                                    
+                                    <div className="mb-6 relative z-10">
+                                        <p className="italic text-gray-600 leading-relaxed text-lg">"{item.text}"</p>
+                                    </div>
+                                    
+                                    <div className="flex items-center gap-4 border-t border-gray-100 pt-6 mt-auto">
+                                        <div className="w-14 h-14 rounded-full flex items-center justify-center bg-brand-ink text-brand-gold text-2xl font-bold heading-font shadow-md flex-shrink-0">
+                                            {item.name ? item.name.charAt(0).toUpperCase() : 'N'}
+                                        </div>
+                                        <div>
+                                            <h4 className="text-lg font-bold text-brand-ink heading-font">{item.name}</h4>
+                                            <span className="text-sm text-brand-green font-medium">{item.role}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </SwiperSlide>
+                        );
+                    })}
+                </Swiper>
+                <div className="testimonial-pagination flex justify-center mt-8 gap-2"></div>
+
             </div>
-        </div>
+        </section>
     );
 };
 

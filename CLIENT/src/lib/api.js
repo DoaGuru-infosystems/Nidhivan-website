@@ -170,7 +170,7 @@ export const deleteBlog = (id) =>
 
 
 export const fetchGalleryCategories = () => 
-  apiCall('/features/gallery-categories', { method: 'GET' }, [{ id: 1, title: 'General', thumbnail_image: '' }]);
+  apiCall('/features/gallery-categories', { method: 'GET' }, []);
 
 export const createGalleryCategory = (formData) => 
   apiCall('/features/gallery-categories', { method: 'POST', body: formData, isMultipart: true }, { success: true, insertId: Date.now() });

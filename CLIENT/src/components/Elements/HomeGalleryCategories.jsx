@@ -29,7 +29,7 @@ const HomeGalleryCategories = () => {
         navigate('/gallery', { state: { activeCategory: categoryId.toString() } });
     };
 
-    if (loading || categories.length === 0) {
+    if (loading) {
         return null;
     }
 
@@ -39,7 +39,7 @@ const HomeGalleryCategories = () => {
     return (
         <div className="section-full p-t100 p-b80 bg-white mobile-page-padding overflow-hidden relative">
             <style>
-                {`
+                { `
                 @keyframes marqueeRightToLeft {
                     0% { transform: translateX(0); }
                     100% { transform: translateX(-50%); }
@@ -62,43 +62,49 @@ const HomeGalleryCategories = () => {
                 </div>
             </div>
 
-            <div className="w-full relative py-4">
-                <div className="marquee-container gap-6 px-3">
-                    {marqueeItems.map((cat, index) => (
-                        <div 
-                            key={`${cat.id}-${index}`} 
-                            className="w-[280px] h-[350px] md:w-[320px] md:h-[400px] shrink-0 rounded-2xl overflow-hidden relative group shadow-lg bg-slate-100"
-                        >
-                            <img 
-                                src={cat.thumbnail_image ? getMediaUrl(cat.thumbnail_image) : 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80'} 
-                                alt={cat.title} 
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center p-6 transition-colors duration-300 group-hover:bg-black/60">
-                                <h3 className="text-white text-2xl md:text-3xl font-bold mb-5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 uppercase tracking-wide text-center">
-                                    {cat.title}
-                                </h3>
-                                <button 
-                                    onClick={() => handleCategoryClick(cat.id)}
-                                    className="bg-[#9C652A] text-white w-max px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#F9BA51] hover:text-[#5F351D] shadow-lg"
-                                >
-                                    Know More
-                                    <ArrowRight size={16} />
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+            {categories.length === 0 ? (
+                <div className="w-full flex justify-center items-center py-12">
+                    <p className="text-gray-500 text-xl font-medium">No data found</p>
                 </div>
-            </div>
+            ) : (
+                <div className="w-full relative py-4">
+                    <div className="marquee-container gap-6 px-3">
+                        { marqueeItems.map((cat, index) => (
+                            <div
+                                key={ `${cat.id}-${index}` }
+                                className="w-[280px] h-[350px] md:w-[320px] md:h-[400px] shrink-0 rounded-2xl overflow-hidden relative group shadow-lg bg-slate-100"
+                            >
+                                <img
+                                    src={ cat.thumbnail_image ? getMediaUrl(cat.thumbnail_image) : '' }
+                                    alt={ cat.title }
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+                                {/* Overlay */}
+                                <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center p-6 transition-colors duration-300 group-hover:bg-black/60">
+                                    <h3 className="text-white text-2xl md:text-3xl font-bold mb-5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 uppercase tracking-wide text-center">
+                                        { cat.title }
+                                    </h3>
+                                    <button
+                                        onClick={ () => handleCategoryClick(cat.id) }
+                                        className="bg-[#9C652A] text-white w-max px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#F9BA51] hover:text-[#5F351D] shadow-lg"
+                                    >
+                                        Know More
+                                        <ArrowRight size={ 16 } />
+                                    </button>
+                                </div>
+                            </div>
+                        )) }
+                    </div>
+                </div>
+            )}
 
             <div className="text-center mt-12">
-                <button 
-                    onClick={() => navigate('/gallery')}
+                <button
+                    onClick={ () => navigate('/gallery') }
                     className="inline-flex items-center gap-3 bg-[#9C652A] text-white hover:bg-[#F9BA51] hover:text-[#5F351D] px-10 py-4 rounded-full text-lg font-bold transition-all shadow-lg"
                 >
                     Explore Full Gallery
-                    <ArrowRight size={20} />
+                    <ArrowRight size={ 20 } />
                 </button>
             </div>
         </div>
