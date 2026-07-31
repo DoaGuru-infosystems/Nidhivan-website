@@ -92,10 +92,10 @@ const HomeProjectsFilter = () => {
                 <div className="filter-carousal-1-outer relative z-10">
                     <div className="max-w-7xl mx-auto px-4">
                         {/* FILTER NAV START */}
-                        <div className="text-center clearfix filter-pos-right shadow m-b30">
-                            <ul className="btn-filter-wrap flex flex-wrap justify-center gap-2 p-4">
+                        <div className="text-center filter-pos-right shadow mb-8 bg-white rounded-lg">
+                            <ul className="flex flex-wrap justify-center items-center gap-4 p-4">
                                 <li 
-                                    className={`btn-filter cursor-pointer px-4 py-2 rounded-sm font-semibold transition-colors ${activeFilter === '*' ? 'bg-black text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                    className={`cursor-pointer px-6 py-2 rounded-full font-bold uppercase tracking-wider text-sm transition-all duration-300 ${activeFilter === '*' ? 'bg-brand-green text-white shadow-md' : 'bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-brand-green'}`}
                                     onClick={() => setActiveFilter('*')}
                                 >
                                     All
@@ -103,7 +103,7 @@ const HomeProjectsFilter = () => {
                                 {filters.map((item, index) => (
                                     <li 
                                         key={index} 
-                                        className={`btn-filter cursor-pointer px-4 py-2 rounded-sm font-semibold transition-colors ${activeFilter === item.filter ? 'bg-black text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                        className={`cursor-pointer px-6 py-2 rounded-full font-bold uppercase tracking-wider text-sm transition-all duration-300 ${activeFilter === item.filter ? 'bg-brand-green text-white shadow-md' : 'bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-brand-green'}`}
                                         onClick={() => setActiveFilter(item.filter)}
                                     >
                                         {item.label}

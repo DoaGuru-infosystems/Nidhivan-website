@@ -17,10 +17,10 @@
   background: var(--color-bg-cream);
   
   /* Brand Tokens */
-  --color-brand-gold: #D9A44A;
-  --color-brand-green: #0dc76a;
+  --color-brand-gold: #F9BA51;
+  --color-brand-green: #0E9050;
   --color-brand-terracotta: #b45b1c;
-  --color-brand-ink: #111111;
+  --color-brand-ink: #2F2F2F;
   --color-bg-cream: #FAFAF5;
   --color-bg-cream-alt: #F3F2EB;
   
@@ -185,6 +185,19 @@ img {
   /* Global Typography System (Preserving original sizing) */
   h1, h2, h3, h4, h5, h6, .heading-font {
     font-family: var(--font-serif) !important;
+  }
+  
+  /* Override headings that use text-brand-ink to resolve to Brand Green */
+  :is(h1, h2, h3, h4, h5, h6, .heading-font).text-brand-ink {
+    color: var(--color-brand-green) !important;
+  }
+  
+  /* Make links and icons resolve to Brand Green if they were set to ink */
+  a.text-brand-ink, svg.text-brand-ink {
+    color: var(--color-brand-green) !important;
+  }
+  a.hover\:text-brand-ink:hover {
+    color: #0b7340 !important; /* Slightly darker green */
   }
   h1 { font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
   h2 { font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }

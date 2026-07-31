@@ -21,6 +21,7 @@ const ProjectManagement = () => {
     const [newStatus, setNewStatus] = useState('upcoming');
     const [newLocation, setNewLocation] = useState('');
     const [newCategory, setNewCategory] = useState('');
+    const [newDescription, setNewDescription] = useState('');
     const [imgFiles, setImgFiles] = useState([]);
     const [imgPreviews, setImgPreviews] = useState([]); // For edit mode existing images or new previews
 
@@ -53,6 +54,7 @@ const ProjectManagement = () => {
         setNewStatus('upcoming');
         setNewLocation('');
         setNewCategory('');
+        setNewDescription('');
         setImgFiles([]);
         setImgPreviews([]);
         setIsDialogOpen(true);
@@ -65,6 +67,7 @@ const ProjectManagement = () => {
         setNewStatus(item.status || 'upcoming');
         setNewLocation(item.location || '');
         setNewCategory(item.category || '');
+        setNewDescription(item.description || '');
         setImgFiles([]);
         // Handle both possible backend structures for images
         let previews = [];
@@ -86,6 +89,7 @@ const ProjectManagement = () => {
             formData.append('status', newStatus);
             formData.append('location', newLocation);
             formData.append('category', newCategory);
+            formData.append('description', newDescription);
             
             imgFiles.forEach(file => {
                 formData.append('images', file);
@@ -203,7 +207,20 @@ const ProjectManagement = () => {
                                 </div>
                                 <div className="grid gap-2">
                                     <Label htmlFor="category" className="text-slate-700 font-medium">Category</Label>
-                                    <Input id="category" value={newCategory} onChange={(e) => setNewCategory(e.target.value)} placeholder="e.g. Premium Apartments" className="focus-visible:ring-[#118A43]" />
+                                    <Input id="category" value={newCategory} onChange={e => setNewCategory(e.target.value)} placeholder="e.g. Premium Apartments" className="focus-visible:ring-[#118A43]" />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="description" className="text-slate-700 font-medium">Project Details (Overview)</Label>
+                                    <textarea 
+                                        id="description" 
+                                        value={newDescription} 
+                                        onChange={e => setNewDescription(e.target.value)} 
+                                        className="flex min-h-[120px] w-full rounded-md border border-slate-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#118A43] disabled:cursor-not-allowed disabled:opacity-50"
+                                        placeholder="Enter full description of the project..."
+                                    />
                                 </div>
                             </div>
 

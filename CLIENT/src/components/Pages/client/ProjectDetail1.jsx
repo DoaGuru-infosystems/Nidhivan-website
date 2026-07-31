@@ -159,17 +159,17 @@ const InquireForm = ({ projectName }) => {
             <h3 className="text-2xl font-bold text-white mb-2 heading-font">Inquire Now</h3>
             <p className="text-gray-300 text-sm mb-6">Interested in this property? Leave your details and we will get back to you.</p>
             
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
                 <div>
-                    <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                    <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
                 </div>
                 <div>
-                    <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full px-4 py-3 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                    <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
                 </div>
                 <div>
-                    <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+                    <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
                 </div>
-                <button type="submit" disabled={isSubmitting} className="w-full bg-brand-gold hover:bg-white text-brand-ink font-bold py-3.5 rounded-md transition-colors shadow-md disabled:opacity-70 uppercase tracking-wider mt-2">
+                <button type="submit" disabled={isSubmitting} className="w-full bg-brand-gold hover:bg-white text-brand-ink font-bold py-4 rounded-md transition-colors shadow-md disabled:opacity-70 uppercase tracking-wider mt-2">
                     {isSubmitting ? "Sending..." : "Request Details"}
                 </button>
             </form>

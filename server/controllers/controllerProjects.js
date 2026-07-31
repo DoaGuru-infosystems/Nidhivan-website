@@ -39,7 +39,7 @@ const upload = multer({
 // Create a new project
 const createProject = (req, res) => {
   try {
-    const { title, type, status, location, category } = req.body;
+    const { title, type, status, location, category, description } = req.body;
 
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: "At least 1 image is required" });
@@ -48,8 +48,8 @@ const createProject = (req, res) => {
     const created_at = getNowIST();
     const updated_at = created_at;
 
-    const projectQuery = "INSERT INTO projects (title, type, status, location, category, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    const projectValues = [title, type, status, location, category, created_at, updated_at];
+    const projectQuery = "INSERT INTO projects (title, type, status, location, category, description, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    const projectValues = [title, type, status, location, category, description, created_at, updated_at];
 
     db.query(projectQuery, projectValues, (err, projectResult) => {
       if (err) {
@@ -159,7 +159,7 @@ const getProjectById = (req, res) => {
 const updateProject = (req, res) => {
   try {
     const projectId = req.params.id;
-    const { title, type, status, location, category } = req.body;
+    const { title, type, status, location, category, description } = req.body;
     
     db.query("SELECT * FROM projects WHERE id = ?", [projectId], (err, results) => {
       if (err) {
@@ -173,13 +173,14 @@ const updateProject = (req, res) => {
 
       const updated_at = getNowIST();
       
-      const updateQuery = "UPDATE projects SET title = ?, type = ?, status = ?, location = ?, category = ?, updated_at = ? WHERE id = ?";
+      const updateQuery = "UPDATE projects SET title = ?, type = ?, status = ?, location = ?, category = ?, description = ?, updated_at = ? WHERE id = ?";
       const updateValues = [
         title || results[0].title,
         type || results[0].type,
         status || results[0].status,
         location || results[0].location,
         category || results[0].category,
+        description !== undefined ? description : results[0].description,
         updated_at,
         projectId
       ];
