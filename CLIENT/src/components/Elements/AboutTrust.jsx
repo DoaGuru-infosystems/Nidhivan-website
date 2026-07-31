@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { siteData } from '../../data/siteContent';
 import { CheckCircle } from 'lucide-react';
 
-const AboutTrust = () => {
+const AboutTrust = ({ hideButton = false }) => {
     return (
         <section className="py-20 bg-bg-cream">
             <div className="max-w-7xl mx-auto px-4">
@@ -41,9 +41,11 @@ const AboutTrust = () => {
                         </div>
 
                         {/* Button */}
-                        <NavLink to="/about" className="inline-block bg-brand-gold text-white px-8 py-4 rounded font-bold uppercase tracking-wider hover:bg-brand-ink transition-colors shadow-lg">
-                            Discover More
-                        </NavLink>
+                        {!hideButton && (
+                            <NavLink to="/about" className="inline-block bg-brand-gold text-white px-8 py-4 rounded font-bold uppercase tracking-wider hover:bg-brand-ink transition-colors shadow-lg">
+                                Discover More
+                            </NavLink>
+                        )}
                     </div>
 
                 </div>
