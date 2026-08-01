@@ -37,6 +37,14 @@ const ProjectManagement = () => {
     const handleMultipleImageUpload = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].size > 5 * 1024 * 1024) {
+                    alert("file is larger then maximum upload size");
+                    e.target.value = '';
+                    return;
+                }
+            }
+
             // Limit to 10 files
             const allowedFiles = files.slice(0, 10);
             setImgFiles(allowedFiles);

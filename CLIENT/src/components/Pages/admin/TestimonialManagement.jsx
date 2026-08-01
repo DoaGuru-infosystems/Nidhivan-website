@@ -36,6 +36,11 @@ const TestimonialManagement = () => {
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert("file is larger then maximum upload size");
+                e.target.value = '';
+                return;
+            }
             setImageFile(file);
             setPreviewUrl(URL.createObjectURL(file));
         }

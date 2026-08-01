@@ -75,6 +75,13 @@ const GalleryManagement = () => {
     const handleCatThumbUpload = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].size > 5 * 1024 * 1024) {
+                    alert("file is larger then maximum upload size");
+                    e.target.value = '';
+                    return;
+                }
+            }
             const newFiles = catThumbFile ? [...catThumbFile, ...files] : files;
             setCatThumbFile(newFiles);
             setCatThumbPreview(newFiles.map(file => URL.createObjectURL(file)));
@@ -174,6 +181,13 @@ const GalleryManagement = () => {
     const handleMultipleImageUpload = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].size > 5 * 1024 * 1024) {
+                    alert("file is larger then maximum upload size");
+                    e.target.value = '';
+                    return;
+                }
+            }
             setImgFiles(files);
         }
     };
@@ -366,6 +380,11 @@ const GalleryManagement = () => {
                                 <Label>Change Image (Optional)</Label>
                                 <Input type="file" accept="image/*" onChange={(e) => {
                                     if(e.target.files[0]) {
+                                        if (e.target.files[0].size > 5 * 1024 * 1024) {
+                                            alert("file is larger then maximum upload size");
+                                            e.target.value = '';
+                                            return;
+                                        }
                                         setEditImgFile(e.target.files[0]);
                                         setEditImgPreview(URL.createObjectURL(e.target.files[0]));
                                     }
@@ -565,6 +584,11 @@ const GalleryManagement = () => {
                             )}
                             <Input type="file" accept="image/*" onChange={(e) => {
                                 if(e.target.files[0]) {
+                                    if (e.target.files[0].size > 5 * 1024 * 1024) {
+                                        alert("file is larger then maximum upload size");
+                                        e.target.value = '';
+                                        return;
+                                    }
                                     setEditCatThumbFile(e.target.files[0]);
                                     setEditCatThumbPreview(URL.createObjectURL(e.target.files[0]));
                                 }
