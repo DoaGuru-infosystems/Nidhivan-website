@@ -12,7 +12,7 @@ const AboutTrust = ({ hideButton = false }) => {
                     {/* Left side: Image */}
                     <div className="relative">
                         <div className="rounded-2xl overflow-hidden shadow-2xl relative z-10 border-4 border-white">
-                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=1600" alt="Nidhivan Developer Farmhouse" className="w-full h-[500px] object-cover" />
+                            <img src="/images/about/about.webp" alt="Nidhivan Developer Farmhouse" className="w-full h-[500px] object-cover" />
                         </div>
                         {/* Decorative element behind the image */}
                         <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-brand-gold rounded-full opacity-20 -z-10"></div>
