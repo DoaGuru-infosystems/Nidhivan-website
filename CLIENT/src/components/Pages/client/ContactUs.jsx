@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Input } from "../../ui/input";
 import { Textarea } from "../../ui/textarea";
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock, FaWhatsapp } from 'react-icons/fa';
 
 // var bnrimg = new URL('../../../images/banner/9.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
@@ -64,6 +64,133 @@ const ContactUs = () => {
         <div className="relative bg-gray-50/50">
             <Banner title="Contact Us" pagename="Contact Us" description={siteData.aboutUs.shortDescription} bgimage={bnrimg}/>
             
+            {/* ===== OUR LOCATIONS SECTION ===== */}
+<section className="py-20" style={{ backgroundColor: "#f8faf9" }}>
+  <div className="container mx-auto px-4 max-w-6xl">
+
+    {/* Section Heading */}
+    <div className="text-center mb-14">
+      <p className="text-sm font-semibold tracking-widest uppercase mb-2"
+         style={{ color: "#118A43" }}>
+        Our Locations
+      </p>
+      <h2 className="text-4xl font-bold text-gray-900 mb-3">
+        Visit Our Properties
+      </h2>
+      <p className="text-gray-500 max-w-lg mx-auto text-base">
+        We have multiple locations across Jabalpur. Walk in or call us directly.
+      </p>
+    </div>
+
+    {/* Cards Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {siteData.properties.map((property, index) => (
+        <div
+          key={property.id}
+          className="rounded-2xl overflow-hidden flex flex-col"
+          style={{
+            boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+            backgroundColor: "#ffffff",
+          }}
+        >
+          {/* ── Card Header ── */}
+          <div
+            className="px-6 pt-7 pb-6"
+            style={{
+              background:
+                index === 0
+                  ? "linear-gradient(135deg, #0f7a3c 0%, #118A43 60%, #16a34a 100%)"
+                  : "linear-gradient(135deg, #b07d1a 0%, #c9911e 60%, #F4B54B 100%)",
+            }}
+          >
+            {/* Badge row removed */}
+
+            {/* Property Name */}
+            <h3 className="text-xl font-bold text-white leading-snug mb-1">
+              {property.name}
+            </h3>
+            <p style={{ color: "rgba(255,255,255,0.75)" }} className="text-sm">
+              {property.tagline}
+            </p>
+          </div>
+
+          {/* ── Card Body ── */}
+          <div className="px-6 py-5 flex flex-col flex-grow">
+
+            {/* Info Rows */}
+            <div className="space-y-3 mb-6">
+
+              {/* Address */}
+              <div className="flex items-start gap-3">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-[#118A43]"
+                  style={{ backgroundColor: "#e8f5ee" }}
+                >
+                  <FaMapMarkerAlt size={16} />
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  {property.address}
+                </p>
+              </div>
+
+              {/* Phone */}
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-[#118A43]"
+                  style={{ backgroundColor: "#e8f5ee" }}
+                >
+                  <FaPhoneAlt size={16} />
+                </div>
+                <a
+                  href={`tel:${property.phone}`}
+                  className="text-sm font-semibold hover:underline"
+                  style={{ color: "#118A43" }}
+                >
+                  {property.phone}
+                </a>
+              </div>
+
+              {/* Hours */}
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-[#118A43]"
+                  style={{ backgroundColor: "#e8f5ee" }}
+                >
+                  <FaClock size={16} />
+                </div>
+                <p className="text-sm text-gray-600">{property.hours}</p>
+              </div>
+
+            </div>
+
+            {/* Rating Bar removed */}
+
+            {/* Spacer pushes buttons to bottom */}
+            <div className="flex-grow" />
+
+            {/* Action Buttons */}
+            <div>
+              <a
+                href={property.mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`w-full flex items-center justify-center text-sm font-bold py-3 rounded-xl border-2 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
+                  index === 0 
+                    ? "text-[#118A43] border-[#118A43] hover:bg-[#118A43] hover:text-white" 
+                    : "text-[#F4B54B] border-[#F4B54B] hover:bg-[#F4B54B] hover:text-white"
+                }`}
+              >
+                Get Directions
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+{/* ===== END OUR LOCATIONS SECTION ===== */}
+
             <div className="relative py-20">
                 <div className="container mx-auto px-4 max-w-7xl">
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-start">
@@ -80,9 +207,9 @@ const ContactUs = () => {
                             </div>
                             
                             <div className="space-y-6 pt-4">
-                                <div className="flex items-start gap-4">
+                                <div className="flex items-center gap-4">
                                     <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-neutral-100 text-[#fb5455]">
-                                        <Phone size={20} />
+                                        <FaPhoneAlt size={20} />
                                     </div>
                                     <div>
                                         <h4 className="text-sm font-semibold uppercase tracking-wider text-neutral-400 mb-1">Phone Number</h4>
@@ -90,9 +217,21 @@ const ContactUs = () => {
                                     </div>
                                 </div>
                                 
-                                <div className="flex items-start gap-4">
+                                <div className="flex items-center gap-4">
+                                    <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-neutral-100" style={{ color: "#25D366" }}>
+                                        <FaWhatsapp size={22} />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-sm font-semibold uppercase tracking-wider text-neutral-400 mb-1">WhatsApp</h4>
+                                        <a href={`https://wa.me/8770375800`} target="_blank" rel="noopener noreferrer" className="text-lg font-medium text-neutral-900 hover:text-[#25D366] transition-colors">
+                                            {siteData.contactInfo.phone}
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex items-center gap-4">
                                     <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-neutral-100 text-[#fb5455]">
-                                        <Mail size={20} />
+                                        <FaEnvelope size={20} />
                                     </div>
                                     <div>
                                         <h4 className="text-sm font-semibold uppercase tracking-wider text-neutral-400 mb-1">Email Address</h4>
@@ -100,9 +239,9 @@ const ContactUs = () => {
                                     </div>
                                 </div>
                                 
-                                <div className="flex items-start gap-4">
+                                <div className="flex items-center gap-4">
                                     <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm border border-neutral-100 text-[#fb5455]">
-                                        <MapPin size={20} />
+                                        <FaMapMarkerAlt size={20} />
                                     </div>
                                     <div>
                                         <h4 className="text-sm font-semibold uppercase tracking-wider text-neutral-400 mb-1">Headquarters</h4>

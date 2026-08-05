@@ -5,19 +5,31 @@ var bgimg1 = new URL('../../images/background/cross-line2.png', import.meta.url)
 const faqs = [
     {
         question: "Are your properties legally verified?",
-        answer: "Yes, all our properties go through a stringent legal check by our expert legal team to ensure a safe and secure investment for you."
+        answer: "Yes, all our plots and farmhouses come with proper registry. We handle the entire legal verification, mutation, and nakal process ourselves."
     },
     {
-        question: "Do you provide assistance with home loans?",
-        answer: "Absolutely. We have tie-ups with leading banks and financial institutions to help you get quick and hassle-free home loan approvals."
+        question: "Do you provide home or agricultural loans?",
+        answer: "Yes, we provide loan assistance from leading banks. Our team helps with the entire documentation process."
     },
     {
-        question: "Are the homes Vastu compliant?",
-        answer: "Yes, we focus heavily on Vastu principles while designing and selecting properties to bring prosperity and peace to our customers."
+        question: "Is a site visit possible before purchasing?",
+        answer: "Absolutely. We arrange guided site visits near the Pariyat Dam location. Call or WhatsApp us to schedule your slot."
     },
     {
-        question: "Can I visit the property before making a decision?",
-        answer: "Of course! We arrange guided site visits for our clients. You can contact our team to schedule a visit at your convenience."
+        question: "What is the minimum plot size available?",
+        answer: " Client to confirm fill minimum plot size (in bigha/sqft)]"
+    },
+    {
+        question: "Are the farmhouse plots Vastu compliant?",
+        answer: "Yes, all our plots are designed keeping Vastu principles in mind with proper orientation, road facing, and natural sunlight."
+    },
+    {
+        question: "How long does the registry and possession process take?",
+        answer: " Client to confirm  e.g. 'Registry is completed within 30-45 days']"
+    },
+    {
+        question: "Can the land be used for farming or agriculture?",
+        answer: "Yes, this is agricultural land where you can do farming as well as farmhouse construction. Dual-purpose use is allowed."
     }
 ];
 
@@ -27,42 +39,42 @@ const FaqHome = () => {
     return (
         <div className="relative py-12 md:py-20 bg-gray-50">
             <div className="max-w-4xl mx-auto px-4">
-                {/* TITLE START */}
+                {/* TITLE START */ }
                 <div className="mb-12 text-center flex flex-col items-center">
                     <div className="sx-separator-outer separator-center mb-4">
-                        <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
+                        <div className="sx-separator bg-white bg-moving bg-repeat-x" style={ { backgroundImage: 'url(' + bgimg1 + ')' } }>
                             <h3 className="sep-line-one">Frequently Asked Questions</h3>
                         </div>
                     </div>
                     <p className="text-gray-600">Find answers to the most common questions about our properties and services.</p>
                 </div>
-                {/* TITLE END */}
-                
+                {/* TITLE END */ }
+
                 <div className="space-y-4">
-                    {faqs.map((faq, index) => (
-                        <div 
-                            key={index} 
-                            className={`border rounded-lg bg-white overflow-hidden transition-all duration-300 ${activeIndex === index ? 'border-[#118A43] shadow-md' : 'border-gray-200 shadow-sm'}`}
+                    { faqs.map((faq, index) => (
+                        <div
+                            key={ index }
+                            className={ `border rounded-lg bg-white overflow-hidden transition-all duration-300 ${activeIndex === index ? 'border-[#118A43] shadow-md' : 'border-gray-200 shadow-sm'}` }
                         >
                             <button
                                 className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
-                                onClick={() => setActiveIndex(activeIndex === index ? -1 : index)}
+                                onClick={ () => setActiveIndex(activeIndex === index ? -1 : index) }
                             >
-                                <span className={`font-semibold text-lg ${activeIndex === index ? 'text-[#118A43]' : 'text-slate-800'}`}>
-                                    {faq.question}
+                                <span className={ `font-semibold text-lg ${activeIndex === index ? 'text-[#118A43]' : 'text-slate-800'}` }>
+                                    { faq.question }
                                 </span>
-                                <span className={`text-xl transition-transform duration-300 ${activeIndex === index ? 'rotate-180 text-[#118A43]' : 'text-gray-400'}`}>
+                                <span className={ `text-xl transition-transform duration-300 ${activeIndex === index ? 'rotate-180 text-[#118A43]' : 'text-gray-400'}` }>
                                     <i className="fa fa-angle-down" />
                                 </span>
                             </button>
-                            
-                            <div 
-                                className={`px-6 overflow-hidden transition-all duration-300 ${activeIndex === index ? 'max-h-40 pb-4 opacity-100' : 'max-h-0 opacity-0'}`}
+
+                            <div
+                                className={ `px-6 overflow-hidden transition-all duration-300 ${activeIndex === index ? 'max-h-40 pb-4 opacity-100' : 'max-h-0 opacity-0'}` }
                             >
-                                <p className="text-gray-600">{faq.answer}</p>
+                                <p className="text-gray-600">{ faq.answer }</p>
                             </div>
                         </div>
-                    ))}
+                    )) }
                 </div>
             </div>
         </div>

@@ -133,7 +133,7 @@ const Footer = () => {
                 <div className="bg-black/40 py-6 border-t border-white/5">
                     <div className="container mx-auto px-4 max-w-7xl">
                         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-                            <span className="text-gray-500 text-sm">© { new Date().getFullYear() } { siteData.companyName }. All Rights Reserved.</span>
+                            <span className="text-gray-500 text-sm">© 2025 { siteData.companyName }. All Rights Reserved.</span>
 
                             {/* HIDDEN ADMIN LINK */ }
                             <NavLink

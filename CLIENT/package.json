@@ -28,6 +28,7 @@
     "react-countup": "^6.3.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.83.0",
+    "react-icons": "^5.7.0",
     "react-image-gallery": "^1.2.11",
     "react-masonry-css": "^1.0.16",
     "react-player": "^2.11.0",
@@ -50,7 +51,7 @@
     "vite": "^8.1.5"
   },
   "scripts": {
-   "dev": "vite --host",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },

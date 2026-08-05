@@ -230,7 +230,7 @@ const AdminLogin = () => {
             
             {/* Footer Text */}
             <div className="mt-12 z-10 text-slate-400 text-sm">
-                &copy; {new Date().getFullYear()} Nidhivan Real Estate. All rights reserved.
+                &copy; 2025 Nidhivan Real Estate. All rights reserved.
             </div>
         </div>
     );

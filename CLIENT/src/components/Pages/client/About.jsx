@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Banner from '../../Elements/Banner';
 import AboutTrust from '../../Elements/AboutTrust';
 import StatsBar from '../../Elements/StatsBar';
@@ -15,15 +16,21 @@ var bnrimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=160
 
 const missionVisionData = [
     {
+        id: "purpose",
+        title: "Our Purpose",
+        description: "Creating nature-inspired communities that enrich lifestyles, preserve green spaces, and deliver meaningful long-term value.",
+        icon: "flaticon-real-estate"
+    },
+    {
         id: "mission",
         title: "Our Mission",
-        description: "To deliver premium, legally verified real estate solutions that offer unmatched value, security, and a foundation for future generations.",
+        description: "Delivering premium farmhouse projects through quality planning, transparent processes, and customer-focused service.",
         icon: "flaticon-home"
     },
     {
         id: "vision",
         title: "Our Vision",
-        description: "To become the most trusted real estate developer in the region, recognized for our commitment to transparency, quality, and customer satisfaction.",
+        description: "Becoming the most trusted name in farmhouse and land development by building destinations people are proud to own.",
         icon: "flaticon-skyline"
     }
 ];
@@ -61,9 +68,9 @@ class About extends React.Component {
                 <ServicesGrid
                     title="Mission & Vision"
                     subtitle="Our Purpose"
-                    description="Guided by strong principles and a clear vision for the future of real estate."
+                    description="We believe that owning land should be more than an investment—it should be a step toward a better lifestyle. Our purpose is to develop premium farmhouse communities where families can reconnect with nature, enjoy peaceful living, and build lasting memories while creating long-term value for future generations."
                     data={ missionVisionData }
-                    gridCols="lg:grid-cols-2"
+                    gridCols="lg:grid-cols-3"
                 />
 
                 {/* 3. Why Choose Us */ }
@@ -73,6 +80,115 @@ class About extends React.Component {
                 <TimelineSection
                     data={ timelineData }
                 />
+
+                {/* ===== OUR PROPERTIES SECTION — 3 Property Cards ===== */}
+                <section className="py-16 bg-white">
+                  <div className="container mx-auto px-4">
+                    
+                    {/* Section Heading */}
+                    <div className="text-center mb-12">
+                      <h2 className="text-3xl font-bold text-gray-800 mb-3">
+                        Our Properties
+                      </h2>
+                      <p className="text-gray-500 max-w-xl mx-auto">
+                        Nidhivan Developer operates three premium real estate properties in
+                        Jabalpur — each designed to offer the finest farm living experience.
+                      </p>
+                      <div
+                        className="w-16 h-1 mx-auto mt-4 rounded-full"
+                        style={{ backgroundColor: "#F4B54B" }}
+                      ></div>
+                    </div>
+
+                    {/* Properties List (Alternating Layout) */}
+                    <div className="flex flex-col gap-12">
+                      {siteData.properties.map((property, index) => (
+                        <div
+                          key={property.id}
+                          className={`flex flex-col lg:flex-row ${
+                            index % 2 !== 0 ? "lg:flex-row-reverse" : ""
+                          } bg-white rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-shadow duration-500 group`}
+                        >
+                          {/* Image Section */}
+                          <div className="w-full lg:w-1/2 relative min-h-[350px] lg:min-h-[500px] overflow-hidden">
+                            <img
+                              src={property.image}
+                              alt={property.name}
+                              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            />
+                            {/* Subtle dark gradient at bottom for text contrast */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+                            
+                            {/* Rating removed as per request */}
+                          </div>
+
+                          {/* Content Section */}
+                          <div className="w-full lg:w-1/2 p-8 lg:p-12 xl:p-16 flex flex-col justify-center bg-white relative">
+                            {/* Top decorative accent */}
+                            <div 
+                                className="absolute top-0 left-0 w-full h-1" 
+                                style={{ background: index === 0 ? "linear-gradient(90deg, #118A43, #0d6e34)" : "linear-gradient(90deg, #F4B54B, #e0a030)" }}
+                            ></div>
+
+                            <div className="flex items-center gap-4 mb-5">
+                              <h4 
+                                className="text-xs sm:text-sm font-bold uppercase tracking-widest"
+                                style={{ color: index === 0 ? "#118A43" : "#e0a030" }}
+                              >
+                                {property.tagline}
+                              </h4>
+                            </div>
+                            
+                            <h3 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
+                              {property.name}
+                            </h3>
+                            
+                            <p className="text-gray-600 text-base lg:text-lg leading-relaxed mb-8">
+                              {property.description}
+                            </p>
+
+                            <div className="flex flex-wrap gap-3 mb-8">
+                              {property.highlights.map((highlight, i) => (
+                                <span
+                                  key={i}
+                                  className="px-4 py-2 bg-gray-50 border border-gray-100 text-gray-700 rounded-full text-xs sm:text-sm font-bold tracking-wide flex items-center gap-2 shadow-sm"
+                                >
+                                  <span 
+                                    className="w-2 h-2 rounded-full"
+                                    style={{ backgroundColor: index === 0 ? "#118A43" : "#F4B54B" }}
+                                  ></span>
+                                  {highlight}
+                                </span>
+                              ))}
+                            </div>
+
+                            <div className="flex items-start gap-4 text-gray-500 mb-10 pb-8 border-b border-gray-100">
+                              <span className="text-2xl mt-0.5 flex-shrink-0">📍</span>
+                              <span className="leading-relaxed text-base font-medium">{property.address}</span>
+                            </div>
+
+                            <div className="mt-auto">
+                              <a
+                                href={property.mapLink || "#"}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`inline-flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 ${
+                                  index === 0 
+                                    ? "bg-[#118A43] text-white hover:bg-[#0a5c2c] hover:text-[#F4B54B] shadow-[#118A43]/30" 
+                                    : "bg-[#F4B54B] text-white hover:bg-[#c99136] hover:text-gray-900 shadow-[#F4B54B]/30"
+                                }`}
+                              >
+                                View Location on Map
+                                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+                {/* ===== END OUR PROPERTIES SECTION ===== */}
 
                 {/* 5. Core Values (Reusing ServicesGrid) */ }
                 <ServicesGrid

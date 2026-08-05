@@ -9,6 +9,7 @@ import Testimonials1 from '../../Elements/Testimonials1';
 import BlogsHome from '../../Elements/BlogsHome';
 import CtaHome from '../../Elements/CtaHome';
 import GoogleMapIframe from '../../Elements/GoogleMapIframe';
+import FarmhouseSection from '../../Elements/FarmhouseSection';
 
 class Home extends React.Component {
     render() {
@@ -18,6 +19,7 @@ class Home extends React.Component {
                     <Slider1 />
                     <StatsBar />
                     <AboutTrust />
+                    <FarmhouseSection />
                     <ServicesGrid />
                     <HomeProjectsFilter />
                     <HomeGalleryCategories />

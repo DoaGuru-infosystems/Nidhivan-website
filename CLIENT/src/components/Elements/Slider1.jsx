@@ -13,11 +13,11 @@ import 'swiper/css/navigation';
 
 // Import slider images
 // import slide1 from '../../images/main-slider/slider1/slide1.jpg'; // ORIGINAL DUMMY - restore when real property photos are ready
-const slide1 = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"; // TEMP LIVE PREVIEW
+const slide1 = "/images/slide1.jpg"; // TEMP LIVE PREVIEW
 // import slide2 from '../../images/main-slider/slider1/slide2.jpg'; // ORIGINAL DUMMY - restore when real property photos are ready
-const slide2 = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"; // TEMP LIVE PREVIEW
+const slide2 = "/images/slide2.jpg"; // TEMP LIVE PREVIEW
 // import slide3 from '../../images/main-slider/slider1/slide3.jpg'; // ORIGINAL DUMMY - restore when real property photos are ready
-const slide3 = "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80"; // TEMP LIVE PREVIEW
+const slide3 = "/images/slide3.jpg"; // TEMP LIVE PREVIEW
 
 gsap.registerPlugin(useGSAP);
 
@@ -90,50 +90,50 @@ const Slider1 = () => {
   );
 
   return (
-    <div ref={containerRef} className="hero-slider-container" style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+    <div ref={ containerRef } className="hero-slider-container" style={ { position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' } }>
       <Swiper
-        modules={[EffectFade, Autoplay, Navigation]}
+        modules={ [EffectFade, Autoplay, Navigation] }
         effect="fade"
-        fadeEffect={{ crossFade: true }}
-        speed={800}
-        loop={true}
-        autoplay={{
+        fadeEffect={ { crossFade: true } }
+        speed={ 800 }
+        loop={ true }
+        autoplay={ {
           delay: 6000,
           disableOnInteraction: false,
-        }}
-        navigation={{
+        } }
+        navigation={ {
           prevEl,
           nextEl,
-        }}
-        onSlideChangeTransitionStart={animateSlide}
-        onAfterInit={animateSlide}
-        style={{ width: '100%', height: '100%' }}
+        } }
+        onSlideChangeTransitionStart={ animateSlide }
+        onAfterInit={ animateSlide }
+        style={ { width: '100%', height: '100%' } }
       >
-        {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
-            {/* Background Image */}
+        { slides.map((slide, index) => (
+          <SwiperSlide key={ index }>
+            {/* Background Image */ }
             <div
-              style={{
+              style={ {
                 position: 'absolute',
                 inset: 0,
                 backgroundImage: `url(${slide.image})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
                 backgroundRepeat: 'no-repeat',
-              }}
+              } }
             />
-            {/* Dark Overlay */}
+            {/* Dark Overlay */ }
             <div
-              style={{
+              style={ {
                 position: 'absolute',
                 inset: 0,
                 background: 'linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 100%)',
                 zIndex: 1,
-              }}
+              } }
             />
-            {/* Content */}
+            {/* Content */ }
             <div
-              style={{
+              style={ {
                 position: 'relative',
                 zIndex: 2,
                 display: 'flex',
@@ -142,12 +142,12 @@ const Slider1 = () => {
                 height: '100%',
                 padding: '0 5%',
                 maxWidth: '900px',
-              }}
+              } }
             >
-              {/* Company Name / Tagline */}
+              {/* Company Name / Tagline */ }
               <p
                 data-animate
-                style={{
+                style={ {
                   fontSize: 'clamp(12px, 2vw, 20px)',
                   fontWeight: 500,
                   letterSpacing: '6px',
@@ -155,46 +155,46 @@ const Slider1 = () => {
                   textTransform: 'uppercase',
                   marginBottom: '16px',
                   fontFamily: 'var(--font-sans)',
-                }}
+                } }
               >
-                {slide.tagline}
+                { slide.tagline }
               </p>
-              {/* Main Title */}
+              {/* Main Title */ }
               <h1
                 data-animate
-                style={{
+                style={ {
                   fontSize: 'clamp(28px, 5vw, 64px)',
                   fontWeight: 800,
                   lineHeight: 1.15,
                   color: '#ffffff',
                   marginBottom: '20px',
                   fontFamily: 'var(--font-serif)',
-                }}
+                } }
               >
-                {slide.title}
+                { slide.title }
               </h1>
-              {/* Description */}
+              {/* Description */ }
               <p
                 data-animate
-                style={{
+                style={ {
                   fontSize: 'clamp(14px, 1.5vw, 18px)',
                   lineHeight: 1.7,
                   color: 'rgba(255,255,255,0.85)',
                   marginBottom: '32px',
                   maxWidth: '700px',
                   fontFamily: 'var(--font-sans)',
-                }}
+                } }
               >
-                {slide.description}
+                { slide.description }
               </p>
-              {/* CTA Buttons */}
-              <div data-animate style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+              {/* CTA Buttons */ }
+              <div data-animate style={ { display: 'flex', gap: '15px', flexWrap: 'wrap' } }>
                 <a
-                  href={`tel:${siteData.contactInfo.phone}`}
+                  href={ `tel:${siteData.contactInfo.phone}` }
                   target="_blank"
                   rel="noreferrer"
                   className="site-button"
-                  style={{
+                  style={ {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '8px',
@@ -204,17 +204,17 @@ const Slider1 = () => {
                     textTransform: 'uppercase',
                     letterSpacing: '1px',
                     transition: 'all 0.3s ease',
-                  }}
+                  } }
                 >
-                  <PhoneCall size={18} />
+                  <PhoneCall size={ 18 } />
                   <span>Call Us</span>
                 </a>
                 <a
-                  href={`https://wa.me/91${siteData.contactInfo.phone.replace(/\D/g, '').replace(/^0/, '')}`}
+                  href={ `https://wa.me/91${siteData.contactInfo.phone.replace(/\D/g, '').replace(/^0/, '')}` }
                   target="_blank"
                   rel="noreferrer"
                   className="site-button"
-                  style={{
+                  style={ {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '8px',
@@ -227,17 +227,17 @@ const Slider1 = () => {
                     backgroundColor: '#25D366', // WhatsApp color
                     borderColor: '#25D366',
                     color: '#fff',
-                  }}
+                  } }
                 >
-                  <MessageCircle size={18} />
+                  <MessageCircle size={ 18 } />
                   <span>WhatsApp</span>
                 </a>
                 <a
-                  href={`mailto:${siteData.contactInfo.email}`}
+                  href={ `mailto:${siteData.contactInfo.email}` }
                   target="_blank"
                   rel="noreferrer"
                   className="site-button"
-                  style={{
+                  style={ {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '8px',
@@ -247,22 +247,22 @@ const Slider1 = () => {
                     textTransform: 'uppercase',
                     letterSpacing: '1px',
                     transition: 'all 0.3s ease',
-                  }}
+                  } }
                 >
-                  <Mail size={18} />
+                  <Mail size={ 18 } />
                   <span>Email</span>
                 </a>
               </div>
             </div>
           </SwiperSlide>
-        ))}
+        )) }
       </Swiper>
 
-      {/* Custom Navigation Arrows */}
+      {/* Custom Navigation Arrows */ }
       <button
-        ref={(node) => setPrevEl(node)}
+        ref={ (node) => setPrevEl(node) }
         aria-label="Previous slide"
-        style={{
+        style={ {
           position: 'absolute',
           bottom: '30px',
           right: '90px',
@@ -279,20 +279,20 @@ const Slider1 = () => {
           cursor: 'pointer',
           transition: 'all 0.3s ease',
           color: '#fff',
-        }}
-        onMouseEnter={(e) => {
+        } }
+        onMouseEnter={ (e) => {
           e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-        }}
-        onMouseLeave={(e) => {
+        } }
+        onMouseLeave={ (e) => {
           e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-        }}
+        } }
       >
-        <ChevronLeft size={22} />
+        <ChevronLeft size={ 22 } />
       </button>
       <button
-        ref={(node) => setNextEl(node)}
+        ref={ (node) => setNextEl(node) }
         aria-label="Next slide"
-        style={{
+        style={ {
           position: 'absolute',
           bottom: '30px',
           right: '30px',
@@ -309,35 +309,35 @@ const Slider1 = () => {
           cursor: 'pointer',
           transition: 'all 0.3s ease',
           color: '#fff',
-        }}
-        onMouseEnter={(e) => {
+        } }
+        onMouseEnter={ (e) => {
           e.currentTarget.style.background = 'rgba(255,255,255,0.25)';
-        }}
-        onMouseLeave={(e) => {
+        } }
+        onMouseLeave={ (e) => {
           e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-        }}
+        } }
       >
-        <ChevronRight size={22} />
+        <ChevronRight size={ 22 } />
       </button>
 
-      {/* Left Social Bar */}
+      {/* Left Social Bar */ }
       <div
-        style={{
+        style={ {
           position: 'absolute',
           left: '20px',
           bottom: '30px',
           zIndex: 10,
           display: 'flex',
           gap: '20px',
-        }}
+        } }
       >
-        {['LinkedIn', 'Twitter', 'Facebook'].map((name) => (
+        { ['LinkedIn', 'Twitter', 'Facebook'].map((name) => (
           <a
-            key={name}
-            href={`https://www.${name.toLowerCase()}.com`}
+            key={ name }
+            href={ `https://www.${name.toLowerCase()}.com` }
             target="_blank"
             rel="noopener noreferrer"
-            style={{
+            style={ {
               color: 'rgba(255,255,255,0.6)',
               fontSize: '13px',
               fontWeight: 500,
@@ -345,13 +345,13 @@ const Slider1 = () => {
               letterSpacing: '1px',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-sans)',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; }}
+            } }
+            onMouseEnter={ (e) => { e.currentTarget.style.color = '#fff'; } }
+            onMouseLeave={ (e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; } }
           >
-            {name}
+            { name }
           </a>
-        ))}
+        )) }
       </div>
     </div>
   );
