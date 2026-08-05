@@ -17,8 +17,6 @@ const formSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters")
 });
 
-import logo from '../../images/nidhivan logo.png';
-import bgMap from '../../images/background/bg-map.png';
 
 const Header = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -223,7 +221,7 @@ const Header = () => {
             {/* Extreme Left: Logo + Tagline */ }
             <div className="logo-section">
               <NavLink to="/" className="inline-block flex-shrink-0">
-                <img src={ logo } alt={ siteData.companyName } style={ { maxHeight: '52px', width: 'auto' } } />
+                <img src="/images/nidhivan logo.png" alt={ siteData.companyName } style={ { maxHeight: '52px', width: 'auto' } } />
               </NavLink>
               <span className="text-[12px] ml-3 leading-snug" style={ { fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 'bold', color: '#b45b1c', letterSpacing: '0.5px' } }>
                 <span className="text-[#0dc76a]">
@@ -292,7 +290,7 @@ const Header = () => {
         } }
       >
         <div style={ { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' } }>
-          <img src={ logo } alt={ siteData.companyName } style={ { height: '32px' } } />
+          <img src="/images/nidhivan logo.png" alt={ siteData.companyName } style={ { height: '32px' } } />
           <button
             onClick={ closeMobileMenu }
             style={ { background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#000' } }
@@ -319,7 +317,7 @@ const Header = () => {
       <div
         className="contact-slide-hide"
         style={{
-          backgroundImage: `url(${bgMap})`,
+          backgroundImage: `url("/images/background/bg-map.png")`,
           right: isQuoteActive ? '0px' : '100%',
           transition: 'right 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
           zIndex: 9999,

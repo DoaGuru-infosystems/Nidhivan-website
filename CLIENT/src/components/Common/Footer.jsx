@@ -37,7 +37,7 @@ const Footer = () => {
                             <div>
                                 <div className="mb-6 bg-white/5 inline-block p-4 rounded-xl border border-white/10">
                                     <NavLink to={ "./" }>
-                                        <img src={ new URL('./../../images/nidhivan logo.png', import.meta.url).href } alt="Nidhivan Farms" style={ { maxHeight: '100px', width: 'auto' } } />
+                                        <img src="/images/nidhivan logo.png" alt="Nidhivan Farms" style={ { maxHeight: '100px', width: 'auto' } } />
                                     </NavLink>
                                 </div>
                                 <p className="mb-6 leading-relaxed text-gray-400">{ siteData.aboutUs.shortDescription }</p>

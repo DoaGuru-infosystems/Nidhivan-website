@@ -8,7 +8,6 @@ import { loginAdminApi, registerAdminApi } from '@/lib/api';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '@/store/UserSlice';
 import { Building2, Lock, Mail, User, ShieldCheck } from 'lucide-react';
-import logo from '@/images/nidhivan logo.png';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
@@ -78,7 +77,7 @@ const AdminLogin = () => {
             {/* Logo Header */}
             <div className="mb-8 z-10 flex flex-col items-center">
                 <img 
-                    src={logo} 
+                    src="/images/nidhivan logo.png" 
                     alt="Nidhivan Logo" 
                     className="h-20 w-auto object-contain mb-4 drop-shadow-md"
                 />
