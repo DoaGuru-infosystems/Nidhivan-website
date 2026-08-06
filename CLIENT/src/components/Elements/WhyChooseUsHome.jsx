@@ -15,33 +15,33 @@ var bgimg1 = new URL('../../images/background/cross-line2.png', import.meta.url)
 
 const usps = [
     {
-        title: "Premium Farmhouse Destinations",
-        description: "Experience beautifully planned farmhouse communities surrounded by lush greenery, scenic landscapes, and peaceful environments that offer the perfect escape from city life.",
+        title: "Affordable Pricing",
+        description: "We believe everyone deserves a farmhouse. Enjoy premium amenities at a price that middle-class families can actually afford.",
         icon: "flaticon-home"
     },
     {
-        title: "Trusted & Transparent Process",
-        description: "From site visits to documentation and property registration, we maintain complete transparency at every stage, ensuring a smooth and worry-free buying experience.",
-        icon: "flaticon-contract"
-    },
-    {
-        title: "Prime Investment Locations",
-        description: "Our projects are strategically located near rapidly developing areas with excellent road connectivity, making them ideal for both personal use and future appreciation.",
+        title: "Prime Locations",
+        description: "Our projects are strategically located near Jabalpur, offering peaceful surroundings with excellent road connectivity.",
         icon: "flaticon-skyline"
     },
     {
-        title: "Nature Inspired Living",
-        description: "Enjoy a healthier lifestyle with open spaces, fresh air, landscaped surroundings, and thoughtfully designed environments that bring you closer to nature every day.",
+        title: "Transparent Documentation",
+        description: "100% legally verified properties with clear titles. We ensure a smooth, worry-free buying and registration process.",
+        icon: "flaticon-contract"
+    },
+    {
+        title: "Peaceful Nature Living",
+        description: "Reconnect with nature in our thoughtfully designed farmhouse communities, offering fresh air, open spaces, and green landscapes.",
         icon: "flaticon-real-estate"
     },
     {
-        title: "Modern Amenities & Infrastructure",
-        description: "Wide internal roads, gated entrances, green landscapes, recreational spaces, and essential infrastructure are carefully planned to enhance comfort and convenience.",
+        title: "Modern Infrastructure",
+        description: "Enjoy comfortable living with wide internal roads, reliable water and electricity, gated security, and recreational spaces.",
         icon: "flaticon-sketch"
     },
     {
         title: "Dedicated Customer Support",
-        description: "Our experienced team is always available to guide you through every step—from selecting the right property to post-purchase assistance and customer care.",
+        description: "Our team is with you every step of the way—from your first site visit to final registration and beyond.",
         icon: "flaticon-users"
     }
 ];
@@ -56,11 +56,11 @@ class WhyChooseUsHome extends React.Component {
                         <div className="mb-10 text-center flex flex-col items-center">
                             <div className="sx-separator-outer separator-center mb-4">
                                 <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                                    <h3 className="sep-line-one ">Why Choose Nidhivan Developers?</h3>
+                                    <h3 className="sep-line-one ">Why Thousands Trust Nidhivan Developers?</h3>
                                 </div>
                             </div>
                             <p className="max-w-2xl text-gray-600">
-                                At Nidhivan Developers, we create more than just properties—we build peaceful destinations where nature, comfort, and long-term value come together. Whether you're looking for a weekend retreat, a farmhouse investment, or a secure land ownership opportunity, we ensure every project reflects quality, trust, and thoughtful planning.
+                                At Nidhivan Developers, we create more than just properties, we build peaceful destinations where nature, comfort, and long-term value come together. Discover why so many families have chosen us for their dream farmhouse.
                             </p>
                         </div>
                         {/* TITLE END */}

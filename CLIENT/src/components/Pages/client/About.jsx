@@ -18,19 +18,19 @@ const missionVisionData = [
     {
         id: "purpose",
         title: "Our Purpose",
-        description: "Creating nature-inspired communities that enrich lifestyles, preserve green spaces, and deliver meaningful long-term value.",
+        description: "Helping every middle-class family own a beautiful farmhouse.",
         icon: "flaticon-real-estate"
     },
     {
         id: "mission",
         title: "Our Mission",
-        description: "Delivering premium farmhouse projects through quality planning, transparent processes, and customer-focused service.",
+        description: "Deliver affordable, transparent and quality farmhouse developments.",
         icon: "flaticon-home"
     },
     {
         id: "vision",
         title: "Our Vision",
-        description: "Becoming the most trusted name in farmhouse and land development by building destinations people are proud to own.",
+        description: "Become Central India's most trusted farmhouse developer.",
         icon: "flaticon-skyline"
     }
 ];
@@ -66,9 +66,9 @@ class About extends React.Component {
 
                 {/* 2. Mission & Vision (Reusing ServicesGrid with custom data) */ }
                 <ServicesGrid
-                    title="Mission & Vision"
-                    subtitle="Our Purpose"
-                    description="We believe that owning land should be more than an investment—it should be a step toward a better lifestyle. Our purpose is to develop premium farmhouse communities where families can reconnect with nature, enjoy peaceful living, and build lasting memories while creating long-term value for future generations."
+                    title="More Than Land. A Better Lifestyle."
+                    subtitle="Mission & Vision"
+                    description=""
                     data={ missionVisionData }
                     gridCols="lg:grid-cols-3"
                 />
@@ -192,9 +192,9 @@ class About extends React.Component {
 
                 {/* 5. Core Values (Reusing ServicesGrid) */ }
                 <ServicesGrid
-                    title="Our Core Values"
-                    subtitle="What We Stand For"
-                    description="The foundational principles that guide every decision we make."
+                    title="Values That Build Trust"
+                    subtitle="Core Values"
+                    description=""
                     data={ coreValuesData }
                     gridCols="md:grid-cols-2 lg:grid-cols-3"
                     sectionBg="bg-white"

@@ -80,15 +80,15 @@ const FarmhouseSection = () => {
 
           <div className="space-y-4">
             <h2 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-brand-gold to-[#fff5e0] bg-clip-text text-transparent leading-tight heading-font">
-              Escape to Nidhivan Farmhouse
+              Find the Farmhouse That Fits Your Dream
             </h2>
             <p className="text-gray-300 text-base md:text-lg leading-relaxed flex flex-wrap items-center gap-1.5">
-              Looking for a luxurious weekend escape close to the city, yet miles away from the chaos? Where luxury meets nature in perfect harmony!
+              Every project by Nidhivan Developers is designed for affordable ownership, peaceful living and strong future appreciation.
               <Leaf className="w-5 h-5 text-brand-green inline" />
               <Sparkles className="w-5 h-5 text-brand-gold inline" />
             </p>
             <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-              Spanning a serene <span className="text-brand-gold font-semibold">3.5-acre peaceful landscape</span> on Pariyat Dam Road (Dindori to Jabalpur Highway), this <span className="text-brand-gold font-semibold">7,000 sq. ft. ready-to-move</span>, fully furnished wooden farmhouse is your ultimate private sanctuary.
+              Experience a <span className="text-brand-gold font-semibold">peaceful family lifestyle</span> near Jabalpur. Our legally verified and beautifully developed farmhouse properties offer the perfect blend of nature, comfort, and lasting investment value.
               <Home className="w-4 h-4 text-brand-gold inline ml-2 mb-1" />
             </p>
           </div>

@@ -14,9 +14,9 @@ export const siteData = {
         instagram: "https://www.instagram.com/nidhivan_jbp/"
     },
     aboutUs: {
-        title: "About Nidhivan Developer",
-        shortDescription: "With a legacy of trust and excellence, Nidhivan Developer is a leading property developer in Jabalpur, specializing in premium farmhouses and farmland.",
-        longDescription: "Nidhivan Developer has been at the forefront of the real estate market in Jabalpur, Madhya Pradesh. Founded and led by Rohit Rajak, we believe in building not just structures, but vibrant communities and lifelong relationships based on trust, transparency, and uncompromised quality. Whether you are looking for your dream farmhouse or a prime plot of farmland, our dedicated team is here to guide you at every step of your real estate journey.",
+        title: "Building Trust. Creating Dreams.",
+        shortDescription: "Your trusted real estate partner in Jabalpur, offering legally verified premium farmhouses and affordable land for your perfect weekend home.",
+        longDescription: "For more than a decade, Nidhivan Developers has been helping families own affordable farmhouses and farmland around Jabalpur. We believe everyone deserves a peaceful place away from the city's rush. That is why we develop legally verified projects with transparent pricing and customer-first service. Whether you're buying your first farmhouse or making a long-term investment, our team is with you from site visit to registration.",
         mission: "To deliver high-quality farmhouses and farmlands at better prices, providing unmatched value and elevating the standard of living for our clients.",
         vision: "To be the most trusted and preferred real estate partner in Central India, known for innovation, integrity, and customer satisfaction."
     },
@@ -24,25 +24,25 @@ export const siteData = {
         {
             id: 1,
             title: "Premium Farmhouses",
-            description: "Explore our premium and beautifully designed farmhouses built with top-notch amenities, offering the perfect weekend getaway or peaceful living.",
+            description: "Discover our affordable, ready-to-move premium farmhouses designed for peaceful family living and perfect weekend getaways in nature.",
             icon: "flaticon-home"
         },
         {
             id: 2,
-            title: "Farmland Plots",
-            description: "Invest in legally verified, prime location agricultural and farmland plots that guarantee high returns and a secure future.",
+            title: "Farmhouse Plots",
+            description: "Invest in legally verified, beautifully located farmhouse plots around Jabalpur that offer excellent long-term appreciation and a secure future.",
             icon: "flaticon-real-estate"
         },
         {
             id: 3,
-            title: "Custom Farm Development",
-            description: "We provide end-to-end development services for your farmland, including landscaping, boundary walls, and customized farmhouse construction.",
+            title: "Farm Development",
+            description: "We provide complete development services for your farmland, from landscaping and boundary walls to custom farmhouse construction.",
             icon: "flaticon-building"
         },
         {
             id: 4,
-            title: "Legal & Registry Assistance",
-            description: "We provide hassle-free assistance with property legalities, transparent documentation, and fast registrations for your peace of mind.",
+            title: "Registration & Legal Support",
+            description: "Experience a 100% transparent process with complete assistance in property legalities, documentation, and fast registrations for your peace of mind.",
             icon: "flaticon-contract"
         }
     ],
@@ -74,7 +74,7 @@ export const siteData = {
             email: "nidhivanfarmsjabalpur@gmail.com",
             hours: "Mon – Sun: 9:00 AM – 8:00 PM",
             description:
-                "Our flagship property and main office, offering premium farmhouse plots near the scenic Pariyat Dam. Trusted by 500+ happy families with 48 verified Google reviews.",
+                "Our flagship property offering premium farmhouse plots near the scenic Pariyat Dam. A peaceful destination trusted by 500+ happy families, perfect for long-term investment and affordable farm living.",
             highlights: ["Flagship Location", "Near Pariyat Dam", "4.7★ on Google"],
             mapLink:
                 "https://www.google.com/maps/search/Nidhivan+Farms+near+Pariyat+Dam+Sundarpur+Jabalpur+Madhya+Pradesh",
@@ -95,7 +95,7 @@ export const siteData = {
             whatsapp: "8770375800",
             email: "nidhivanfarmsjabalpur@gmail.com",
             hours: "Mon – Sun: 9:00 AM – 6:00 PM",
-            description: "A star-rated premium farmhouse community by Nidhivan Developers near Bargi Dam, Jabalpur. Perfect for investment and farm living.",
+            description: "A premium farmhouse community by Nidhivan Developers near Bargi Dam, Jabalpur. Designed for affordable ownership and a peaceful family lifestyle with strong future appreciation.",
             highlights: ["5.0★ Perfect Rating", "Near Bargi Dam", "Jabalpur, MP"],
             mapLink: "https://www.google.com/maps/search/Star+Farmhouse+by+Nidhivan+Developers+Bargi+Dam+Jabalpur",
            
@@ -115,7 +115,7 @@ export const siteData = {
             whatsapp: "8770375800",
             email: "nidhivanfarmsjabalpur@gmail.com",
             hours: "Mon – Sun: 9:00 AM – 6:00 PM",
-            description: "Experience the gateway to premium farm living near Hinotiya Bargi, Jabalpur — peaceful location with excellent connectivity.",
+            description: "Experience the gateway to premium farm living near Hinotiya Bargi, Jabalpur,a peaceful, legally verified location offering excellent connectivity and lasting investment value for your family.",
             highlights: ["5.0★ Perfect Rating", "Near Bargi Road", "Jabalpur, MP"],
             mapLink: "https://www.google.com/maps/search/Door+to+Heaven+Farmhouse+Hinotiya+Bargi+Jabalpur",
           

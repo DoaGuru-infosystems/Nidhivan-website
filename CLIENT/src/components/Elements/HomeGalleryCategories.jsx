@@ -37,8 +37,9 @@ const HomeGalleryCategories = () => {
         <div className="section-full p-t100 p-b80 bg-white mobile-page-padding relative">
             <div className="w-full">
                 <div className="section-head flex flex-col items-center text-center">
-                    <span className="text-[#9C652A] uppercase font-bold tracking-widest text-sm mb-2">Portfolio</span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#5F351D] mb-8 uppercase">Our Gallery Categories</h2>
+                    <span className="text-[#9C652A] uppercase font-bold tracking-widest text-sm mb-2">Real Places. Real Families. Real Happiness.</span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#5F351D] mb-4 uppercase">Our Gallery Categories</h2>
+                    <p className="text-gray-600 max-w-2xl text-center mb-8 text-lg">Take a closer look at our farmhouse communities, interiors and project development.</p>
                 </div>
             </div>
 

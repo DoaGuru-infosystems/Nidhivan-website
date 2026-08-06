@@ -24,21 +24,21 @@ gsap.registerPlugin(useGSAP);
 const slides = [
   {
     image: slide3,
-    tagline: siteData.companyName,
-    title: siteData.taglines[0],
-    description: 'Invest with confidence. We offer legally verified properties with guaranteed high returns.',
+    tagline: "THE FUTURE OF FARMHOUSE LIVING",
+    title: "The Address Your Heart\nHas Been Waiting For.",
+    description: "Wake up to fresh air, peaceful mornings and endless greenery.\nOwn a premium farmhouse near Jabalpur at a price that's made for every aspiring family.",
   },
   {
     image: slide1,
-    tagline: siteData.companyName,
-    title: siteData.taglines[1],
-    description: 'Invest with confidence. We offer legally verified properties with guaranteed high returns.',
+    tagline: "सपनों की ज़मीन • अपनों के नाम",
+    title: "शहर की भागदौड़ से दूर,  सुकून खेतों के बीच  मिलता है।",
+    description: "जहाँ बच्चों की हँसी हो... बड़ों की शामें सुकून भरी हों... और हर वीकेंड एक नई याद बन जाए।\nअब अपना फार्महाउस खरीदना पहले से कहीं ज़्यादा आसान है।",
   },
   {
     image: slide2,
-    tagline: siteData.companyName,
-    title: siteData.taglines[2],
-    description: 'Invest with confidence. We offer legally verified properties with guaranteed high returns.',
+    tagline: "LIMITED LAND. UNLIMITED MEMORIES.",
+    title: "Own More Than Property.\nOwn Your Peace.",
+    description: "Whether it's your weekend escape or your next smart investment,\nNidhivan Developers brings you premium farmhouse destinations with complete trust and transparent ownership.",
   },
 ];
 
@@ -61,12 +61,12 @@ const Slider1 = () => {
       {
         y: 60,
         opacity: 0,
-        clipPath: 'inset(0 100% 0 0)',
+        clipPath: 'inset(-50% 100% -50% -50%)',
       },
       {
         y: 0,
         opacity: 1,
-        clipPath: 'inset(0 0% 0 0)',
+        clipPath: 'inset(-50% -50% -50% -50%)',
         duration: 0.9,
         ease: 'power3.out',
         stagger: 0.15,
@@ -127,7 +127,7 @@ const Slider1 = () => {
               style={ {
                 position: 'absolute',
                 inset: 0,
-                background: 'linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 100%)',
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.677) 0%, rgba(0, 0, 0, 0.209) 100%)',
                 zIndex: 1,
               } }
             />
@@ -144,36 +144,37 @@ const Slider1 = () => {
                 maxWidth: '900px',
               } }
             >
-             {/* Company Name / Tagline */}
-<div className="flex items-center gap-4 mb-6">
-  <span className="w-12 h-[2px] bg-[#C9A96A]" />
+              {/* Company Name / Tagline */ }
+              <div className="flex items-center gap-4 mb-6">
+                <span className="w-12 h-[2px] bg-[#C9A96A]" />
 
-  <p
-    data-animate
-    style={{
-      fontSize: "clamp(24px, 1vw, 17px)",
-      fontWeight: 800,
-      letterSpacing: "0.18em",
-      color: "rgba(255,255,255,0.9)",
-      textTransform: "uppercase",
-      margin: 0,
-      fontFamily: "var(--font-sans)",
-      textShadow: "0 2px 8px rgba(0,0,0,.35)",
-    }}
-  >
-    {slide.tagline}
-  </p>
-</div>
+                <p
+                  data-animate
+                  style={ {
+                    fontSize: "clamp(24px, 1vw, 17px)",
+                    fontWeight: 800,
+                    letterSpacing: "0.18em",
+                    color: "rgba(255,255,255,0.9)",
+                    textTransform: "uppercase",
+                    margin: 0,
+                    fontFamily: "var(--font-sans)",
+                    textShadow: "0 2px 8px rgba(0,0,0,.35)",
+                  } }
+                >
+                  { slide.tagline }
+                </p>
+              </div>
               {/* Main Title */ }
               <h1
                 data-animate
                 style={ {
                   fontSize: 'clamp(28px, 5vw, 64px)',
                   fontWeight: 800,
-                  lineHeight: 1.15,
+                  lineHeight: 1.3,
                   color: '#ffffff',
                   marginBottom: '20px',
                   fontFamily: 'var(--font-serif)',
+                  whiteSpace: 'pre-line',
                 } }
               >
                 { slide.title }
@@ -188,6 +189,7 @@ const Slider1 = () => {
                   marginBottom: '32px',
                   maxWidth: '700px',
                   fontFamily: 'var(--font-sans)',
+                  whiteSpace: 'pre-line',
                 } }
               >
                 { slide.description }

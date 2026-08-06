@@ -79,12 +79,15 @@ const HomeProjectsFilter = () => {
             <div className="section-content">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* TITLE START */}
-                    <div className="mb-10">
-                        <div className="sx-separator-outer separator-center">
+                    <div className="mb-10 text-center flex flex-col items-center">
+                        <div className="sx-separator-outer separator-center mb-4">
                             <div className="sx-separator bg-white bg-moving bg-repeat-x" style={{ backgroundImage: 'url(' + bgimg1 + ')' }}>
-                                <h3 className="sep-line-one">All Projects</h3>
+                                <h3 className="sep-line-one">Delivered With Trust</h3>
                             </div>
                         </div>
+                        <p className="max-w-2xl text-gray-600">
+                            Completed projects that families proudly call their second home, and new affordable farmhouse destinations around Jabalpur that are on the way.
+                        </p>
                     </div>
                     {/* TITLE END */}
                 </div>

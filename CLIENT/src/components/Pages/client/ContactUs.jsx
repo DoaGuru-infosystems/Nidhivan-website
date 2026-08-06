@@ -199,10 +199,12 @@ const ContactUs = () => {
                         <div className="flex flex-col justify-center space-y-8 pt-4">
                             <div>
                                 <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 mb-4">
-                                    Get in touch
+                                    Let's Build Your Dream Together
                                 </h2>
                                 <p className="text-lg text-neutral-500 max-w-md">
-                                    Have a question or want to learn more about our projects? We'd love to hear from you. Drop us a message and we'll reply as soon as possible.
+                                    Have questions or want a site visit? Call us, WhatsApp us or visit our office.
+                                    <br/><br/>
+                                    जबलपुर के बेहतरीन फार्महाउस प्रोजेक्ट्स में आज ही अपनी प्रॉपर्टी बुक करें और अपने सपनों का घर बनाएं।
                                 </p>
                             </div>
                             

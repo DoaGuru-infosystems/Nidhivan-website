@@ -43,10 +43,10 @@ const CtaHome = () => {
                     
                     <div className="lg:col-span-7 text-white space-y-6">
                         <h2 className="text-4xl md:text-5xl font-bold leading-tight heading-font text-brand-gold">
-                            Ready to Find Your Dream Farmhouse?
+                            Let's Build Your Dream Together
                         </h2>
                         <p className="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
-                            Get in touch with our real estate experts today. Whether you want to buy a property or just have some questions, we are here to help you every step of the way.
+                            Have questions or want a site visit? Call us, WhatsApp us or visit our office.<br/><br/>जबलपुर के बेहतरीन फार्महाउस प्रोजेक्ट्स में आज ही अपनी प्रॉपर्टी बुक करें और अपने सपनों का घर बनाएं।
                         </p>
                         
                         <div className="flex flex-wrap gap-4 pt-4">
