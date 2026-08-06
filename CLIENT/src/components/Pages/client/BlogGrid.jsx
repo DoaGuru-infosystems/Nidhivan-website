@@ -4,7 +4,7 @@ import Banner from '../../Elements/Banner';
 import { fetchAllBlogsClient, getMediaUrl } from '@/lib/api';
 import { ChevronRight, Calendar, User } from 'lucide-react';
 
-var bnrimg = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80"; // TEMP LIVE PREVIEW
+var bnrimg = "/images/blogs_banner.webp"; // TEMP LIVE PREVIEW
 
 class BlogGrid extends React.Component {
     constructor(props) {

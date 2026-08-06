@@ -144,21 +144,26 @@ const Slider1 = () => {
                 maxWidth: '900px',
               } }
             >
-              {/* Company Name / Tagline */ }
-              <p
-                data-animate
-                style={ {
-                  fontSize: 'clamp(12px, 2vw, 20px)',
-                  fontWeight: 500,
-                  letterSpacing: '6px',
-                  color: 'rgba(255,255,255,0.85)',
-                  textTransform: 'uppercase',
-                  marginBottom: '16px',
-                  fontFamily: 'var(--font-sans)',
-                } }
-              >
-                { slide.tagline }
-              </p>
+             {/* Company Name / Tagline */}
+<div className="flex items-center gap-4 mb-6">
+  <span className="w-12 h-[2px] bg-[#C9A96A]" />
+
+  <p
+    data-animate
+    style={{
+      fontSize: "clamp(24px, 1vw, 17px)",
+      fontWeight: 800,
+      letterSpacing: "0.18em",
+      color: "rgba(255,255,255,0.9)",
+      textTransform: "uppercase",
+      margin: 0,
+      fontFamily: "var(--font-sans)",
+      textShadow: "0 2px 8px rgba(0,0,0,.35)",
+    }}
+  >
+    {slide.tagline}
+  </p>
+</div>
               {/* Main Title */ }
               <h1
                 data-animate

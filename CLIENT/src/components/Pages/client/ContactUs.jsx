@@ -12,7 +12,7 @@ import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock, FaWhatsapp } from 'rea
 
 // var bnrimg = new URL('../../../images/banner/9.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
-var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80"; // TEMP LIVE PREVIEW
+var bnrimg = "/images/contact-us_banner.webp"; // TEMP LIVE PREVIEW
 
 const formSchema = z.object({
     username: z.string().min(2, "Name must be at least 2 characters"),

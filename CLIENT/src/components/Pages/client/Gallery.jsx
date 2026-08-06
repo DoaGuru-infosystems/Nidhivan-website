@@ -20,7 +20,7 @@ const defaultFilters = [
     { label: "General", filter: "General" }
 ];
 
-var bnrimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"; // TEMP LIVE PREVIEW
+var bnrimg = "/images/gallery_banner.webp"; // TEMP LIVE PREVIEW
 var bgimg1 = new URL('../../../images/background/cross-line.png', import.meta.url).href;
 
 const breakpointColumnsObj = {

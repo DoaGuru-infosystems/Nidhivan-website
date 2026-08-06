@@ -12,7 +12,7 @@ import CtaHome from '../../Elements/CtaHome';
 import GoogleMapIframe from '../../Elements/GoogleMapIframe';
 import { siteData } from '../../../data/siteContent';
 
-var bnrimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80";
+var bnrimg = "/images/about_banner.webp";
 
 const missionVisionData = [
     {

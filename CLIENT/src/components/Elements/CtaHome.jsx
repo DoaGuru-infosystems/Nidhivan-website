@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { submitContactForm } from '../../lib/api';
 
-var bgimg = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"; // Luxury house background
+var bgimg = "/images/cta_overlay.webp"; // Luxury house background
 
 const CtaHome = () => {
     const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
@@ -36,7 +36,7 @@ const CtaHome = () => {
     return (
         <section className="relative py-20 md:py-28 bg-brand-ink overflow-hidden" style={{ backgroundImage: `url(${bgimg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
             {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-brand-ink/90"></div>
+            <div className="absolute inset-0 bg-brand-ink/50"></div>
             
             <div className="max-w-7xl mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">

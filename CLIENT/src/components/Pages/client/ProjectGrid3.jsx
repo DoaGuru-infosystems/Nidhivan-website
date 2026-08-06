@@ -17,8 +17,8 @@ const filters = [
     { label: "Residential", filter: "cat-5" }
 ];
 
-var bnrimg = "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=1600&q=80"; // TEMP LIVE PREVIEW
-var bgimg1 = new URL('../../../images/background/cross-line.png', import.meta.url).href;
+var bnrimg = "images/projects_banner.webp"; // TEMP LIVE PREVIEW
+// var bgimg1 = new URL('../../../images/background/cross-line.png', import.meta.url).href;
 
 import { fetchAllProjects, getMediaUrl } from '@/lib/api';
 
@@ -92,6 +92,10 @@ const ProjectGrid3 = ({ statusFilter, pageTitle }) => {
 
     return (
         <div className="relative bg-bg-cream min-h-screen">
+
+                        
+
+            
             <Banner title={pageTitle || "Our Projects"} pagename={pageTitle || "Projects"} description="Explore our premium farmhouses and plots." bgimage={bnrimg}/>
             
             <div className="relative py-12 md:py-20">

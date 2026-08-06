@@ -78,8 +78,8 @@ export const siteData = {
             highlights: ["Flagship Location", "Near Pariyat Dam", "4.7★ on Google"],
             mapLink:
                 "https://www.google.com/maps/search/Nidhivan+Farms+near+Pariyat+Dam+Sundarpur+Jabalpur+Madhya+Pradesh",
-            icon: "🌿",
-            image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80"
+         
+            image: "/images/property.webp"
         },
         {
             id: 2,
@@ -98,8 +98,8 @@ export const siteData = {
             description: "A star-rated premium farmhouse community by Nidhivan Developers near Bargi Dam, Jabalpur. Perfect for investment and farm living.",
             highlights: ["5.0★ Perfect Rating", "Near Bargi Dam", "Jabalpur, MP"],
             mapLink: "https://www.google.com/maps/search/Star+Farmhouse+by+Nidhivan+Developers+Bargi+Dam+Jabalpur",
-            icon: "⭐",
-            image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80"
+           
+              image: "/images/property2.webp"
         },
         {
             id: 3,
@@ -118,8 +118,8 @@ export const siteData = {
             description: "Experience the gateway to premium farm living near Hinotiya Bargi, Jabalpur — peaceful location with excellent connectivity.",
             highlights: ["5.0★ Perfect Rating", "Near Bargi Road", "Jabalpur, MP"],
             mapLink: "https://www.google.com/maps/search/Door+to+Heaven+Farmhouse+Hinotiya+Bargi+Jabalpur",
-            icon: "🏡",
-            image: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=800&q=80"
+          
+           image: "/images/property3.webp"
         },
     ],
     projects: [
