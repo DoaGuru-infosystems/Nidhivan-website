@@ -22,24 +22,26 @@ const slide3 = "/images/slide3.jpg"; // TEMP LIVE PREVIEW
 gsap.registerPlugin(useGSAP);
 
 const slides = [
-  {
-    image: slide3,
-    tagline: "THE FUTURE OF FARMHOUSE LIVING",
-    title: "The Address Your Heart\nHas Been Waiting For.",
-    description: "Wake up to fresh air, peaceful mornings and endless greenery.\nOwn a premium farmhouse near Jabalpur at a price that's made for every aspiring family.",
-  },
+ {
+  image: slide3,
+  tagline: "JABALPUR'S TRUSTED FARMHOUSE DESTINATION",
+  title: "Apna Farmhouse,\nAb Har Family Ke Budget Mein.",
+  description:
+    "Nidhivan Developers brings affordable farmhouse projects near Jabalpur where nature, peace and smart investment come together. Your dream farmhouse is now closer than ever.",
+},
   {
     image: slide1,
     tagline: "सपनों की ज़मीन • अपनों के नाम",
-    title: "शहर की भागदौड़ से दूर,  सुकून खेतों के बीच  मिलता है।",
+    title: "शहर की भागदौड़ से दूर,  सुकून भरे खेत के बीच अपना फार्महाउस",
     description: "जहाँ बच्चों की हँसी हो... बड़ों की शामें सुकून भरी हों... और हर वीकेंड एक नई याद बन जाए।\nअब अपना फार्महाउस खरीदना पहले से कहीं ज़्यादा आसान है।",
   },
   {
-    image: slide2,
-    tagline: "LIMITED LAND. UNLIMITED MEMORIES.",
-    title: "Own More Than Property.\nOwn Your Peace.",
-    description: "Whether it's your weekend escape or your next smart investment,\nNidhivan Developers brings you premium farmhouse destinations with complete trust and transparent ownership.",
-  },
+  image: slide2,
+  tagline: "LIVE CLOSE TO NATURE • INVEST CLOSE TO HOME",
+  title: "Jabalpur Ke Paas...\nApna Sapno Ka Farmhouse.",
+  description:
+    "Weekend getaway ho ya future investment, hamare legally verified farmhouse projects aapke budget aur family dono ko dhyan mein rakhkar develop kiye gaye hain.",
+},
 ];
 
 const Slider1 = () => {
@@ -141,7 +143,7 @@ const Slider1 = () => {
                 justifyContent: 'center',
                 height: '100%',
                 padding: '0 5%',
-                maxWidth: '900px',
+                maxWidth: '1090px',
               } }
             >
               {/* Company Name / Tagline */ }

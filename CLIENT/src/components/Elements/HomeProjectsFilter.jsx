@@ -17,6 +17,14 @@ const filters = [
     { label: "Plots", filter: "cat-3" }
 ];
 
+const getProjectFilterKey = (project) => {
+    const rawValue = String(project.type || project.category || '').toLowerCase();
+    if (rawValue.includes('resid')) return 'cat-1';
+    if (rawValue.includes('commercial')) return 'cat-2';
+    if (rawValue.includes('plot') || rawValue.includes('land')) return 'cat-3';
+    return filters.find(f => f.label.toLowerCase() === rawValue)?.filter || rawValue;
+};
+
 var bgimg1 = new URL('./../../images/background/cross-line2.png', import.meta.url).href;
 
 const getImgUrl = (id) => {
@@ -57,7 +65,7 @@ const HomeProjectsFilter = () => {
                 const dynamic = data.map(item => ({
                     ...item,
                     address: item.location,
-                    filter: filters.find(f => f.label === item.category)?.filter || item.category,
+                    filter: getProjectFilterKey(item),
                     // If image doesn't exist, fallback to null
                     imgUrl: item.images && item.images.length > 0 ? getMediaUrl(item.images[0].image_url || item.images[0].image || item.images[0]) : null
                 }));

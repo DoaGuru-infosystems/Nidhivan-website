@@ -11,47 +11,47 @@ export const siteData = {
         email: "nidhivanfarmsjabalpur@gmail.com",
         workingHours: "Mon - Sun: 9:00 AM - 8:00 PM",
         facebook: "https://www.facebook.com/profile.php?id=61578401472526",
-        instagram: "https://www.instagram.com/nidhivan_jbp/"
+        instagram: "https://www.instagram.com/nidhivan_farms"
     },
     aboutUs: {
-        title: "Building Trust. Creating Dreams.",
-        shortDescription: "Your trusted real estate partner in Jabalpur, offering legally verified premium farmhouses and affordable land for your perfect weekend home.",
-        longDescription: "For more than a decade, Nidhivan Developers has been helping families own affordable farmhouses and farmland around Jabalpur. We believe everyone deserves a peaceful place away from the city's rush. That is why we develop legally verified projects with transparent pricing and customer-first service. Whether you're buying your first farmhouse or making a long-term investment, our team is with you from site visit to registration.",
-        mission: "To deliver high-quality farmhouses and farmlands at better prices, providing unmatched value and elevating the standard of living for our clients.",
-        vision: "To be the most trusted and preferred real estate partner in Central India, known for innovation, integrity, and customer satisfaction."
+    title: "A Farmhouse of Your Own, Near the City You Call Home",
+    shortDescription: "Nidhivan Developer offers legally clear farmhouse plots just outside Jabalpur, near jabalpur's prime location  a quiet second home for the weekends, without leaving your city behind.",
+    longDescription: "Nidhivan Developer builds farmhouse plots and farmland just outside Jabalpur, in the green stretch  near Pariyat Dam, Sundarpur, Jabalpur . We started with one simple idea every family that works hard in the city deserves a piece of land where they can slow down, breathe open air, and call it their own. Every plot we sell comes with clear title, complete documentation, and a price that doesn't change after you've already said yes. From your first site visit to the day the registry is in your hand, our team walks the whole path with you  no shortcuts, no surprises.",
+    mission: "To make farmhouse ownership near Jabalpur simple, honest, and within reach — one verified plot, one satisfied family at a time.",
+    vision: "To become the name Madhya Pradesh trusts first when they think of owning land near Jabalpur — built on clear titles, fair pricing, and people who keep their word."
+},
+   services: [
+    {
+        id: 1,
+        title: "Ready Farmhouses",
+        description: "Move-in ready farmhouses built for weekend living — open verandas, garden space, and enough distance from the city to actually feel like a break.",
+        icon: "flaticon-home"
     },
-    services: [
-        {
-            id: 1,
-            title: "Premium Farmhouses",
-            description: "Discover our affordable, ready-to-move premium farmhouses designed for peaceful family living and perfect weekend getaways in nature.",
-            icon: "flaticon-home"
-        },
-        {
-            id: 2,
-            title: "Farmhouse Plots",
-            description: "Invest in legally verified, beautifully located farmhouse plots around Jabalpur that offer excellent long-term appreciation and a secure future.",
-            icon: "flaticon-real-estate"
-        },
-        {
-            id: 3,
-            title: "Farm Development",
-            description: "We provide complete development services for your farmland, from landscaping and boundary walls to custom farmhouse construction.",
-            icon: "flaticon-building"
-        },
-        {
-            id: 4,
-            title: "Registration & Legal Support",
-            description: "Experience a 100% transparent process with complete assistance in property legalities, documentation, and fast registrations for your peace of mind.",
-            icon: "flaticon-contract"
-        }
-    ],
-    whyChooseUs: [
-        "Better Price Guarantee",
-        "Better Farmhouse Area",
-        "Transparent Dealings",
-        "Prime Locations"
-    ],
+    {
+        id: 2,
+        title: "Farmhouse Plots",
+        description: "Clear-title plots near Jabalpur, priced for today and built to appreciate  buy the land now, build your farmhouse whenever you're ready.",
+        icon: "flaticon-real-estate"
+    },
+    {
+        id: 3,
+        title: "Farm Development",
+        description: "From boundary walls and internal roads to landscaping and custom farmhouse construction  we handle the ground work so you don't have to visit the site every week.",
+        icon: "flaticon-building"
+    },
+    {
+        id: 4,
+        title: "Registration & Legal Support",
+        description: "We sit with you through every document  sale deed, mutation, registry and don't hand over the keys until every paper is in your name.",
+        icon: "flaticon-contract"
+    }
+],
+whyChooseUs: [
+    "Price Fixed at Booking, No Last-Minute Additions",
+    "Larger Plot Sizes for the Same Budget",
+    "Every Deal on Paper, Nothing on Trust Alone",
+    "Minutes from Jabalpur, Not Hours"
+],
     statistics: [
         { label: "Happy Families", value: "500", suffix: "+" },
         { label: "Completed Projects", value: "15", suffix: "+" },

@@ -18,6 +18,13 @@ const filters = [
     { label: "Residential", filter: "cat-5" }
 ];
 
+const getProjectFilterKey = (project) => {
+    const rawValue = String(project.type || project.category || '').toLowerCase();
+    if (rawValue.includes('resid')) return 'cat-5';
+    if (rawValue.includes('commercial')) return 'cat-2';
+    if (rawValue.includes('plot') || rawValue.includes('land')) return 'cat-3';
+    return filters.find(f => f.label.toLowerCase() === rawValue)?.filter || rawValue;
+};
 
 // var bnrimg = new URL('../../../images/banner/9.jpg', import.meta.url).href; // ORIGINAL DUMMY - restore when real property photos are ready
 
@@ -49,7 +56,7 @@ const ProjectMasonary3 = () => {
                 const dynamic = data.map(item => ({
                     ...item,
                     description: item.location,
-                    filter: filters.find(f => f.label === item.category)?.filter || item.category,
+                    filter: getProjectFilterKey(item),
                     image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0].image_url || item.images[0].image || item.images[0]) : null
                 }));
                 const merged = dynamic;

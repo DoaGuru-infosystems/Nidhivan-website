@@ -17,6 +17,14 @@ const filters = [
     { label: "Residential", filter: "cat-5" }
 ];
 
+const getProjectFilterKey = (project) => {
+    const rawValue = String(project.type || project.category || '').toLowerCase();
+    if (rawValue.includes('resid')) return 'cat-5';
+    if (rawValue.includes('commercial')) return 'cat-2';
+    if (rawValue.includes('plot') || rawValue.includes('land')) return 'cat-3';
+    return filters.find(f => f.label.toLowerCase() === rawValue)?.filter || rawValue;
+};
+
 var bnrimg = "images/projects_banner.webp"; // TEMP LIVE PREVIEW
 // var bgimg1 = new URL('../../../images/background/cross-line.png', import.meta.url).href;
 
@@ -38,7 +46,7 @@ const ProjectGrid3 = ({ statusFilter, pageTitle }) => {
                 const dynamic = data.map(item => ({
                     ...item,
                     address: item.location,
-                    filter: filters.find(f => f.label === item.category)?.filter || item.category,
+                    filter: getProjectFilterKey(item),
                     image: item.images && item.images.length > 0 ? getMediaUrl(item.images[0].image_url || item.images[0].image || item.images[0]) : null
                 }));
                 

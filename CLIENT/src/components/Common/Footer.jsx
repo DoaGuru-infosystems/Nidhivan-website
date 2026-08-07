@@ -35,11 +35,11 @@ const Footer = () => {
 
                             {/* ABOUT COMPANY */ }
                             <div>
-                                <div className="mb-6 bg-white/5 inline-block p-4 rounded-xl border border-white/10">
-                                    <NavLink to={ "./" }>
-                                        <img src="/images/nidhivan logo.png" alt="Nidhivan Farms" style={ { maxHeight: '100px', width: 'auto' } } />
-                                    </NavLink>
-                                </div>
+                               <div className="mb-6 bg-white/90 inline-block p-4 rounded-xl shadow-lg">
+    <NavLink to={"./"}>
+        <img src="/images/nidhivan logo.png" alt="Nidhivan Farms" style={{ maxHeight: '100px', width: 'auto' }} />
+    </NavLink>
+</div>
                                 <p className="mb-6 leading-relaxed text-gray-400">{ siteData.aboutUs.shortDescription }</p>
                                 <div className="flex gap-4">
                                     <a href={ siteData.contactInfo.facebook } className="w-10 h-10 rounded-full bg-brand-green/20 text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-brand-ink transition-colors group" target="_blank" rel="noreferrer">
@@ -48,12 +48,12 @@ const Footer = () => {
                                     <a href={ siteData.contactInfo.instagram } className="w-10 h-10 rounded-full bg-brand-green/20 text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-brand-ink transition-colors group" target="_blank" rel="noreferrer">
                                         <svg className="group-hover:text-brand-ink" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                                     </a>
-                                    <a href="#" className="w-10 h-10 rounded-full bg-brand-green/20 text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-brand-ink transition-colors group" target="_blank" rel="noreferrer">
+                                    {/* <a href="#" className="w-10 h-10 rounded-full bg-brand-green/20 text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-brand-ink transition-colors group" target="_blank" rel="noreferrer">
                                         <svg className="group-hover:text-brand-ink" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                                     </a>
                                     <a href="#" className="w-10 h-10 rounded-full bg-brand-green/20 text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-brand-ink transition-colors group" target="_blank" rel="noreferrer">
                                         <svg className="group-hover:text-brand-ink" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
-                                    </a>
+                                    </a> */}
                                 </div>
                             </div>
 
@@ -145,7 +145,7 @@ const Footer = () => {
 
                             <span className="text-gray-500 text-sm flex flex-col md:flex-row items-center gap-1">
                                 Designed and developed by
-                                <a href="https://doaguru.com" target="_blank" rel="noreferrer" className="text-brand-gold font-semibold hover:text-white transition-colors">Doaguru Info Systems</a>
+                                <a href="https://doaguru.com" target="_blank" rel="noreferrer" className="text-brand-gold font-semibold hover:text-white transition-colors">DOAGuru InfoSystems</a>
                             </span>
                         </div>
                     </div>
