@@ -29,8 +29,8 @@ const BlogsHome = () => {
     if (latestBlogs.length === 0) return null;
 
     return (
-        <div className="section-full p-t80 p-b50 bg-white">
-            <div className="max-w-7xl mx-auto px-4">
+        <div className="section-full py-12 md:py-16 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 {/* TITLE START */}
                 <div className="section-head">
                     <div className="sx-separator-outer separator-left">
@@ -41,9 +41,9 @@ const BlogsHome = () => {
                 </div>
                 {/* TITLE END */}
                 
-                <div className="grid grid-cols-12 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {latestBlogs.map((item, index) => (
-                        <div className="col-span-12 md:col-span-6 lg:col-span-4" key={index}>
+                        <div key={index}>
                             <div className="blog-post blog-grid date-style-2 h-full flex flex-col shadow-sm rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow">
                                 <div className="sx-post-media sx-img-effect img-reflection">
                                     <NavLink to={item.slug ? `/blog-single/${item.slug}` : "/blog-single"}><img src={item.image} alt="" className="w-full h-56 object-cover" /></NavLink>

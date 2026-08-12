@@ -94,6 +94,32 @@ export const loginAdminApi = async (email, password) => {
   return data;
 };
 
+export const forgotPasswordApi = async (email) => {
+  const response = await fetch(`${BASE_URL.replace('/api', '')}/auth/admin/api/forgotPassword`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || 'Failed to send OTP. Please try again.');
+  }
+  return data;
+};
+
+export const resetPasswordApi = async (email, otp, newPassword) => {
+  const response = await fetch(`${BASE_URL.replace('/api', '')}/auth/admin/api/verifyOtpAndResetPassword`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, otp, newPassword }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || 'Password reset failed. Please try again.');
+  }
+  return data;
+};
+
 export const registerAdminApi = async (name, email, password) => {
   const response = await fetch(`${BASE_URL}/register`, {
     method: 'POST',

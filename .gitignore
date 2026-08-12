@@ -1,5 +1,9 @@
 # Dependencies
 CLIENT/node_modules/
+server/node_modules/
+
+# Environment files (never commit credentials)
+# 
 
 # Generated output
 graphify-out/

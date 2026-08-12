@@ -44,7 +44,7 @@ class Services1 extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="hilite-title text-left p-l50 text-uppercase">
+                    <div className="hilite-title text-left text-uppercase" style={{ paddingLeft: 'clamp(16px, 5vw, 50px)' }}>
                         <strong>Services</strong>
                     </div>
                 </div>

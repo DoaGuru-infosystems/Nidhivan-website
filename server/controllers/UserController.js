@@ -3,6 +3,7 @@ const { db } = require("../db");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const { sendLeadNotificationEmail } = require("../utils/email");
 
 // const register = async (req, res) => {
 //   try {
@@ -213,19 +214,29 @@ const getuserdata = async (req, res) => {
 
 // smtp code
 const user_data = async (req, res) => {
-  const { name, email, mobile_no, subject, message } = req.body;
+  const { name, email, mobile_no, subject, message, project_name } = req.body;
 
-  const sql = `INSERT INTO contact (name, email, mobile_no, subject, message) VALUES (?, ?, ?, ?, ?)`;
-  db.query(sql, [name, email, mobile_no, subject, message], (err, results) => {
+  const sql = `INSERT INTO contact (name, email, mobile_no, subject, message, project_name) VALUES (?, ?, ?, ?, ?, ?)`;
+
+  db.query(sql, [name, email, mobile_no, subject, message, project_name], async (err, results) => {
     if (err) {
-      return res.status(500).json({ error: "Error of Data" });
+      return res.status(500).json({ error: "Error saving lead data" });
     }
 
+    // ✅ Respond immediately — lead is saved successfully
     res.status(201).json({
       success: true,
       message:
         "Thank you for submitting the form! Our team will connect with you as soon as possible.",
     });
+
+    // ✅ Send owner notification email AFTER responding (non-blocking)
+    try {
+      await sendLeadNotificationEmail({ name, email, mobile_no, subject, message, project_name });
+    } catch (emailError) {
+      // Log failure but do NOT affect the already-sent response
+      console.error("[Lead Notification] Failed to send owner email:", emailError.message);
+    }
   });
 };
 

@@ -1,8 +1,8 @@
 const { db } = require("../db");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const { sendOtpEmail } = require("../utils/email");
 
 const handleAuth = async (data, password, res) => {
   const isMatch = await bcrypt.compare(password, data.password);
@@ -76,36 +76,15 @@ const login = async (req, res) => {
   }
 };
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAILSENDER,
-    pass: process.env.EMAILPASSWORD,
-  },
-});
-
 const forgotOtpStore = new Map();
 const otpRateLimitStore = new Map();
-
-const sendPasswordOtpEmail = async (email, otp) => {
-  const mailOptions = {
-    from: `"Your Password OTP" <${process.env.EMAILSENDER}>`,
-    to: email,
-    subject: "Password Reset OTP",
-    text: `Your password reset OTP code is: ${otp}`,
-    html: `<b>Your password reset OTP code is: ${otp}</b>`,
-  };
-
-  const info = await transporter.sendMail(mailOptions);
-  return info;
-};
 
 const generateOtp = () => {
   const n = crypto.randomInt(0, 1000000);
   return n.toString().padStart(6, "0");
 };
 
-// ✅ Sirf registered_data table check
+// ✅ Check in registered_data table only
 const findUserByEmail = (email) => {
   return new Promise((resolve, reject) => {
     db.query(
@@ -135,7 +114,7 @@ const forgotPassword = async (req, res) => {
     const emailLower = email.trim().toLowerCase();
     const now = Date.now();
 
-    // ✅ Rate limiting
+    // ✅ Rate limiting: max 3 OTPs per 15 minutes
     const rate = otpRateLimitStore.get(emailLower) || {
       lastSentAt: 0,
       sentCount: 0,
@@ -148,28 +127,27 @@ const forgotPassword = async (req, res) => {
     if (rate.sentCount >= 3) {
       return res.status(429).json({
         success: false,
-        message: "Too many requests. Try later.",
+        message: "Too many requests. Please try again after 15 minutes.",
       });
     }
 
-    const genericResponse = () =>
-      res.status(200).json({
-        success: true,
-        message:
-          "If the account exists, an OTP has been sent to the registered email.",
-      });
-
     // ✅ User check
     const user = await findUserByEmail(emailLower);
-    if (!user) return genericResponse();
+    if (!user) {
+      // Return 404 to explicitly tell the admin the email is not registered
+      return res.status(404).json({
+        success: false,
+        message: "This email is not registered as an Admin.",
+      });
+    }
 
-    // ✅ OTP generate & store (no role/table needed)
+    // ✅ OTP generate & store
     const otp = generateOtp();
     const otpHash = await bcrypt.hash(otp, 10);
 
     forgotOtpStore.set(emailLower, {
       otpHash,
-      expiresAt: now + 5 * 60 * 1000,
+      expiresAt: now + 5 * 60 * 1000, // 5 minutes
       attempts: 0,
     });
 
@@ -177,9 +155,25 @@ const forgotPassword = async (req, res) => {
     rate.lastSentAt = now;
     otpRateLimitStore.set(emailLower, rate);
 
-    await sendPasswordOtpEmail(user.email, otp);
+    // ✅ Send OTP email via centralized utility
+    try {
+      await sendOtpEmail(user.email, otp);
+    } catch (emailError) {
+      console.error("Forgot Password - OTP email send failed:", emailError);
+      // Clean up OTP store since email failed
+      forgotOtpStore.delete(emailLower);
+      return res.status(500).json({
+        success: false,
+        message:
+          "Failed to send OTP email. Please check your email configuration or try again later.",
+      });
+    }
 
-    return genericResponse();
+    return res.status(200).json({
+      success: true,
+      message:
+        "If the account exists, an OTP has been sent to the registered email.",
+    });
   } catch (error) {
     console.error("Forgot Password Error:", error);
     return res.status(500).json({
@@ -216,17 +210,17 @@ const verifyOtpAndResetPassword = async (req, res) => {
       forgotOtpStore.delete(emailLower);
       return res.status(400).json({
         success: false,
-        message: "OTP expired or invalid",
+        message: "OTP has expired or is invalid. Please request a new one.",
       });
     }
 
-    // ✅ Max attempts check
+    // ✅ Max attempts check (prevent brute force)
     otpData.attempts += 1;
     if (otpData.attempts > 5) {
       forgotOtpStore.delete(emailLower);
       return res.status(429).json({
         success: false,
-        message: "Too many attempts",
+        message: "Too many incorrect attempts. Please request a new OTP.",
       });
     }
 
@@ -235,11 +229,11 @@ const verifyOtpAndResetPassword = async (req, res) => {
     if (!isValidOtp) {
       return res.status(400).json({
         success: false,
-        message: "Invalid OTP",
+        message: "Invalid OTP. Please check the code and try again.",
       });
     }
 
-    // ✅ Password update - fixed table: registered_data
+    // ✅ Hash and update password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     await new Promise((resolve, reject) => {
@@ -257,7 +251,7 @@ const verifyOtpAndResetPassword = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Password reset successful",
+      message: "Password reset successful! You can now log in with your new password.",
     });
   } catch (error) {
     console.error("Reset Password Error:", error);

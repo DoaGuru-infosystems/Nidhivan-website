@@ -12,10 +12,10 @@ class About3 extends React.Component {
         return (
             <>
                 <div className={`${this.props.bgcolor} relative py-8 md:pt-20 md:pb-12`}>
-                    <div className="max-w-7xl mx-auto px-4">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6">
                         <div className="section-content">
-                            <div className="grid grid-cols-12 gap-8">
-                                <div className="col-span-12 lg:col-span-6">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                                <div className="">
                                     <div className="about-home-3 m-b30">
                                         <h3 className="m-t0 m-b20 sx-tilte">{siteData.aboutUs.title}</h3>
                                         <p>{siteData.aboutUs.longDescription}</p>
@@ -30,7 +30,7 @@ class About3 extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-span-12 lg:col-span-6 relative mt-10 mr-10 mb-12">
+                                <div className="relative mt-6 lg:mt-10 lg:mr-10 lg:mb-12">
                                     {/* The Black Frame (Offset) */}
                                     <div className="absolute -top-10 -right-10 -bottom-10 w-full border-[15px] border-[#2b2b2b] z-0 hidden lg:block"></div>
                                     

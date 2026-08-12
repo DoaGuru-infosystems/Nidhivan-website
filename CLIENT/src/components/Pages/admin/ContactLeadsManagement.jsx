@@ -3,13 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Eye, Mail, Calendar, User, MessageSquare, Trash2 } from 'lucide-react';
+import { Eye, Mail, Calendar, User, MessageSquare, Trash2, Phone, Home } from 'lucide-react';
 import { fetchContactLeads, deleteContactLead } from '@/lib/api';
 
 export const DUMMY_LEADS = [
-    { id: 1, name: 'Suresh Kumar', email: 'suresh.k@example.com', date: 'Oct 20, 2025', message: 'I am interested in buying a 3BHK flat in your upcoming project. Please send details.', isNew: true },
-    { id: 2, name: 'Priya Verma', email: 'priya.v@example.com', date: 'Oct 21, 2025', message: 'What is the starting price for commercial shops?', isNew: true },
-    { id: 3, name: 'Amit Singh', email: 'amit99@example.com', date: 'Oct 22, 2025', message: 'Can we schedule a site visit this weekend?', isNew: false },
+    { id: 1, name: 'Suresh Kumar', email: 'suresh.k@example.com', mobile_no: '9876543210', date: 'Oct 20, 2025', message: 'I am interested in buying a 3BHK flat in your upcoming project. Please send details.', isNew: true },
+    { id: 2, name: 'Priya Verma', email: 'priya.v@example.com', mobile_no: '9876500000', date: 'Oct 21, 2025', message: 'What is the starting price for commercial shops?', isNew: true },
+    { id: 3, name: 'Amit Singh', email: 'amit99@example.com', mobile_no: '9998887776', date: 'Oct 22, 2025', message: 'Can we schedule a site visit this weekend?', isNew: false },
 ];
 
 const ContactLeadsManagement = () => {
@@ -30,8 +30,10 @@ const ContactLeadsManagement = () => {
                 id: lead.id,
                 name: lead.full_name || lead.name || 'Unknown',
                 email: lead.email,
+                mobile_no: lead.mobile_no || lead.phone,
                 date: new Date(lead.created_date || lead.created_at || lead.date || Date.now()).toLocaleDateString(),
                 message: lead.message,
+                project_name: lead.project_name || null,
                 isNew: lead.isNew || false
             }));
             setLeads(mappedLeads);
@@ -70,6 +72,7 @@ const ContactLeadsManagement = () => {
                             <TableRow className="hover:bg-transparent bg-slate-50/50">
                                 <TableHead className="text-slate-600 font-semibold py-4 pl-6">Name</TableHead>
                                 <TableHead className="text-slate-600 font-semibold py-4">Email</TableHead>
+                                <TableHead className="text-slate-600 font-semibold py-4">Phone</TableHead>
                                 <TableHead className="text-slate-600 font-semibold py-4">Date</TableHead>
                                 <TableHead className="text-right text-slate-600 font-semibold py-4 pr-6">Actions</TableHead>
                             </TableRow>
@@ -86,6 +89,7 @@ const ContactLeadsManagement = () => {
                                         </div>
                                     </TableCell>
                                     <TableCell className="text-slate-600 py-4">{lead.email}</TableCell>
+                                    <TableCell className="text-slate-600 py-4">{lead.mobile_no || 'N/A'}</TableCell>
                                     <TableCell className="text-slate-500 py-4">{lead.date}</TableCell>
                                     <TableCell className="text-right py-4 pr-6">
                                         <div className="flex justify-end gap-2">
@@ -130,12 +134,18 @@ const ContactLeadsManagement = () => {
                     </div>
                     
                     <div className="p-6 bg-slate-50">
-                        <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                            <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+                                <div className="flex items-center gap-2 text-slate-500 text-sm mb-1 font-medium">
+                                    <Mail size={14} className="shrink-0" /> <span className="truncate">Email Address</span>
+                                </div>
+                                <div className="text-slate-800 font-medium break-all" title={selectedLead?.email}>{selectedLead?.email}</div>
+                            </div>
                             <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
                                 <div className="flex items-center gap-2 text-slate-500 text-sm mb-1 font-medium">
-                                    <Mail size={14} /> Email Address
+                                    <Phone size={14} /> Phone Number
                                 </div>
-                                <div className="text-slate-800 font-medium">{selectedLead?.email}</div>
+                                <div className="text-slate-800 font-medium">{selectedLead?.mobile_no || 'N/A'}</div>
                             </div>
                             <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
                                 <div className="flex items-center gap-2 text-slate-500 text-sm mb-1 font-medium">
@@ -143,6 +153,14 @@ const ContactLeadsManagement = () => {
                                 </div>
                                 <div className="text-slate-800 font-medium">{selectedLead?.date}</div>
                             </div>
+                            {selectedLead?.project_name && (
+                                <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm sm:col-span-2 lg:col-span-3">
+                                    <div className="flex items-center gap-2 text-slate-500 text-sm mb-1 font-medium">
+                                        <Home size={14} /> Project Interest
+                                    </div>
+                                    <div className="text-[#118A43] font-bold">{selectedLead.project_name}</div>
+                                </div>
+                            )}
                         </div>
 
                         <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">

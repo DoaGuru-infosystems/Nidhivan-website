@@ -117,7 +117,7 @@ const FaqHome = () => {
                 <div className="mt-10 text-center">
                     <p className="text-slate-500 text-sm">
                         Still have a question? {' '}
-                        <a href="tel:87703 75800" className="text-[#118A43] font-semibold hover:underline">
+                        <a href="tel:9302736606" className="text-[#118A43] font-semibold hover:underline">
                             Call or WhatsApp our team
                         </a>{' '}
                         directly, we're happy to help.

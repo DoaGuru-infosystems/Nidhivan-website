@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '@/store/UserSlice';
-import { BookOpen, MessageSquare, Image as ImageIcon, Users, Building2, LogOut, ChevronDown } from 'lucide-react';
+import { BookOpen, MessageSquare, Image as ImageIcon, Users, Building2, LogOut, ChevronDown, Home } from 'lucide-react';
 
 const AdminLayout = () => {
     const navigate = useNavigate();
@@ -90,25 +90,36 @@ const AdminLayout = () => {
                         {getPageTitle()}
                     </h1>
                     
-                    <div className="flex items-center gap-4 group cursor-pointer relative">
-                        <div className="w-10 h-10 rounded-full bg-[#F4B54B]/20 text-[#F4B54B] flex items-center justify-center font-bold border border-[#F4B54B]/30">
-                            A
-                        </div>
-                        <div className="flex items-center gap-1">
-                            <span className="font-semibold text-slate-700">Admin</span>
-                            <ChevronDown size={16} className="text-slate-400 group-hover:text-slate-700 transition-colors" />
-                        </div>
+                    <div className="flex items-center gap-6">
+                        {/* Go to Website Link */}
+                        <a 
+                            href="/" 
+                            className="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-[#118A43] transition-colors"
+                        >
+                            <Home size={18} />
+                            <span>Go to Website</span>
+                        </a>
 
-                        {/* Dropdown Menu (Hover based for simplicity, or we can use a small absolute div) */}
-                        <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-md shadow-lg border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 origin-top">
-                            <div className="p-2">
-                                <button 
-                                    onClick={handleLogout}
-                                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md transition-colors text-left"
-                                >
-                                    <LogOut size={16} />
-                                    Logout
-                                </button>
+                        <div className="flex items-center gap-4 group cursor-pointer relative">
+                            <div className="w-10 h-10 rounded-full bg-[#F4B54B]/20 text-[#F4B54B] flex items-center justify-center font-bold border border-[#F4B54B]/30">
+                                A
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <span className="font-semibold text-slate-700">Admin</span>
+                                <ChevronDown size={16} className="text-slate-400 group-hover:text-slate-700 transition-colors" />
+                            </div>
+
+                            {/* Dropdown Menu (Hover based for simplicity, or we can use a small absolute div) */}
+                            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-md shadow-lg border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 origin-top">
+                                <div className="p-2">
+                                    <button 
+                                        onClick={handleLogout}
+                                        className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md transition-colors text-left"
+                                    >
+                                        <LogOut size={16} />
+                                        Logout
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

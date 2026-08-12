@@ -43,6 +43,8 @@ const GalleryManagement = () => {
     const [newImgTitle, setNewImgTitle] = useState('');
     const [newImgAddress, setNewImgAddress] = useState('');
     const [imgFiles, setImgFiles] = useState([]); // Multiple files
+    const [imgPreviews, setImgPreviews] = useState([]);
+    const [isImgDragging, setIsImgDragging] = useState(false);
     const [imgSaving, setImgSaving] = useState(false);
 
     // Images Edit state
@@ -184,12 +186,22 @@ const GalleryManagement = () => {
             for (let i = 0; i < files.length; i++) {
                 if (files[i].size > 5 * 1024 * 1024) {
                     alert("file is larger then maximum upload size");
-                    e.target.value = '';
+                    if (e.target) e.target.value = '';
                     return;
                 }
             }
-            setImgFiles(files);
+            const newFiles = files.filter(file => !imgFiles.some(existing => existing.name === file.name));
+            const combined = [...imgFiles, ...newFiles];
+            setImgFiles(combined);
+            setImgPreviews(combined.map(f => URL.createObjectURL(f)));
         }
+        if (e.target) e.target.value = null;
+    };
+
+    const handleRemoveImageToUpload = (indexToRemove) => {
+        const newFiles = imgFiles.filter((_, idx) => idx !== indexToRemove);
+        setImgFiles(newFiles);
+        setImgPreviews(newFiles.map(f => URL.createObjectURL(f)));
     };
 
     const handleSaveImages = async () => {
@@ -212,6 +224,7 @@ const GalleryManagement = () => {
             setNewImgTitle('');
             setNewImgAddress('');
             setImgFiles([]);
+            setImgPreviews([]);
         } catch (error) {
             console.error("Upload images failed", error);
             // Optimistic
@@ -224,6 +237,7 @@ const GalleryManagement = () => {
             setImages([...newImgs, ...images]);
             setIsImgDialogOpen(false);
             setImgFiles([]);
+            setImgPreviews([]);
         } finally {
             setImgSaving(false);
         }
@@ -295,7 +309,15 @@ const GalleryManagement = () => {
                     </div>
                     
                     {/* Add Image to Category Button */}
-                    <Dialog open={isImgDialogOpen} onOpenChange={setIsImgDialogOpen}>
+                    <Dialog open={isImgDialogOpen} onOpenChange={(open) => {
+                        setIsImgDialogOpen(open);
+                        if (!open) {
+                            setImgFiles([]);
+                            setImgPreviews([]);
+                            setNewImgTitle('');
+                            setNewImgAddress('');
+                        }
+                    }}>
                         <DialogTrigger asChild>
                             <Button className="bg-[#118A43] hover:bg-[#0f7a3b] text-white flex items-center gap-2">
                                 <UploadCloud size={16} />
@@ -309,9 +331,72 @@ const GalleryManagement = () => {
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
                                 <div className="grid gap-2">
-                                    <Label>Select Images</Label>
-                                    <Input type="file" multiple accept="image/*" onChange={handleMultipleImageUpload} />
-                                    {imgFiles.length > 0 && <p className="text-sm text-green-600">{imgFiles.length} files selected</p>}
+                                    <Label className="text-slate-700 font-medium">Select Images</Label>
+                                    <div className="flex gap-3 items-center">
+                                        <div className="flex-1 relative">
+                                            <input type="file" multiple id="img-upload-input" accept="image/*" onChange={handleMultipleImageUpload} className="hidden" />
+                                            <Label 
+                                                htmlFor="img-upload-input" 
+                                                onDragOver={(e) => { 
+                                                    e.preventDefault(); 
+                                                    e.stopPropagation(); 
+                                                    setIsImgDragging(true);
+                                                }}
+                                                onDragLeave={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    setIsImgDragging(false);
+                                                }}
+                                                onDrop={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    setIsImgDragging(false);
+                                                    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                                                        const files = Array.from(e.dataTransfer.files);
+                                                        const validFiles = [];
+                                                        for (let i = 0; i < files.length; i++) {
+                                                            if (files[i].size > 5 * 1024 * 1024) {
+                                                                alert("file is larger then maximum upload size");
+                                                                return;
+                                                            }
+                                                            validFiles.push(files[i]);
+                                                        }
+                                                        const newFiles = validFiles.filter(file => !imgFiles.some(existing => existing.name === file.name));
+                                                        const combined = [...imgFiles, ...newFiles];
+                                                        setImgFiles(combined);
+                                                        setImgPreviews(combined.map(f => URL.createObjectURL(f)));
+                                                    }
+                                                }}
+                                                className={`flex flex-col items-center justify-center w-full h-32 px-4 py-4 border-2 border-dashed rounded-xl cursor-pointer transition-all ${isImgDragging ? 'border-[#118A43] bg-[#118A43]/10' : 'border-slate-300 hover:border-[#118A43]/50 hover:bg-slate-50 bg-slate-50/50'}`}>
+                                                <UploadCloud className={`w-10 h-10 mb-3 transition-colors ${isImgDragging ? 'text-[#118A43]' : 'text-slate-400'}`} />
+                                                <span className="text-sm font-medium text-slate-700">
+                                                    {isImgDragging ? 'Drop images here...' : 'Choose files or drag & drop here'}
+                                                </span>
+                                                <span className="text-xs text-slate-400 mt-1">Duplicate files will be ignored</span>
+                                            </Label>
+                                            {imgFiles.length > 0 && (
+                                                <p className="text-xs text-green-600 mt-2 font-medium">
+                                                    {imgFiles.length} {imgFiles.length === 1 ? 'file' : 'files'} selected
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                    {imgPreviews.length > 0 && (
+                                        <div className="flex gap-2 mt-2 overflow-x-auto pb-2 custom-scrollbar">
+                                            {imgPreviews.map((preview, idx) => (
+                                                <div key={idx} className="w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 relative group">
+                                                    <img src={preview} alt={`Preview ${idx + 1}`} className="w-full h-full object-cover" />
+                                                    <button 
+                                                        onClick={(e) => { e.preventDefault(); handleRemoveImageToUpload(idx); }} 
+                                                        className="absolute top-1 right-1 bg-white/90 rounded-full text-red-500 hover:text-red-700 shadow-sm flex items-center justify-center p-1"
+                                                        title="Remove image"
+                                                    >
+                                                        <X size={14} />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Title (Optional)</Label>

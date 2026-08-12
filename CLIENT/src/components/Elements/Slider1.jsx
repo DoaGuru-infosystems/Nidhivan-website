@@ -1,5 +1,6 @@
 import React, { useRef, useCallback, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { siteData } from '../../data/siteContent';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Autoplay, Navigation } from 'swiper/modules';
@@ -134,34 +135,14 @@ const Slider1 = () => {
               } }
             />
             {/* Content */ }
-            <div
-              style={ {
-                position: 'relative',
-                zIndex: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                height: '100%',
-                padding: '0 5%',
-                maxWidth: '1090px',
-              } }
-            >
+            <div className="relative z-10 flex flex-col justify-center h-full px-4 sm:px-8 md:px-12 lg:px-[5%] max-w-[1090px]">
               {/* Company Name / Tagline */ }
               <div className="flex items-center gap-4 mb-6">
                 <span className="w-12 h-[2px] bg-[#C9A96A]" />
 
                 <p
                   data-animate
-                  style={ {
-                    fontSize: "clamp(24px, 1vw, 17px)",
-                    fontWeight: 800,
-                    letterSpacing: "0.18em",
-                    color: "rgba(255,255,255,0.9)",
-                    textTransform: "uppercase",
-                    margin: 0,
-                    fontFamily: "var(--font-sans)",
-                    textShadow: "0 2px 8px rgba(0,0,0,.35)",
-                  } }
+                  className="font-extrabold tracking-[0.18em] text-white/90 uppercase m-0 font-sans drop-shadow-md text-[10px] sm:text-xs md:text-[clamp(12px,1vw,14px)]"
                 >
                   { slide.tagline }
                 </p>
@@ -169,97 +150,48 @@ const Slider1 = () => {
               {/* Main Title */ }
               <h1
                 data-animate
-                style={ {
-                  fontSize: 'clamp(28px, 5vw, 64px)',
-                  fontWeight: 800,
-                  lineHeight: 1.3,
-                  color: '#ffffff',
-                  marginBottom: '20px',
-                  fontFamily: 'var(--font-serif)',
-                  whiteSpace: 'pre-line',
-                } }
+                className="font-extrabold leading-tight text-white mb-4 md:mb-5 font-serif whitespace-pre-line text-[28px] sm:text-4xl md:text-5xl lg:text-[clamp(40px,5vw,64px)]"
               >
                 { slide.title }
               </h1>
               {/* Description */ }
               <p
                 data-animate
-                style={ {
-                  fontSize: 'clamp(14px, 1.5vw, 18px)',
-                  lineHeight: 1.7,
-                  color: 'rgba(255,255,255,0.85)',
-                  marginBottom: '32px',
-                  maxWidth: '700px',
-                  fontFamily: 'var(--font-sans)',
-                  whiteSpace: 'pre-line',
-                } }
+                className="leading-relaxed text-white/85 mb-6 md:mb-8 max-w-[700px] font-sans whitespace-pre-line text-[13px] sm:text-sm md:text-base lg:text-lg"
               >
                 { slide.description }
               </p>
               {/* CTA Buttons */ }
-              <div data-animate style={ { display: 'flex', gap: '15px', flexWrap: 'wrap' } }>
+              <div data-animate className="flex flex-row gap-2 sm:gap-4 flex-wrap w-full sm:w-auto">
                 <a
-                  href={ `tel:${siteData.contactInfo.phone}` }
+                  href={ `tel:${siteData.contactInfo.phone.split(',')[0].trim()}` }
                   target="_blank"
                   rel="noreferrer"
-                  className="site-button"
-                  style={ {
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '12px 24px',
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    transition: 'all 0.3s ease',
-                  } }
+                  className="site-button flex-1 sm:flex-none flex justify-center items-center gap-1 sm:gap-2 px-2 sm:px-6 py-2 sm:py-3 text-[10px] sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300"
                 >
                   <PhoneCall size={ 18 } />
-                  <span>Call Us</span>
+                  <span className="hidden sm:inline">Call Us</span>
+                  <span className="sm:hidden">Call</span>
                 </a>
                 <a
-                  href={ `https://wa.me/91${siteData.contactInfo.phone.replace(/\D/g, '').replace(/^0/, '')}` }
+                  href={ `https://wa.me/91${siteData.contactInfo.whatsapp.replace(/\D/g, '').replace(/^0/, '')}` }
                   target="_blank"
                   rel="noreferrer"
-                  className="site-button"
-                  style={ {
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '12px 24px',
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    transition: 'all 0.3s ease',
-                    backgroundColor: '#25D366', // WhatsApp color
-                    borderColor: '#25D366',
-                    color: '#fff',
-                  } }
+                  className="site-button flex-1 sm:flex-none flex justify-center items-center gap-1 sm:gap-2 px-2 sm:px-6 py-2 sm:py-3 text-[10px] sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 !bg-[#25D366] !border-[#25D366] !text-white"
                 >
-                  <MessageCircle size={ 18 } />
-                  <span>WhatsApp</span>
+                  <WhatsAppIcon style={{ fontSize: 18 }} />
+                  <span className="hidden sm:inline">WhatsApp</span>
+                  <span className="sm:hidden">Chat</span>
                 </a>
                 <a
                   href={ `mailto:${siteData.contactInfo.email}` }
                   target="_blank"
                   rel="noreferrer"
-                  className="site-button"
-                  style={ {
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '12px 24px',
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    transition: 'all 0.3s ease',
-                  } }
+                  className="site-button flex-1 sm:flex-none flex justify-center items-center gap-1 sm:gap-2 px-2 sm:px-6 py-2 sm:py-3 text-[10px] sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300"
                 >
                   <Mail size={ 18 } />
-                  <span>Email</span>
+                  <span className="hidden sm:inline">Email</span>
+                  <span className="sm:hidden">Mail</span>
                 </a>
               </div>
             </div>
@@ -330,37 +262,13 @@ const Slider1 = () => {
       </button>
 
       {/* Left Social Bar */ }
-      <div
-        style={ {
-          position: 'absolute',
-          left: '20px',
-          bottom: '30px',
-          zIndex: 10,
-          display: 'flex',
-          gap: '20px',
-        } }
-      >
-        { ['LinkedIn', 'Twitter', 'Facebook'].map((name) => (
-          <a
-            key={ name }
-            href={ `https://www.${name.toLowerCase()}.com` }
-            target="_blank"
-            rel="noopener noreferrer"
-            style={ {
-              color: 'rgba(255,255,255,0.6)',
-              fontSize: '13px',
-              fontWeight: 500,
-              textDecoration: 'none',
-              letterSpacing: '1px',
-              transition: 'color 0.3s ease',
-              fontFamily: 'var(--font-sans)',
-            } }
-            onMouseEnter={ (e) => { e.currentTarget.style.color = '#fff'; } }
-            onMouseLeave={ (e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; } }
-          >
-            { name }
-          </a>
-        )) }
+      <div className="absolute left-5 bottom-8 z-10 flex gap-4">
+        <a href={ siteData.contactInfo.facebook } className="w-10 h-10 rounded-full bg-brand-green/20 text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-brand-ink transition-colors group border border-brand-green/30 backdrop-blur-sm shadow-lg" target="_blank" rel="noreferrer">
+          <svg className="group-hover:text-brand-ink" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href={ siteData.contactInfo.instagram } className="w-10 h-10 rounded-full bg-brand-green/20 text-brand-gold flex items-center justify-center hover:bg-brand-gold hover:text-brand-ink transition-colors group border border-brand-green/30 backdrop-blur-sm shadow-lg" target="_blank" rel="noreferrer">
+          <svg className="group-hover:text-brand-ink" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
       </div>
     </div>
   );

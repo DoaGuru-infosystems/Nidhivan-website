@@ -128,6 +128,7 @@ const StatusBadge = ({ status }) => {
 const InquireForm = ({ projectName }) => {
     const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -138,11 +139,12 @@ const InquireForm = ({ projectName }) => {
                 email: formData.email,
                 mobile_no: formData.phone,
                 subject: `Inquiry for ${projectName}`,
-                message: "I am interested in this project. Please contact me with more details."
+                message: "I am interested in this project. Please contact me with more details.",
+                project_name: projectName
             };
             const response = await submitContactForm(data);
             if (response && response.success) {
-                alert("Thank you! Your inquiry has been sent.");
+                setIsSuccess(true);
                 setFormData({ name: '', phone: '', email: '' });
             } else {
                 alert("Failed to submit inquiry. Please try again later.");
@@ -155,32 +157,53 @@ const InquireForm = ({ projectName }) => {
     };
 
     return (
-        <div className="bg-brand-ink rounded-2xl shadow-xl p-8 border-t-4 border-brand-gold sticky top-24">
-            <h3 className="text-2xl font-bold text-white mb-2 heading-font">Inquire Now</h3>
-            <p className="text-gray-300 text-sm mb-6">Interested in this property? Leave your details and we will get back to you.</p>
-            
-            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-                <div>
-                    <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50)})} maxLength="50" className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
+        <div className="bg-[#fcfaf8] rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] p-8 border border-[#eae0d5] sticky top-24">
+            {isSuccess ? (
+                <div className="flex flex-col items-center justify-center text-center py-6 min-h-[300px]">
+                    <div className="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold text-brand-ink mb-2">Thank You!</h3>
+                    <p className="text-gray-600 mb-6 text-sm">Your inquiry has been sent successfully. We will get back to you shortly.</p>
+                    <button 
+                        onClick={() => setIsSuccess(false)}
+                        className="bg-brand-gold text-white px-6 py-3 rounded-md font-bold hover:bg-[#b45b1c] transition-colors text-sm uppercase tracking-wider w-full"
+                    >
+                        Send Another Inquiry
+                    </button>
                 </div>
-                <div>
-                    <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10)})} maxLength="10" className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
-                </div>
-                <div>
-                    <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value.slice(0, 100)})} maxLength="100" className="w-full px-4 py-3.5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white/10 text-white placeholder-gray-400" />
-                </div>
-                <button type="submit" disabled={isSubmitting} className="w-full bg-brand-gold hover:bg-white text-brand-ink font-bold py-4 rounded-md transition-colors shadow-md disabled:opacity-70 uppercase tracking-wider mt-2">
-                    {isSubmitting ? "Sending..." : "Request Details"}
-                </button>
-            </form>
+            ) : (
+                <>
+                    <h3 className="text-2xl font-bold text-brand-ink mb-2 heading-font">Inquire Now</h3>
+                    <p className="text-gray-600 text-sm mb-6">Interested in this property? Leave your details and we will get back to you.</p>
+                    
+                    <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+                        <div>
+                            <input required type="text" placeholder="Your Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50)})} maxLength="50" className="w-full px-4 py-3.5 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white text-gray-800 placeholder-gray-400 shadow-sm" />
+                        </div>
+                        <div>
+                            <input required type="tel" placeholder="Phone Number" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10)})} maxLength="10" className="w-full px-4 py-3.5 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white text-gray-800 placeholder-gray-400 shadow-sm" />
+                        </div>
+                        <div>
+                            <input required type="email" placeholder="Email Address" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value.slice(0, 100)})} maxLength="100" className="w-full px-4 py-3.5 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-gold bg-white text-gray-800 placeholder-gray-400 shadow-sm" />
+                        </div>
+                        <button type="submit" disabled={isSubmitting} className="w-full bg-brand-gold hover:bg-[#b45b1c] text-white font-bold py-4 rounded-md transition-colors shadow-md disabled:opacity-70 uppercase tracking-wider mt-2">
+                            {isSubmitting ? "Sending..." : "Request Details"}
+                        </button>
+                    </form>
+                </>
+            )}
 
-            <div className="mt-8 pt-6 border-t border-gray-700 space-y-4">
-                <a href="tel:+919876543210" className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Phone size={18} /></div>
-                    <span className="font-bold">+91 98765 43210</span>
-                </a>
-                <a href="mailto:info@nidhivandeveloper.com" className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><Mail size={18} /></div>
+            <div className="mt-8 pt-6 border-t border-gray-200 space-y-4">
+                <div className="flex items-start gap-3 text-brand-ink">
+                    <div className="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center shrink-0 mt-1"><Phone size={18} className="text-brand-green" /></div>
+                    <div className="flex flex-col gap-1">
+                        <a href="tel:9302736606" className="font-bold hover:text-brand-gold transition-colors">9302736606</a>
+                        <a href="tel:8815891302" className="font-bold hover:text-brand-gold transition-colors">8815891302</a>
+                    </div>
+                </div>
+                <a href="mailto:info@nidhivandeveloper.com" className="flex items-center gap-3 text-brand-ink hover:text-brand-gold transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center"><Mail size={18} className="text-brand-green" /></div>
                     <span className="font-bold">info@nidhivandeveloper.com</span>
                 </a>
             </div>

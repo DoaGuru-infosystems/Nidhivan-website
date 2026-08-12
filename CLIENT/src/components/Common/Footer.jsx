@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import Switcher from '../Elements/Switcher';
 import { siteData } from '../../data/siteContent';
 import { fetchAllBlogsClient } from '../../lib/api';
+import { MapPin, Mail, Phone, Clock } from 'lucide-react';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 const Footer = () => {
     const [recentBlogs, setRecentBlogs] = useState([]);
@@ -30,8 +32,8 @@ const Footer = () => {
             <footer className="bg-brand-ink text-gray-300 relative border-t-4 border-brand-gold">
                 {/* FOOTER TOP */ }
                 <div className="pt-20 pb-12">
-                    <div className="container mx-auto px-4 max-w-[1500px]">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 xl:gap-14">
+                    <div className="container mx-auto px-4 sm:px-6 max-w-[1500px]">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 xl:gap-14">
 
                             {/* ABOUT COMPANY */ }
                             <div>
@@ -104,21 +106,42 @@ const Footer = () => {
                             <div>
                                 <h5 className="text-xl font-bold text-white mb-6 flex items-center gap-2 heading-font"><span className="w-2 h-2 rounded-full bg-brand-gold"></span> Contact Us</h5>
                                 <ul className="flex flex-col gap-4">
-                                    <li className="flex gap-3 items-start">
-                                        <i className="fa fa-map-marker text-brand-gold mt-1 text-lg"></i>
-                                        <span className="text-gray-400">{ siteData.contactInfo.address }</span>
+                                    <li className="flex gap-4 items-start">
+                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                            <MapPin size={18} className="text-brand-gold" />
+                                        </div>
+                                        <span className="text-gray-400 text-sm leading-relaxed mt-2">{ siteData.contactInfo.address }</span>
                                     </li>
-                                    <li className="flex gap-3 items-center">
-                                        <i className="fa fa-envelope text-brand-gold text-lg"></i>
-                                        <a href={ `mailto:${siteData.contactInfo.email}` } className="text-gray-400 hover:text-white transition-colors">{ siteData.contactInfo.email }</a>
+                                    <li className="flex gap-4 items-center">
+                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                            <Mail size={18} className="text-brand-gold" />
+                                        </div>
+                                        <a href={ `mailto:${siteData.contactInfo.email}` } className="text-gray-400 hover:text-white transition-colors text-sm" style={{ wordBreak: 'break-word' }}>{ siteData.contactInfo.email }</a>
                                     </li>
-                                    <li className="flex gap-3 items-center">
-                                        <i className="fa fa-phone text-brand-gold text-lg"></i>
-                                        <a href={ `tel:${siteData.contactInfo.phone}` } className="text-gray-400 hover:text-white transition-colors">{ siteData.contactInfo.phone }</a>
+                                    <li className="flex gap-4 items-start">
+                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                            <Phone size={18} className="text-brand-gold" />
+                                        </div>
+                                        <div className="flex flex-wrap items-center mt-1">
+                                            {siteData.contactInfo.phone.split(',').map((num, idx, arr) => (
+                                                <React.Fragment key={idx}>
+                                                    <a href={`tel:${num.trim()}`} className="text-gray-400 hover:text-white transition-colors text-sm">{num.trim()}</a>
+                                                    {idx < arr.length - 1 && <span className="text-gray-400 text-sm mr-1">,</span>}
+                                                </React.Fragment>
+                                            ))}
+                                        </div>
                                     </li>
-                                    <li className="flex gap-3 items-center">
-                                        <i className="fa fa-clock-o text-brand-gold text-lg"></i>
-                                        <span className="text-gray-400">{ siteData.contactInfo.workingHours }</span>
+                                    <li className="flex gap-4 items-center">
+                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                            <WhatsAppIcon style={{ fontSize: 18 }} className="text-brand-gold" />
+                                        </div>
+                                        <a href={ `https://wa.me/91${siteData.contactInfo.whatsapp.replace(/\D/g, '')}` } target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors text-sm">{ siteData.contactInfo.whatsapp }</a>
+                                    </li>
+                                    <li className="flex gap-4 items-center">
+                                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                            <Clock size={18} className="text-brand-gold" />
+                                        </div>
+                                        <span className="text-gray-400 text-sm">{ siteData.contactInfo.workingHours }</span>
                                     </li>
                                 </ul>
                             </div>

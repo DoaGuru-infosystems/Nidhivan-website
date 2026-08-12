@@ -37,7 +37,7 @@ const FarmhouseSection = () => {
   `;
 
   return (
-    <section className="relative w-full min-h-[90vh] bg-brand-ink text-white flex items-center justify-center py-16 px-6 overflow-hidden">
+    <section className="relative w-full bg-brand-ink text-white flex items-center justify-center py-12 md:py-16 px-4 sm:px-6 overflow-hidden">
 
       <style>
         { `
@@ -70,7 +70,7 @@ const FarmhouseSection = () => {
       <div className="absolute top-0 left-0 w-80 h-80 bg-brand-green/20 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-gold/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center relative z-10">
 
         {/* Card 1: Content Card (Glassmorphism) */ }
         <div className="bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-8 md:p-12 rounded-[2rem] shadow-2xl hover:-translate-y-2 transition-transform duration-500 ease-out flex flex-col gap-8 relative overflow-hidden group">
@@ -131,7 +131,7 @@ const FarmhouseSection = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-5 pt-2">
-            <a href="tel:+918770375800" className="w-full sm:w-auto px-8 py-4 bg-brand-gold hover:bg-brand-terracotta text-brand-ink hover:text-white font-bold rounded-full text-center transition-all duration-300 shadow-[0_0_20px_rgba(249,186,81,0.3)] hover:shadow-[0_0_30px_rgba(180,91,28,0.5)] transform hover:scale-105 flex items-center justify-center gap-2">
+            <a href="tel:+919302736606" className="w-full sm:w-auto px-8 py-4 bg-brand-gold hover:bg-brand-terracotta text-brand-ink hover:text-white font-bold rounded-full text-center transition-all duration-300 shadow-[0_0_20px_rgba(249,186,81,0.3)] hover:shadow-[0_0_30px_rgba(180,91,28,0.5)] transform hover:scale-105 flex items-center justify-center gap-2">
               <Phone className="w-5 h-5" /> Book Site Visit
             </a>
             <div className="text-sm text-gray-400 flex items-center gap-2">
@@ -142,8 +142,8 @@ const FarmhouseSection = () => {
         </div>
 
         {/* Card 2: Video Section with Real Instagram Embed */ }
-        <div className="flex justify-center lg:justify-end animate-float-element">
-          <div className="instagram-embed-container relative w-full max-w-[340px] flex items-center justify-center">
+        <div className="flex justify-center lg:justify-end animate-float-element w-full">
+          <div className="instagram-embed-container relative w-full max-w-[340px] flex items-center justify-center overflow-hidden">
             <div
               dangerouslySetInnerHTML={ { __html: instagramEmbedCode } }
               className="w-full flex justify-center"

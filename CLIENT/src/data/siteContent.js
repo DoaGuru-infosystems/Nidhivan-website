@@ -1,13 +1,14 @@
 export const siteData = {
     companyName: "Nidhivan Developer",
     taglines: [
-        "Building Trust Since 2010",
+        "Building Trust Since 2018",
         "Better Price, Better Farmhouse Area",
         "Your Gateway to Premium Living"
     ],
     contactInfo: {
         address: "Near Pariyat Dam, Sundarpur, Jabalpur, Dundi Pipariya, Madhya Pradesh 482005",
-        phone: "087703 75800",
+        phone: "9302736606, 8815891302",
+        whatsapp: "8770375800",
         email: "nidhivanfarmsjabalpur@gmail.com",
         workingHours: "Mon - Sun: 9:00 AM - 8:00 PM",
         facebook: "https://www.facebook.com/profile.php?id=61578401472526",
@@ -16,7 +17,7 @@ export const siteData = {
     aboutUs: {
     title: "A Farmhouse of Your Own, Near the City You Call Home",
     shortDescription: "Nidhivan Developer offers legally clear farmhouse plots just outside Jabalpur, near jabalpur's prime location  a quiet second home for the weekends, without leaving your city behind.",
-    longDescription: "Nidhivan Developer builds farmhouse plots and farmland just outside Jabalpur, in the green stretch  near Pariyat Dam, Sundarpur, Jabalpur . We started with one simple idea every family that works hard in the city deserves a piece of land where they can slow down, breathe open air, and call it their own. Every plot we sell comes with clear title, complete documentation, and a price that doesn't change after you've already said yes. From your first site visit to the day the registry is in your hand, our team walks the whole path with you  no shortcuts, no surprises.",
+    longDescription: "Nidhivan Developer builds farmhouse plots and farmland just outside Jabalpur, in the green stretch  near Pariyat Dam, Sundarpur, Jabalpur . We started our journey in 2018 with one simple idea every family that works hard in the city deserves a piece of land where they can slow down, breathe open air, and call it their own. Every plot we sell comes with clear title, complete documentation, and a price that doesn't change after you've already said yes. From your first site visit to the day the registry is in your hand, our team walks the whole path with you  no shortcuts, no surprises.",
     mission: "To make farmhouse ownership near Jabalpur simple, honest, and within reach — one verified plot, one satisfied family at a time.",
     vision: "To become the name Madhya Pradesh trusts first when they think of owning land near Jabalpur — built on clear titles, fair pricing, and people who keep their word."
 },
@@ -53,10 +54,10 @@ whyChooseUs: [
     "Minutes from Jabalpur, Not Hours"
 ],
     statistics: [
-        { label: "Happy Families", value: "500", suffix: "+" },
-        { label: "Completed Projects", value: "15", suffix: "+" },
-        { label: "Years of Trust", value: "10", suffix: "+" },
-        { label: "Ongoing Projects", value: "5", suffix: "+" }
+        { label: "Premium Amenities", value: "15", suffix: "+" },
+        { label: "Completed Projects", value: "2", suffix: "+" },
+        { label: "Years of Trust", value: "8", suffix: "+" },
+        { label: "Ongoing Projects", value: "2", suffix: "+" }
     ],
     properties: [
         {
@@ -69,8 +70,8 @@ whyChooseUs: [
             reviewCount: 48,
             type: "Real Estate Developer",
             address: "Near Pariyat Dam, Sundarpur, Jabalpur, Dundi Pipariya, Madhya Pradesh 482005",
-            phone: "087703 75800",
-            whatsapp: "8770375800",
+            phone: "9302736606, 8815891302",
+            whatsapp: "9302736606",
             email: "nidhivanfarmsjabalpur@gmail.com",
             hours: "Mon – Sun: 9:00 AM – 8:00 PM",
             description:
@@ -91,8 +92,8 @@ whyChooseUs: [
             reviewCount: 3,
             type: "Real Estate Developer",
             address: "Bargi Dam Rd, near Kali gad state, Sahazpuri Ghat, Jabalpur, Shahajpuri, Madhya Pradesh 482021",
-            phone: "8770375800",
-            whatsapp: "8770375800",
+            phone: "9302736606, 8815891302",
+            whatsapp: "9302736606",
             email: "nidhivanfarmsjabalpur@gmail.com",
             hours: "Mon – Sun: 9:00 AM – 6:00 PM",
             description: "A premium farmhouse community by Nidhivan Developers near Bargi Dam, Jabalpur. Designed for affordable ownership and a peaceful family lifestyle with strong future appreciation.",
@@ -111,8 +112,8 @@ whyChooseUs: [
             reviewCount: 2,
             type: "Real Estate Developer",
             address: "Hinotiya Bargi Main Road, near The Royal Heritage Public School, Jabalpur, Madhya Pradesh 482021",
-            phone: "8770375800",
-            whatsapp: "8770375800",
+            phone: "9302736606, 8815891302",
+            whatsapp: "9302736606",
             email: "nidhivanfarmsjabalpur@gmail.com",
             hours: "Mon – Sun: 9:00 AM – 6:00 PM",
             description: "Experience the gateway to premium farm living near Hinotiya Bargi, Jabalpur,a peaceful, legally verified location offering excellent connectivity and lasting investment value for your family.",

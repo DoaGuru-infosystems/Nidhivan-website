@@ -31,13 +31,13 @@ const Testimonials1 = () => {
     }, []);
 
     return (
-        <section className="py-20 bg-bg-cream">
-            <div className="max-w-7xl mx-auto px-4">
+        <section className="py-12 md:py-20 bg-bg-cream">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 
                 {/* Section Header */}
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h4 className="text-brand-green font-semibold uppercase tracking-wider mb-2">Testimonials</h4>
-                    <h2 className="text-4xl md:text-5xl heading-font text-brand-ink mb-4">What Our Clients Say</h2>
+                <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
+                    <h4 className="text-brand-green font-semibold uppercase tracking-wider mb-2 text-sm md:text-base">Testimonials</h4>
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl heading-font text-brand-ink mb-4">What Our Clients Say</h2>
                     <div className="w-24 h-1 bg-brand-gold mx-auto"></div>
                 </div>
 
@@ -48,30 +48,30 @@ const Testimonials1 = () => {
                         loop={true}
                         autoplay={{ delay: 6000, disableOnInteraction: false }}
                         pagination={{ clickable: true, el: '.testimonial-pagination' }}
-                        spaceBetween={30}
+                        spaceBetween={20}
                         breakpoints={{
-                            640: { slidesPerView: 1 },
-                            768: { slidesPerView: 2 },
-                            1024: { slidesPerView: 3 },
+                            640: { slidesPerView: 1, spaceBetween: 20 },
+                            768: { slidesPerView: 2, spaceBetween: 24 },
+                            1024: { slidesPerView: 3, spaceBetween: 30 },
                         }}
                         className="pb-16"
                     >
                         {allTestimonials.map((item, index) => {
                             return (
                                 <SwiperSlide key={index}>
-                                    <div className="bg-white rounded-xl p-8 border border-gray-100 shadow-sm relative h-full flex flex-col justify-between mt-8 hover:-translate-y-2 transition-transform duration-300">
-                                        <Quote className="absolute -top-6 right-8 text-brand-gold opacity-20 w-16 h-16" />
+                                    <div className="bg-white rounded-xl p-5 md:p-8 border border-gray-100 shadow-sm relative h-full flex flex-col justify-between mt-6 md:mt-8 hover:-translate-y-2 transition-transform duration-300">
+                                        <Quote className="absolute -top-5 right-6 md:-top-6 md:right-8 text-brand-gold opacity-20 w-12 h-12 md:w-16 md:h-16" />
                                         
-                                        <div className="mb-6 relative z-10">
-                                            <p className="italic text-gray-600 leading-relaxed text-lg">"{item.text}"</p>
+                                        <div className="mb-5 relative z-10">
+                                            <p className="italic text-gray-600 leading-relaxed text-base overflow-wrap-anywhere">&ldquo;{item.text}&rdquo;</p>
                                         </div>
                                         
-                                        <div className="flex items-center gap-4 border-t border-gray-100 pt-6 mt-auto">
-                                            <div className="w-14 h-14 rounded-full flex items-center justify-center bg-brand-ink text-brand-gold text-2xl font-bold heading-font shadow-md flex-shrink-0">
+                                        <div className="flex items-center gap-4 border-t border-gray-100 pt-5 mt-auto">
+                                            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-brand-ink text-brand-gold text-xl md:text-2xl font-bold heading-font shadow-md flex-shrink-0">
                                                 {item.name ? item.name.charAt(0).toUpperCase() : 'N'}
                                             </div>
-                                            <div>
-                                                <h4 className="text-lg font-bold text-brand-ink heading-font">{item.name}</h4>
+                                            <div className="min-w-0">
+                                                <h4 className="text-base md:text-lg font-bold text-brand-ink heading-font truncate">{item.name}</h4>
                                                 <span className="text-sm text-brand-green font-medium">{item.role}</span>
                                             </div>
                                         </div>

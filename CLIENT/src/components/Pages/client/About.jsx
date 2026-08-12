@@ -45,11 +45,11 @@ const coreValuesData = [
 ];
 
 const timelineData = [
-    { year: "2010", title: "Company Started", description: "Nidhivan Developer was founded with a vision to redefine real estate." },
-    { year: "2013", title: "First Premium Project", description: "Successfully delivered our first major farmland project." },
-    { year: "2016", title: "Regional Expansion", description: "Expanded operations to multiple prime locations." },
-    { year: "2020", title: "500+ Happy Families", description: "Reached a major milestone of satisfied customers." },
-    { year: "2024", title: "Present Day", description: "Continuing to lead the market with premium farmhouse developments." }
+    { year: "2018", title: "Company Started", description: "Nidhivan Developer was founded with a vision to redefine real estate." },
+    { year: "2020", title: "First Premium Project", description: "Successfully delivered our first major farmland project." },
+    { year: "2023", title: "Regional Expansion", description: "Expanded operations to multiple prime locations." },
+    { year: "2024", title: "Community Growth", description: "Reached a major milestone of satisfied customers." },
+    { year: "2026", title: "Present Day", description: "Continuing to lead the market with premium farmhouse developments." }
 ];
 
 class About extends React.Component {
@@ -123,7 +123,7 @@ class About extends React.Component {
                           </div>
 
                           {/* Content Section */}
-                          <div className="w-full lg:w-1/2 p-8 lg:p-12 xl:p-16 flex flex-col justify-center bg-white relative">
+                          <div className="w-full lg:w-1/2 p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-center bg-white relative">
                             {/* Top decorative accent */}
                             <div 
                                 className="absolute top-0 left-0 w-full h-1" 

@@ -17,6 +17,7 @@ import Gallery from './Pages/client/Gallery';
 import Error from './Pages/client/Error';
 import ContactUs from './Pages/client/ContactUs';
 import ScrollToTop from './Common/ScrollToTop';
+import FloatingButtons from './Common/FloatingButtons';
 
 // Admin Pages
 import AdminLogin from './Pages/admin/AdminLogin';
@@ -43,6 +44,7 @@ const ClientLayout = () => {
             <Header />
             <Outlet />
             <Footer />
+            <FloatingButtons />
         </div>
     );
 };
