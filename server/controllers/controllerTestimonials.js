@@ -120,15 +120,22 @@ const updateTestimonial = (req, res) => {
         return res.status(404).json({ message: "Testimonial not found" });
       }
 
+      const old_image = results[0].image_url;
+      const old_video = results[0].video_url;
+
       let image_url = req.body.image_url !== undefined ? req.body.image_url : results[0].image_url;
       let video_url = req.body.video_url !== undefined ? req.body.video_url : results[0].video_url;
+      let newImageUploaded = false;
+      let newVideoUploaded = false;
 
       if (req.files) {
         if (req.files.image_url) {
           image_url = req.files.image_url[0].filename;
+          newImageUploaded = true;
         }
         if (req.files.video_url) {
           video_url = req.files.video_url[0].filename;
+          newVideoUploaded = true;
         }
       }
 
@@ -151,11 +158,29 @@ const updateTestimonial = (req, res) => {
         id
       ];
 
-      db.query(query, values, (err, result) => {
-        if (err) {
-          console.error("Error updating testimonial:", err);
+      db.query(query, values, (updateErr, result) => {
+        if (updateErr) {
+          console.error("Error updating testimonial:", updateErr);
           return res.status(500).json({ message: "Server error" });
         }
+
+        const fs = require('fs');
+        const path = require('path');
+
+        if (newImageUploaded && old_image && old_image !== image_url) {
+          const imagePath = path.join(__dirname, "../public/uploads", old_image);
+          fs.unlink(imagePath, (unlinkErr) => {
+            if (unlinkErr && unlinkErr.code !== 'ENOENT') console.error("Failed to delete old testimonial image:", unlinkErr);
+          });
+        }
+
+        if (newVideoUploaded && old_video && old_video !== video_url) {
+          const videoPath = path.join(__dirname, "../public/uploads", old_video);
+          fs.unlink(videoPath, (unlinkErr) => {
+            if (unlinkErr && unlinkErr.code !== 'ENOENT') console.error("Failed to delete old testimonial video:", unlinkErr);
+          });
+        }
+
         res.json({ message: "Testimonial updated successfully" });
       });
     });

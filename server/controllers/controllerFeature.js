@@ -54,27 +54,42 @@ const getGalleryCategoryById = (req, res) => {
 const updateGalleryCategory = (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
-  let thumbnail_image = req.body.thumbnail_image; // fallback to existing string/url
-  
-  if (req.file) {
-    thumbnail_image = req.file.filename;
-  }
+  db.query("SELECT thumbnail_image FROM gallery_categories WHERE id = ?", [id], (err, selectResults) => {
+    if (err) return res.status(500).json({ error: "Database error", details: err });
+    if (selectResults.length === 0) return res.status(404).json({ error: "Category not found" });
 
-  if (!title || !thumbnail_image) {
-    return res.status(400).json({ error: "Title and thumbnail_image are required" });
-  }
+    const old_thumbnail = selectResults[0].thumbnail_image;
+    let thumbnail_image = req.body.thumbnail_image;
+    let newFileUploaded = false;
+    
+    if (req.file) {
+      thumbnail_image = req.file.filename;
+      newFileUploaded = true;
+    }
 
-  const updated_at = getNowIST();
-  const query = "UPDATE gallery_categories SET title = ?, thumbnail_image = ?, updated_at = ? WHERE id = ?";
-  
-  db.query(query, [title, thumbnail_image, updated_at, id], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: "Database error", details: err });
+    if (!title || !thumbnail_image) {
+      return res.status(400).json({ error: "Title and thumbnail_image are required" });
     }
-    if (results.affectedRows === 0) {
-      return res.status(404).json({ error: "Category not found" });
-    }
-    return res.status(200).json({ message: "Category updated successfully" });
+
+    const updated_at = getNowIST();
+    const query = "UPDATE gallery_categories SET title = ?, thumbnail_image = ?, updated_at = ? WHERE id = ?";
+    
+    db.query(query, [title, thumbnail_image, updated_at, id], (updateErr, results) => {
+      if (updateErr) {
+        return res.status(500).json({ error: "Database error", details: updateErr });
+      }
+
+      if (newFileUploaded && old_thumbnail && old_thumbnail !== thumbnail_image) {
+        const filePath = path.join(__dirname, "../public/uploads", old_thumbnail);
+        fs.unlink(filePath, (unlinkErr) => {
+          if (unlinkErr && unlinkErr.code !== 'ENOENT') {
+            console.error("Failed to delete old thumbnail:", unlinkErr);
+          }
+        });
+      }
+      
+      return res.status(200).json({ message: "Category updated successfully" });
+    });
   });
 };
 
@@ -188,28 +203,45 @@ const updateGalleryImage = (req, res) => {
   const { category_id, title, address } = req.body;
   let image_url = req.body.image_url;
 
-  // Use the first file from array if a new one was uploaded
-  if (req.files && req.files.length > 0) {
-    image_url = req.files[0].filename;
-  } else if (req.file) { 
-    image_url = req.file.filename;
-  }
+  db.query("SELECT image_url FROM gallery_images WHERE id = ?", [id], (err, selectResults) => {
+    if (err) return res.status(500).json({ error: "Database error", details: err });
+    if (selectResults.length === 0) return res.status(404).json({ error: "Image not found" });
 
-  if (!category_id || !image_url) {
-    return res.status(400).json({ error: "category_id and image_url are required" });
-  }
+    const old_image = selectResults[0].image_url;
+    let newFileUploaded = false;
 
-  const updated_at = getNowIST();
-  const query = "UPDATE gallery_images SET category_id = ?, image_url = ?, title = ?, address = ?, updated_at = ? WHERE id = ?";
-  
-  db.query(query, [category_id, image_url, title || null, address || null, updated_at, id], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: "Database error", details: err });
+    // Use the first file from array if a new one was uploaded
+    if (req.files && req.files.length > 0) {
+      image_url = req.files[0].filename;
+      newFileUploaded = true;
+    } else if (req.file) { 
+      image_url = req.file.filename;
+      newFileUploaded = true;
     }
-    if (results.affectedRows === 0) {
-      return res.status(404).json({ error: "Image not found" });
+
+    if (!category_id || !image_url) {
+      return res.status(400).json({ error: "category_id and image_url are required" });
     }
-    return res.status(200).json({ message: "Image updated successfully" });
+
+    const updated_at = getNowIST();
+    const query = "UPDATE gallery_images SET category_id = ?, image_url = ?, title = ?, address = ?, updated_at = ? WHERE id = ?";
+    
+    db.query(query, [category_id, image_url, title || null, address || null, updated_at, id], (updateErr, results) => {
+      if (updateErr) {
+        return res.status(500).json({ error: "Database error", details: updateErr });
+      }
+
+      if (newFileUploaded && old_image && old_image !== image_url) {
+        const filePath = path.join(__dirname, "../public/uploads", old_image);
+        fs.unlink(filePath, (unlinkErr) => {
+          if (unlinkErr && unlinkErr.code !== 'ENOENT') {
+            console.error("Failed to delete old image:", unlinkErr);
+          }
+        });
+      }
+
+      return res.status(200).json({ message: "Image updated successfully" });
+    });
   });
 };
 

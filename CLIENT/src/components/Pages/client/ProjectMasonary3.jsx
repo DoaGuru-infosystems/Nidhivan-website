@@ -15,7 +15,8 @@ const filters = [
     { label: "Decor", filter: "cat-2" },
     { label: "Outdoor", filter: "cat-3" },
     { label: "Interiors", filter: "cat-4" },
-    { label: "Residential", filter: "cat-5" }
+    { label: "Residential", filter: "cat-5" },
+    { label: "Farmhouse", filter: "cat-6" }
 ];
 
 const getProjectFilterKey = (project) => {
@@ -23,6 +24,7 @@ const getProjectFilterKey = (project) => {
     if (rawValue.includes('resid')) return 'cat-5';
     if (rawValue.includes('commercial')) return 'cat-2';
     if (rawValue.includes('plot') || rawValue.includes('land')) return 'cat-3';
+    if (rawValue.includes('farm')) return 'cat-6';
     return filters.find(f => f.label.toLowerCase() === rawValue)?.filter || rawValue;
 };
 

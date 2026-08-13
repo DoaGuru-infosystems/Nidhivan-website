@@ -14,7 +14,8 @@ import 'swiper/css/navigation';
 const filters = [
     { label: "Residential", filter: "cat-1" },
     { label: "Commercial", filter: "cat-2" },
-    { label: "Plots", filter: "cat-3" }
+    { label: "Plots", filter: "cat-3" },
+    { label: "Farmhouse", filter: "cat-4" }
 ];
 
 const getProjectFilterKey = (project) => {
@@ -22,6 +23,7 @@ const getProjectFilterKey = (project) => {
     if (rawValue.includes('resid')) return 'cat-1';
     if (rawValue.includes('commercial')) return 'cat-2';
     if (rawValue.includes('plot') || rawValue.includes('land')) return 'cat-3';
+    if (rawValue.includes('farm')) return 'cat-4';
     return filters.find(f => f.label.toLowerCase() === rawValue)?.filter || rawValue;
 };
 

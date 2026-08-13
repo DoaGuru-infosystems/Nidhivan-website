@@ -3,6 +3,12 @@ const path = require("path");
 const fs = require("fs");
 const { db } = require("../db");
 const { getNowIST } = require("../utils/datatime");
+const util = require('util');
+
+const query = util.promisify(db.query).bind(db);
+const beginTransaction = util.promisify(db.beginTransaction).bind(db);
+const commit = util.promisify(db.commit).bind(db);
+const rollback = util.promisify(db.rollback).bind(db);
 
 const uploadDir = path.join(__dirname, "../public/uploads");
 if (!fs.existsSync(uploadDir)) {
@@ -37,40 +43,66 @@ const upload = multer({
 });
 
 // Create a new project
-const createProject = (req, res) => {
+const createProject = async (req, res) => {
   try {
     const { title, type, status, location, category, description } = req.body;
+    let { noOfUnits, noOfSaleUnits, landArea, mapEmbedUrl, amenities, specifications } = req.body;
 
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: "At least 1 image is required" });
     }
 
+    if (mapEmbedUrl && !mapEmbedUrl.startsWith("https://www.google.com/maps") && !mapEmbedUrl.startsWith("https://maps.google.com")) {
+      return res.status(400).json({ error: "Invalid Google Maps Embed URL" });
+    }
+
+    const parsedNoOfUnits = noOfUnits ? parseInt(noOfUnits, 10) : null;
+    const parsedNoOfSaleUnits = noOfSaleUnits ? parseInt(noOfSaleUnits, 10) : null;
+    if (parsedNoOfUnits !== null && parsedNoOfUnits < 0) return res.status(400).json({ error: "No. of Units must be non-negative" });
+    if (parsedNoOfSaleUnits !== null && parsedNoOfSaleUnits < 0) return res.status(400).json({ error: "No. of Sale Units must be non-negative" });
+
+    let parsedAmenities = [];
+    let parsedSpecifications = [];
+    try {
+      if (amenities) parsedAmenities = JSON.parse(amenities).filter(a => typeof a === 'string' && a.trim() !== '');
+      if (specifications) parsedSpecifications = JSON.parse(specifications).filter(a => typeof a === 'string' && a.trim() !== '');
+    } catch (e) {
+      return res.status(400).json({ error: "Invalid JSON format for amenities or specifications" });
+    }
+
     const created_at = getNowIST();
     const updated_at = created_at;
 
-    const projectQuery = "INSERT INTO projects (title, type, status, location, category, description, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    const projectValues = [title, type, status, location, category, description, created_at, updated_at];
+    await beginTransaction();
 
-    db.query(projectQuery, projectValues, (err, projectResult) => {
-      if (err) {
-        console.error("Error inserting project:", err);
-        return res.status(500).json({ message: "Server error", error: err.message });
-      }
-
+    try {
+      const projectQuery = "INSERT INTO projects (title, type, status, location, category, description, no_of_units, no_of_sale_units, land_area, map_embed_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      const projectValues = [title, type, status, location, category, description, parsedNoOfUnits, parsedNoOfSaleUnits, landArea || null, mapEmbedUrl || null, created_at, updated_at];
+      
+      const projectResult = await query(projectQuery, projectValues);
       const projectId = projectResult.insertId;
 
-      // Bulk insert images
       const imageValues = req.files.map(file => [projectId, file.filename, created_at, updated_at]);
-      const imagesQuery = "INSERT INTO project_images (project_id, image_url, created_at, updated_at) VALUES ?";
+      if (imageValues.length > 0) {
+        await query("INSERT INTO project_images (project_id, image_url, created_at, updated_at) VALUES ?", [imageValues]);
+      }
 
-      db.query(imagesQuery, [imageValues], (err, imageResult) => {
-        if (err) {
-          console.error("Error inserting project images:", err);
-          return res.status(500).json({ message: "Server error", error: err.message });
-        }
-        res.status(201).json({ id: projectId, message: "Project created successfully" });
-      });
-    });
+      const amenityValues = parsedAmenities.map((text, i) => [projectId, text.trim(), i]);
+      if (amenityValues.length > 0) {
+        await query("INSERT INTO project_amenities (project_id, amenity_text, sort_order) VALUES ?", [amenityValues]);
+      }
+
+      const specValues = parsedSpecifications.map((text, i) => [projectId, text.trim(), i]);
+      if (specValues.length > 0) {
+        await query("INSERT INTO project_specifications (project_id, specification_text, sort_order) VALUES ?", [specValues]);
+      }
+
+      await commit();
+      res.status(201).json({ id: projectId, message: "Project created successfully" });
+    } catch (innerError) {
+      await rollback();
+      throw innerError;
+    }
   } catch (error) {
     console.error("Error creating project:", error);
     res.status(500).json({ message: "Server error", error: error.message });
@@ -123,32 +155,25 @@ const getAllProjects = (req, res) => {
 };
 
 // Get single project
-const getProjectById = (req, res) => {
+const getProjectById = async (req, res) => {
   const projectId = req.params.id;
   try {
-    const projectQuery = "SELECT * FROM projects WHERE id = ?";
-    db.query(projectQuery, [projectId], (err, projects) => {
-      if (err) {
-        console.error("Error fetching project:", err);
-        return res.status(500).json({ message: "Server error", error: err.message });
-      }
+    const projects = await query("SELECT * FROM projects WHERE id = ?", [projectId]);
+    if (projects.length === 0) {
+      return res.status(404).json({ message: "Project not found" });
+    }
 
-      if (projects.length === 0) {
-        return res.status(404).json({ message: "Project not found" });
-      }
+    const project = projects[0];
+    const images = await query("SELECT * FROM project_images WHERE project_id = ?", [projectId]);
+    project.images = images;
 
-      const project = projects[0];
-      const imagesQuery = "SELECT * FROM project_images WHERE project_id = ?";
-      db.query(imagesQuery, [projectId], (err, images) => {
-        if (err) {
-          console.error("Error fetching project images:", err);
-          return res.status(500).json({ message: "Server error", error: err.message });
-        }
-        
-        project.images = images;
-        res.json(project);
-      });
-    });
+    const amenities = await query("SELECT amenity_text FROM project_amenities WHERE project_id = ? ORDER BY sort_order ASC", [projectId]);
+    project.amenities = amenities.map(a => a.amenity_text);
+
+    const specifications = await query("SELECT specification_text FROM project_specifications WHERE project_id = ? ORDER BY sort_order ASC", [projectId]);
+    project.specifications = specifications.map(s => s.specification_text);
+
+    res.json(project);
   } catch (error) {
     console.error("Error in getProjectById:", error);
     res.status(500).json({ message: "Server error" });
@@ -156,24 +181,43 @@ const getProjectById = (req, res) => {
 };
 
 // Update a project
-const updateProject = (req, res) => {
+const updateProject = async (req, res) => {
   try {
     const projectId = req.params.id;
     const { title, type, status, location, category, description } = req.body;
+    let { noOfUnits, noOfSaleUnits, landArea, mapEmbedUrl, amenities, specifications } = req.body;
+
+    const results = await query("SELECT * FROM projects WHERE id = ?", [projectId]);
+    if (results.length === 0) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    if (mapEmbedUrl && !mapEmbedUrl.startsWith("https://www.google.com/maps") && !mapEmbedUrl.startsWith("https://maps.google.com")) {
+      return res.status(400).json({ error: "Invalid Google Maps Embed URL" });
+    }
+
+    const parsedNoOfUnits = noOfUnits !== undefined ? (noOfUnits ? parseInt(noOfUnits, 10) : null) : results[0].no_of_units;
+    const parsedNoOfSaleUnits = noOfSaleUnits !== undefined ? (noOfSaleUnits ? parseInt(noOfSaleUnits, 10) : null) : results[0].no_of_sale_units;
+    if (parsedNoOfUnits !== null && parsedNoOfUnits < 0) return res.status(400).json({ error: "No. of Units must be non-negative" });
+    if (parsedNoOfSaleUnits !== null && parsedNoOfSaleUnits < 0) return res.status(400).json({ error: "No. of Sale Units must be non-negative" });
+
+    let parsedAmenities = null;
+    let parsedSpecifications = null;
+    let parsedRetainedImages = null;
+    try {
+      if (amenities !== undefined) parsedAmenities = JSON.parse(amenities).filter(a => typeof a === 'string' && a.trim() !== '');
+      if (specifications !== undefined) parsedSpecifications = JSON.parse(specifications).filter(a => typeof a === 'string' && a.trim() !== '');
+      if (req.body.retainedImages !== undefined) parsedRetainedImages = JSON.parse(req.body.retainedImages).filter(a => typeof a === 'string');
+    } catch (e) {
+      return res.status(400).json({ error: "Invalid JSON format for array fields" });
+    }
+
+    const updated_at = getNowIST();
     
-    db.query("SELECT * FROM projects WHERE id = ?", [projectId], (err, results) => {
-      if (err) {
-        console.error("Error fetching project:", err);
-        return res.status(500).json({ message: "Server error" });
-      }
+    await beginTransaction();
 
-      if (results.length === 0) {
-        return res.status(404).json({ message: "Project not found" });
-      }
-
-      const updated_at = getNowIST();
-      
-      const updateQuery = "UPDATE projects SET title = ?, type = ?, status = ?, location = ?, category = ?, description = ?, updated_at = ? WHERE id = ?";
+    try {
+      const updateQuery = "UPDATE projects SET title = ?, type = ?, status = ?, location = ?, category = ?, description = ?, no_of_units = ?, no_of_sale_units = ?, land_area = ?, map_embed_url = ?, updated_at = ? WHERE id = ?";
       const updateValues = [
         title || results[0].title,
         type || results[0].type,
@@ -181,41 +225,75 @@ const updateProject = (req, res) => {
         location || results[0].location,
         category || results[0].category,
         description !== undefined ? description : results[0].description,
+        parsedNoOfUnits,
+        parsedNoOfSaleUnits,
+        landArea !== undefined ? (landArea || null) : results[0].land_area,
+        mapEmbedUrl !== undefined ? (mapEmbedUrl || null) : results[0].map_embed_url,
         updated_at,
         projectId
       ];
 
-      db.query(updateQuery, updateValues, (err) => {
-        if (err) {
-          console.error("Error updating project:", err);
-          return res.status(500).json({ message: "Server error" });
-        }
+      await query(updateQuery, updateValues);
 
-        // Handle image replacement if new images are provided
-        if (req.files && req.files.length > 0) {
-          db.query("DELETE FROM project_images WHERE project_id = ?", [projectId], (err) => {
-            if (err) {
-              console.error("Error deleting old images:", err);
-              return res.status(500).json({ message: "Server error while updating images" });
-            }
+      const oldImages = await query("SELECT image_url FROM project_images WHERE project_id = ?", [projectId]);
+      let imagesToDelete = [];
 
-            const created_at = getNowIST(); // or re-use existing
-            const imageValues = req.files.map(file => [projectId, file.filename, created_at, created_at]);
-            const imagesQuery = "INSERT INTO project_images (project_id, image_url, created_at, updated_at) VALUES ?";
-
-            db.query(imagesQuery, [imageValues], (err) => {
-              if (err) {
-                console.error("Error inserting new images:", err);
-                return res.status(500).json({ message: "Server error while inserting new images" });
-              }
-              return res.json({ id: projectId, message: "Project updated successfully with new images" });
-            });
-          });
+      if (parsedRetainedImages !== null) {
+        imagesToDelete = oldImages.map(img => img.image_url).filter(url => !parsedRetainedImages.includes(url));
+        if (parsedRetainedImages.length === 0) {
+          await query("DELETE FROM project_images WHERE project_id = ?", [projectId]);
         } else {
-          return res.json({ id: projectId, message: "Project updated successfully" });
+          const placeholders = parsedRetainedImages.map(() => '?').join(',');
+          await query(`DELETE FROM project_images WHERE project_id = ? AND image_url NOT IN (${placeholders})`, [projectId, ...parsedRetainedImages]);
         }
-      });
-    });
+      } else if (req.files && req.files.length > 0) {
+        imagesToDelete = oldImages.map(img => img.image_url);
+        await query("DELETE FROM project_images WHERE project_id = ?", [projectId]);
+      }
+
+      if (imagesToDelete.length > 0) {
+        const fs = require('fs');
+        const path = require('path');
+        imagesToDelete.forEach(url => {
+          if (url) {
+            const filePath = path.join(__dirname, "../public/uploads", url);
+            fs.unlink(filePath, (err) => {
+              if (err && err.code !== 'ENOENT') {
+                console.error(`Failed to delete discarded project image (${url}):`, err);
+              }
+            });
+          }
+        });
+      }
+
+      if (req.files && req.files.length > 0) {
+        const created_at = getNowIST();
+        const imageValues = req.files.map(file => [projectId, file.filename, created_at, created_at]);
+        await query("INSERT INTO project_images (project_id, image_url, created_at, updated_at) VALUES ?", [imageValues]);
+      }
+
+      if (parsedAmenities !== null) {
+        await query("DELETE FROM project_amenities WHERE project_id = ?", [projectId]);
+        const amenityValues = parsedAmenities.map((text, i) => [projectId, text.trim(), i]);
+        if (amenityValues.length > 0) {
+          await query("INSERT INTO project_amenities (project_id, amenity_text, sort_order) VALUES ?", [amenityValues]);
+        }
+      }
+
+      if (parsedSpecifications !== null) {
+        await query("DELETE FROM project_specifications WHERE project_id = ?", [projectId]);
+        const specValues = parsedSpecifications.map((text, i) => [projectId, text.trim(), i]);
+        if (specValues.length > 0) {
+          await query("INSERT INTO project_specifications (project_id, specification_text, sort_order) VALUES ?", [specValues]);
+        }
+      }
+
+      await commit();
+      res.json({ id: projectId, message: "Project updated successfully" });
+    } catch (innerError) {
+      await rollback();
+      throw innerError;
+    }
   } catch (error) {
     console.error("Error updating project:", error);
     res.status(500).json({ message: "Server error" });

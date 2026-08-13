@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { Pencil, Trash2, Plus, Building2 } from 'lucide-react';
+import { Pencil, Trash2, Plus, Building2, ImagePlus, X } from 'lucide-react';
 import { fetchAllProjects, createProject, updateProject, deleteProject, getMediaUrl } from '@/lib/api';
 
 const ProjectManagement = () => {
@@ -22,8 +22,17 @@ const ProjectManagement = () => {
     const [newLocation, setNewLocation] = useState('');
     const [newCategory, setNewCategory] = useState('');
     const [newDescription, setNewDescription] = useState('');
-    const [imgFiles, setImgFiles] = useState([]);
-    const [imgPreviews, setImgPreviews] = useState([]); // For edit mode existing images or new previews
+    const [newNoOfUnits, setNewNoOfUnits] = useState('');
+    const [newNoOfSaleUnits, setNewNoOfSaleUnits] = useState('');
+    const [newLandArea, setNewLandArea] = useState('');
+    const [newMapEmbedUrl, setNewMapEmbedUrl] = useState('');
+    const [newAmenities, setNewAmenities] = useState([]);
+    const [newAmenityInput, setNewAmenityInput] = useState('');
+    const [newSpecifications, setNewSpecifications] = useState([]);
+    const [newSpecInput, setNewSpecInput] = useState('');
+    const [existingImages, setExistingImages] = useState([]);
+    const [newFiles, setNewFiles] = useState([]);
+    const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
         loadProjects();
@@ -34,25 +43,64 @@ const ProjectManagement = () => {
         setProjects(data);
     };
 
-    const handleMultipleImageUpload = (e) => {
-        const files = Array.from(e.target.files);
-        if (files.length > 0) {
-            for (let i = 0; i < files.length; i++) {
-                if (files[i].size > 5 * 1024 * 1024) {
-                    alert("file is larger then maximum upload size");
-                    e.target.value = '';
-                    return;
-                }
-            }
-
-            // Limit to 10 files
-            const allowedFiles = files.slice(0, 10);
-            setImgFiles(allowedFiles);
-            
-            // Create previews
-            const previews = allowedFiles.map(f => URL.createObjectURL(f));
-            setImgPreviews(previews);
+    const processFiles = (filesArray) => {
+        const currentCount = existingImages.length + newFiles.length;
+        let allowedSpace = 10 - currentCount;
+        
+        if (allowedSpace <= 0) {
+            alert("Maximum 10 images allowed.");
+            return;
         }
+
+        const validFiles = [];
+        for (let i = 0; i < filesArray.length; i++) {
+            const file = filesArray[i];
+            if (file.size > 5 * 1024 * 1024) {
+                alert(`File ${file.name} is larger than maximum upload size (5MB).`);
+                continue;
+            }
+            const isDuplicate = newFiles.some(f => f.name === file.name && f.size === file.size);
+            if (!isDuplicate && validFiles.length < allowedSpace) {
+                validFiles.push(file);
+            }
+        }
+
+        if (validFiles.length > 0) {
+            setNewFiles(prev => [...prev, ...validFiles]);
+        }
+    };
+
+    const handleFileSelect = (e) => {
+        if (e.target.files) {
+            processFiles(Array.from(e.target.files));
+        }
+        e.target.value = '';
+    };
+
+    const onDragOver = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+    };
+
+    const onDragLeave = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+    };
+
+    const onDrop = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+        if (e.dataTransfer.files) {
+            processFiles(Array.from(e.dataTransfer.files));
+        }
+    };
+
+    const removeExistingImage = (idx) => {
+        setExistingImages(prev => prev.filter((_, i) => i !== idx));
+    };
+
+    const removeNewFile = (idx) => {
+        setNewFiles(prev => prev.filter((_, i) => i !== idx));
     };
 
     const openCreateDialog = () => {
@@ -63,8 +111,16 @@ const ProjectManagement = () => {
         setNewLocation('');
         setNewCategory('');
         setNewDescription('');
-        setImgFiles([]);
-        setImgPreviews([]);
+        setNewNoOfUnits('');
+        setNewNoOfSaleUnits('');
+        setNewLandArea('');
+        setNewMapEmbedUrl('');
+        setNewAmenities([]);
+        setNewAmenityInput('');
+        setNewSpecifications([]);
+        setNewSpecInput('');
+        setExistingImages([]);
+        setNewFiles([]);
         setIsDialogOpen(true);
     };
 
@@ -76,15 +132,25 @@ const ProjectManagement = () => {
         setNewLocation(item.location || '');
         setNewCategory(item.category || '');
         setNewDescription(item.description || '');
-        setImgFiles([]);
-        // Handle both possible backend structures for images
-        let previews = [];
+        setNewNoOfUnits(item.no_of_units || '');
+        setNewNoOfSaleUnits(item.no_of_sale_units || '');
+        setNewLandArea(item.land_area || '');
+        setNewMapEmbedUrl(item.map_embed_url || '');
+        setNewAmenities(item.amenities || []);
+        setNewAmenityInput('');
+        setNewSpecifications(item.specifications || []);
+        setNewSpecInput('');
+        setNewFiles([]);
+        let existing = [];
         if (item.images && Array.isArray(item.images)) {
-            previews = item.images.map(img => getMediaUrl(img.image_url || img.image || img));
+            existing = item.images.map(img => {
+                const fileStr = img.image_url || img.image || img;
+                return { file: fileStr, preview: getMediaUrl(fileStr) };
+            });
         } else if (item.image) {
-            previews = [getMediaUrl(item.image)];
+            existing = [{ file: item.image, preview: getMediaUrl(item.image) }];
         }
-        setImgPreviews(previews);
+        setExistingImages(existing);
         setIsDialogOpen(true);
     };
 
@@ -98,8 +164,17 @@ const ProjectManagement = () => {
             formData.append('location', newLocation);
             formData.append('category', newCategory);
             formData.append('description', newDescription);
+            formData.append('noOfUnits', newNoOfUnits);
+            formData.append('noOfSaleUnits', newNoOfSaleUnits);
+            formData.append('landArea', newLandArea);
+            formData.append('mapEmbedUrl', newMapEmbedUrl);
+            formData.append('amenities', JSON.stringify(newAmenities));
+            formData.append('specifications', JSON.stringify(newSpecifications));
             
-            imgFiles.forEach(file => {
+            const retainedImages = existingImages.map(img => img.file);
+            formData.append('retainedImages', JSON.stringify(retainedImages));
+            
+            newFiles.forEach(file => {
                 formData.append('images', file);
             });
 
@@ -114,7 +189,7 @@ const ProjectManagement = () => {
         } catch (error) {
             console.error("Save failed", error);
             // Optimistic update for fallback
-            const fakeImage = imgPreviews.length > 0 ? imgPreviews[0] : '';
+            const fakeImage = existingImages.length > 0 ? existingImages[0].preview : (newFiles.length > 0 ? URL.createObjectURL(newFiles[0]) : '');
             if (editingId) {
                 setProjects(prev => prev.map(p => p.id === editingId ? {
                     ...p, title: newTitle, type: newType, status: newStatus, location: newLocation, category: newCategory, images: [fakeImage]
@@ -191,6 +266,7 @@ const ProjectManagement = () => {
                                         <option value="residential">Residential</option>
                                         <option value="commercial">Commercial</option>
                                         <option value="plot">Plots / Land</option>
+                                        <option value="farmhouse">Farmhouse / Farm Land</option>
                                     </select>
                                 </div>
                                 <div className="grid gap-2">
@@ -219,6 +295,27 @@ const ProjectManagement = () => {
                                 </div>
                             </div>
 
+                            <div className="grid grid-cols-3 gap-4">
+                                <div className="grid gap-2">
+                                    <Label htmlFor="noOfUnits" className="text-slate-700 font-medium">No. of Units</Label>
+                                    <Input id="noOfUnits" type="number" min="0" value={newNoOfUnits} onChange={e => setNewNoOfUnits(e.target.value)} placeholder="e.g. 125" className="focus-visible:ring-[#118A43]" />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="noOfSaleUnits" className="text-slate-700 font-medium">No. of Sale Units</Label>
+                                    <Input id="noOfSaleUnits" type="number" min="0" value={newNoOfSaleUnits} onChange={e => setNewNoOfSaleUnits(e.target.value)} placeholder="e.g. 30" className="focus-visible:ring-[#118A43]" />
+                                </div>
+                                <div className="grid gap-2">
+                                    <Label htmlFor="landArea" className="text-slate-700 font-medium">Land Area</Label>
+                                    <Input id="landArea" value={newLandArea} onChange={e => setNewLandArea(e.target.value)} placeholder="e.g. 1.78 acre" className="focus-visible:ring-[#118A43]" />
+                                </div>
+                            </div>
+                            
+                            <div className="grid gap-2">
+                                <Label htmlFor="mapEmbedUrl" className="text-slate-700 font-medium">Google Maps Embed Link</Label>
+                                <Input id="mapEmbedUrl" value={newMapEmbedUrl} onChange={e => setNewMapEmbedUrl(e.target.value)} placeholder="Paste embed link from Google Maps → Share → Embed a map" className="focus-visible:ring-[#118A43]" />
+                                <span className="text-xs text-slate-500">Google Maps → open the location → Share → Embed a map tab → Copy HTML → paste only the src="..." URL here.</span>
+                            </div>
+
                             <div className="grid grid-cols-1 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="description" className="text-slate-700 font-medium">Project Details (Overview)</Label>
@@ -232,27 +329,85 @@ const ProjectManagement = () => {
                                 </div>
                             </div>
 
+                            <div className="grid gap-4 mt-2 border-t border-slate-100 pt-4">
+                                <Label className="text-slate-700 font-medium">Amenities</Label>
+                                <div className="flex gap-2">
+                                    <Input value={newAmenityInput} onChange={e => setNewAmenityInput(e.target.value)} onKeyDown={(e) => { if(e.key === 'Enter') { e.preventDefault(); const val = newAmenityInput.trim(); if(val && !newAmenities.includes(val)) { setNewAmenities([...newAmenities, val]); setNewAmenityInput(''); } } }} placeholder="Add an amenity..." className="focus-visible:ring-[#118A43]" />
+                                    <Button type="button" onClick={() => { const val = newAmenityInput.trim(); if(val && !newAmenities.includes(val)) { setNewAmenities([...newAmenities, val]); setNewAmenityInput(''); } }} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white">Add</Button>
+                                </div>
+                                {newAmenities.length > 0 && (
+                                    <div className="flex flex-wrap gap-2">
+                                        {newAmenities.map((amenity, idx) => (
+                                            <span key={idx} className="inline-flex items-center gap-1 px-3 py-1 bg-slate-100 text-sm rounded-full text-slate-700 border border-slate-200">
+                                                {amenity}
+                                                <button type="button" onClick={() => setNewAmenities(newAmenities.filter((_, i) => i !== idx))} className="text-slate-500 hover:text-red-500 rounded-full w-4 h-4 flex items-center justify-center font-bold">×</button>
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="grid gap-4 mt-2 border-t border-slate-100 pt-4 pb-4 border-b">
+                                <Label className="text-slate-700 font-medium">Specifications</Label>
+                                <div className="flex gap-2">
+                                    <Input value={newSpecInput} onChange={e => setNewSpecInput(e.target.value)} onKeyDown={(e) => { if(e.key === 'Enter') { e.preventDefault(); const val = newSpecInput.trim(); if(val && !newSpecifications.includes(val)) { setNewSpecifications([...newSpecifications, val]); setNewSpecInput(''); } } }} placeholder="Add a specification..." className="focus-visible:ring-[#118A43]" />
+                                    <Button type="button" onClick={() => { const val = newSpecInput.trim(); if(val && !newSpecifications.includes(val)) { setNewSpecifications([...newSpecifications, val]); setNewSpecInput(''); } }} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white">Add</Button>
+                                </div>
+                                {newSpecifications.length > 0 && (
+                                    <div className="flex flex-wrap gap-2">
+                                        {newSpecifications.map((spec, idx) => (
+                                            <span key={idx} className="inline-flex items-center gap-1 px-3 py-1 bg-slate-100 text-sm rounded-full text-slate-700 border border-slate-200">
+                                                {spec}
+                                                <button type="button" onClick={() => setNewSpecifications(newSpecifications.filter((_, i) => i !== idx))} className="text-slate-500 hover:text-red-500 rounded-full w-4 h-4 flex items-center justify-center font-bold">×</button>
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
                             <div className="grid gap-2">
                                 <Label className="text-slate-700 font-medium">Project Images (Max 10)</Label>
                                 <div className="flex flex-col gap-3">
-                                    <div className="relative">
+                                    <div 
+                                        className={`relative border-2 border-dashed rounded-lg p-6 transition-colors ${isDragging ? 'border-[#118A43] bg-[#118A43]/5' : 'border-slate-300 hover:border-[#118A43]/50 hover:bg-slate-50'}`}
+                                        onDragOver={onDragOver}
+                                        onDragLeave={onDragLeave}
+                                        onDrop={onDrop}
+                                    >
                                         <input 
                                             type="file" 
                                             id="project-image-upload" 
                                             multiple
                                             accept="image/*" 
-                                            onChange={handleMultipleImageUpload} 
-                                            className="hidden" 
+                                            onChange={handleFileSelect} 
+                                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
                                         />
-                                        <Label htmlFor="project-image-upload" className="flex items-center justify-center w-full h-10 px-4 py-2 border border-slate-200 border-dashed rounded-md cursor-pointer hover:bg-slate-50 transition-colors text-sm text-slate-600 bg-white shadow-sm font-medium">
-                                            {editingId ? 'Upload New Images (Replaces existing)' : 'Select Images'}
-                                        </Label>
+                                        <div className="flex flex-col items-center justify-center text-center pointer-events-none">
+                                            <div className="p-3 bg-white rounded-full shadow-sm border border-slate-100 mb-3">
+                                                <ImagePlus className="w-6 h-6 text-[#118A43]" />
+                                            </div>
+                                            <p className="text-sm font-medium text-slate-700">Drag & drop images here</p>
+                                            <p className="text-xs text-slate-500 mt-1">or click to browse from computer</p>
+                                        </div>
                                     </div>
-                                    {imgPreviews.length > 0 && (
-                                        <div className="grid grid-cols-5 gap-2 mt-2">
-                                            {imgPreviews.map((url, i) => (
-                                                <div key={i} className="aspect-square rounded-md overflow-hidden border border-slate-200 bg-slate-100">
-                                                    <img src={url} alt={`preview ${i}`} className="w-full h-full object-cover" />
+
+                                    {(existingImages.length > 0 || newFiles.length > 0) && (
+                                        <div className="grid grid-cols-5 gap-3 mt-2">
+                                            {existingImages.map((img, i) => (
+                                                <div key={`existing-${i}`} className="relative aspect-square rounded-md overflow-hidden border border-slate-200 bg-slate-100 group">
+                                                    <img src={img.preview} alt={`existing preview ${i}`} className="w-full h-full object-cover" />
+                                                    <button type="button" onClick={() => removeExistingImage(i)} className="absolute top-1 right-1 bg-white/90 text-red-500 rounded-full w-5 h-5 flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-red-50">
+                                                        <X size={12} />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                            {newFiles.map((file, i) => (
+                                                <div key={`new-${i}`} className="relative aspect-square rounded-md overflow-hidden border border-green-200 bg-green-50 group">
+                                                    <img src={URL.createObjectURL(file)} alt={`new preview ${i}`} className="w-full h-full object-cover" />
+                                                    <button type="button" onClick={() => removeNewFile(i)} className="absolute top-1 right-1 bg-white/90 text-red-500 rounded-full w-5 h-5 flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity z-10 hover:bg-red-50">
+                                                        <X size={12} />
+                                                    </button>
+                                                    <div className="absolute bottom-0 inset-x-0 bg-green-500/80 text-[10px] text-white text-center py-0.5">New</div>
                                                 </div>
                                             ))}
                                         </div>

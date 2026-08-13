@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import SimilarProjectsCarousel from '../../Elements/SimilarProjectsCarousel';
 import { fetchProjectById, getMediaUrl, submitContactForm } from '@/lib/api';
-import { MapPin, Calendar, Tag, Layers, ChevronLeft, ChevronRight, Phone, Mail } from 'lucide-react';
+import { MapPin, Calendar, Tag, Layers, ChevronLeft, ChevronRight, Phone, Mail, CheckCircle2, Home, Grid, Map } from 'lucide-react';
 
 var bnrimg = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80";
 
@@ -251,6 +251,12 @@ class ProjectDetail1 extends React.Component {
             content,
             description,
             created_at,
+            no_of_units,
+            no_of_sale_units,
+            land_area,
+            map_embed_url,
+            amenities = [],
+            specifications = [],
             images = [],
         } = dynamicProject;
 
@@ -299,15 +305,63 @@ class ProjectDetail1 extends React.Component {
                                     </div>
                                 </div>
                                 
-                                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+                                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 mb-10">
                                     <h2 className="text-2xl font-bold text-brand-ink mb-6 heading-font border-b border-gray-100 pb-4">Key Details</h2>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
                                         <FactRow icon={Tag} label="Type" value={displayType} />
                                         <FactRow icon={Layers} label="Category" value={category} />
                                         <FactRow icon={MapPin} label="Location" value={location} />
+                                        {no_of_units != null && <FactRow icon={Home} label="No. of Units" value={no_of_units} />}
+                                        {no_of_sale_units != null && <FactRow icon={Grid} label="No. of Sale Units" value={no_of_sale_units} />}
+                                        {land_area && <FactRow icon={Map} label="Land Area" value={land_area} />}
                                         <FactRow icon={Calendar} label="Listed on" value={formattedDate} last />
                                     </div>
                                 </div>
+
+                                {amenities && amenities.length > 0 && (
+                                    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 mb-10">
+                                        <h2 className="text-2xl font-bold text-[#F4B54B] mb-6 heading-font border-b border-gray-100 pb-4 uppercase">Amenities</h2>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                                            {amenities.map((item, idx) => (
+                                                <div key={idx} className="flex items-start gap-3">
+                                                    <CheckCircle2 size={20} className="text-brand-green flex-shrink-0 mt-0.5" />
+                                                    <span className="text-gray-700">{item}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {specifications && specifications.length > 0 && (
+                                    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 mb-10">
+                                        <h2 className="text-2xl font-bold text-[#F4B54B] mb-6 heading-font border-b border-gray-100 pb-4 uppercase">Specifications</h2>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                                            {specifications.map((item, idx) => (
+                                                <div key={idx} className="flex items-start gap-3">
+                                                    <CheckCircle2 size={20} className="text-brand-green flex-shrink-0 mt-0.5" />
+                                                    <span className="text-gray-700">{item}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {(map_embed_url || location) && (
+                                    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 mb-10">
+                                        <h2 className="text-2xl font-bold text-brand-ink mb-6 heading-font border-b border-gray-100 pb-4">Our Location</h2>
+                                        <div className="w-full rounded-xl overflow-hidden bg-gray-100 aspect-video md:aspect-[21/9]">
+                                            <iframe
+                                                src={map_embed_url || `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`}
+                                                width="100%"
+                                                height="100%"
+                                                style={{ border: 0, minHeight: '400px' }}
+                                                loading="lazy"
+                                                referrerPolicy="no-referrer-when-downgrade"
+                                                title="Project Location"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
 
                             </div>
 

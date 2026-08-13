@@ -259,11 +259,23 @@ const updateBlog = (req, res) => {
         blogId,
       ];
 
-      db.query(updateQuery, updateValues, (err) => {
-        if (err) {
-          console.error("Error updating blog:", err);
+      db.query(updateQuery, updateValues, (updateErr) => {
+        if (updateErr) {
+          console.error("Error updating blog:", updateErr);
           return res.status(500).json({ message: "Server error" });
         }
+
+        if (req.file && results[0].image_url && results[0].image_url !== imageUrl) {
+          const fs = require('fs');
+          const path = require('path');
+          const filePath = path.join(__dirname, "../public/uploads", results[0].image_url);
+          fs.unlink(filePath, (unlinkErr) => {
+            if (unlinkErr && unlinkErr.code !== 'ENOENT') {
+              console.error("Failed to delete old blog image:", unlinkErr);
+            }
+          });
+        }
+
         res.json({ id: blogId, slug, message: "Blog updated successfully" });
       });
     });

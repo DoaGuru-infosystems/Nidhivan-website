@@ -36,7 +36,7 @@ const AdminLayout = () => {
         }`;
 
     return (
-        <div className="flex min-h-screen bg-[#f8fafc]">
+        <div className="flex min-h-screen bg-[#f8fafc]" data-lenis-prevent="true">
             {/* SIDEBAR */}
             <aside className="w-64 bg-white border-r border-slate-200 shadow-sm flex flex-col z-10">
                 <div className="p-6 border-b border-slate-100 flex justify-center items-center h-20">
