@@ -55,9 +55,9 @@ const ContactLeadsManagement = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-center bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div className="flex flex-wrap gap-3 justify-between items-center bg-white p-4 lg:p-6 rounded-xl border border-slate-200 shadow-sm">
                 <div>
-                    <h2 className="text-xl font-bold text-slate-800">Contact Leads</h2>
+                    <h2 className="text-lg lg:text-xl font-bold text-slate-800">Contact Leads</h2>
                     <p className="text-sm text-slate-500 mt-1">View and respond to inquiries submitted through the contact form.</p>
                 </div>
             </div>
@@ -66,7 +66,7 @@ const ContactLeadsManagement = () => {
                 <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
                     <CardTitle className="text-lg text-slate-800">Recent Inquiries</CardTitle>
                 </CardHeader>
-                <CardContent className="p-0">
+                <CardContent className="p-0 overflow-x-auto">
                     <Table>
                         <TableHeader>
                             <TableRow className="hover:bg-transparent bg-slate-50/50">

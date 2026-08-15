@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, Plus, FileText } from 'lucide-react';
+import { Pencil, Trash2, Plus, FileText, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { fetchAllBlogsAdmin, deleteBlog, getMediaUrl } from '@/lib/api';
 
@@ -32,14 +32,14 @@ const BlogManagement = () => {
     return (
         <div className="space-y-6">
             {/* Header */}
-            <div className="flex justify-between items-center bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div className="flex flex-wrap gap-3 justify-between items-center bg-white p-4 lg:p-6 rounded-xl border border-slate-200 shadow-sm">
                 <div>
-                    <h2 className="text-xl font-bold text-slate-800">Manage Blogs</h2>
+                    <h2 className="text-lg lg:text-xl font-bold text-slate-800">Manage Blogs</h2>
                     <p className="text-sm text-slate-500 mt-1">Create, edit, and manage your blog posts.</p>
                 </div>
                 <Button
                     onClick={() => navigate('/admin/blogs/new')}
-                    className="bg-[#118A43] hover:bg-[#0f7a3b] text-white flex items-center gap-2"
+                    className="bg-[#118A43] hover:bg-[#0f7a3b] text-white flex items-center gap-2 shrink-0"
                 >
                     <Plus size={16} />
                     Add New Blog
@@ -51,7 +51,7 @@ const BlogManagement = () => {
                 <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
                     <CardTitle className="text-lg text-slate-800">All Blog Posts ({blogs.length})</CardTitle>
                 </CardHeader>
-                <CardContent className="p-0">
+                <CardContent className="p-0 overflow-x-auto">
                     <Table>
                         <TableHeader>
                             <TableRow className="hover:bg-transparent bg-slate-50/50">
@@ -102,7 +102,16 @@ const BlogManagement = () => {
                                         </span>
                                     </TableCell>
                                     <TableCell className="text-right py-4 pr-6" onClick={e => e.stopPropagation()}>
-                                        <div className="flex justify-end gap-2">
+                                        <div className="flex justify-end gap-1">
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="h-8 w-8 text-blue-500 hover:bg-blue-50 hover:text-blue-700"
+                                                title="View on Website"
+                                                onClick={(e) => { e.stopPropagation(); window.open(item.slug ? `/blog-single/${item.slug}` : '/blogs', '_blank'); }}
+                                            >
+                                                <ExternalLink size={16} />
+                                            </Button>
                                             <Button
                                                 variant="ghost"
                                                 size="icon"

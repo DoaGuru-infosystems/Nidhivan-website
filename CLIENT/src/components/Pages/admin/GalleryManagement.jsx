@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Trash2, Plus, UploadCloud, Folder, ArrowLeft, Image as ImageIcon, X, Edit } from 'lucide-react';
+import { Trash2, Plus, UploadCloud, Folder, ArrowLeft, Image as ImageIcon, X, Edit, Play } from 'lucide-react';
 import { 
     fetchGalleryCategories, 
     createGalleryCategory, 
@@ -179,13 +179,17 @@ const GalleryManagement = () => {
         }
     };
 
-    // ----- Image Handlers -----
+    // ----- Image/Video Handlers -----
+    const isVideoFile = (file) => file && file.type && file.type.startsWith('video/');
+    const isVideoUrl = (url) => url && /\.(mp4|webm|mov|avi|mkv)$/i.test(url);
+
     const handleMultipleImageUpload = (e) => {
         const files = Array.from(e.target.files);
         if (files.length > 0) {
             for (let i = 0; i < files.length; i++) {
-                if (files[i].size > 5 * 1024 * 1024) {
-                    alert("file is larger then maximum upload size");
+                const maxSize = isVideoFile(files[i]) ? 50 * 1024 * 1024 : 5 * 1024 * 1024;
+                if (files[i].size > maxSize) {
+                    alert(`"${files[i].name}" exceeds the maximum size (${isVideoFile(files[i]) ? '50MB for videos' : '5MB for images'}).`);
                     if (e.target) e.target.value = '';
                     return;
                 }
@@ -292,19 +296,19 @@ const GalleryManagement = () => {
     if (viewingCategory) {
         return (
             <div className="space-y-6">
-                <div className="flex justify-between items-center bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <div className="flex items-center gap-4">
+                <div className="flex flex-wrap gap-3 justify-between items-center bg-white p-4 lg:p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div className="flex items-center gap-3">
                         <button onClick={() => setViewingCategory(null)} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors text-sm font-medium">
                             <ArrowLeft size={16} />
-                            Back to Categories
+                            Back
                         </button>
                         <div className="w-px h-5 bg-slate-200" />
                         <div>
-                            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                            <h2 className="text-lg lg:text-xl font-bold text-slate-800 flex items-center gap-2">
                                 <Folder size={20} className="text-[#118A43]" />
-                                {viewingCategory.title || viewingCategory.category_name}
+                                <span className="truncate max-w-[150px] sm:max-w-none">{viewingCategory.title || viewingCategory.category_name}</span>
                             </h2>
-                            <p className="text-sm text-slate-500 mt-1">Manage images in this category.</p>
+                            <p className="text-sm text-slate-500 mt-0.5">Manage images in this category.</p>
                         </div>
                     </div>
                     
@@ -326,15 +330,15 @@ const GalleryManagement = () => {
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-[500px]">
                             <DialogHeader>
-                                <DialogTitle>Upload Images</DialogTitle>
-                                <DialogDescription>Add new images to this category.</DialogDescription>
+                                <DialogTitle>Upload Images & Videos</DialogTitle>
+                                <DialogDescription>Add images or videos (mp4, webm, mov) to this category.</DialogDescription>
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
                                 <div className="grid gap-2">
                                     <Label className="text-slate-700 font-medium">Select Images</Label>
                                     <div className="flex gap-3 items-center">
                                         <div className="flex-1 relative">
-                                            <input type="file" multiple id="img-upload-input" accept="image/*" onChange={handleMultipleImageUpload} className="hidden" />
+                                            <input type="file" multiple id="img-upload-input" accept="image/*,video/mp4,video/webm,video/quicktime,video/x-msvideo" onChange={handleMultipleImageUpload} className="hidden" />
                                             <Label 
                                                 htmlFor="img-upload-input" 
                                                 onDragOver={(e) => { 
@@ -355,8 +359,9 @@ const GalleryManagement = () => {
                                                         const files = Array.from(e.dataTransfer.files);
                                                         const validFiles = [];
                                                         for (let i = 0; i < files.length; i++) {
-                                                            if (files[i].size > 5 * 1024 * 1024) {
-                                                                alert("file is larger then maximum upload size");
+                                                            const maxSize = isVideoFile(files[i]) ? 50 * 1024 * 1024 : 5 * 1024 * 1024;
+                                                            if (files[i].size > maxSize) {
+                                                                alert(`"${files[i].name}" exceeds the maximum size (${isVideoFile(files[i]) ? '50MB for videos' : '5MB for images'}).`);
                                                                 return;
                                                             }
                                                             validFiles.push(files[i]);
@@ -370,9 +375,9 @@ const GalleryManagement = () => {
                                                 className={`flex flex-col items-center justify-center w-full h-32 px-4 py-4 border-2 border-dashed rounded-xl cursor-pointer transition-all ${isImgDragging ? 'border-[#118A43] bg-[#118A43]/10' : 'border-slate-300 hover:border-[#118A43]/50 hover:bg-slate-50 bg-slate-50/50'}`}>
                                                 <UploadCloud className={`w-10 h-10 mb-3 transition-colors ${isImgDragging ? 'text-[#118A43]' : 'text-slate-400'}`} />
                                                 <span className="text-sm font-medium text-slate-700">
-                                                    {isImgDragging ? 'Drop images here...' : 'Choose files or drag & drop here'}
+                                                    {isImgDragging ? 'Drop files here...' : 'Choose images/videos or drag & drop'}
                                                 </span>
-                                                <span className="text-xs text-slate-400 mt-1">Duplicate files will be ignored</span>
+                                                <span className="text-xs text-slate-400 mt-1">Images up to 5MB · Videos (mp4, webm, mov) up to 50MB</span>
                                             </Label>
                                             {imgFiles.length > 0 && (
                                                 <p className="text-xs text-green-600 mt-2 font-medium">
@@ -385,11 +390,18 @@ const GalleryManagement = () => {
                                         <div className="flex gap-2 mt-2 overflow-x-auto pb-2 custom-scrollbar">
                                             {imgPreviews.map((preview, idx) => (
                                                 <div key={idx} className="w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 relative group">
-                                                    <img src={preview} alt={`Preview ${idx + 1}`} className="w-full h-full object-cover" />
+                                                    {isVideoFile(imgFiles[idx]) ? (
+                                                        <div className="w-full h-full flex items-center justify-center bg-slate-800">
+                                                            <Play size={24} className="text-white" />
+                                                            <span className="absolute bottom-1 left-1 right-1 text-[9px] text-white/80 truncate text-center">{imgFiles[idx]?.name}</span>
+                                                        </div>
+                                                    ) : (
+                                                        <img src={preview} alt={`Preview ${idx + 1}`} className="w-full h-full object-cover" />
+                                                    )}
                                                     <button 
                                                         onClick={(e) => { e.preventDefault(); handleRemoveImageToUpload(idx); }} 
                                                         className="absolute top-1 right-1 bg-white/90 rounded-full text-red-500 hover:text-red-700 shadow-sm flex items-center justify-center p-1"
-                                                        title="Remove image"
+                                                        title="Remove"
                                                     >
                                                         <X size={14} />
                                                     </button>
@@ -418,14 +430,32 @@ const GalleryManagement = () => {
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    {images.map((img) => (
+                    {images.map((img) => {
+                        const url = img.image_url ? getMediaUrl(img.image_url) : (img.image ? getMediaUrl(img.image) : '');
+                        const isVid = isVideoUrl(img.image_url || img.image || '') || img.media_type === 'video';
+                        return (
                         <div key={img.id} className="group relative rounded-xl overflow-hidden border border-slate-200 shadow-sm aspect-square bg-slate-100">
-                            <img 
-                                src={img.image_url ? getMediaUrl(img.image_url) : (img.image ? getMediaUrl(img.image) : '')} 
-                                alt={img.title || "Gallery Item"}
-                                className="object-cover w-full h-full"
-                            />
-                            
+                            {isVid ? (
+                                <video
+                                    src={url}
+                                    className="object-cover w-full h-full"
+                                    muted
+                                    preload="metadata"
+                                />
+                            ) : (
+                                <img
+                                    src={url}
+                                    alt={img.title || "Gallery Item"}
+                                    className="object-cover w-full h-full"
+                                />
+                            )}
+                            {isVid && (
+                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <div className="bg-black/40 rounded-full p-2">
+                                        <Play size={22} className="text-white" />
+                                    </div>
+                                </div>
+                            )}
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-between p-3">
                                 <div className="flex justify-end gap-2">
                                     <button onClick={() => openEditImage(img)} className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg">
@@ -441,7 +471,8 @@ const GalleryManagement = () => {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                        );
+                    })}
                 </div>
                 {images.length === 0 && (
                     <div className="text-center py-12 text-slate-500 bg-white rounded-xl border border-slate-200">
@@ -499,9 +530,9 @@ const GalleryManagement = () => {
     // ----- DEFAULT RENDER: CATEGORIES -----
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-center bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div className="flex flex-wrap gap-3 justify-between items-center bg-white p-4 lg:p-6 rounded-xl border border-slate-200 shadow-sm">
                 <div>
-                    <h2 className="text-xl font-bold text-slate-800">Gallery Categories</h2>
+                    <h2 className="text-lg lg:text-xl font-bold text-slate-800">Gallery Categories</h2>
                     <p className="text-sm text-slate-500 mt-1">Organize your portfolio into categories.</p>
                 </div>
                 
@@ -621,7 +652,7 @@ const GalleryManagement = () => {
                                 </div>
                             )}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                            <div className="absolute top-2 right-2 flex gap-2">
+                            <div className="absolute top-2 right-2 flex gap-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
                                 <button 
                                     onClick={(e) => openEditCategory(e, cat)} 
                                     className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"

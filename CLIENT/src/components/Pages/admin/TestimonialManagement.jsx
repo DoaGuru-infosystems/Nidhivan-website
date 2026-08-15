@@ -132,9 +132,9 @@ const TestimonialManagement = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-center bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div className="flex flex-wrap gap-3 justify-between items-center bg-white p-4 lg:p-6 rounded-xl border border-slate-200 shadow-sm">
                 <div>
-                    <h2 className="text-xl font-bold text-slate-800">Manage Testimonials</h2>
+                    <h2 className="text-lg lg:text-xl font-bold text-slate-800">Manage Testimonials</h2>
                     <p className="text-sm text-slate-500 mt-1">Manage client reviews and feedback.</p>
                 </div>
                 
@@ -145,7 +145,7 @@ const TestimonialManagement = () => {
                             Add Testimonial
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[550px] p-6 rounded-xl max-h-[90vh] overflow-y-auto">
+                    <DialogContent className="sm:max-w-[550px] p-4 sm:p-6 rounded-xl max-h-[90vh] overflow-y-auto">
                         <DialogHeader className="mb-4">
                             <DialogTitle className="text-2xl text-[#1e1e1e]">{editingId ? 'Edit Testimonial' : 'Add New Testimonial'}</DialogTitle>
                             <DialogDescription className="text-slate-500">
@@ -206,7 +206,7 @@ const TestimonialManagement = () => {
                 <CardHeader className="bg-slate-50/50 border-b border-slate-100 pb-4">
                     <CardTitle className="text-lg text-slate-800">All Testimonials</CardTitle>
                 </CardHeader>
-                <CardContent className="p-0">
+                <CardContent className="p-0 overflow-x-auto">
                     <Table>
                         <TableHeader>
                             <TableRow className="hover:bg-transparent bg-slate-50/50">
@@ -235,11 +235,11 @@ const TestimonialManagement = () => {
                                         </div>
                                     </TableCell>
                                     <TableCell className="text-right py-5 pr-6 align-top">
-                                        <div className="flex justify-end gap-2 mt-2">
-                                            <Button onClick={() => openEditDialog(item)} variant="ghost" size="icon" className="h-8 w-8 text-[#118A43] hover:bg-[#118A43]/10 hover:text-[#0f7a3b] opacity-0 group-hover:opacity-100 transition-opacity" title="Edit">
+                                        <div className="flex justify-end gap-2 mt-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                                            <Button onClick={() => openEditDialog(item)} variant="ghost" size="icon" className="h-8 w-8 text-[#118A43] hover:bg-[#118A43]/10 hover:text-[#0f7a3b]" title="Edit">
                                                 <Pencil size={16} />
                                             </Button>
-                                            <Button onClick={() => handleDelete(item.id)} variant="ghost" size="icon" className="h-8 w-8 text-red-500 hover:bg-red-50 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity" title="Delete">
+                                            <Button onClick={() => handleDelete(item.id)} variant="ghost" size="icon" className="h-8 w-8 text-red-500 hover:bg-red-50 hover:text-red-700" title="Delete">
                                                 <Trash2 size={16} />
                                             </Button>
                                         </div>

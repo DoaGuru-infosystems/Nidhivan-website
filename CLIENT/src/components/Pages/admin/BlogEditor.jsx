@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
-import { ArrowLeft, Save, Eye } from 'lucide-react';
+import { ArrowLeft, Save, Eye, X } from 'lucide-react';
 import { fetchBlogById, createBlog, updateBlog, getMediaUrl } from '@/lib/api';
 import BlogContentEditor from './components/BlogContentEditor';
 
@@ -28,6 +28,7 @@ const BlogEditor = () => {
     
     const [imageFile, setImageFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState('');
+    const [keywordInput, setKeywordInput] = useState('');
     const [saving, setSaving] = useState(false);
     const [loading, setLoading] = useState(isEditMode);
 
@@ -119,31 +120,31 @@ const BlogEditor = () => {
     return (
         <div className="min-h-screen bg-[#f8fafc]">
             {/* Top Bar */}
-            <div className="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-sm px-8 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                    <button onClick={() => navigate('/admin/blogs')} className="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors text-sm font-medium">
+            <div className="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-sm px-4 lg:px-8 py-3 lg:py-4 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 lg:gap-4 min-w-0">
+                    <button onClick={() => navigate('/admin/blogs')} className="flex items-center gap-1.5 text-slate-500 hover:text-slate-800 transition-colors text-sm font-medium shrink-0">
                         <ArrowLeft size={16} />
-                        Back to Blogs
+                        <span className="hidden sm:inline">Back to Blogs</span>
                     </button>
-                    <div className="w-px h-5 bg-slate-200" />
-                    <h1 className="text-xl font-bold text-slate-800">
+                    <div className="w-px h-5 bg-slate-200 hidden sm:block" />
+                    <h1 className="text-base lg:text-xl font-bold text-slate-800 truncate">
                         {isEditMode ? 'Edit Blog Post' : 'New Blog Post'}
                     </h1>
                 </div>
 
-                <div className="flex items-center gap-3">
-                    <Button variant="outline" onClick={() => navigate('/admin/blogs')} className="border-slate-200 text-slate-600 hover:bg-slate-50">
+                <div className="flex items-center gap-2 lg:gap-3 shrink-0">
+                    <Button variant="outline" onClick={() => navigate('/admin/blogs')} className="hidden sm:flex border-slate-200 text-slate-600 hover:bg-slate-50">
                         Cancel
                     </Button>
-                    <Button onClick={handleSave} disabled={saving} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white flex items-center gap-2 min-w-[130px]">
+                    <Button onClick={handleSave} disabled={saving} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white flex items-center gap-2">
                         <Save size={16} />
-                        {saving ? 'Saving...' : isEditMode ? 'Update Post' : 'Publish Post'}
+                        <span>{saving ? 'Saving...' : isEditMode ? 'Update' : 'Publish'}</span>
                     </Button>
                 </div>
             </div>
 
             {/* Main Content */}
-            <div className="max-w-4xl mx-auto px-6 py-10 space-y-8">
+            <div className="max-w-4xl mx-auto px-4 lg:px-6 py-6 lg:py-10 space-y-6 lg:space-y-8">
 
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
                     {/* Status Toggle */}
@@ -236,25 +237,79 @@ const BlogEditor = () => {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="meta-keywords">Meta Keywords</Label>
-                            <Input id="meta-keywords" value={form.meta_keywords} onChange={e => setField('meta_keywords', e.target.value)} placeholder="comma, separated, keywords" />
-                            {form.meta_keywords && (
-                                <div className="flex flex-wrap gap-2 mt-3 p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                                    <span className="text-xs text-slate-500 w-full mb-1">Keywords preview (how they will appear):</span>
-                                    {(form.meta_keywords.includes(',') 
-                                        ? form.meta_keywords.split(',').map(k => k.trim()).filter(Boolean)
-                                        : form.meta_keywords.split(/\s+/).filter(Boolean)
-                                    ).map((kw, idx) => (
-                                        <span key={idx} className="px-2.5 py-1 bg-[#118A43]/10 text-[#118A43] rounded-md text-xs font-semibold">
-                                            {kw}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
+                            {/* Tag-style keyword input */}
+                            <div
+                                className="flex flex-wrap gap-1.5 items-center p-2 min-h-[44px] border border-slate-200 rounded-md bg-white focus-within:ring-2 focus-within:ring-[#118A43] focus-within:border-[#118A43] transition-colors cursor-text"
+                                onClick={() => document.getElementById('keyword-input').focus()}
+                            >
+                                {(form.meta_keywords ? form.meta_keywords.split(',').map(k => k.trim()).filter(Boolean) : []).map((kw, idx) => (
+                                    <span key={idx} className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#118A43]/10 text-[#118A43] border border-[#118A43]/20 rounded text-xs font-semibold shrink-0">
+                                        {kw}
+                                        <button
+                                            type="button"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                const tags = form.meta_keywords.split(',').map(k => k.trim()).filter(Boolean);
+                                                tags.splice(idx, 1);
+                                                setField('meta_keywords', tags.join(', '));
+                                            }}
+                                            className="text-[#118A43]/60 hover:text-red-500 transition-colors"
+                                        >
+                                            <X size={10} />
+                                        </button>
+                                    </span>
+                                ))}
+                                <input
+                                    id="keyword-input"
+                                    type="text"
+                                    value={keywordInput}
+                                    onChange={e => setKeywordInput(e.target.value)}
+                                    onKeyDown={e => {
+                                        if (e.key === 'Enter' || e.key === ',') {
+                                            e.preventDefault();
+                                            const newTag = keywordInput.trim().replace(/,$/, '');
+                                            if (!newTag) return;
+                                            const existing = form.meta_keywords ? form.meta_keywords.split(',').map(k => k.trim()).filter(Boolean) : [];
+                                            if (!existing.includes(newTag)) {
+                                                setField('meta_keywords', [...existing, newTag].join(', '));
+                                            }
+                                            setKeywordInput('');
+                                        } else if (e.key === 'Backspace' && !keywordInput) {
+                                            const tags = form.meta_keywords ? form.meta_keywords.split(',').map(k => k.trim()).filter(Boolean) : [];
+                                            if (tags.length > 0) {
+                                                tags.pop();
+                                                setField('meta_keywords', tags.join(', '));
+                                            }
+                                        }
+                                    }}
+                                    placeholder={form.meta_keywords ? 'Add more...' : 'Type keyword, press Enter or ,'}
+                                    className="flex-1 min-w-[120px] outline-none text-sm text-slate-700 bg-transparent py-0.5"
+                                />
+                            </div>
+                            <p className="text-xs text-slate-400 mt-1">Press <kbd className="px-1 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px]">Enter</kbd> or <kbd className="px-1 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px]">,</kbd> to add · <kbd className="px-1 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px]">⌫</kbd> to remove last</p>
+
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="meta-desc">Meta Description</Label>
                             <Textarea id="meta-desc" value={form.meta_description} onChange={e => setField('meta_description', e.target.value)} placeholder="SEO Description" className="min-h-[80px]" />
                         </div>
+                    </div>
+                </div>
+
+                {/* Bottom Publish/Save Button */}
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <p className="font-semibold text-slate-800">{isEditMode ? 'Save your changes' : 'Ready to publish?'}</p>
+                        <p className="text-sm text-slate-500 mt-0.5">{isEditMode ? 'Click Update Post to save all changes.' : 'Click Publish Post to make it live on the website.'}</p>
+                    </div>
+                    <div className="flex items-center gap-3 shrink-0">
+                        <Button variant="outline" onClick={() => navigate('/admin/blogs')} className="border-slate-200 text-slate-600 hover:bg-slate-50">
+                            Cancel
+                        </Button>
+                        <Button onClick={handleSave} disabled={saving} className="bg-[#118A43] hover:bg-[#0f7a3b] text-white flex items-center gap-2 min-w-[140px]">
+                            <Save size={16} />
+                            {saving ? 'Saving...' : isEditMode ? 'Update Post' : 'Publish Post'}
+                        </Button>
                     </div>
                 </div>
 

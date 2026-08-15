@@ -2,6 +2,38 @@ const { db } = require("../db");
 const { getNowIST } = require("../utils/datatime");
 const fs = require("fs");
 const path = require("path");
+const multer = require("multer");
+
+const uploadDir = path.join(__dirname, "../public/uploads");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Multer storage config for gallery (images + videos)
+const galleryStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+const galleryUpload = multer({
+  storage: galleryStorage,
+  limits: { fileSize: 50 * 1024 * 1024 }, // 50MB for videos
+  fileFilter: (req, file, cb) => {
+    const allowedMime = [
+      "image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif", "image/jfif",
+      "video/mp4", "video/webm", "video/quicktime", "video/x-msvideo", "video/x-matroska"
+    ];
+    if (allowedMime.includes(file.mimetype)) {
+      return cb(null, true);
+    }
+    cb(new Error("Only images (jpg, png, webp, gif) and videos (mp4, webm, mov, avi) are allowed!"));
+  },
+});
 
 // Create a new gallery category
 const createGalleryCategory = (req, res) => {
@@ -132,7 +164,7 @@ const deleteGalleryCategory = (req, res) => {
 
 // --- Gallery Images CRUD ---
 
-// Create a new gallery image (Multiple Upload Support)
+// Create a new gallery image/video (Multiple Upload Support)
 const createGalleryImage = (req, res) => {
   const { category_id, title, address } = req.body;
 
@@ -141,21 +173,31 @@ const createGalleryImage = (req, res) => {
   }
 
   if (!req.files || req.files.length === 0) {
-    return res.status(400).json({ error: "At least one image is required" });
+    return res.status(400).json({ error: "At least one file is required" });
   }
 
   const created_at = getNowIST();
   
-  // Create an array of values for bulk insert: [category_id, image_url, title, address, created_at, updated_at]
-  const values = req.files.map(file => [category_id, file.filename, title || null, address || null, created_at, created_at]);
+  // Store file type (image/video) along with filename
+  const values = req.files.map(file => {
+    const isVideo = file.mimetype.startsWith('video/');
+    return [category_id, file.filename, isVideo ? 'video' : 'image', title || null, address || null, created_at, created_at];
+  });
 
-  const query = "INSERT INTO gallery_images (category_id, image_url, title, address, created_at, updated_at) VALUES ?";
+  const query = "INSERT INTO gallery_images (category_id, image_url, media_type, title, address, created_at, updated_at) VALUES ?";
   
   db.query(query, [values], (err, results) => {
     if (err) {
-      return res.status(500).json({ error: "Database error", details: err });
+      // Fallback: try without media_type column (backward compat)
+      const fallbackValues = req.files.map(file => [category_id, file.filename, title || null, address || null, created_at, created_at]);
+      const fallbackQuery = "INSERT INTO gallery_images (category_id, image_url, title, address, created_at, updated_at) VALUES ?";
+      db.query(fallbackQuery, [fallbackValues], (err2, results2) => {
+        if (err2) return res.status(500).json({ error: "Database error", details: err2 });
+        return res.status(201).json({ message: "Files uploaded successfully", insertedRows: results2.affectedRows });
+      });
+      return;
     }
-    return res.status(201).json({ message: "Images created successfully", insertedRows: results.affectedRows });
+    return res.status(201).json({ message: "Files uploaded successfully", insertedRows: results.affectedRows });
   });
 };
 
@@ -284,4 +326,5 @@ module.exports = {
   getGalleryImageById,
   updateGalleryImage,
   deleteGalleryImage,
+  galleryUpload,
 };

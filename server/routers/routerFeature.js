@@ -12,6 +12,7 @@ const {
   getGalleryImageById,
   updateGalleryImage,
   deleteGalleryImage,
+  galleryUpload,
 } = require("../controllers/controllerFeature");
 
 const router = express.Router();
@@ -23,12 +24,12 @@ router.get("/gallery-categories/:id", getGalleryCategoryById);
 router.put("/gallery-categories/:id", upload.single("thumbnail_image"), updateGalleryCategory);
 router.delete("/gallery-categories/:id", deleteGalleryCategory);
 
-// Gallery Image Routes
-router.post("/gallery-images", upload.array("images", 50), createGalleryImage);
+// Gallery Image Routes (supports images + videos up to 50MB)
+router.post("/gallery-images", galleryUpload.array("images", 50), createGalleryImage);
 router.get("/gallery-images", getAllGalleryImages);
 router.get("/gallery-images/category/:category_id", getGalleryImagesByCategoryId);
 router.get("/gallery-images/:id", getGalleryImageById);
-router.put("/gallery-images/:id", upload.array("images", 1), updateGalleryImage);
+router.put("/gallery-images/:id", galleryUpload.array("images", 1), updateGalleryImage);
 router.delete("/gallery-images/:id", deleteGalleryImage);
 
 module.exports = router;

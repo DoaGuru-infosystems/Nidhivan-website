@@ -53,7 +53,7 @@ const Navigation = ({ onLinkClick }) => {
               <ul
                 className="sub-menu"
                 style={{
-                  display: openSubmenu === index ? 'block' : '',
+                  display: openSubmenu === index ? 'block' : 'none',
                 }}
               >
                 {item.children.map((child) => (

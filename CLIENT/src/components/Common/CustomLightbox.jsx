@@ -4,6 +4,7 @@ import "yet-another-react-lightbox/styles.css";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Counter from "yet-another-react-lightbox/plugins/counter";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import Video from "yet-another-react-lightbox/plugins/video";
 import "yet-another-react-lightbox/plugins/counter.css";
 
 /**
@@ -23,7 +24,7 @@ const CustomLightbox = ({ open, close, index, slides }) => {
             close={close}
             index={index}
             slides={slides}
-            plugins={[Fullscreen, Counter, Zoom]}
+            plugins={[Fullscreen, Counter, Zoom, Video]}
             carousel={{
                 finite: false, // infinite loop for prev/next
                 preload: 2, // Preload next and previous images

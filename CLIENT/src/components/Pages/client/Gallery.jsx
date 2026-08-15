@@ -4,7 +4,7 @@ import Banner from '../../Elements/Banner';
 import Masonry from 'react-masonry-css';
 import gsap from 'gsap';
 import { Flip } from 'gsap/Flip';
-import { Maximize, SearchX, AlertCircle, RefreshCw } from 'lucide-react';
+import { Maximize, SearchX, AlertCircle, RefreshCw, Play } from 'lucide-react';
 import CustomLightbox from '../../Common/CustomLightbox';
 import { fetchAllGalleryImages, fetchGalleryCategories, getMediaUrl } from '@/lib/api';
 
@@ -29,6 +29,8 @@ const breakpointColumnsObj = {
   768: 2,
   500: 1
 };
+
+const isVideoUrl = (url) => url && /\.(mp4|webm|mov|avi|mkv)$/i.test(url);
 
 const Gallery = () => {
     const location = useLocation();
@@ -76,7 +78,8 @@ const Gallery = () => {
                 title: item.title || `Gallery Image ${index + 1}`,
                 address: item.address || '',
                 filter: item.category_id ? item.category_id.toString() : 'General',
-                image: item.image_url ? getMediaUrl(item.image_url) : "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80"
+                image: item.image_url ? getMediaUrl(item.image_url) : "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80",
+                mediaType: item.media_type || (item.image_url && isVideoUrl(item.image_url) ? 'video' : 'image')
             }));
 
             // Combine both category thumbnails and regular images
@@ -208,12 +211,30 @@ const Gallery = () => {
                                             className="relative group overflow-hidden rounded-2xl shadow-sm hover:shadow-2xl transition-shadow duration-500 cursor-pointer bg-gray-100"
                                             onClick={(e) => { e.preventDefault(); setLightboxIndex(index); setLightboxOpen(true); }}
                                         >
-                                            <img 
-                                                src={item.image} 
-                                                alt={item.title} 
-                                                loading="lazy"
-                                                className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" 
-                                            />
+                                            {item.mediaType === 'video' || isVideoUrl(item.image) ? (
+                                                <video 
+                                                    src={item.image} 
+                                                    className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                                                    muted
+                                                    preload="metadata"
+                                                />
+                                            ) : (
+                                                <img 
+                                                    src={item.image} 
+                                                    alt={item.title} 
+                                                    loading="lazy"
+                                                    className="w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" 
+                                                />
+                                            )}
+                                            
+                                            {/* Video Indicator Overlay */}
+                                            {(item.mediaType === 'video' || isVideoUrl(item.image)) && (
+                                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                                                    <div className="bg-black/40 backdrop-blur-sm rounded-full p-4 shadow-lg text-white group-hover:bg-brand-gold group-hover:text-brand-ink transition-all duration-300">
+                                                        <Play fill="currentColor" size={24} className="ml-1" />
+                                                    </div>
+                                                </div>
+                                            )}
                                             
                                             {/* Premium Overlay */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -242,7 +263,22 @@ const Gallery = () => {
                 open={lightboxOpen}
                 close={() => setLightboxOpen(false)}
                 index={lightboxIndex}
-                slides={filteredItems.map(item => ({ src: item.image, title: item.title, description: item.address }))}
+                slides={filteredItems.map(item => {
+                    const isVid = item.mediaType === 'video' || isVideoUrl(item.image);
+                    if (isVid) {
+                        return {
+                            type: "video",
+                            title: item.title,
+                            description: item.address,
+                            width: 1280,
+                            height: 720,
+                            sources: [
+                                { src: item.image, type: `video/${item.image.split('.').pop()}` }
+                            ]
+                        };
+                    }
+                    return { src: item.image, title: item.title, description: item.address };
+                })}
             />
         </div>
     );
