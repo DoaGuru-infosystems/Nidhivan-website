@@ -56,8 +56,8 @@
     "vite": "^8.1.5"
   },
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
+    "dev": "node init && vite --host",
+    "build": "node init && vite build",
     "preview": "vite preview"
   },
   "browserslist": {
