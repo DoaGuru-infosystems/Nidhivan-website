@@ -8,3 +8,5 @@ server/node_modules/
 # Generated output
 graphify-out/
 CLIENT/build/
+config.bat
+node_modules
